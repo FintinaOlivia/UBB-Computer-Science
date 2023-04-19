@@ -1,0 +1,1 @@
+["Day: 30 Amount: 300 Type: house","Day: 25 Amount: 250 Type: others","Day: 20 Amount: 200 Type: transport","Day: 18 Amount: 123 Type: fdsaf","Day: 12 Amount: 123 Type: asaxda"]
