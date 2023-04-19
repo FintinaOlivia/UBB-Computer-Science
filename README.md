@@ -3,6 +3,10 @@
     🔮 Hi! This is where I am going to upload my work, as a BBU Computer Science student. 🔮
 
     Contains lectures, seminaries, laboratories, plus additional materials.
+    
+    PSA:
+    * preferred IDE: VSC/ CLion
+    * main OS: KUbuntu
 
 <ul>
     <li>:open_file_folder: Semester 1
