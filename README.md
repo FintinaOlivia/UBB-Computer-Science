@@ -2,8 +2,7 @@
 
     Hi! This is where I am going to upload my work, as a BBU Computer Science.
 
-    This is supposed to contain lectures, seminaries, laboratories, as well 
-    as additional helpful materials.
+    Contains lectures, seminaries, laboratories, plus additional materials.
 
 <ul>
     <li>:open_file_folder: Semester 1
