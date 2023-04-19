@@ -22,6 +22,11 @@
                        🍀 Computational Logic
                     </a>
                 </li>
+            <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%201/Fundamentals%20of%20Programming)">
+                       🐍 Fundamentals of Programming
+                    </a>
+                </li>
          </ul>
       </li>
     <li>:open_file_folder: Semester 2
