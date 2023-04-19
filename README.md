@@ -26,7 +26,6 @@
                        🏥 Computer System Architecture (ASC)
                     </a>
                 </li>
-            <li>
              <li>
                     <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%201/Computational%20Logic">
                        🍀 Computational Logic
