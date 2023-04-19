@@ -32,7 +32,7 @@
     <li>:open_file_folder: Semester 2
         <ul>
                 <li>
-                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%202/OOP">
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%202/Object-Oriented%20Programming">
                        ⏳ Objected-Oriented Programming
                     </a>
                 </li>
