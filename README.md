@@ -8,6 +8,8 @@
     * preferred IDE: VSC/ CLion
     * main OS: KUbuntu
 
+YEAR 1
+
 <ul>
     <li>:open_file_folder: Semester 1
         <ul>
