@@ -8,12 +8,12 @@
     <li>:open_file_folder: Semester 1
         <ul>
             <li>
-                <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%201/Algebra">
+                <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%201/Linear%20Algebra">
                     :1234: Linear Algebra
                 </a>
             </li>
             <li>
-                <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%201/Analysis">
+                <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%201/Mathematical%20Analysis">
                     :chart: Mathematical Analysis
                 </a>
             </li>
@@ -23,7 +23,7 @@
                     </a>
                 </li>
             <li>
-                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%201/Fundamentals%20of%20Programming)">
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%201/Fundamentals%20of%20Programming">
                        🐍 Fundamentals of Programming
                     </a>
                 </li>
