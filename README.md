@@ -17,6 +17,11 @@
                     :chart: Mathematical Analysis
                 </a>
             </li>
+             <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%201/Computational%20Logic">
+                       🍀 Computational Logic
+                    </a>
+                </li>
          </ul>
       </li>
     <li>:open_file_folder: Semester 2
