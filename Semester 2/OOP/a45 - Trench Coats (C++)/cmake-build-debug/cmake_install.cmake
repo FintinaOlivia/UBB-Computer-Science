@@ -1,4 +1,4 @@
-# Install script for directory: /home/theo/CLionProjects/a45-913-Fintina-Olivia
+# Install script for directory: /home/theo/CLionProjects/a45 - Trench Coats (C++)
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
