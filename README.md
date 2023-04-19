@@ -1,6 +1,6 @@
 # UBB-Computer-Science
 
-    Hi! This is where I am going to upload my work, as a BBU Computer Science.
+    🔮 Hi! This is where I am going to upload my work, as a BBU Computer Science. 🔮
 
     Contains lectures, seminaries, laboratories, plus additional materials.
 
