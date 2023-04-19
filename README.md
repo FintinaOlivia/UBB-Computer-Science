@@ -1,6 +1,6 @@
 # UBB-Computer-Science
 
-    🔮 Hi! This is where I am going to upload my work, as a BBU Computer Science student. 🔮
+    🔮 Greetings! This is a compilation of sugar, spice and everything nice, as a BBU Computer Science student. 🔮
 
     Contains lectures, seminaries, laboratories, plus additional materials.
     
