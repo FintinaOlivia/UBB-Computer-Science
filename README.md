@@ -2,7 +2,7 @@
 
     🔮 Greetings! This is a compilation of sugar, spice and everything nice, as a BBU Computer Science student. 🔮
 
-    Contains lectures, seminaries, laboratories, plus additional materials.
+    Contains lectures, seminars, laboratories, plus additional materials.
     
     PSA:
     * preferred IDE: VSC/ CLion
