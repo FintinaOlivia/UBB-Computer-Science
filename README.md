@@ -6,8 +6,8 @@
     Contains lectures, seminars, laboratories, plus additional materials.
     
     PSA:
-    * preferred IDE: VSC/ CLion
-    * main OS: KUbuntu
+    * preferred IDE: VSC / CLion
+    * main OS: (K)Ubuntu
 
 YEAR 1
 
