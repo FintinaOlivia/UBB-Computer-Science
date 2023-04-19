@@ -1,7 +1,7 @@
 # UBB-Computer-Science
 
     🔮 Greetings! 🔮
-    🔮 This is a compilation of sugar, spice and everything nice, as a BBU Computer Science student. 🔮
+    🔮 This is a compilation of sugar, spice and everything nice, as a BBU CompSci student. 🔮
 
     Contains lectures, seminars, laboratories, plus additional materials.
     
