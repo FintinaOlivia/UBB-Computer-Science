@@ -1,12 +1,14 @@
 # UBB-Computer-Science
 
-    🔮 Hi! This is where I am going to upload my work, as a BBU Computer Science student. 🔮
+    🔮 Greetings! This is a compilation of sugar, spice and everything nice, as a BBU Computer Science student. 🔮
 
-    Contains lectures, seminaries, laboratories, plus additional materials.
+    Contains lectures, seminars, laboratories, plus additional materials.
     
     PSA:
     * preferred IDE: VSC/ CLion
     * main OS: KUbuntu
+
+YEAR 1
 
 <ul>
     <li>:open_file_folder: Semester 1
@@ -55,4 +57,21 @@
                        🌟 Operational Systems
                     </a>
                 </li>
+                <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%202/Data%20Structures%20%26%20Algorithms">
+                       🤖 Data Structures & Algorithms
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%202/Geometry">
+                       👽 Geometry
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%202/Graph%20Algorithmics">
+                       🗺️ Graph Algorithmics
+                    </a>
+                </li>
+        </ul>
+    </li>
 </ul>
