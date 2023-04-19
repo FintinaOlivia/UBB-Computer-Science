@@ -23,7 +23,7 @@
             </li>
             <li>
                     <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%201/Computer%20System%20Architecture%20(ASC)">
-                       :cross: Computer System Architecture (ASC)
+                       🏥 Computer System Architecture (ASC)
                     </a>
                 </li>
             <li>
