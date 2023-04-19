@@ -1,0 +1,10 @@
+1 30 blue 100 20 www.link-to-blue-coats.com
+2 32 blue 100 19 www.link-to-blue-coats.com
+3 40 red 200 29 www.link-to-red-coats.com/ 
+4 42 red 200 28 www.link-to-red-coats.com/
+5 38 green 150 23 www.link-to-green-coats.com
+6 34 green 150 22 www.link-to-green-coats.com 
+7 36 cream 225 27 www.link-to-cream-coats.com
+8 32 black 175 21 www.link-to-black-coats.com
+9 38 black 175 24 www.link-to-black-coats.com
+10 40 black 175 25 www.link-to-black-coats.com
