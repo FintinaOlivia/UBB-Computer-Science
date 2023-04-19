@@ -27,4 +27,9 @@
                        ⏳ Objected-Oriented Programming
                     </a>
                 </li>
+                 <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%202/Dynamical%20Systems">
+                       ⛷ Dynamical Systems
+                    </a>
+                </li>
 </ul>
