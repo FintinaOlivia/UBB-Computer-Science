@@ -57,7 +57,7 @@
                 </li>
                 <li>
                     <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%202/Data%20Structures%20%26%20Algorithms">
-                       🤖 Data Strctures & Algorithms
+                       🤖 Data Structures & Algorithms
                     </a>
                 </li>
                 <li>
