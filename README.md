@@ -55,6 +55,21 @@
                        🌟 Operational Systems
                     </a>
                 </li>
+                <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%202/Data%20Structures%20%26%20Algorithms">
+                       🤖 Data Strctures & Algorithms
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%202/Geometry">
+                       👽 Geometry
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%202/Graph%20Algorithmics">
+                       🗺️ Graph Algorithmics
+                    </a>
+                </li>
         </ul>
     </li>
 </ul>
