@@ -1,0 +1,863 @@
+        -:    0:Source:/usr/include/c++/11/bits/alloc_traits.h
+        -:    0:Graph:/home/theo/CLionProjects/a6-913-Fintina-Olivia-1/cmake-build-debug-coverage/CMakeFiles/CLionProjects.dir/testController.cpp.gcno
+        -:    0:Data:/home/theo/CLionProjects/a6-913-Fintina-Olivia-1/cmake-build-debug-coverage/CMakeFiles/CLionProjects.dir/testController.cpp.gcda
+        -:    0:Runs:1
+        -:    1:// Allocator traits -*- C++ -*-
+        -:    2:
+        -:    3:// Copyright (C) 2011-2021 Free Software Foundation, Inc.
+        -:    4://
+        -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
+        -:    6:// software; you can redistribute it and/or modify it under the
+        -:    7:// terms of the GNU General Public License as published by the
+        -:    8:// Free Software Foundation; either version 3, or (at your option)
+        -:    9:// any later version.
+        -:   10:
+        -:   11:// This library is distributed in the hope that it will be useful,
+        -:   12:// but WITHOUT ANY WARRANTY; without even the implied warranty of
+        -:   13:// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        -:   14:// GNU General Public License for more details.
+        -:   15:
+        -:   16:// Under Section 7 of GPL version 3, you are granted additional
+        -:   17:// permissions described in the GCC Runtime Library Exception, version
+        -:   18:// 3.1, as published by the Free Software Foundation.
+        -:   19:
+        -:   20:// You should have received a copy of the GNU General Public License and
+        -:   21:// a copy of the GCC Runtime Library Exception along with this program;
+        -:   22:// see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+        -:   23:// <http://www.gnu.org/licenses/>.
+        -:   24:
+        -:   25:/** @file bits/alloc_traits.h
+        -:   26: *  This is an internal header file, included by other library headers.
+        -:   27: *  Do not attempt to use it directly. @headername{memory}
+        -:   28: */
+        -:   29:
+        -:   30:#ifndef _ALLOC_TRAITS_H
+        -:   31:#define _ALLOC_TRAITS_H 1
+        -:   32:
+        -:   33:#include <bits/stl_construct.h>
+        -:   34:#include <bits/memoryfwd.h>
+        -:   35:#if __cplusplus >= 201103L
+        -:   36:# include <bits/allocator.h>
+        -:   37:# include <bits/ptr_traits.h>
+        -:   38:# include <ext/numeric_traits.h>
+        -:   39:#endif
+        -:   40:
+        -:   41:namespace std _GLIBCXX_VISIBILITY(default)
+        -:   42:{
+        -:   43:_GLIBCXX_BEGIN_NAMESPACE_VERSION
+        -:   44:
+        -:   45:#if __cplusplus >= 201103L
+        -:   46:#define __cpp_lib_allocator_traits_is_always_equal 201411
+        -:   47:
+        -:   48:  /// @cond undocumented
+        -:   49:  struct __allocator_traits_base
+        -:   50:  {
+        -:   51:    template<typename _Tp, typename _Up, typename = void>
+        -:   52:      struct __rebind : __replace_first_arg<_Tp, _Up> { };
+        -:   53:
+        -:   54:    template<typename _Tp, typename _Up>
+        -:   55:      struct __rebind<_Tp, _Up,
+        -:   56:		      __void_t<typename _Tp::template rebind<_Up>::other>>
+        -:   57:      { using type = typename _Tp::template rebind<_Up>::other; };
+        -:   58:
+        -:   59:  protected:
+        -:   60:    template<typename _Tp>
+        -:   61:      using __pointer = typename _Tp::pointer;
+        -:   62:    template<typename _Tp>
+        -:   63:      using __c_pointer = typename _Tp::const_pointer;
+        -:   64:    template<typename _Tp>
+        -:   65:      using __v_pointer = typename _Tp::void_pointer;
+        -:   66:    template<typename _Tp>
+        -:   67:      using __cv_pointer = typename _Tp::const_void_pointer;
+        -:   68:    template<typename _Tp>
+        -:   69:      using __pocca = typename _Tp::propagate_on_container_copy_assignment;
+        -:   70:    template<typename _Tp>
+        -:   71:      using __pocma = typename _Tp::propagate_on_container_move_assignment;
+        -:   72:    template<typename _Tp>
+        -:   73:      using __pocs = typename _Tp::propagate_on_container_swap;
+        -:   74:    template<typename _Tp>
+        -:   75:      using __equal = typename _Tp::is_always_equal;
+        -:   76:  };
+        -:   77:
+        -:   78:  template<typename _Alloc, typename _Up>
+        -:   79:    using __alloc_rebind
+        -:   80:      = typename __allocator_traits_base::template __rebind<_Alloc, _Up>::type;
+        -:   81:  /// @endcond
+        -:   82:
+        -:   83:  /**
+        -:   84:   * @brief  Uniform interface to all allocator types.
+        -:   85:   * @headerfile memory
+        -:   86:   * @ingroup allocators
+        -:   87:   * @since C++11
+        -:   88:  */
+        -:   89:  template<typename _Alloc>
+        -:   90:    struct allocator_traits : __allocator_traits_base
+        -:   91:    {
+        -:   92:      /// The allocator type
+        -:   93:      typedef _Alloc allocator_type;
+        -:   94:      /// The allocated type
+        -:   95:      typedef typename _Alloc::value_type value_type;
+        -:   96:
+        -:   97:      /**
+        -:   98:       * @brief   The allocator's pointer type.
+        -:   99:       *
+        -:  100:       * @c Alloc::pointer if that type exists, otherwise @c value_type*
+        -:  101:      */
+        -:  102:      using pointer = __detected_or_t<value_type*, __pointer, _Alloc>;
+        -:  103:
+        -:  104:    private:
+        -:  105:      // Select _Func<_Alloc> or pointer_traits<pointer>::rebind<_Tp>
+        -:  106:      template<template<typename> class _Func, typename _Tp, typename = void>
+        -:  107:	struct _Ptr
+        -:  108:	{
+        -:  109:	  using type = typename pointer_traits<pointer>::template rebind<_Tp>;
+        -:  110:	};
+        -:  111:
+        -:  112:      template<template<typename> class _Func, typename _Tp>
+        -:  113:	struct _Ptr<_Func, _Tp, __void_t<_Func<_Alloc>>>
+        -:  114:	{
+        -:  115:	  using type = _Func<_Alloc>;
+        -:  116:	};
+        -:  117:
+        -:  118:      // Select _A2::difference_type or pointer_traits<_Ptr>::difference_type
+        -:  119:      template<typename _A2, typename _PtrT, typename = void>
+        -:  120:	struct _Diff
+        -:  121:	{ using type = typename pointer_traits<_PtrT>::difference_type; };
+        -:  122:
+        -:  123:      template<typename _A2, typename _PtrT>
+        -:  124:	struct _Diff<_A2, _PtrT, __void_t<typename _A2::difference_type>>
+        -:  125:	{ using type = typename _A2::difference_type; };
+        -:  126:
+        -:  127:      // Select _A2::size_type or make_unsigned<_DiffT>::type
+        -:  128:      template<typename _A2, typename _DiffT, typename = void>
+        -:  129:	struct _Size : make_unsigned<_DiffT> { };
+        -:  130:
+        -:  131:      template<typename _A2, typename _DiffT>
+        -:  132:	struct _Size<_A2, _DiffT, __void_t<typename _A2::size_type>>
+        -:  133:	{ using type = typename _A2::size_type; };
+        -:  134:
+        -:  135:    public:
+        -:  136:      /**
+        -:  137:       * @brief   The allocator's const pointer type.
+        -:  138:       *
+        -:  139:       * @c Alloc::const_pointer if that type exists, otherwise
+        -:  140:       * <tt> pointer_traits<pointer>::rebind<const value_type> </tt>
+        -:  141:      */
+        -:  142:      using const_pointer = typename _Ptr<__c_pointer, const value_type>::type;
+        -:  143:
+        -:  144:      /**
+        -:  145:       * @brief   The allocator's void pointer type.
+        -:  146:       *
+        -:  147:       * @c Alloc::void_pointer if that type exists, otherwise
+        -:  148:       * <tt> pointer_traits<pointer>::rebind<void> </tt>
+        -:  149:      */
+        -:  150:      using void_pointer = typename _Ptr<__v_pointer, void>::type;
+        -:  151:
+        -:  152:      /**
+        -:  153:       * @brief   The allocator's const void pointer type.
+        -:  154:       *
+        -:  155:       * @c Alloc::const_void_pointer if that type exists, otherwise
+        -:  156:       * <tt> pointer_traits<pointer>::rebind<const void> </tt>
+        -:  157:      */
+        -:  158:      using const_void_pointer = typename _Ptr<__cv_pointer, const void>::type;
+        -:  159:
+        -:  160:      /**
+        -:  161:       * @brief   The allocator's difference type
+        -:  162:       *
+        -:  163:       * @c Alloc::difference_type if that type exists, otherwise
+        -:  164:       * <tt> pointer_traits<pointer>::difference_type </tt>
+        -:  165:      */
+        -:  166:      using difference_type = typename _Diff<_Alloc, pointer>::type;
+        -:  167:
+        -:  168:      /**
+        -:  169:       * @brief   The allocator's size type
+        -:  170:       *
+        -:  171:       * @c Alloc::size_type if that type exists, otherwise
+        -:  172:       * <tt> make_unsigned<difference_type>::type </tt>
+        -:  173:      */
+        -:  174:      using size_type = typename _Size<_Alloc, difference_type>::type;
+        -:  175:
+        -:  176:      /**
+        -:  177:       * @brief   How the allocator is propagated on copy assignment
+        -:  178:       *
+        -:  179:       * @c Alloc::propagate_on_container_copy_assignment if that type exists,
+        -:  180:       * otherwise @c false_type
+        -:  181:      */
+        -:  182:      using propagate_on_container_copy_assignment
+        -:  183:	= __detected_or_t<false_type, __pocca, _Alloc>;
+        -:  184:
+        -:  185:      /**
+        -:  186:       * @brief   How the allocator is propagated on move assignment
+        -:  187:       *
+        -:  188:       * @c Alloc::propagate_on_container_move_assignment if that type exists,
+        -:  189:       * otherwise @c false_type
+        -:  190:      */
+        -:  191:      using propagate_on_container_move_assignment
+        -:  192:	= __detected_or_t<false_type, __pocma, _Alloc>;
+        -:  193:
+        -:  194:      /**
+        -:  195:       * @brief   How the allocator is propagated on swap
+        -:  196:       *
+        -:  197:       * @c Alloc::propagate_on_container_swap if that type exists,
+        -:  198:       * otherwise @c false_type
+        -:  199:      */
+        -:  200:      using propagate_on_container_swap
+        -:  201:	= __detected_or_t<false_type, __pocs, _Alloc>;
+        -:  202:
+        -:  203:      /**
+        -:  204:       * @brief   Whether all instances of the allocator type compare equal.
+        -:  205:       *
+        -:  206:       * @c Alloc::is_always_equal if that type exists,
+        -:  207:       * otherwise @c is_empty<Alloc>::type
+        -:  208:      */
+        -:  209:      using is_always_equal
+        -:  210:	= __detected_or_t<typename is_empty<_Alloc>::type, __equal, _Alloc>;
+        -:  211:
+        -:  212:      template<typename _Tp>
+        -:  213:	using rebind_alloc = __alloc_rebind<_Alloc, _Tp>;
+        -:  214:      template<typename _Tp>
+        -:  215:	using rebind_traits = allocator_traits<rebind_alloc<_Tp>>;
+        -:  216:
+        -:  217:    private:
+        -:  218:      template<typename _Alloc2>
+        -:  219:	static constexpr auto
+        -:  220:	_S_allocate(_Alloc2& __a, size_type __n, const_void_pointer __hint, int)
+        -:  221:	-> decltype(__a.allocate(__n, __hint))
+        -:  222:	{ return __a.allocate(__n, __hint); }
+        -:  223:
+        -:  224:      template<typename _Alloc2>
+        -:  225:	static constexpr pointer
+        -:  226:	_S_allocate(_Alloc2& __a, size_type __n, const_void_pointer, ...)
+        -:  227:	{ return __a.allocate(__n); }
+        -:  228:
+        -:  229:      template<typename _Tp, typename... _Args>
+        -:  230:	struct __construct_helper
+        -:  231:	{
+        -:  232:	  template<typename _Alloc2,
+        -:  233:	    typename = decltype(std::declval<_Alloc2*>()->construct(
+        -:  234:		  std::declval<_Tp*>(), std::declval<_Args>()...))>
+        -:  235:	    static true_type __test(int);
+        -:  236:
+        -:  237:	  template<typename>
+        -:  238:	    static false_type __test(...);
+        -:  239:
+        -:  240:	  using type = decltype(__test<_Alloc>(0));
+        -:  241:	};
+        -:  242:
+        -:  243:      template<typename _Tp, typename... _Args>
+        -:  244:	using __has_construct
+        -:  245:	  = typename __construct_helper<_Tp, _Args...>::type;
+        -:  246:
+        -:  247:      template<typename _Tp, typename... _Args>
+        -:  248:	static _GLIBCXX14_CONSTEXPR _Require<__has_construct<_Tp, _Args...>>
+        -:  249:	_S_construct(_Alloc& __a, _Tp* __p, _Args&&... __args)
+        -:  250:	noexcept(noexcept(__a.construct(__p, std::forward<_Args>(__args)...)))
+        -:  251:	{ __a.construct(__p, std::forward<_Args>(__args)...); }
+        -:  252:
+        -:  253:      template<typename _Tp, typename... _Args>
+        -:  254:	static _GLIBCXX14_CONSTEXPR
+        -:  255:	_Require<__and_<__not_<__has_construct<_Tp, _Args...>>,
+        -:  256:			       is_constructible<_Tp, _Args...>>>
+        -:  257:	_S_construct(_Alloc&, _Tp* __p, _Args&&... __args)
+        -:  258:	noexcept(std::is_nothrow_constructible<_Tp, _Args...>::value)
+        -:  259:	{
+        -:  260:#if __cplusplus <= 201703L
+        -:  261:	  ::new((void*)__p) _Tp(std::forward<_Args>(__args)...);
+        -:  262:#else
+        -:  263:	  std::construct_at(__p, std::forward<_Args>(__args)...);
+        -:  264:#endif
+        -:  265:	}
+        -:  266:
+        -:  267:      template<typename _Alloc2, typename _Tp>
+        -:  268:	static _GLIBCXX14_CONSTEXPR auto
+        -:  269:	_S_destroy(_Alloc2& __a, _Tp* __p, int)
+        -:  270:	noexcept(noexcept(__a.destroy(__p)))
+        -:  271:	-> decltype(__a.destroy(__p))
+        -:  272:	{ __a.destroy(__p); }
+        -:  273:
+        -:  274:      template<typename _Alloc2, typename _Tp>
+        -:  275:	static _GLIBCXX14_CONSTEXPR void
+        -:  276:	_S_destroy(_Alloc2&, _Tp* __p, ...)
+        -:  277:	noexcept(std::is_nothrow_destructible<_Tp>::value)
+        -:  278:	{ std::_Destroy(__p); }
+        -:  279:
+        -:  280:      template<typename _Alloc2>
+        -:  281:	static constexpr auto
+        -:  282:	_S_max_size(_Alloc2& __a, int)
+        -:  283:	-> decltype(__a.max_size())
+        -:  284:	{ return __a.max_size(); }
+        -:  285:
+        -:  286:      template<typename _Alloc2>
+        -:  287:	static constexpr size_type
+        -:  288:	_S_max_size(_Alloc2&, ...)
+        -:  289:	{
+        -:  290:	  // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  291:	  // 2466. allocator_traits::max_size() default behavior is incorrect
+        -:  292:	  return __gnu_cxx::__numeric_traits<size_type>::__max
+        -:  293:	    / sizeof(value_type);
+        -:  294:	}
+        -:  295:
+        -:  296:      template<typename _Alloc2>
+        -:  297:	static constexpr auto
+        -:  298:	_S_select(_Alloc2& __a, int)
+        -:  299:	-> decltype(__a.select_on_container_copy_construction())
+        -:  300:	{ return __a.select_on_container_copy_construction(); }
+        -:  301:
+        -:  302:      template<typename _Alloc2>
+        -:  303:	static constexpr _Alloc2
+        -:  304:	_S_select(_Alloc2& __a, ...)
+        -:  305:	{ return __a; }
+        -:  306:
+        -:  307:    public:
+        -:  308:
+        -:  309:      /**
+        -:  310:       *  @brief  Allocate memory.
+        -:  311:       *  @param  __a  An allocator.
+        -:  312:       *  @param  __n  The number of objects to allocate space for.
+        -:  313:       *
+        -:  314:       *  Calls @c a.allocate(n)
+        -:  315:      */
+        -:  316:      _GLIBCXX_NODISCARD static _GLIBCXX20_CONSTEXPR pointer
+        -:  317:      allocate(_Alloc& __a, size_type __n)
+        -:  318:      { return __a.allocate(__n); }
+        -:  319:
+        -:  320:      /**
+        -:  321:       *  @brief  Allocate memory.
+        -:  322:       *  @param  __a  An allocator.
+        -:  323:       *  @param  __n  The number of objects to allocate space for.
+        -:  324:       *  @param  __hint Aid to locality.
+        -:  325:       *  @return Memory of suitable size and alignment for @a n objects
+        -:  326:       *          of type @c value_type
+        -:  327:       *
+        -:  328:       *  Returns <tt> a.allocate(n, hint) </tt> if that expression is
+        -:  329:       *  well-formed, otherwise returns @c a.allocate(n)
+        -:  330:      */
+        -:  331:      _GLIBCXX_NODISCARD static _GLIBCXX20_CONSTEXPR pointer
+        -:  332:      allocate(_Alloc& __a, size_type __n, const_void_pointer __hint)
+        -:  333:      { return _S_allocate(__a, __n, __hint, 0); }
+        -:  334:
+        -:  335:      /**
+        -:  336:       *  @brief  Deallocate memory.
+        -:  337:       *  @param  __a  An allocator.
+        -:  338:       *  @param  __p  Pointer to the memory to deallocate.
+        -:  339:       *  @param  __n  The number of objects space was allocated for.
+        -:  340:       *
+        -:  341:       *  Calls <tt> a.deallocate(p, n) </tt>
+        -:  342:      */
+        -:  343:      static _GLIBCXX20_CONSTEXPR void
+        -:  344:      deallocate(_Alloc& __a, pointer __p, size_type __n)
+        -:  345:      { __a.deallocate(__p, __n); }
+        -:  346:
+        -:  347:      /**
+        -:  348:       *  @brief  Construct an object of type `_Tp`
+        -:  349:       *  @param  __a  An allocator.
+        -:  350:       *  @param  __p  Pointer to memory of suitable size and alignment for Tp
+        -:  351:       *  @param  __args Constructor arguments.
+        -:  352:       *
+        -:  353:       *  Calls <tt> __a.construct(__p, std::forward<Args>(__args)...) </tt>
+        -:  354:       *  if that expression is well-formed, otherwise uses placement-new
+        -:  355:       *  to construct an object of type @a _Tp at location @a __p from the
+        -:  356:       *  arguments @a __args...
+        -:  357:      */
+        -:  358:      template<typename _Tp, typename... _Args>
+        -:  359:	static _GLIBCXX20_CONSTEXPR auto
+        -:  360:	construct(_Alloc& __a, _Tp* __p, _Args&&... __args)
+        -:  361:	noexcept(noexcept(_S_construct(__a, __p,
+        -:  362:				       std::forward<_Args>(__args)...)))
+        -:  363:	-> decltype(_S_construct(__a, __p, std::forward<_Args>(__args)...))
+        -:  364:	{ _S_construct(__a, __p, std::forward<_Args>(__args)...); }
+        -:  365:
+        -:  366:      /**
+        -:  367:       *  @brief  Destroy an object of type @a _Tp
+        -:  368:       *  @param  __a  An allocator.
+        -:  369:       *  @param  __p  Pointer to the object to destroy
+        -:  370:       *
+        -:  371:       *  Calls @c __a.destroy(__p) if that expression is well-formed,
+        -:  372:       *  otherwise calls @c __p->~_Tp()
+        -:  373:      */
+        -:  374:      template<typename _Tp>
+        -:  375:	static _GLIBCXX20_CONSTEXPR void
+        -:  376:	destroy(_Alloc& __a, _Tp* __p)
+        -:  377:	noexcept(noexcept(_S_destroy(__a, __p, 0)))
+        -:  378:	{ _S_destroy(__a, __p, 0); }
+        -:  379:
+        -:  380:      /**
+        -:  381:       *  @brief  The maximum supported allocation size
+        -:  382:       *  @param  __a  An allocator.
+        -:  383:       *  @return @c __a.max_size() or @c numeric_limits<size_type>::max()
+        -:  384:       *
+        -:  385:       *  Returns @c __a.max_size() if that expression is well-formed,
+        -:  386:       *  otherwise returns @c numeric_limits<size_type>::max()
+        -:  387:      */
+        -:  388:      static _GLIBCXX20_CONSTEXPR size_type
+        -:  389:      max_size(const _Alloc& __a) noexcept
+        -:  390:      { return _S_max_size(__a, 0); }
+        -:  391:
+        -:  392:      /**
+        -:  393:       *  @brief  Obtain an allocator to use when copying a container.
+        -:  394:       *  @param  __rhs  An allocator.
+        -:  395:       *  @return @c __rhs.select_on_container_copy_construction() or @a __rhs
+        -:  396:       *
+        -:  397:       *  Returns @c __rhs.select_on_container_copy_construction() if that
+        -:  398:       *  expression is well-formed, otherwise returns @a __rhs
+        -:  399:      */
+        -:  400:      static _GLIBCXX20_CONSTEXPR _Alloc
+        -:  401:      select_on_container_copy_construction(const _Alloc& __rhs)
+        -:  402:      { return _S_select(__rhs, 0); }
+        -:  403:    };
+        -:  404:
+        -:  405:#if __cplusplus > 201703L
+        -:  406:# define __cpp_lib_constexpr_dynamic_alloc 201907L
+        -:  407:#endif
+        -:  408:
+        -:  409:  /// Partial specialization for std::allocator.
+        -:  410:  template<typename _Tp>
+        -:  411:    struct allocator_traits<allocator<_Tp>>
+        -:  412:    {
+        -:  413:      /// The allocator type
+        -:  414:      using allocator_type = allocator<_Tp>;
+        -:  415:
+        -:  416:      /// The allocated type
+        -:  417:      using value_type = _Tp;
+        -:  418:
+        -:  419:      /// The allocator's pointer type.
+        -:  420:      using pointer = _Tp*;
+        -:  421:
+        -:  422:      /// The allocator's const pointer type.
+        -:  423:      using const_pointer = const _Tp*;
+        -:  424:
+        -:  425:      /// The allocator's void pointer type.
+        -:  426:      using void_pointer = void*;
+        -:  427:
+        -:  428:      /// The allocator's const void pointer type.
+        -:  429:      using const_void_pointer = const void*;
+        -:  430:
+        -:  431:      /// The allocator's difference type
+        -:  432:      using difference_type = std::ptrdiff_t;
+        -:  433:
+        -:  434:      /// The allocator's size type
+        -:  435:      using size_type = std::size_t;
+        -:  436:
+        -:  437:      /// How the allocator is propagated on copy assignment
+        -:  438:      using propagate_on_container_copy_assignment = false_type;
+        -:  439:
+        -:  440:      /// How the allocator is propagated on move assignment
+        -:  441:      using propagate_on_container_move_assignment = true_type;
+        -:  442:
+        -:  443:      /// How the allocator is propagated on swap
+        -:  444:      using propagate_on_container_swap = false_type;
+        -:  445:
+        -:  446:      /// Whether all instances of the allocator type compare equal.
+        -:  447:      using is_always_equal = true_type;
+        -:  448:
+        -:  449:      template<typename _Up>
+        -:  450:	using rebind_alloc = allocator<_Up>;
+        -:  451:
+        -:  452:      template<typename _Up>
+        -:  453:	using rebind_traits = allocator_traits<allocator<_Up>>;
+        -:  454:
+        -:  455:      /**
+        -:  456:       *  @brief  Allocate memory.
+        -:  457:       *  @param  __a  An allocator.
+        -:  458:       *  @param  __n  The number of objects to allocate space for.
+        -:  459:       *
+        -:  460:       *  Calls @c a.allocate(n)
+        -:  461:      */
+        -:  462:      _GLIBCXX_NODISCARD static _GLIBCXX20_CONSTEXPR pointer
+        -:  463:      allocate(allocator_type& __a, size_type __n)
+        -:  464:      { return __a.allocate(__n); }
+        -:  465:
+        -:  466:      /**
+        -:  467:       *  @brief  Allocate memory.
+        -:  468:       *  @param  __a  An allocator.
+        -:  469:       *  @param  __n  The number of objects to allocate space for.
+        -:  470:       *  @param  __hint Aid to locality.
+        -:  471:       *  @return Memory of suitable size and alignment for @a n objects
+        -:  472:       *          of type @c value_type
+        -:  473:       *
+        -:  474:       *  Returns <tt> a.allocate(n, hint) </tt>
+        -:  475:      */
+        -:  476:      _GLIBCXX_NODISCARD static _GLIBCXX20_CONSTEXPR pointer
+        -:  477:      allocate(allocator_type& __a, size_type __n, const_void_pointer __hint)
+        -:  478:      {
+        -:  479:#if __cplusplus <= 201703L
+        -:  480:	return __a.allocate(__n, __hint);
+        -:  481:#else
+        -:  482:	return __a.allocate(__n);
+        -:  483:#endif
+        -:  484:      }
+        -:  485:
+        -:  486:      /**
+        -:  487:       *  @brief  Deallocate memory.
+        -:  488:       *  @param  __a  An allocator.
+        -:  489:       *  @param  __p  Pointer to the memory to deallocate.
+        -:  490:       *  @param  __n  The number of objects space was allocated for.
+        -:  491:       *
+        -:  492:       *  Calls <tt> a.deallocate(p, n) </tt>
+        -:  493:      */
+        -:  494:      static _GLIBCXX20_CONSTEXPR void
+function _ZNSt16allocator_traitsISaI10TrenchCoatEE10deallocateERS1_PS0_m called 0 returned 0% blocks executed 0%
+    #####:  495:      deallocate(allocator_type& __a, pointer __p, size_type __n)
+    #####:  496:      { __a.deallocate(__p, __n); }
+    %%%%%:  496-block  0
+call    0 never executed
+        -:  497:
+        -:  498:      /**
+        -:  499:       *  @brief  Construct an object of type `_Up`
+        -:  500:       *  @param  __a  An allocator.
+        -:  501:       *  @param  __p  Pointer to memory of suitable size and alignment for
+        -:  502:       *	       an object of type `_Up`.
+        -:  503:       *  @param  __args Constructor arguments.
+        -:  504:       *
+        -:  505:       *  Calls `__a.construct(__p, std::forward<_Args>(__args)...)`
+        -:  506:       *  in C++11, C++14 and C++17. Changed in C++20 to call
+        -:  507:       *  `std::construct_at(__p, std::forward<_Args>(__args)...)` instead.
+        -:  508:      */
+        -:  509:      template<typename _Up, typename... _Args>
+        -:  510:	static _GLIBCXX20_CONSTEXPR void
+        -:  511:	construct(allocator_type& __a __attribute__((__unused__)), _Up* __p,
+        -:  512:		  _Args&&... __args)
+        -:  513:	noexcept(std::is_nothrow_constructible<_Up, _Args...>::value)
+        -:  514:	{
+        -:  515:#if __cplusplus <= 201703L
+        -:  516:	  __a.construct(__p, std::forward<_Args>(__args)...);
+        -:  517:#else
+        -:  518:	  std::construct_at(__p, std::forward<_Args>(__args)...);
+        -:  519:#endif
+        -:  520:	}
+        -:  521:
+        -:  522:      /**
+        -:  523:       *  @brief  Destroy an object of type @a _Up
+        -:  524:       *  @param  __a  An allocator.
+        -:  525:       *  @param  __p  Pointer to the object to destroy
+        -:  526:       *
+        -:  527:       *  Calls @c __a.destroy(__p).
+        -:  528:      */
+        -:  529:      template<typename _Up>
+        -:  530:	static _GLIBCXX20_CONSTEXPR void
+        -:  531:	destroy(allocator_type& __a __attribute__((__unused__)), _Up* __p)
+        -:  532:	noexcept(is_nothrow_destructible<_Up>::value)
+        -:  533:	{
+        -:  534:#if __cplusplus <= 201703L
+        -:  535:	  __a.destroy(__p);
+        -:  536:#else
+        -:  537:	  std::destroy_at(__p);
+        -:  538:#endif
+        -:  539:	}
+        -:  540:
+        -:  541:      /**
+        -:  542:       *  @brief  The maximum supported allocation size
+        -:  543:       *  @param  __a  An allocator.
+        -:  544:       *  @return @c __a.max_size()
+        -:  545:      */
+        -:  546:      static _GLIBCXX20_CONSTEXPR size_type
+        -:  547:      max_size(const allocator_type& __a __attribute__((__unused__))) noexcept
+        -:  548:      {
+        -:  549:#if __cplusplus <= 201703L
+        -:  550:	return __a.max_size();
+        -:  551:#else
+        -:  552:	return size_t(-1) / sizeof(value_type);
+        -:  553:#endif
+        -:  554:      }
+        -:  555:
+        -:  556:      /**
+        -:  557:       *  @brief  Obtain an allocator to use when copying a container.
+        -:  558:       *  @param  __rhs  An allocator.
+        -:  559:       *  @return @c __rhs
+        -:  560:      */
+        -:  561:      static _GLIBCXX20_CONSTEXPR allocator_type
+        -:  562:      select_on_container_copy_construction(const allocator_type& __rhs)
+        -:  563:      { return __rhs; }
+        -:  564:    };
+        -:  565:
+        -:  566:  /// Explicit specialization for std::allocator<void>.
+        -:  567:  template<>
+        -:  568:    struct allocator_traits<allocator<void>>
+        -:  569:    {
+        -:  570:      /// The allocator type
+        -:  571:      using allocator_type = allocator<void>;
+        -:  572:
+        -:  573:      /// The allocated type
+        -:  574:      using value_type = void;
+        -:  575:
+        -:  576:      /// The allocator's pointer type.
+        -:  577:      using pointer = void*;
+        -:  578:
+        -:  579:      /// The allocator's const pointer type.
+        -:  580:      using const_pointer = const void*;
+        -:  581:
+        -:  582:      /// The allocator's void pointer type.
+        -:  583:      using void_pointer = void*;
+        -:  584:
+        -:  585:      /// The allocator's const void pointer type.
+        -:  586:      using const_void_pointer = const void*;
+        -:  587:
+        -:  588:      /// The allocator's difference type
+        -:  589:      using difference_type = std::ptrdiff_t;
+        -:  590:
+        -:  591:      /// The allocator's size type
+        -:  592:      using size_type = std::size_t;
+        -:  593:
+        -:  594:      /// How the allocator is propagated on copy assignment
+        -:  595:      using propagate_on_container_copy_assignment = false_type;
+        -:  596:
+        -:  597:      /// How the allocator is propagated on move assignment
+        -:  598:      using propagate_on_container_move_assignment = true_type;
+        -:  599:
+        -:  600:      /// How the allocator is propagated on swap
+        -:  601:      using propagate_on_container_swap = false_type;
+        -:  602:
+        -:  603:      /// Whether all instances of the allocator type compare equal.
+        -:  604:      using is_always_equal = true_type;
+        -:  605:
+        -:  606:      template<typename _Up>
+        -:  607:	using rebind_alloc = allocator<_Up>;
+        -:  608:
+        -:  609:      template<typename _Up>
+        -:  610:	using rebind_traits = allocator_traits<allocator<_Up>>;
+        -:  611:
+        -:  612:      /// allocate is ill-formed for allocator<void>
+        -:  613:      static void*
+        -:  614:      allocate(allocator_type&, size_type, const void* = nullptr) = delete;
+        -:  615:
+        -:  616:      /// deallocate is ill-formed for allocator<void>
+        -:  617:      static void
+        -:  618:      deallocate(allocator_type&, void*, size_type) = delete;
+        -:  619:
+        -:  620:      /**
+        -:  621:       *  @brief  Construct an object of type `_Up`
+        -:  622:       *  @param  __a  An allocator.
+        -:  623:       *  @param  __p  Pointer to memory of suitable size and alignment for
+        -:  624:       *	       an object of type `_Up`.
+        -:  625:       *  @param  __args Constructor arguments.
+        -:  626:       *
+        -:  627:       *  Calls `__a.construct(__p, std::forward<_Args>(__args)...)`
+        -:  628:       *  in C++11, C++14 and C++17. Changed in C++20 to call
+        -:  629:       *  `std::construct_at(__p, std::forward<_Args>(__args)...)` instead.
+        -:  630:      */
+        -:  631:      template<typename _Up, typename... _Args>
+        -:  632:	static _GLIBCXX20_CONSTEXPR void
+        -:  633:	construct(allocator_type&, _Up* __p, _Args&&... __args)
+        -:  634:	noexcept(std::is_nothrow_constructible<_Up, _Args...>::value)
+        -:  635:	{ std::_Construct(__p, std::forward<_Args>(__args)...); }
+        -:  636:
+        -:  637:      /**
+        -:  638:       *  @brief  Destroy an object of type `_Up`
+        -:  639:       *  @param  __a  An allocator.
+        -:  640:       *  @param  __p  Pointer to the object to destroy
+        -:  641:       *
+        -:  642:       *  Invokes the destructor for `*__p`.
+        -:  643:      */
+        -:  644:      template<typename _Up>
+        -:  645:	static _GLIBCXX20_CONSTEXPR void
+        -:  646:	destroy(allocator_type&, _Up* __p)
+        -:  647:	noexcept(is_nothrow_destructible<_Up>::value)
+        -:  648:	{ std::_Destroy(__p); }
+        -:  649:
+        -:  650:      /// max_size is ill-formed for allocator<void>
+        -:  651:      static size_type
+        -:  652:      max_size(const allocator_type&) = delete;
+        -:  653:
+        -:  654:      /**
+        -:  655:       *  @brief  Obtain an allocator to use when copying a container.
+        -:  656:       *  @param  __rhs  An allocator.
+        -:  657:       *  @return `__rhs`
+        -:  658:      */
+        -:  659:      static _GLIBCXX20_CONSTEXPR allocator_type
+        -:  660:      select_on_container_copy_construction(const allocator_type& __rhs)
+        -:  661:      { return __rhs; }
+        -:  662:    };
+        -:  663:
+        -:  664:#if __cplusplus < 201703L
+        -:  665:  template<typename _Alloc>
+        -:  666:    inline void
+        -:  667:    __do_alloc_on_copy(_Alloc& __one, const _Alloc& __two, true_type)
+        -:  668:    { __one = __two; }
+        -:  669:
+        -:  670:  template<typename _Alloc>
+        -:  671:    inline void
+        -:  672:    __do_alloc_on_copy(_Alloc&, const _Alloc&, false_type)
+        -:  673:    { }
+        -:  674:#endif
+        -:  675:
+        -:  676:  template<typename _Alloc>
+        -:  677:    _GLIBCXX14_CONSTEXPR inline void
+        -:  678:    __alloc_on_copy(_Alloc& __one, const _Alloc& __two)
+        -:  679:    {
+        -:  680:      typedef allocator_traits<_Alloc> __traits;
+        -:  681:      typedef typename __traits::propagate_on_container_copy_assignment __pocca;
+        -:  682:#if __cplusplus >= 201703L
+        -:  683:      if constexpr (__pocca::value)
+        -:  684:	__one = __two;
+        -:  685:#else
+        -:  686:      __do_alloc_on_copy(__one, __two, __pocca());
+        -:  687:#endif
+        -:  688:    }
+        -:  689:
+        -:  690:  template<typename _Alloc>
+        -:  691:    constexpr _Alloc
+        -:  692:    __alloc_on_copy(const _Alloc& __a)
+        -:  693:    {
+        -:  694:      typedef allocator_traits<_Alloc> __traits;
+        -:  695:      return __traits::select_on_container_copy_construction(__a);
+        -:  696:    }
+        -:  697:
+        -:  698:#if __cplusplus < 201703L
+        -:  699:  template<typename _Alloc>
+        -:  700:    inline void __do_alloc_on_move(_Alloc& __one, _Alloc& __two, true_type)
+        -:  701:    { __one = std::move(__two); }
+        -:  702:
+        -:  703:  template<typename _Alloc>
+        -:  704:    inline void __do_alloc_on_move(_Alloc&, _Alloc&, false_type)
+        -:  705:    { }
+        -:  706:#endif
+        -:  707:
+        -:  708:  template<typename _Alloc>
+        -:  709:    _GLIBCXX14_CONSTEXPR inline void
+        -:  710:    __alloc_on_move(_Alloc& __one, _Alloc& __two)
+        -:  711:    {
+        -:  712:      typedef allocator_traits<_Alloc> __traits;
+        -:  713:      typedef typename __traits::propagate_on_container_move_assignment __pocma;
+        -:  714:#if __cplusplus >= 201703L
+        -:  715:      if constexpr (__pocma::value)
+        -:  716:	__one = std::move(__two);
+        -:  717:#else
+        -:  718:      __do_alloc_on_move(__one, __two, __pocma());
+        -:  719:#endif
+        -:  720:    }
+        -:  721:
+        -:  722:#if __cplusplus < 201703L
+        -:  723:  template<typename _Alloc>
+        -:  724:    inline void __do_alloc_on_swap(_Alloc& __one, _Alloc& __two, true_type)
+        -:  725:    {
+        -:  726:      using std::swap;
+        -:  727:      swap(__one, __two);
+        -:  728:    }
+        -:  729:
+        -:  730:  template<typename _Alloc>
+        -:  731:    inline void __do_alloc_on_swap(_Alloc&, _Alloc&, false_type)
+        -:  732:    { }
+        -:  733:#endif
+        -:  734:
+        -:  735:  template<typename _Alloc>
+        -:  736:    _GLIBCXX14_CONSTEXPR inline void
+        -:  737:    __alloc_on_swap(_Alloc& __one, _Alloc& __two)
+        -:  738:    {
+        -:  739:      typedef allocator_traits<_Alloc> __traits;
+        -:  740:      typedef typename __traits::propagate_on_container_swap __pocs;
+        -:  741:#if __cplusplus >= 201703L
+        -:  742:      if constexpr (__pocs::value)
+        -:  743:	{
+        -:  744:	  using std::swap;
+        -:  745:	  swap(__one, __two);
+        -:  746:	}
+        -:  747:#else
+        -:  748:      __do_alloc_on_swap(__one, __two, __pocs());
+        -:  749:#endif
+        -:  750:    }
+        -:  751:
+        -:  752:  template<typename _Alloc, typename _Tp,
+        -:  753:	   typename _ValueT = __remove_cvref_t<typename _Alloc::value_type>,
+        -:  754:	   typename = void>
+        -:  755:    struct __is_alloc_insertable_impl
+        -:  756:    : false_type
+        -:  757:    { };
+        -:  758:
+        -:  759:  template<typename _Alloc, typename _Tp, typename _ValueT>
+        -:  760:    struct __is_alloc_insertable_impl<_Alloc, _Tp, _ValueT,
+        -:  761:      __void_t<decltype(allocator_traits<_Alloc>::construct(
+        -:  762:		   std::declval<_Alloc&>(), std::declval<_ValueT*>(),
+        -:  763:		   std::declval<_Tp>()))>>
+        -:  764:    : true_type
+        -:  765:    { };
+        -:  766:
+        -:  767:  // true if _Alloc::value_type is CopyInsertable into containers using _Alloc
+        -:  768:  // (might be wrong if _Alloc::construct exists but is not constrained,
+        -:  769:  // i.e. actually trying to use it would still be invalid. Use with caution.)
+        -:  770:  template<typename _Alloc>
+        -:  771:    struct __is_copy_insertable
+        -:  772:    : __is_alloc_insertable_impl<_Alloc,
+        -:  773:				 typename _Alloc::value_type const&>::type
+        -:  774:    { };
+        -:  775:
+        -:  776:  // std::allocator<_Tp> just requires CopyConstructible
+        -:  777:  template<typename _Tp>
+        -:  778:    struct __is_copy_insertable<allocator<_Tp>>
+        -:  779:    : is_copy_constructible<_Tp>
+        -:  780:    { };
+        -:  781:
+        -:  782:  // true if _Alloc::value_type is MoveInsertable into containers using _Alloc
+        -:  783:  // (might be wrong if _Alloc::construct exists but is not constrained,
+        -:  784:  // i.e. actually trying to use it would still be invalid. Use with caution.)
+        -:  785:  template<typename _Alloc>
+        -:  786:    struct __is_move_insertable
+        -:  787:    : __is_alloc_insertable_impl<_Alloc, typename _Alloc::value_type>::type
+        -:  788:    { };
+        -:  789:
+        -:  790:  // std::allocator<_Tp> just requires MoveConstructible
+        -:  791:  template<typename _Tp>
+        -:  792:    struct __is_move_insertable<allocator<_Tp>>
+        -:  793:    : is_move_constructible<_Tp>
+        -:  794:    { };
+        -:  795:
+        -:  796:  // Trait to detect Allocator-like types.
+        -:  797:  template<typename _Alloc, typename = void>
+        -:  798:    struct __is_allocator : false_type { };
+        -:  799:
+        -:  800:  template<typename _Alloc>
+        -:  801:    struct __is_allocator<_Alloc,
+        -:  802:      __void_t<typename _Alloc::value_type,
+        -:  803:	       decltype(std::declval<_Alloc&>().allocate(size_t{}))>>
+        -:  804:    : true_type { };
+        -:  805:
+        -:  806:  template<typename _Alloc>
+        -:  807:    using _RequireAllocator
+        -:  808:      = typename enable_if<__is_allocator<_Alloc>::value, _Alloc>::type;
+        -:  809:
+        -:  810:  template<typename _Alloc>
+        -:  811:    using _RequireNotAllocator
+        -:  812:      = typename enable_if<!__is_allocator<_Alloc>::value, _Alloc>::type;
+        -:  813:
+        -:  814:#if __cpp_concepts >= 201907L
+        -:  815:  template<typename _Alloc>
+        -:  816:    concept __allocator_like = requires (_Alloc& __a) {
+        -:  817:      typename _Alloc::value_type;
+        -:  818:      __a.deallocate(__a.allocate(1u), 1u);
+        -:  819:    };
+        -:  820:#endif
+        -:  821:#endif // C++11
+        -:  822:
+        -:  823:  /**
+        -:  824:   * Destroy a range of objects using the supplied allocator.  For
+        -:  825:   * non-default allocators we do not optimize away invocation of
+        -:  826:   * destroy() even if _Tp has a trivial destructor.
+        -:  827:   */
+        -:  828:
+        -:  829:  template<typename _ForwardIterator, typename _Allocator>
+        -:  830:    void
+        -:  831:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+        -:  832:	     _Allocator& __alloc)
+        -:  833:    {
+        -:  834:      for (; __first != __last; ++__first)
+        -:  835:#if __cplusplus < 201103L
+        -:  836:	__alloc.destroy(std::__addressof(*__first));
+        -:  837:#else
+        -:  838:	allocator_traits<_Allocator>::destroy(__alloc,
+        -:  839:					      std::__addressof(*__first));
+        -:  840:#endif
+        -:  841:    }
+        -:  842:
+        -:  843:  template<typename _ForwardIterator, typename _Tp>
+        -:  844:    inline void
+function _ZSt8_DestroyIP10TrenchCoatS0_EvT_S2_RSaIT0_E called 0 returned 0% blocks executed 0%
+    #####:  845:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+        -:  846:	     allocator<_Tp>&)
+        -:  847:    {
+    #####:  848:      _Destroy(__first, __last);
+    %%%%%:  848-block  0
+call    0 never executed
+    #####:  849:    }
+        -:  850:
+        -:  851:_GLIBCXX_END_NAMESPACE_VERSION
+        -:  852:} // namespace std
+        -:  853:#endif // _ALLOC_TRAITS_H

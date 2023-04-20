@@ -1,0 +1,3 @@
+/home/theo/CLionProjects/a6-913-Fintina-Olivia-1/cmake-build-debug-coverage/CMakeFiles/CLionProjects.dir
+/home/theo/CLionProjects/a6-913-Fintina-Olivia-1/cmake-build-debug-coverage/CMakeFiles/edit_cache.dir
+/home/theo/CLionProjects/a6-913-Fintina-Olivia-1/cmake-build-debug-coverage/CMakeFiles/rebuild_cache.dir

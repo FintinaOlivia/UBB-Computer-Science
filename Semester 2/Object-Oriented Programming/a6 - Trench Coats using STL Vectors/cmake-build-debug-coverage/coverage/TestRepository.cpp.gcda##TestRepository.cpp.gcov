@@ -1,0 +1,558 @@
+        -:    0:Source:/home/theo/CLionProjects/a6-913-Fintina-Olivia-1/TestRepository.cpp
+        -:    0:Graph:/home/theo/CLionProjects/a6-913-Fintina-Olivia-1/cmake-build-debug-coverage/CMakeFiles/CLionProjects.dir/TestRepository.cpp.gcno
+        -:    0:Data:/home/theo/CLionProjects/a6-913-Fintina-Olivia-1/cmake-build-debug-coverage/CMakeFiles/CLionProjects.dir/TestRepository.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by theo on 20.04.2023.
+        -:    3://
+        -:    4:#include "TestAll.h"
+        -:    5:#include "Repository.h"
+        -:    6:#include "Domain.h"
+        -:    7:#include <cassert>
+        -:    8:#include <iostream>
+        -:    9:
+function _Z14testRepositoryv called 1 returned 100% blocks executed 46%
+        1:   10:void testRepository(){
+        1:   11:    std::cout << "Testing Repository" << std::endl;
+        1:   11-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   11-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   12:    Repository repository;
+        1:   12-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   13:    repository.addTrenchCoat(1, 2, "red", 3, 4, "link");
+        1:   13-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   13-block  1
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   13-block  2
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   13-block  3
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   13-block  4
+call   15 never executed
+    $$$$$:   13-block  5
+    $$$$$:   13-block  6
+call   16 never executed
+    $$$$$:   13-block  7
+    $$$$$:   13-block  8
+call   17 never executed
+    $$$$$:   13-block  9
+    $$$$$:   13-block 10
+call   18 never executed
+    $$$$$:   13-block 11
+       1*:   14:    assert(repository.getSize() == 1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   14-block  0
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   14-block  1
+call    5 never executed
+        -:   15:
+        1:   16:    repository.addTrenchCoat(2, 4, "blue", 4, 5, "link2");
+        1:   16-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   16-block  1
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   16-block  2
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   16-block  3
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   16-block  4
+call   15 never executed
+    $$$$$:   16-block  5
+    $$$$$:   16-block  6
+call   16 never executed
+    $$$$$:   16-block  7
+    $$$$$:   16-block  8
+call   17 never executed
+    $$$$$:   16-block  9
+    $$$$$:   16-block 10
+call   18 never executed
+    $$$$$:   16-block 11
+        1:   17:    repository.addTrenchCoat(3, 4, "green", 5, 6, "link3");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   17-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   17-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   17-block  2
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   17-block  3
+call   15 never executed
+    $$$$$:   17-block  4
+    $$$$$:   17-block  5
+call   16 never executed
+    $$$$$:   17-block  6
+    $$$$$:   17-block  7
+call   17 never executed
+    $$$$$:   17-block  8
+    $$$$$:   17-block  9
+call   18 never executed
+    $$$$$:   17-block 10
+        1:   18:    repository.addTrenchCoat(4, 5, "yellow", 6, 7, "link4");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   18-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   18-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   18-block  2
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   18-block  3
+call   15 never executed
+    $$$$$:   18-block  4
+    $$$$$:   18-block  5
+call   16 never executed
+    $$$$$:   18-block  6
+    $$$$$:   18-block  7
+call   17 never executed
+    $$$$$:   18-block  8
+    $$$$$:   18-block  9
+call   18 never executed
+    $$$$$:   18-block 10
+        1:   19:    repository.addTrenchCoat(5, 6, "black", 7, 8, "link5");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   19-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   19-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   19-block  2
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   19-block  3
+call   15 never executed
+    $$$$$:   19-block  4
+    $$$$$:   19-block  5
+call   16 never executed
+    $$$$$:   19-block  6
+    $$$$$:   19-block  7
+call   17 never executed
+    $$$$$:   19-block  8
+    $$$$$:   19-block  9
+call   18 never executed
+    $$$$$:   19-block 10
+       1*:   20:    assert(repository.getSize() == 5);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   20-block  0
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   20-block  1
+call    5 never executed
+       1*:   21:    assert(repository.validID(1));
+        1:   21-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   21-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   21-block  2
+call    5 never executed
+        -:   22:
+        1:   23:    repository.removeTrenchCoat(1);
+        1:   23-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   24:    assert(repository.getSize() == 4);
+        1:   24-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   24-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   24-block  2
+call    5 never executed
+       1*:   25:    assert(!repository.validID(1));
+        1:   25-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   25-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   25-block  2
+call    5 never executed
+        -:   26:
+        1:   27:    repository.updateTrenchCoat(2, 1, 2, "red", 3, 4, "link");
+        1:   27-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   27-block  1
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   27-block  2
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   27-block  3
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   27-block  4
+call   15 never executed
+    $$$$$:   27-block  5
+    $$$$$:   27-block  6
+call   16 never executed
+    $$$$$:   27-block  7
+    $$$$$:   27-block  8
+call   17 never executed
+    $$$$$:   27-block  9
+    $$$$$:   27-block 10
+call   18 never executed
+    $$$$$:   27-block 11
+       1*:   28:    assert(repository.getTrenchCoat(1).getTrenchID() == 1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   28-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   28-block  1
+branch  6 taken 0 (fallthrough)
+branch  7 taken 1
+    %%%%%:   28-block  2
+call    8 never executed
+        1:   28-block  3
+call    9 returned 1
+    $$$$$:   28-block  4
+call   10 never executed
+    $$$$$:   28-block  5
+       1*:   29:    assert(repository.getTrenchCoat(1).getTrenchSize() == 2);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   29-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   29-block  1
+branch  6 taken 0 (fallthrough)
+branch  7 taken 1
+    %%%%%:   29-block  2
+call    8 never executed
+        1:   29-block  3
+call    9 returned 1
+    $$$$$:   29-block  4
+call   10 never executed
+    $$$$$:   29-block  5
+        -:   30:
+        1:   31:    TrenchCoat trenchCoat = repository.getTrenchCoat(1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   32:    assert(trenchCoat.getTrenchID() == 1);
+        1:   32-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   32-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   32-block  2
+call    5 never executed
+        -:   33:
+        1:   34:    std::vector<TrenchCoat> trenchCoats = repository.getAllTrenchCoats();
+        1:   34-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   35:    assert(trenchCoats.size() == 4);
+        1:   35-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   35-block  1
+call    3 never executed
+        -:   36:
+        1:   37:    repository.setFileName("test.txt");
+        1:   37-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   37-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   37-block  2
+call    7 returned 1
+call    8 returned 1
+    $$$$$:   37-block  3
+call    9 never executed
+    $$$$$:   37-block  4
+    $$$$$:   37-block  5
+call   10 never executed
+    $$$$$:   37-block  6
+       1*:   38:    assert(repository.getFileName() == "test.txt");
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   38-block  0
+call    3 returned 1
+branch  4 taken 0 (fallthrough)
+branch  5 taken 1
+    %%%%%:   38-block  1
+call    6 never executed
+        1:   38-block  2
+call    7 returned 1
+        -:   39:
+        1:   40:    repository.writeToFile();
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   41:    repository.readFromFile();
+        1:   41-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   42:    assert(repository.getSize() == 8);
+        1:   42-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   42-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   42-block  2
+call    5 never executed
+        -:   43:
+       1*:   44:    assert(repository.getTrenchCoat(1).getTrenchID() == 1);
+        1:   44-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   44-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   44-block  2
+branch  6 taken 0 (fallthrough)
+branch  7 taken 1
+    %%%%%:   44-block  3
+call    8 never executed
+        1:   44-block  4
+call    9 returned 1
+    $$$$$:   44-block  5
+call   10 never executed
+    $$$$$:   44-block  6
+        -:   45:
+        1:   46:    TrenchCoat trenchCoat1 = repository.getTrenchCoat(20);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   47:    assert(trenchCoat1.getTrenchID() == -1);
+        1:   47-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   47-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   47-block  2
+call    5 never executed
+        -:   48:
+        -:   49:
+       1*:   50:    assert_perror(repository.updateTrenchCoat(20, 1, 2, "red", 3, 4, "link"));
+        1:   50-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   50-block  1
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   50-block  2
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   50-block  3
+branch 11 taken 0 (fallthrough)
+branch 12 taken 1
+    %%%%%:   50-block  4
+call   13 never executed
+call   14 never executed
+branch 15 never executed
+branch 16 never executed
+    %%%%%:   50-block  5
+call   17 never executed
+call   18 never executed
+branch 19 never executed
+branch 20 never executed
+    %%%%%:   50-block  6
+call   21 never executed
+branch 22 never executed
+branch 23 never executed
+    %%%%%:   50-block  7
+call   24 never executed
+        1:   50-block  8
+branch 25 taken 0 (fallthrough)
+branch 26 taken 1
+    %%%%%:   50-block  9
+call   27 never executed
+        1:   50-block 10
+branch 28 taken 0 (fallthrough)
+branch 29 taken 1
+    %%%%%:   50-block 11
+call   30 never executed
+        1:   50-block 12
+branch 31 taken 0 (fallthrough)
+branch 32 taken 1
+    %%%%%:   50-block 13
+call   33 never executed
+        1:   50-block 14
+branch 34 taken 0 (fallthrough)
+branch 35 taken 1
+    %%%%%:   50-block 15
+call   36 never executed
+        1:   50-block 16
+call   37 returned 1
+call   38 returned 1
+call   39 returned 1
+call   40 returned 1
+    $$$$$:   50-block 17
+branch 41 never executed
+branch 42 never executed
+    $$$$$:   50-block 18
+call   43 never executed
+    $$$$$:   50-block 19
+    $$$$$:   50-block 20
+branch 44 never executed
+branch 45 never executed
+    $$$$$:   50-block 21
+call   46 never executed
+    $$$$$:   50-block 22
+    $$$$$:   50-block 23
+branch 47 never executed
+branch 48 never executed
+    $$$$$:   50-block 24
+call   49 never executed
+    $$$$$:   50-block 25
+    $$$$$:   50-block 26
+branch 50 never executed
+branch 51 never executed
+    $$$$$:   50-block 27
+call   52 never executed
+    $$$$$:   50-block 28
+    $$$$$:   50-block 29
+call   53 never executed
+    $$$$$:   50-block 30
+    $$$$$:   50-block 31
+call   54 never executed
+    $$$$$:   50-block 32
+    $$$$$:   50-block 33
+call   55 never executed
+    $$$$$:   50-block 34
+    $$$$$:   50-block 35
+call   56 never executed
+    $$$$$:   50-block 36
+       1*:   51:    assert_perror(repository.removeTrenchCoat(20));
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   51-block  0
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   51-block  1
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:   51-block  2
+call    8 never executed
+        1:   52:    std::cout << "Repository tests passed" << std::endl;
+        1:   52-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   52-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   53:}
+        1:   53-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+    $$$$$:   53-block  1
+call    4 never executed
+    $$$$$:   53-block  2
+call    5 never executed
+    $$$$$:   53-block  3
+call    6 never executed
+    $$$$$:   53-block  4
+call    7 never executed

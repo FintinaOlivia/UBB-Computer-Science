@@ -1,0 +1,4 @@
+/snap/clion/234/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/234/bin/ninja/linux/x64/ninja -DCMAKE_CXX_FLAGS=--coverage -DCMAKE_C_FLAGS=--coverage -G Ninja -S /home/theo/CLionProjects/a6-913-Fintina-Olivia-1 -B /home/theo/CLionProjects/a6-913-Fintina-Olivia-1/cmake-build-debug-coverage
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/theo/CLionProjects/a6-913-Fintina-Olivia-1/cmake-build-debug-coverage

@@ -1,0 +1,9 @@
+# ninja log v5
+1	398	1681986531761234655	CMakeFiles/CLionProjects.dir/Repository.cpp.o	15219fc62a88ef64
+0	298	1681986531661234657	CMakeFiles/CLionProjects.dir/Controller.cpp.o	781097b19156af25
+2	276	1681987004593224824	CMakeFiles/CLionProjects.dir/TestRepository.cpp.o	49df66a890c3a55e
+1	246	1681986827637228503	CMakeFiles/CLionProjects.dir/main.cpp.o	9a0ec3a5b3c11b0
+1	238	1681986531601234658	CMakeFiles/CLionProjects.dir/testDomain.cpp.o	2d25ae2757fcf3cb
+2	298	1681986827689228502	CMakeFiles/CLionProjects.dir/UI.cpp.o	932ae1c3afddb612
+0	200	1681986531565234659	CMakeFiles/CLionProjects.dir/Domain.cpp.o	2f71652d1ac4631a
+276	386	1681987004705224822	CLionProjects	16857f73a5bfca3c

@@ -1,0 +1,221 @@
+        -:    0:Source:/home/theo/CLionProjects/a6-913-Fintina-Olivia-1/Domain.cpp
+        -:    0:Graph:/home/theo/CLionProjects/a6-913-Fintina-Olivia-1/cmake-build-debug-coverage/CMakeFiles/CLionProjects.dir/Domain.cpp.gcno
+        -:    0:Data:/home/theo/CLionProjects/a6-913-Fintina-Olivia-1/cmake-build-debug-coverage/CMakeFiles/CLionProjects.dir/Domain.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include <string>
+        -:    2:#include "Domain.h"
+        -:    3:
+function _ZN10TrenchCoatC2Ev called 2 returned 100% blocks executed 67%
+        2:    4:TrenchCoat::TrenchCoat(){
+        2:    4-block  0
+call    0 returned 2
+call    1 returned 2
+        2:    5:    this->id = 0;
+        2:    6:    this->size = 0;
+        2:    7:    this->colour = "0";
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:    8:    this->price = 0;
+        2:    9:    this->quantity = 0;
+        2:   10:    this->photographyLink = "0";
+        2:   10-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:   11:};
+        2:   11-block  0
+    $$$$$:   11-block  1
+call    0 never executed
+    $$$$$:   11-block  2
+call    1 never executed
+        -:   12:
+function _ZN10TrenchCoatC2EiiRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEfiS7_ called 39 returned 100% blocks executed 67%
+       39:   13:TrenchCoat::TrenchCoat(int id, 
+        -:   14:                    int sizeOfTrench, 
+        -:   15:                    const std::string &colourOfTrench, 
+        -:   16:                    float priceOfTrench, 
+        -:   17:                    int quantityOfTrench, 
+       39:   18:                    const std::string &photographyLinkOfTrench) {
+       39:   18-block  0
+call    0 returned 39
+call    1 returned 39
+        -:   19:
+       39:   20:    this->id = id;
+       39:   21:    this->size = sizeOfTrench;
+       39:   22:    this->colour = colourOfTrench;
+call    0 returned 39
+branch  1 taken 39 (fallthrough)
+branch  2 taken 0 (throw)
+       39:   23:    this->price = priceOfTrench;
+       39:   24:    this->quantity = quantityOfTrench;
+       39:   25:    this->photographyLink = photographyLinkOfTrench;
+       39:   25-block  0
+call    0 returned 39
+branch  1 taken 39 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   26:
+        -:   27:    // size{sizeOfTrench}; 
+        -:   28:    // colour{colourOfTrench}; 
+        -:   29:    // price{priceOfTrench};
+        -:   30:    // quantity{quantityOfTrench};
+        -:   31:    // photographyLink{photographyLinkOfTrench};
+        -:   32:
+       39:   33:}
+       39:   33-block  0
+    $$$$$:   33-block  1
+call    0 never executed
+    $$$$$:   33-block  2
+call    1 never executed
+        -:   34:
+        -:   35:// TrenchCoat::TrenchCoat(int id, 
+        -:   36://                     int sizeOfTrench, 
+        -:   37://                     const std::string &colourOfTrench, 
+        -:   38://                     float priceOfTrench, 
+        -:   39://                     int quantityOfTrench, 
+        -:   40://                     const std::string &photographyLinkOfTrench) {
+        -:   41:
+        -:   42://     id = (id);
+        -:   43://     size = (sizeOfTrench);
+        -:   44://     colour = (colourOfTrench);
+        -:   45://     price = (priceOfTrench);
+        -:   46://     quantity = (quantityOfTrench);
+        -:   47://     photographyLink = (photographyLinkOfTrench);
+        -:   48:
+        -:   49://     // size{sizeOfTrench}; 
+        -:   50://     // colour{colourOfTrench}; 
+        -:   51://     // price{priceOfTrench};
+        -:   52://     // quantity{quantityOfTrench};
+        -:   53://     // photographyLink{photographyLinkOfTrench};
+        -:   54:
+        -:   55:// }
+        -:   56:
+        -:   57://Getters
+function _ZNK10TrenchCoat11getTrenchIDEv called 461 returned 100% blocks executed 100%
+      461:   58:int TrenchCoat::getTrenchID() const {
+      461:   59:    return this->id;
+      461:   59-block  0
+        -:   60:}
+        -:   61:
+function _ZN10TrenchCoat13getTrenchSizeEv called 33 returned 100% blocks executed 100%
+       33:   62:int TrenchCoat::getTrenchSize()
+        -:   63:{
+       33:   64:    return this->size;
+       33:   64-block  0
+        -:   65:}
+        -:   66:
+function _ZNK10TrenchCoat15getTrenchColourB5cxx11Ev called 19 returned 100% blocks executed 100%
+       19:   67:std::string TrenchCoat::getTrenchColour() const
+        -:   68:{
+       19:   69:    return this->colour;
+       19:   69-block  0
+call    0 returned 19
+        -:   70:}
+        -:   71:
+function _ZN10TrenchCoat14getTrenchPriceEv called 19 returned 100% blocks executed 100%
+       19:   72:float TrenchCoat::getTrenchPrice()
+        -:   73:{
+       19:   74:    return this->price;
+       19:   74-block  0
+        -:   75:}
+        -:   76:
+function _ZN10TrenchCoat17getTrenchQuantityEv called 19 returned 100% blocks executed 100%
+       19:   77:int TrenchCoat::getTrenchQuantity()
+        -:   78:{
+       19:   79:    return this->quantity;
+       19:   79-block  0
+        -:   80:}
+        -:   81:
+function _ZNK10TrenchCoat24getTrenchPhotographyLinkB5cxx11Ev called 19 returned 100% blocks executed 100%
+       19:   82:std::string TrenchCoat::getTrenchPhotographyLink() const
+        -:   83:{
+       19:   84:    return this->photographyLink;
+       19:   84-block  0
+call    0 returned 19
+        -:   85:}
+        -:   86:
+        -:   87://Operator overloading
+function _ZN10TrenchCoateqERKS_ called 2 returned 100% blocks executed 100%
+        2:   88:bool TrenchCoat::operator==(const TrenchCoat &trenchToCompare)
+        -:   89:{
+        5:   90:    if(this->id == trenchToCompare.id &&
+        2:   91:        this->size == trenchToCompare.size &&
+        1:   91-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:   92:        this->colour == trenchToCompare.colour &&
+        1:   92-block  0
+call    0 returned 1
+        1:   93:        this->price == trenchToCompare.price &&
+        1:   93-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        4:   94:        this->quantity == trenchToCompare.quantity &&
+        2:   94-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        1:   94-block  1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0
+        1:   94-block  2
+        1:   94-block  3
+        2:   94-block  4
+branch  6 taken 1 (fallthrough)
+branch  7 taken 1
+        1:   95:        this->photographyLink == trenchToCompare.photographyLink)
+        1:   95-block  0
+call    0 returned 1
+        -:   96:    {
+        1:   97:        return true;
+        1:   97-block  0
+        -:   98:    }else{
+        1:   99:        return false;
+        1:   99-block  0
+        -:  100:    }
+        -:  101:}
+        -:  102:
+        -:  103://Setters
+function _ZN10TrenchCoat11setTrenchIDEi called 4 returned 100% blocks executed 100%
+        4:  104:void TrenchCoat::setTrenchID(int newID)
+        -:  105:{
+        4:  106:    this->id = newID;
+        4:  107:}
+        -:  108:
+function _ZN10TrenchCoat13setTrenchSizeEi called 4 returned 100% blocks executed 100%
+        4:  109:void TrenchCoat::setTrenchSize(int newSize)
+        -:  110:{
+        4:  111:    this->size = newSize;
+        4:  112:}
+        -:  113:
+function _ZN10TrenchCoat15setTrenchColourERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 4 returned 100% blocks executed 100%
+        4:  114:void TrenchCoat::setTrenchColour(const std::string &newColour)
+        -:  115:{
+        4:  116:    this->colour = newColour;
+        4:  116-block  0
+call    0 returned 4
+        4:  117:}
+        -:  118:
+function _ZN10TrenchCoat14setTrenchPriceEf called 4 returned 100% blocks executed 100%
+        4:  119:void TrenchCoat::setTrenchPrice(float newPrice)
+        -:  120:{
+        4:  121:    this->price = newPrice;
+        4:  122:}
+        -:  123:
+function _ZN10TrenchCoat17setTrenchQuantityEi called 4 returned 100% blocks executed 100%
+        4:  124:void TrenchCoat::setTrenchQuantity(int newQuantity)
+        -:  125:{
+        4:  126:    this->quantity = newQuantity;
+        4:  127:}
+        -:  128:
+function _ZN10TrenchCoat24setTrenchPhotographyLinkERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 4 returned 100% blocks executed 100%
+        4:  129:void TrenchCoat::setTrenchPhotographyLink(const std::string &newPhotographyLink)
+        -:  130:{
+        4:  131:    this->photographyLink = newPhotographyLink;
+        4:  131-block  0
+call    0 returned 4
+        4:  132:}
+        -:  133:
