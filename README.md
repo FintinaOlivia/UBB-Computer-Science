@@ -12,16 +12,16 @@
 YEAR 1
 
 <ul>
-    <li>:open_file_folder: Semester 1
+    <li> 📂 Semester 1
         <ul>
             <li>
                 <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%201/Linear%20Algebra">
-                    :1234: Linear Algebra
+                    🔢 Linear Algebra
                 </a>
             </li>
             <li>
                 <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%201/Mathematical%20Analysis">
-                    :chart: Mathematical Analysis
+                    💹 Mathematical Analysis
                 </a>
             </li>
             <li>
@@ -41,7 +41,7 @@ YEAR 1
                 </li>
          </ul>
       </li>
-    <li>:open_file_folder: Semester 2
+    <li> 📂 Semester 2
         <ul>
                 <li>
                     <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%202/Object-Oriented%20Programming">
