@@ -11,12 +11,12 @@ fi
 while ((1 > 0))
 do
 	processes=($(ps -ef | grep $danger | awk '{print $2}' | head -n -2))
-	for process in ${processes[@]}
+	for proc in ${processes[@]}
 	do
-		if (($$ != $process))
+		if (($$ != $proc))
 		then
 			echo $danger was killed
-			kill $process
+			kill $proc
 		fi
 	done
 	sleep 1
