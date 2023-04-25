@@ -1,0 +1,3 @@
+/home/theo/CLionProjects/Week 8 - Test Prep/cmake-build-debug/CMakeFiles/Week_8___Test_Prep.dir
+/home/theo/CLionProjects/Week 8 - Test Prep/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/theo/CLionProjects/Week 8 - Test Prep/cmake-build-debug/CMakeFiles/rebuild_cache.dir

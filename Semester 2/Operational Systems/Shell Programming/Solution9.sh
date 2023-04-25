@@ -1,13 +1,12 @@
 #!/bin/bash
 
-
 #Check if there are arguments
 if (($# == 0)) ; then
 	echo "We need some arguments there"
 
 #Check if there is one argument and if it is a directory
 elif (($# == 1)) ; then
-	if (test -d $@) ; then
+	if (test -d "$@") ; then
 		directory=$1
 	else
 		echo "We need a directory!"
@@ -22,7 +21,9 @@ files=($(find $directory))
 echo "Files that have duplicates"
 
 #Check for duplicates
+# shellcheck disable=SC2068
 for file in ${files[@]} ; do
+	# shellcheck disable=SC2068
 	for other in ${files[@]} ; do
 		if test -e $file ; then
 			if test $file != $other ; then
