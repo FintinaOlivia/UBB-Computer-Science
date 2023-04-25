@@ -17,7 +17,7 @@ fi
 
 #Find all the files in the directory
 files=($(find $directory -name *.c | tac))
-echo $files
+
 COUNT=0
 
 #Iterate through the files
@@ -27,7 +27,7 @@ for file in ${files[@]} ; do
 	
 	if(($SIZE > 500)) ; then
 		((COUNT++))
-		echo $file $SIZE
+		echo $file 
 
 		#If there are more than 2 files bigger than 500 lines, exit
 		if((COUNT == 2)) ; then
