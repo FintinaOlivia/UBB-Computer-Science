@@ -1,4 +1,4 @@
-Bills, bills, bills
+**Bills, bills, bills**
 
 Emily needs to manage her list of ever-growing bills. Each bill has a company name, a serial number, a sum and an isPaid field that illustrates whether the bill was paid. See below a few examples:
 
