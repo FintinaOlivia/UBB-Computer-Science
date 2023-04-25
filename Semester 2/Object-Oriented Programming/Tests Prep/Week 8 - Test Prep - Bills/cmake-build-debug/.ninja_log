@@ -1,0 +1,18 @@
+# ninja log v5
+1	275	1682439345217586881	CMakeFiles/Week_8___Test_Prep.dir/UI.cpp.o	7dfd2dbf7f3bc356
+0	177	1682439345121586882	CMakeFiles/Week_8___Test_Prep.dir/main.cpp.o	3e97a2d5713e8e2d
+0	189	1682436009181654851	CMakeFiles/Week_8___Test_Prep.dir/Domain.cpp.o	960c1a1ffe810cb
+0	214	1682439345157586882	CMakeFiles/Week_8___Test_Prep.dir/Repository.cpp.o	4c314a92048cc86
+275	339	1682439345281586879	Week_8___Test_Prep	827bc6664cf3ab06
+1	215	1682439345157586882	CMakeFiles/Week_8___Test_Prep.dir/Controller.cpp.o	901cd8becd6ebcbd
+1	183	1682440015249573229	CMakeFiles/Week_8___Test_Prep.dir/main.cpp.o	3e97a2d5713e8e2d
+2	219	1682440015281573228	CMakeFiles/Week_8___Test_Prep.dir/Controller.cpp.o	901cd8becd6ebcbd
+2	259	1682440015321573227	CMakeFiles/Week_8___Test_Prep.dir/Repository.cpp.o	4c314a92048cc86
+3	306	1682440015369573226	CMakeFiles/Week_8___Test_Prep.dir/UI.cpp.o	7dfd2dbf7f3bc356
+1	212	1682440079269571924	CMakeFiles/Week_8___Test_Prep.dir/Tests.cpp.o	b64930f3bcf7d38
+212	285	1682440079341571923	Week_8___Test_Prep	9625b417105f3a4e
+1	245	1682440107233571355	CMakeFiles/Week_8___Test_Prep.dir/Tests.cpp.o	b64930f3bcf7d38
+246	336	1682440107325571353	Week_8___Test_Prep	9625b417105f3a4e
+1	211	1682440195053569565	CMakeFiles/Week_8___Test_Prep.dir/Controller.cpp.o	901cd8becd6ebcbd
+1	248	1682440195089569565	CMakeFiles/Week_8___Test_Prep.dir/Tests.cpp.o	b64930f3bcf7d38
+248	316	1682440195157569563	Week_8___Test_Prep	9625b417105f3a4e
