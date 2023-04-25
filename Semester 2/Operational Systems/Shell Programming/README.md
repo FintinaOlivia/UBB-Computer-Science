@@ -21,7 +21,7 @@ rares 3
 
 (2) 	Find recursively in a directory all ".c" files having more than 500 lines. Stop after finding 2 such files. 	find, wc, expr, while, break
 
-dir/11.c
+dir/11.c \
 dir/d/a/13.c
 
 (3) 	Find recursively in a directory, all the files with the extension ".log" and sort their lines (replace the original file with the sorted content). 	find, sort, mv, rm 	The *.log files in test directory "dir" should be all sorted.
