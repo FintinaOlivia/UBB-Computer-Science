@@ -58,10 +58,12 @@ void UI::run() {
 void UI::addCar() {
     std::cout << "Enter the manufacturer: ";
     std::string manufacturer;
-    std::cin >> manufacturer;
+    std::cin.ignore();
+    std::getline(std::cin, manufacturer);
 
     std::cout << "Enter the model: ";
     std::string model;
+    std::cin.ignore();
     std::cin >> model;
 
     std::cout << "Enter the year of fabrication: ";
@@ -70,6 +72,7 @@ void UI::addCar() {
 
     std::cout << "Enter the type: ";
     std::string type;
+    std::cin.ignore();
     std::cin >> type;
 
     Car car = Car(manufacturer, model, yearOfFabrication, type);
@@ -141,7 +144,7 @@ void UI::getAllCars() {
 }
 
 void UI::displayVintageCars() {
-        std::vector<Car> cars = this->controller.getVintageCarsOlderThan(1978);
+    std::vector<Car> cars = this->controller.getVintageCarsOlderThan(1978);
     for (Car car : cars) {
         std::cout << car.toString() << std::endl;
     }
