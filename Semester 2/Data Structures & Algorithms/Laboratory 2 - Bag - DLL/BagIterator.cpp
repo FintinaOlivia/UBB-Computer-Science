@@ -4,52 +4,49 @@
 
 using namespace std;
 
-
+//Complexity: theta(1)
 BagIterator::BagIterator(const Bag& c): bag(c)
 {
-	//Complexity: Theta(1)
-
-	currentNode = bag.head;
+    this->currentNode = c.head;
+    this->currentFrequency = 1;
 }
 
+//Complexity: theta(1)
 void BagIterator::first() {
-	//Complexity: Theta(1)
-
-	currentNode = bag.head;
+	this->currentNode = this->bag.head;
 }
 
-
+//Complexity: theta(1)
+//Best Case == Worst Case == Average Case
 void BagIterator::next() {
-	//Complexity: Theta(1)
-
-	if (valid()) {
-		currentNode = currentNode->next;
-	}
-	else {
-		throw exception();
-	}
+	if (this->currentNode == nullptr) {
+        throw exception();
+    }else{
+        if (this->currentFrequency < this->currentNode->frequency) {
+            this->currentFrequency++;
+        }else{
+            this->currentNode = this->currentNode->next;
+            this->currentFrequency = 1;
+        }
+    }
 }
 
-
+//Complexity: theta(1)
+//Best Case == Worst Case == Average Case
 bool BagIterator::valid() const {
-	//Complexity: Theta(1)
-	
-	if (currentNode != nullptr) {
-		return true;
-	}
-	return false;
+	if (this->currentNode == nullptr) {
+        return false;
+    }
+    return true;
 }
 
 
-
+//Complexity: theta(1)
+//Best Case == Worst Case == Average Case
 TElem BagIterator::getCurrent() const
 {
-	//Complexity: Theta(1)
-
-	if (valid()) {
-		return currentNode->info;
-	}
-	else {
-		throw exception();
-	}
+	if (this->currentNode == nullptr) {
+        throw exception();
+    }
+    return this->currentNode->info;
 }

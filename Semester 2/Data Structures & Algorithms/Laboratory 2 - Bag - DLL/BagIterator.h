@@ -6,11 +6,11 @@ class BagIterator
 	friend class Bag;
 	
 private:
-	const Bag& bag;	
-	//TODO  - Representation
-	Node<TElem>* currentNode;
+	const Bag& bag;
+    Node<TElem>* currentNode;
+    int currentFrequency;
+    explicit BagIterator(const Bag& c);
 
-	BagIterator(const Bag& c);
 public:
 	void first();
 	void next();

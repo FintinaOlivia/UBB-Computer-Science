@@ -4,122 +4,171 @@
 #include <iostream>
 using namespace std;
 
-
-
+//Complexity: theta(1)
 Bag::Bag() {
-	head = NULL;
-	tail = NULL;
-	length = 0;
+	this->head = nullptr;
+    this->tail = nullptr;
+    this->sizeOfBag = 0;
 }
 
-
+//Complexity:
+// - Best Case: theta(1)
+// - Worst Case: theta(n)
+// - Average Case: theta(n)
 void Bag::add(TElem elem) {
-	
-	Node<TElem>* newNode = new Node<TElem>;
-	newNode->info = elem;
-	newNode->frequency = 0;
-	newNode->next = NULL;
-	newNode->prev = NULL;
-	
-	if (head == NULL) {
-		head = newNode;
-		tail = newNode;
-		newNode->frequency += 1;
-	}
-	else {
-		tail->next = newNode;
-		newNode->prev = tail;
-		tail = newNode;
-	}
-	length++;
+	if(this->head == nullptr) {
+        // If the bag is empty, add the element to the bag
+        // and set the head and tail to the new node
+        auto* newNode = new Node<TElem>;
+        newNode->info = elem;
+        newNode->frequency = 1;
+        newNode->next = nullptr;
+        newNode->prev = nullptr;
+
+        this->head = newNode;
+        this->tail = newNode;
+        this->sizeOfBag++;
+    }else{
+        // Search for the element in the bag
+        // If it is found, increase the frequency
+        Node<TElem>* currentNode = this->head;
+        while (currentNode != nullptr) {
+            if (currentNode->info == elem) {
+                currentNode->frequency++;
+                this->sizeOfBag++;
+                return;
+            }
+            currentNode = currentNode->next;
+        }
+
+        // If it is not found, add it to the end of the bag
+        auto* newNode = new Node<TElem>;
+
+        newNode->info = elem;
+        newNode->frequency = 1;
+        newNode->next = nullptr;
+        newNode->prev = this->tail;
+
+        this->tail->next = newNode;
+        this->tail = newNode;
+        this->sizeOfBag++;
+    }
 }
 
-
+//Complexity:
+// - Best Case: theta(1)
+// - Worst Case: theta(n)
+// - Average Case: theta(n)
 bool Bag::remove(TElem elem) {
-	
-	Node<TElem>* currentNode = head;
+	if(this->head == nullptr) {
+        return false;
+    }
 
-	while (currentNode != NULL) {
-		if (currentNode->info == elem) {
-			if (currentNode == head) {
-				head = currentNode->next;
-				if (head != NULL) {
-					head->prev = NULL;
-				}
-				else {
-					tail = NULL;
-				}
-			}
-			else if (currentNode == tail) {
-				tail = currentNode->prev;
-				tail->next = NULL;
-			}
-			else {
-				currentNode->prev->next = currentNode->next;
-				currentNode->next->prev = currentNode->prev;
-			}
-			delete currentNode;
-			length--;
-			return true;
-		}
-		currentNode = currentNode->next;
-	}
+    Node<TElem>* currentNode = this->head;
+    while (currentNode != nullptr) {
+        if (currentNode->info == elem) {
+            if (currentNode->frequency > 1) {
+                currentNode->frequency--;
+                this->sizeOfBag--;
+                return true;
+            }else{
+                if (currentNode == this->head) {
+                    this->head = currentNode->next;
+                    if (this->head != nullptr) {
+                        this->head->prev = nullptr;
+                    }
+                    delete currentNode;
+                    this->sizeOfBag--;
+                    return true;
+                }else if (currentNode == this->tail) {
+                    this->tail = currentNode->prev;
+                    if (this->tail != nullptr) {
+                        this->tail->next = nullptr;
+                    }
+                    delete currentNode;
+                    this->sizeOfBag--;
+                    return true;
+                }else{
+                    currentNode->prev->next = currentNode->next;
+                    currentNode->next->prev = currentNode->prev;
+                    delete currentNode;
+                    this->sizeOfBag--;
+                    return true;
+                }
+            }
+        }
+        currentNode = currentNode->next;
+    }
 	return false; 
 }
 
-
+//Complexity:
+// - Best Case: theta(1)
+// - Worst Case: theta(n)
+// - Average Case: theta(n)
 bool Bag::search(TElem elem) const {
+	if(this->head == nullptr) {
+        return false;
+    }
 
-	Node<TElem>* currentNode = head;
-	while (currentNode != NULL) {
-		if (currentNode->info == elem) {
-			return true;
-		}
-		currentNode = currentNode->next;
-	}
-	return false; 
+    Node<TElem>* currentNode = this->head;
+    while (currentNode != nullptr) {
+        if (currentNode->info == elem) {
+            return true;
+        }
+        currentNode = currentNode->next;
+    }
+
+    return false;
 }
 
+//Complexity:
+// - Best Case: theta(1)
+// - Worst Case: theta(n)
+// - Average Case: theta(n)
 int Bag::nrOccurrences(TElem elem) const {
-	
-	Node<TElem>* currentNode = head;
-	int count = 0;
-	while (currentNode != NULL) {
-		if (currentNode->info == elem) {
-			count++;
-		}
-		currentNode = currentNode->next;
-	}
-	return count;
+	if(this->head == nullptr) {
+        return 0;
+    }
+
+    Node<TElem>* currentNode = this->head;
+    while (currentNode != nullptr) {
+        if (currentNode->info == elem) {
+            return currentNode->frequency;
+        }
+        currentNode = currentNode->next;
+    }
+
+    return 0;
 }
 
-
+//Complexity: theta(1)
+//Best Case == Worst Case == Average Case == theta(1)
 int Bag::size() const {
-
-	return length;
+	return this->sizeOfBag;
 }
 
-
+//Complexity: theta(1)
+//Best Case == Worst Case == Average Case == theta(1)
 bool Bag::isEmpty() const {
-	
-	if (length == 0) {
-		return true;
-	}
-	return false;
+	return this->sizeOfBag == 0;
 }
 
+//Complexity: theta(1)
+//Best Case == Worst Case == Average Case == theta(1)
 BagIterator Bag::iterator() const {
 	return BagIterator(*this);
 }
 
-
+//Complexity: theta(n)
+//Best Case == Worst Case == Average Case == theta(n)
 Bag::~Bag() {
-	
-	Node<TElem>* currentNode = head;
-	while (currentNode != NULL) {
-		Node<TElem>* nextNode = currentNode->next;
-		delete currentNode;
-		currentNode = nextNode;
-	}
+    Node<TElem>* currentNode = this->head;
+    while (currentNode != nullptr) {
+        Node<TElem>* nextNode = currentNode->next;
+        delete currentNode;
+        currentNode = nextNode;
+    }
+    delete currentNode;
 }
 
