@@ -1,0 +1,16 @@
+# ninja log v5
+1	223	1682488204983210631	CMakeFiles/t1_913_Fintina_Olivia_1.dir/Controller.cpp.o	6dd9c67ffbbac8da
+1	322	1682488205079213942	CMakeFiles/t1_913_Fintina_Olivia_1.dir/UI.cpp.o	d484dfff3e1f91d3
+1	230	1682487667392671515	CMakeFiles/t1_913_Fintina_Olivia_1.dir/Repository.cpp.o	bb2dda43ba12b6e2
+1	165	1682487660028417630	CMakeFiles/t1_913_Fintina_Olivia_1.dir/Domain.cpp.o	3e7d29f03ffa0c8d
+322	434	1682488205191217806	t1_913_Fintina_Olivia_1	bcf5bab8aab9b731
+2	227	1682488204987210769	CMakeFiles/t1_913_Fintina_Olivia_1.dir/main.cpp.o	a0425dae54838cfa
+0	203	1682488524671120229	CMakeFiles/t1_913_Fintina_Olivia_1.dir/main.cpp.o	a0425dae54838cfa
+0	224	1682488524691116135	CMakeFiles/t1_913_Fintina_Olivia_1.dir/Tests.cpp.o	fce0755b6eb86217
+224	336	1682488524803093209	t1_913_Fintina_Olivia_1	4fc5f730ed89ac64
+2	182	1682488543847267218	CMakeFiles/t1_913_Fintina_Olivia_1.dir/main.cpp.o	a0425dae54838cfa
+182	288	1682488543955245908	t1_913_Fintina_Olivia_1	4fc5f730ed89ac64
+1	174	1682488737399412659	CMakeFiles/t1_913_Fintina_Olivia_1.dir/main.cpp.o	a0425dae54838cfa
+2	285	1682488737511397454	CMakeFiles/t1_913_Fintina_Olivia_1.dir/Tests.cpp.o	fce0755b6eb86217
+1	258	1682488759900422183	CMakeFiles/t1_913_Fintina_Olivia_1.dir/Tests.cpp.o	fce0755b6eb86217
+258	389	1682488760032405013	t1_913_Fintina_Olivia_1	4fc5f730ed89ac64
