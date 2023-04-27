@@ -1,0 +1,278 @@
+        -:    0:Source:/home/theo/CLionProjects/a45-913-Fintina-Olivia/testDomain.cpp
+        -:    0:Graph:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/testDomain.cpp.gcno
+        -:    0:Data:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/testDomain.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "Domain.h"
+        -:    2:#include <assert.h>
+        -:    3:#include <string>
+        -:    4:#include <iostream>
+        -:    5:#include "TestAll.h"
+        -:    6:
+function _Z10testDomainv called 1 returned 100% blocks executed 57%
+        1:    7:void testDomain()
+        -:    8:{
+        2:    9:    TrenchCoat trenchCoat(1, 2, "red", 3, 4, "link");
+        1:    9-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:    9-block  1
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:    9-block  2
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:    9-block  3
+    $$$$$:    9-block  4
+    $$$$$:    9-block  5
+    $$$$$:    9-block  6
+        -:   10:
+       1*:   11:    assert(trenchCoat.getTrenchID() == 1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   11-block  0
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   11-block  1
+call    5 never executed
+       1*:   12:    assert(trenchCoat.getTrenchSize() == 2);
+        1:   12-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   12-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   12-block  2
+call    5 never executed
+       1*:   13:    assert(trenchCoat.getTrenchColour() == "red");
+        1:   13-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   13-block  1
+call    3 returned 1
+branch  4 taken 0 (fallthrough)
+branch  5 taken 1
+    %%%%%:   13-block  2
+call    6 never executed
+        1:   13-block  3
+call    7 returned 1
+       1*:   14:    assert(trenchCoat.getTrenchPrice() == 3);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   14-block  0
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   14-block  1
+call    5 never executed
+       1*:   15:    assert(trenchCoat.getTrenchQuantity() == 4);
+        1:   15-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   15-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   15-block  2
+call    5 never executed
+       1*:   16:    assert(trenchCoat.getTrenchPhotographyLink() == "link");
+        1:   16-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   16-block  1
+call    3 returned 1
+branch  4 taken 0 (fallthrough)
+branch  5 taken 1
+    %%%%%:   16-block  2
+call    6 never executed
+        1:   16-block  3
+call    7 returned 1
+        -:   17:
+        1:   18:    trenchCoat.setTrenchID(5);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   19:    assert(trenchCoat.getTrenchID() == 5);
+        1:   19-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   19-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   19-block  2
+call    5 never executed
+        -:   20:
+        1:   21:    trenchCoat.setTrenchSize(6);
+        1:   21-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   22:    assert(trenchCoat.getTrenchSize() == 6);
+        1:   22-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   22-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   22-block  2
+call    5 never executed
+        -:   23:
+        1:   24:    trenchCoat.setTrenchColour("blue");
+        1:   24-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   24-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   24-block  2
+call    7 returned 1
+call    8 returned 1
+    $$$$$:   24-block  3
+call    9 never executed
+    $$$$$:   24-block  4
+    $$$$$:   24-block  5
+call   10 never executed
+    $$$$$:   24-block  6
+       1*:   25:    assert(trenchCoat.getTrenchColour() == "blue");
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   25-block  0
+call    3 returned 1
+branch  4 taken 0 (fallthrough)
+branch  5 taken 1
+    %%%%%:   25-block  1
+call    6 never executed
+        1:   25-block  2
+call    7 returned 1
+        -:   26:
+        1:   27:    trenchCoat.setTrenchPrice(7);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   28:    assert(trenchCoat.getTrenchPrice() == 7);
+        1:   28-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   28-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   28-block  2
+call    5 never executed
+        -:   29:
+        1:   30:    trenchCoat.setTrenchQuantity(8);
+        1:   30-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   31:    assert(trenchCoat.getTrenchQuantity() == 8);
+        1:   31-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   31-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   31-block  2
+call    5 never executed
+        -:   32:    
+        1:   33:    trenchCoat.setTrenchPhotographyLink("link2");
+        1:   33-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   33-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   33-block  2
+call    7 returned 1
+call    8 returned 1
+    $$$$$:   33-block  3
+call    9 never executed
+    $$$$$:   33-block  4
+    $$$$$:   33-block  5
+call   10 never executed
+    $$$$$:   33-block  6
+       1*:   34:    assert(trenchCoat.getTrenchPhotographyLink() == "link2");
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   34-block  0
+call    3 returned 1
+branch  4 taken 0 (fallthrough)
+branch  5 taken 1
+    %%%%%:   34-block  1
+call    6 never executed
+        1:   34-block  2
+call    7 returned 1
+        -:   35:
+        2:   36:    TrenchCoat trenchCoat2(1, 2, "red", 3, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   36-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   36-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   36-block  2
+    $$$$$:   36-block  3
+    $$$$$:   36-block  4
+    $$$$$:   36-block  5
+       1*:   37:    assert_perror(trenchCoat == trenchCoat2);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   37-block  0
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   37-block  1
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:   37-block  2
+call    8 never executed
+        1:   38:    std::cout << "Domain tests passed!" << std::endl;
+        1:   38-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   38-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   39:}
+        1:   39-block  0
+call    0 returned 1
+call    1 returned 1
+    $$$$$:   39-block  1
+call    2 never executed
+    $$$$$:   39-block  2
+call    3 never executed

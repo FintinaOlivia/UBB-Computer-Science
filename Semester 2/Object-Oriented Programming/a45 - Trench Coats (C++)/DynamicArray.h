@@ -24,7 +24,8 @@ class dynamicVector {
         
         void append(Type element);
         void remove(int index);
-        void update(int index, Type element);
+
+    __attribute__((unused)) void update(int index, Type element);
 
         Type operator[](int index);
         int getSize();
@@ -105,7 +106,7 @@ inline void dynamicVector<Type>::remove(int index)
 }
 
 template <class Type>
-inline void dynamicVector<Type>::update(int index, Type element)
+__attribute__((unused)) inline void dynamicVector<Type>::update(int index, Type element)
 {
     if (index < 0 || index >= this->size)
     {

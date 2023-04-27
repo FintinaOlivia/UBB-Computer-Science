@@ -1,0 +1,273 @@
+        -:    0:Source:/home/theo/CLionProjects/a45-913-Fintina-Olivia/DynamicArray.h
+        -:    0:Graph:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/Controller.cpp.gcno
+        -:    0:Data:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/Controller.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#pragma once
+        -:    2:
+        -:    3:#include<string>
+        -:    4:#include<typeinfo>
+        -:    5:#include<fstream>
+        -:    6:#include<iostream>
+        -:    7:#include<random>
+        -:    8:
+        -:    9:using namespace std;
+        -:   10:
+        -:   11:template <class Type>
+        -:   12:class dynamicVector {
+        -:   13:    private:
+        -:   14:        int size{};
+        -:   15:        int capacity{};
+        -:   16:        Type* elements;
+        -:   17:
+        -:   18:    public:
+        -:   19:        explicit dynamicVector(int capacity = 10);
+        -:   20:        dynamicVector(const dynamicVector& dynamicVectorToCopy);
+        -:   21:        ~dynamicVector();
+        -:   22:        dynamicVector<Type>& operator = (const dynamicVector &other);
+        -:   23:        
+        -:   24:        
+        -:   25:        void append(Type element);
+        -:   26:        void remove(int index);
+        -:   27:
+        -:   28:    __attribute__((unused)) void update(int index, Type element);
+        -:   29:
+        -:   30:        Type operator[](int index);
+        -:   31:        int getSize();
+        -:   32:        int getCapacity();
+        -:   33:    
+        -:   34:};
+        -:   35:
+        -:   36:template <class Type>
+function _ZN13dynamicVectorI10TrenchCoatEC2Ei called 23 returned 100% blocks executed 47%
+       23:   37:inline dynamicVector<Type>::dynamicVector(int capacity)
+        -:   38:{
+       23:   39:    this->size = 0;
+       23:   40:    this->capacity = capacity;
+     244*:   41:    this->elements = new Type[capacity];
+       23:   41-block  0
+branch  0 taken 23 (fallthrough)
+branch  1 taken 0
+       23:   41-block  1
+    %%%%%:   41-block  2
+       23:   41-block  3
+call    2 returned 23
+      221:   41-block  4
+call    3 returned 221
+branch  4 taken 221 (fallthrough)
+branch  5 taken 0 (throw)
+      221:   41-block  5
+      244:   41-block  6
+branch  6 taken 221
+branch  7 taken 23 (fallthrough)
+    $$$$$:   41-block  7
+    $$$$$:   41-block  8
+call    8 never executed
+    $$$$$:   41-block  9
+branch  9 never executed
+branch 10 never executed
+    $$$$$:   41-block 10
+    $$$$$:   41-block 11
+    $$$$$:   41-block 12
+call   11 never executed
+       23:   42:}
+       23:   42-block  0
+        -:   43:
+        -:   44:template <class Type>
+        -:   45:inline dynamicVector<Type>::dynamicVector(const dynamicVector &dynamicVectorToCopy)
+        -:   46:{
+        -:   47:    this->size = dynamicVectorToCopy.size;
+        -:   48:    this->capacity = dynamicVectorToCopy.capacity;
+        -:   49:    this->elements = new Type[this->capacity];
+        -:   50:    for (int i = 0; i < this->size; i++)
+        -:   51:    {
+        -:   52:        this->elements[i] = dynamicVectorToCopy.elements[i];
+        -:   53:    }
+        -:   54:}
+        -:   55:
+        -:   56:template <class Type>
+function _ZN13dynamicVectorI10TrenchCoatED2Ev called 69 returned 100% blocks executed 100%
+       69:   57:inline dynamicVector<Type>::~dynamicVector()
+        -:   58:{
+      781:   59:    delete[] this->elements;
+       69:   59-block  0
+branch  0 taken 69 (fallthrough)
+branch  1 taken 0
+       69:   59-block  1
+      781:   59-block  2
+branch  2 taken 712 (fallthrough)
+branch  3 taken 69
+      712:   59-block  3
+call    4 returned 712
+       69:   59-block  4
+call    5 returned 69
+       69:   60:}
+        -:   61:
+        -:   62:template <class Type>
+function _ZN13dynamicVectorI10TrenchCoatEaSERKS1_ called 8 returned 100% blocks executed 66%
+        8:   63:inline dynamicVector<Type> &dynamicVector<Type>::operator=(const dynamicVector &other)
+        -:   64:{
+        8:   65:    this->size = other.size;
+        8:   66:    this->capacity = other.capacity;
+       88:   67:    delete[] this->elements;
+        8:   67-block  0
+branch  0 taken 8 (fallthrough)
+branch  1 taken 0
+        8:   67-block  1
+       88:   67-block  2
+branch  2 taken 80 (fallthrough)
+branch  3 taken 8
+       80:   67-block  3
+call    4 returned 80
+        8:   67-block  4
+call    5 returned 8
+      88*:   68:    this->elements = new Type[other.capacity];
+        8:   68-block  0
+branch  0 taken 8 (fallthrough)
+branch  1 taken 0
+        8:   68-block  1
+    %%%%%:   68-block  2
+        8:   68-block  3
+call    2 returned 8
+       80:   68-block  4
+call    3 returned 80
+branch  4 taken 80 (fallthrough)
+branch  5 taken 0 (throw)
+       80:   68-block  5
+       88:   68-block  6
+branch  6 taken 80
+branch  7 taken 8 (fallthrough)
+    $$$$$:   68-block  7
+    $$$$$:   68-block  8
+call    8 never executed
+    $$$$$:   68-block  9
+branch  9 never executed
+branch 10 never executed
+    $$$$$:   68-block 10
+    $$$$$:   68-block 11
+    $$$$$:   68-block 12
+call   11 never executed
+        -:   69:
+       88:   70:    for(int i = 0;i < other.capacity;i++){
+        8:   70-block  0
+       88:   70-block  1
+branch  0 taken 80
+branch  1 taken 8 (fallthrough)
+       80:   71:        this->elements[i] = other.elements[i];
+       80:   71-block  0
+call    0 returned 80
+        -:   72:    }
+        8:   73:    return *this;
+        8:   73-block  0
+        8:   73-block  1
+        -:   74:}
+        -:   75:
+        -:   76:template <class Type>
+function _ZN13dynamicVectorI10TrenchCoatE6appendES0_ called 42 returned 100% blocks executed 68%
+       42:   77:inline void dynamicVector<Type>::append(Type element)
+        -:   78:{
+       42:   79:    if (this->size == this->capacity)
+       42:   79-block  0
+branch  0 taken 5 (fallthrough)
+branch  1 taken 37
+        -:   80:    {
+        5:   81:        this->capacity *= 2;
+      67*:   82:        Type* newElements = new Type[this->capacity];
+        5:   82-block  0
+branch  0 taken 5 (fallthrough)
+branch  1 taken 0
+        5:   82-block  1
+    %%%%%:   82-block  2
+        5:   82-block  3
+call    2 returned 5
+       62:   82-block  4
+call    3 returned 62
+branch  4 taken 62 (fallthrough)
+branch  5 taken 0 (throw)
+       62:   82-block  5
+       67:   82-block  6
+branch  6 taken 62
+branch  7 taken 5 (fallthrough)
+    $$$$$:   82-block  7
+    $$$$$:   82-block  8
+call    8 never executed
+    $$$$$:   82-block  9
+branch  9 never executed
+branch 10 never executed
+    $$$$$:   82-block 10
+    $$$$$:   82-block 11
+    $$$$$:   82-block 12
+call   11 never executed
+       36:   83:        for (int i = 0; i < this->size; i++)
+        5:   83-block  0
+       36:   83-block  1
+branch  0 taken 31
+branch  1 taken 5 (fallthrough)
+        -:   84:        {
+       31:   85:            newElements[i] = this->elements[i];
+       31:   85-block  0
+call    0 returned 31
+        -:   86:        }
+       36:   87:        delete[] this->elements;
+        5:   87-block  0
+branch  0 taken 5 (fallthrough)
+branch  1 taken 0
+        5:   87-block  1
+       36:   87-block  2
+branch  2 taken 31 (fallthrough)
+branch  3 taken 5
+       31:   87-block  3
+call    4 returned 31
+        5:   87-block  4
+call    5 returned 5
+        5:   88:        this->elements = newElements;
+        5:   88-block  0
+        -:   89:    }
+       42:   90:    this->elements[this->size] = element;
+       42:   90-block  0
+call    0 returned 42
+       42:   91:    this->size++;
+       42:   92:}
+        -:   93:
+        -:   94:template <class Type>
+        -:   95:inline void dynamicVector<Type>::remove(int index)
+        -:   96:{
+        -:   97:    if (index < 0 || index >= this->size){
+        -:   98:        return;
+        -:   99:    }
+        -:  100:
+        -:  101:    for (int i = index; i < this->size - 1; i++)
+        -:  102:    {
+        -:  103:        this->elements[i] = this->elements[i + 1];
+        -:  104:    }
+        -:  105:    this->size--;
+        -:  106:}
+        -:  107:
+        -:  108:template <class Type>
+        -:  109:__attribute__((unused)) inline void dynamicVector<Type>::update(int index, Type element)
+        -:  110:{
+        -:  111:    if (index < 0 || index >= this->size)
+        -:  112:    {
+        -:  113:        return;
+        -:  114:    }
+        -:  115:    this->elements[index] = element;
+        -:  116:}
+        -:  117:
+        -:  118:template <class Type>
+function _ZN13dynamicVectorI10TrenchCoatEixEi called 82 returned 100% blocks executed 100%
+       82:  119:inline Type dynamicVector<Type>::operator[](int index)
+        -:  120:{
+       82:  121:    return this->elements[index];
+       82:  121-block  0
+call    0 returned 82
+        -:  122:}
+        -:  123:
+        -:  124:template <class Type>
+        -:  125:inline int dynamicVector<Type>::getSize(){
+        -:  126:    return this->size;
+        -:  127:}
+        -:  128:
+        -:  129:template <class Type>
+        -:  130:inline int dynamicVector<Type>::getCapacity(){
+        -:  131:    return this->capacity;
+        -:  132:}
+        -:  133:

@@ -1,0 +1,2090 @@
+        -:    0:Source:/home/theo/CLionProjects/a45-913-Fintina-Olivia/UI.cpp
+        -:    0:Graph:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/UI.cpp.gcno
+        -:    0:Data:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/UI.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "UI.h"
+        -:    2:#include <string>
+        -:    3:#include <iostream>
+        -:    4:#include <utility>
+        -:    5:#include <cstdlib>
+        -:    6:
+        -:    7:using namespace std;
+        -:    8:#define MAX_NAME_LEN 60
+        -:    9:
+        -:   10://Constructor
+function _ZN2UIC2E10ControllerS0_ called 1 returned 100% blocks executed 73%
+        1:   11:UI::UI(Controller controller, Controller basket_controller)
+        1:   11-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        -:   12:{
+        1:   13:    this->controller = std::move(controller);
+        1:   13-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   14:    this->basket_controller = std::move(basket_controller);
+        1:   14-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   15:}
+        1:   15-block  0
+    $$$$$:   15-block  1
+call    0 never executed
+    $$$$$:   15-block  2
+call    1 never executed
+        -:   16:
+        -:   17://Prints
+function _ZN2UI19printWelcomeMessageEv called 0 returned 0% blocks executed 0%
+    #####:   18:void UI::printWelcomeMessage()
+        -:   19:{
+    #####:   20:    std::cout << "Welcome to the Administration ProperTrenchCoat application!" << std::endl;
+    %%%%%:   20-block  0
+call    0 never executed
+call    1 never executed
+    #####:   21:    std::cout << "What would you like to do?" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:   22:}
+        -:   23:
+function _ZN2UI23printQuestioningMessageEv called 0 returned 0% blocks executed 0%
+    #####:   24:void UI::printQuestioningMessage()
+        -:   25:{
+    #####:   26:    std::cout << std::endl;
+    %%%%%:   26-block  0
+call    0 never executed
+    #####:   27:    std::cout << "================WELCOME TO THE PROPER TRENCH COATS!===============" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:   28:    std::cout << "Hello and welcome to the Proper Trench Coats! You want it, we got it!" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:   29:    std::cout << "Are you here as administrator(1) or as user(2)? Press (0) to exit...\n >";
+call    0 never executed
+    #####:   30:}
+        -:   31:
+function _ZN2UI20printAddToCartButtonEv called 0 returned 0% blocks executed 0%
+    #####:   32:void UI::printAddToCartButton(){
+    #####:   33:    std::cout << "            ================              " << std::endl;
+    %%%%%:   33-block  0
+call    0 never executed
+call    1 never executed
+    #####:   34:    std::cout << "            =  Add to cart =              " << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:   35:    std::cout << "            ================              " << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:   36:    std::cout << std::endl;
+call    0 never executed
+    #####:   37:}
+        -:   38:
+function _ZN2UI15printTrenchCoatE10TrenchCoat called 0 returned 0% blocks executed 0%
+    #####:   39:void UI::printTrenchCoat(TrenchCoat trenchCoatToPrint)
+        -:   40:{
+    #####:   41:    std::cout << std::endl;
+    %%%%%:   41-block  0
+call    0 never executed
+    #####:   42:    std::cout << "ID: " << trenchCoatToPrint.getTrenchID() << std::endl;
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:   43:    std::cout << "Size: " << trenchCoatToPrint.getTrenchSize() << std::endl;
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:   44:    std::cout << "Colour: " << trenchCoatToPrint.getTrenchColour() << std::endl;
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:   44-block  0
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:   44-block  1
+call    8 never executed
+    $$$$$:   44-block  2
+call    9 never executed
+    $$$$$:   44-block  3
+call   10 never executed
+    #####:   45:    std::cout << "Price: " << trenchCoatToPrint.getTrenchPrice() << std::endl;
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:   46:    std::cout << "Quantity: " << trenchCoatToPrint.getTrenchQuantity() << std::endl;
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:   47:    std::cout << "Photograph: " << trenchCoatToPrint.getTrenchPhotographyLink() << std::endl;
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:   47-block  0
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:   47-block  1
+call    8 never executed
+    $$$$$:   47-block  2
+call    9 never executed
+    #####:   48:    std::cout << std::endl;
+call    0 never executed
+    #####:   49:}
+        -:   50:
+        -:   51://Admin menu
+function _ZN2UI14printAdminMenuEv called 0 returned 0% blocks executed 0%
+    #####:   52:void UI::printAdminMenu()
+        -:   53:{
+    #####:   54:    std::cout << std::endl;
+    %%%%%:   54-block  0
+call    0 never executed
+    #####:   55:    std::cout << "===========ADMINISTRATOR MODE============" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:   56:    std::cout << "1. Add a trench coat" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:   57:    std::cout << "2. Remove a trench coat" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:   58:    std::cout << "3. Update a trench coat" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:   59:    std::cout << "4. Get a trench coat" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:   60:    std::cout << "5. Print all trench coats" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:   61:    std::cout << "6. Write to database" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:   62:    std::cout << "7. Read from database" << std :: endl;
+call    0 never executed
+call    1 never executed
+    #####:   63:    std::cout << "8. Exit" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:   64:    std::cout << "=========================================" << std::endl << std::endl;
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:   65:    std::cout << "> ";
+call    0 never executed
+    #####:   66:}
+        -:   67:
+function _ZN2UI19printAllTrenchCoatsEi called 0 returned 0% blocks executed 0%
+    #####:   68:void UI::printAllTrenchCoats(int codeOfController)
+        -:   69:{
+    #####:   70:    if(codeOfController == 1){
+    %%%%%:   70-block  0
+branch  0 never executed
+branch  1 never executed
+        -:   71:        dynamicVector<TrenchCoat> allTrenchCoats =
+    #####:   72:                this->controller.getAllTrenchCoats();
+    %%%%%:   72-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   73:
+        -:   74:        
+    #####:   75:        for (int i = 0; i < allTrenchCoats.getSize(); i++)
+    %%%%%:   75-block  0
+    %%%%%:   75-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   76:        {
+    #####:   77:            printTrenchCoat(allTrenchCoats[i]);
+    %%%%%:   77-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   77-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   77-block  2
+call    6 never executed
+    $$$$$:   77-block  3
+call    7 never executed
+    $$$$$:   77-block  4
+        -:   78:        }
+    #####:   79:    }else{
+    %%%%%:   79-block  0
+call    0 never executed
+    $$$$$:   79-block  1
+call    1 never executed
+        -:   80:        dynamicVector<TrenchCoat> allTrenchCoats =
+    #####:   81:                this->basket_controller.getAllTrenchCoats();
+    %%%%%:   81-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   82:
+        -:   83:            
+    #####:   84:        for (int i = 0; i < allTrenchCoats.getSize(); i++)
+    %%%%%:   84-block  0
+    %%%%%:   84-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   85:        {
+        -:   86:            
+    #####:   87:            TrenchCoat trenchCoat = allTrenchCoats[i];
+    %%%%%:   87-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   88:            std::cout << "ID: " << trenchCoat.getTrenchID() << " || " 
+    %%%%%:   88-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   89:                    << "Size: " << trenchCoat.getTrenchSize() << " || " 
+    %%%%%:   89-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   89-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   89-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:   89-block  3
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    #####:   90:                    << "Colour: " << trenchCoat.getTrenchColour() << " || "
+    $$$$$:   90-block  0
+call    0 never executed
+    $$$$$:   90-block  1
+    #####:   91:                    << "Price: " << trenchCoat.getTrenchPrice() << " || " 
+    %%%%%:   91-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   91-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   91-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:   91-block  3
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:   91-block  4
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+    %%%%%:   91-block  5
+call   15 never executed
+branch 16 never executed
+branch 17 never executed
+    %%%%%:   91-block  6
+call   18 never executed
+branch 19 never executed
+branch 20 never executed
+    %%%%%:   91-block  7
+call   21 never executed
+branch 22 never executed
+branch 23 never executed
+    %%%%%:   91-block  8
+call   24 never executed
+branch 25 never executed
+branch 26 never executed
+    %%%%%:   91-block  9
+call   27 never executed
+branch 28 never executed
+branch 29 never executed
+    #####:   92:                    << "Quantity: " << trenchCoat.getTrenchQuantity() << " || " 
+    %%%%%:   92-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   92-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:   93:                    << "Link: " << trenchCoat.getTrenchPhotographyLink() 
+    %%%%%:   93-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   93-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   93-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:   93-block  3
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:   93-block  4
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+    %%%%%:   93-block  5
+call   15 never executed
+branch 16 never executed
+branch 17 never executed
+    %%%%%:   93-block  6
+call   18 never executed
+call   19 never executed
+    $$$$$:   93-block  7
+call   20 never executed
+    $$$$$:   93-block  8
+    #####:   94:                    << std::endl;
+    %%%%%:   94-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   95:        }
+call    0 never executed
+    $$$$$:   95-block  0
+call    1 never executed
+    #####:   96:    }
+    %%%%%:   96-block  0
+call    0 never executed
+    $$$$$:   96-block  1
+call    1 never executed
+    #####:   97:}
+    %%%%%:   97-block  0
+        -:   98:
+        -:   99://User menu
+function _ZN2UI13printUserMenuEv called 0 returned 0% blocks executed 0%
+    #####:  100:void UI::printUserMenu(){
+    #####:  101:    std::cout << std::endl;
+    %%%%%:  101-block  0
+call    0 never executed
+    #####:  102:    std::cout << "===========USER MODE============" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:  103:    std::cout << "1. Browse through all trench coats" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:  104:    std::cout << "2. Display all trench coats in the shopping cart" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:  105:    std::cout << "3. Purchase all trench coats in the shopping cart" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:  106:    std::cout << "4. Exit" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:  107:    std::cout << "=========================================" << std::endl << std::endl;
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:  108:    std::cout << "> ";
+call    0 never executed
+    #####:  109:}
+        -:  110:
+function _ZN2UI21printUserBrowsingMenuEv called 0 returned 0% blocks executed 0%
+    #####:  111:void UI::printUserBrowsingMenu(){
+    #####:  112:    std::cout << std::endl;
+    %%%%%:  112-block  0
+call    0 never executed
+    #####:  113:    std::cout << "Enter 1 to go the previous trench coat, ";
+call    0 never executed
+    #####:  114:    std::cout << "2 to go to the next trench coat, ";
+call    0 never executed
+    #####:  115:    std::cout << "3 to add the trench coat to the shopping basket, ";
+call    0 never executed
+    #####:  116:    std::cout << "and 4 to exit the cycle." << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:  117:    std::cout << "Happy shopping!> " << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:  118:}
+        -:  119:
+function _ZN2UI20printPurchaseMessageEv called 0 returned 0% blocks executed 0%
+    #####:  120:void UI::printPurchaseMessage()
+        -:  121:{
+    #####:  122:    std::cout << "Thank you for your purchase!" << std::endl;
+    %%%%%:  122-block  0
+call    0 never executed
+call    1 never executed
+    #####:  123:}
+        -:  124:
+function _ZN2UI19printGoodbyeMessageEv called 0 returned 0% blocks executed 0%
+    #####:  125:void UI::printGoodbyeMessage()
+        -:  126:{
+    #####:  127:    std::cout << "Goodbye!" << std::endl;
+    %%%%%:  127-block  0
+call    0 never executed
+call    1 never executed
+    #####:  128:}
+        -:  129:
+        -:  130://Admin Mode Functions
+function _ZN2UI17administratorModeEv called 0 returned 0% blocks executed 0%
+    #####:  131:void UI::administratorMode()
+        -:  132:{
+    #####:  133:    this->printWelcomeMessage();
+    %%%%%:  133-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  134:    this->printAdminMenu();
+    %%%%%:  134-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  135:    int command;
+    #####:  136:    std::cin >> command;
+    %%%%%:  136-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  137:    while (command < 9 && command > 0)
+    %%%%%:  137-block  0
+    %%%%%:  137-block  1
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  137-block  2
+branch  2 never executed
+branch  3 never executed
+        -:  138:    {
+    #####:  139:        switch (command)
+    %%%%%:  139-block  0
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+branch  6 never executed
+branch  7 never executed
+branch  8 never executed
+        -:  140:        {
+    #####:  141:        case 1:
+    #####:  142:            this->addTrenchCoat();
+    %%%%%:  142-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  143:            break;
+    %%%%%:  143-block  0
+    #####:  144:        case 2:
+    #####:  145:            this->removeTrenchCoat();
+    %%%%%:  145-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  146:            break;
+    %%%%%:  146-block  0
+    #####:  147:        case 3:
+    #####:  148:            this->updateTrenchCoat();
+    %%%%%:  148-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  149:            break;
+    %%%%%:  149-block  0
+    #####:  150:        case 4:
+    #####:  151:            this->getTrenchCoat();
+    %%%%%:  151-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  152:            break;
+    %%%%%:  152-block  0
+    #####:  153:        case 5:
+    #####:  154:            this->printAllTrenchCoats(1);
+    %%%%%:  154-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  155:            break;
+    %%%%%:  155-block  0
+    #####:  156:        case 6:
+    #####:  157:            this->writeToDatabase();
+    %%%%%:  157-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  158:            std::cout << "Writing to database..." << std::endl;
+    %%%%%:  158-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  158-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  159:            break;
+    %%%%%:  159-block  0
+    #####:  160:        case 7:
+    #####:  161:            this->readFromDatabase();
+    %%%%%:  161-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  162:            break;
+    %%%%%:  162-block  0
+    #####:  163:        case 8:
+    #####:  164:            this->printGoodbyeMessage();
+    %%%%%:  164-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  165:            return;
+    %%%%%:  165-block  0
+        -:  166:
+    #####:  167:        default:
+    #####:  168:            std::cout << "Invalid command!" << std::endl;
+    %%%%%:  168-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  168-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  169:            break;
+    %%%%%:  169-block  0
+        -:  170:        }
+    #####:  171:        this->printAdminMenu();
+    %%%%%:  171-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  172:        std::cin >> command;
+    %%%%%:  172-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  173:    }
+    #####:  174:    this->printGoodbyeMessage();
+    %%%%%:  174-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  175:}
+        -:  176:
+function _ZN2UI13addTrenchCoatEv called 0 returned 0% blocks executed 0%
+    #####:  177:void UI::addTrenchCoat()
+        -:  178:{
+        -:  179:    int id, sizeOfTrench, quantityOfTrench;
+        -:  180:    char colourOfTrench[MAX_NAME_LEN], photography_linkOfTrench[MAX_NAME_LEN];
+        -:  181:    float priceOfTrench;
+        -:  182:
+    #####:  183:    std::cout << "Enter the ID of the trench coat: ";
+    %%%%%:  183-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  184:    std::cin >> id;
+    %%%%%:  184-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  185:
+    #####:  186:    while(id <= 0){
+    %%%%%:  186-block  0
+    %%%%%:  186-block  1
+branch  0 never executed
+branch  1 never executed
+    #####:  187:        std::cout << "The ID must be a positive integer!" << std::endl;
+    %%%%%:  187-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  187-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  188:        std::cout << "Enter the ID of the trench coat: ";
+    %%%%%:  188-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  189:        std::cin >> id;
+    %%%%%:  189-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  190:    }
+        -:  191:
+    #####:  192:    std::cout << "Enter the size of the trench coat: ";
+    %%%%%:  192-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  193:    std::cin >> sizeOfTrench;
+    %%%%%:  193-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  194:
+    #####:  195:    while(sizeOfTrench < 30 || sizeOfTrench > 50){
+    %%%%%:  195-block  0
+    %%%%%:  195-block  1
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  195-block  2
+branch  2 never executed
+branch  3 never executed
+    #####:  196:        std::cout << "The size must be in the range [30,60]!" << std::endl;
+    %%%%%:  196-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  196-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  197:        std::cout << "Enter the size of the trench coat: ";
+    %%%%%:  197-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  198:        std::cin >> sizeOfTrench;
+    %%%%%:  198-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  199:    }
+        -:  200:
+    #####:  201:    std::cout << "Enter the colour of the trench coat: ";
+    %%%%%:  201-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  202:    std::cin.ignore();
+    %%%%%:  202-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  203:    std::cin >> colourOfTrench;
+    %%%%%:  203-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  204:
+    #####:  205:    std::cout << "Enter the price of the trench coat: ";
+    %%%%%:  205-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  206:    std::cin.ignore();
+    %%%%%:  206-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  207:    std::cin >> priceOfTrench;
+    %%%%%:  207-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  208:
+    #####:  209:    while(priceOfTrench <= 0){
+    %%%%%:  209-block  0
+    %%%%%:  209-block  1
+branch  0 never executed
+branch  1 never executed
+    #####:  210:        std::cout << "The price must be a positive number!" << std::endl;
+    %%%%%:  210-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  210-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  211:        std::cout << "Enter the price of the trench coat: ";
+    %%%%%:  211-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  212:        std::cin.ignore();
+    %%%%%:  212-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  213:        std::cin >> priceOfTrench;
+    %%%%%:  213-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  214:    }
+        -:  215:
+    #####:  216:    std::cout << "Enter the quantity of the trench coat: ";
+    %%%%%:  216-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  217:    std::cin.ignore();
+    %%%%%:  217-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  218:    std::cin >> quantityOfTrench;
+    %%%%%:  218-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  219:
+    #####:  220:    while(quantityOfTrench <= 0){
+    %%%%%:  220-block  0
+    %%%%%:  220-block  1
+branch  0 never executed
+branch  1 never executed
+    #####:  221:        std::cout << "The quantity must be a positive integer!" << std::endl;
+    %%%%%:  221-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  221-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  222:        std::cout << "Enter the quantity of the trench coat: ";
+    %%%%%:  222-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  223:        std::cin.ignore();
+    %%%%%:  223-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  224:        std::cin >> quantityOfTrench;
+    %%%%%:  224-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  225:    }
+        -:  226:
+    #####:  227:    std::cout << "Enter the photography link of the trench coat: ";
+    %%%%%:  227-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  228:    std::cin.ignore();
+    %%%%%:  228-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  229:    std::cin >> photography_linkOfTrench;
+    %%%%%:  229-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  230:                            
+    #####:  231:    std:: cout << "Adding trench coat..." << std::endl;
+    %%%%%:  231-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  231-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  232: 
+    #####:  233:    if(this->controller.addTrenchCoat(id, 
+    %%%%%:  233-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  233-block  1
+call    4 never executed
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:  233-block  2
+call    8 never executed
+branch  9 never executed
+branch 10 never executed
+    %%%%%:  233-block  3
+call   11 never executed
+call   12 never executed
+call   13 never executed
+call   14 never executed
+branch 15 never executed
+branch 16 never executed
+    $$$$$:  233-block  4
+call   17 never executed
+    $$$$$:  233-block  5
+    $$$$$:  233-block  6
+call   18 never executed
+    $$$$$:  233-block  7
+    $$$$$:  233-block  8
+call   19 never executed
+    $$$$$:  233-block  9
+    $$$$$:  233-block 10
+call   20 never executed
+    $$$$$:  233-block 11
+        -:  234:                            sizeOfTrench, 
+        -:  235:                            colourOfTrench, 
+        -:  236:                            priceOfTrench, 
+        -:  237:                            quantityOfTrench, 
+        -:  238:                            photography_linkOfTrench)){
+    #####:  239:        std :: cout << "Trench coat added!" << std::endl;
+    %%%%%:  239-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  239-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  240:    }else{
+    #####:  241:        std:: cout << "Trench coat with this ID already exists!" << std::endl;
+    %%%%%:  241-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  241-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  242:    }
+    #####:  243:}
+    %%%%%:  243-block  0
+        -:  244:
+function _ZN2UI16removeTrenchCoatEv called 0 returned 0% blocks executed 0%
+    #####:  245:void UI::removeTrenchCoat()
+        -:  246:{
+        -:  247:    int id;
+    #####:  248:    std::cout << "Enter the ID of the trench coat you want to remove: ";
+    %%%%%:  248-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  249:    std::cin >> id;
+    %%%%%:  249-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  250:
+    #####:  251:    while(id <= 0){
+    %%%%%:  251-block  0
+    %%%%%:  251-block  1
+branch  0 never executed
+branch  1 never executed
+    #####:  252:        std::cout << "The ID must be a positive integer!" << std::endl;
+    %%%%%:  252-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  252-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  253:        std::cout << "Enter the ID of the trench coat you want to remove: ";
+    %%%%%:  253-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  254:        std::cin >> id;
+    %%%%%:  254-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  255:    }
+        -:  256:
+    #####:  257:    if(!this->controller.trenchCoatExists(id)){
+    %%%%%:  257-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  257-block  1
+branch  3 never executed
+branch  4 never executed
+    #####:  258:        std::cout << ("The trench coat does not exist!") << std::endl;
+    %%%%%:  258-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  258-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  259:    }else{
+    #####:  260:        std::cout << "Removing trench coat..." << std::endl;
+    %%%%%:  260-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  260-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  261:        this->controller.removeTrenchCoat(id);
+    %%%%%:  261-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  262:        std::cout << "Trench coat removed!" << std::endl;
+    %%%%%:  262-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  262-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  263:    }
+    #####:  264:}
+    %%%%%:  264-block  0
+        -:  265:
+function _ZN2UI16updateTrenchCoatEv called 0 returned 0% blocks executed 0%
+    #####:  266:void UI::updateTrenchCoat()
+        -:  267:{
+        -:  268:    int id, newID, sizeOfTrench, quantityOfTrench;
+    #####:  269:    std::string colourOfTrench, photography_linkOfTrench;
+    %%%%%:  269-block  0
+call    0 never executed
+call    1 never executed
+        -:  270:    float priceOfTrench;
+        -:  271:
+    #####:  272:    std::cout << "Enter the ID of the trench coat: ";
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  273:    std::cin >> id;
+    %%%%%:  273-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  274:    
+    #####:  275:    if(!this->controller.trenchCoatExists(id)){
+    %%%%%:  275-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  275-block  1
+branch  3 never executed
+branch  4 never executed
+    #####:  276:        std::cout << ("The trench coat does not exist!") << std::endl;
+    %%%%%:  276-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  276-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  277:    }else{
+    #####:  278:        std::cout << "Enter the new ID of the trench coat: ";
+    %%%%%:  278-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  279:        std::cin >> newID;
+    %%%%%:  279-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  280:
+    #####:  281:        if(this->controller.trenchCoatExists(id) > 1){
+    %%%%%:  281-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  281-block  1
+branch  3 never executed
+branch  4 never executed
+    #####:  282:            std::cout << ("There already is a trench coat with that ID!") << std::endl;
+    %%%%%:  282-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  282-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  283:        }else{
+    #####:  284:            while(id <= 0){
+    %%%%%:  284-block  0
+    %%%%%:  284-block  1
+branch  0 never executed
+branch  1 never executed
+    #####:  285:                std::cout << "The ID must be a positive integer!" << std::endl;
+    %%%%%:  285-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  285-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  286:                std::cout << "Enter the ID of the trench coat: ";
+    %%%%%:  286-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  287:                std::cin >> newID;
+    %%%%%:  287-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  288:            }
+        -:  289:
+    #####:  290:            std::cout << "Enter the size of the trench coat: ";
+    %%%%%:  290-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  291:            std::cin >> sizeOfTrench;
+    %%%%%:  291-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  292:
+    #####:  293:            while(sizeOfTrench <= 30 || sizeOfTrench >= 50){
+    %%%%%:  293-block  0
+    %%%%%:  293-block  1
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  293-block  2
+branch  2 never executed
+branch  3 never executed
+    #####:  294:                std::cout << "The size must be in the range [30,60]!" << std::endl;
+    %%%%%:  294-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  294-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  295:                std::cout << "Enter the size of the trench coat: ";
+    %%%%%:  295-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  296:                std::cin >> sizeOfTrench;
+    %%%%%:  296-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  297:            }
+        -:  298:
+    #####:  299:            std::cout << "Enter the colour of the trench coat: ";
+    %%%%%:  299-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  300:            std::cin >> colourOfTrench;
+    %%%%%:  300-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  301:
+    #####:  302:            std::cout << "Enter the price of the trench coat: ";
+    %%%%%:  302-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  303:            std::cin >> priceOfTrench;
+    %%%%%:  303-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  304:
+    #####:  305:            while(priceOfTrench <= 0){
+    %%%%%:  305-block  0
+    %%%%%:  305-block  1
+branch  0 never executed
+branch  1 never executed
+    #####:  306:                std::cout << "The price must be a positive number!" << std::endl;
+    %%%%%:  306-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  306-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  307:                std::cout << "Enter the price of the trench coat: ";
+    %%%%%:  307-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  308:                std::cin >> priceOfTrench;
+    %%%%%:  308-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  309:            }
+        -:  310:
+    #####:  311:            std::cout << "Enter the quantity of the trench coat: ";
+    %%%%%:  311-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  312:            std::cin >> quantityOfTrench;
+    %%%%%:  312-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  313:
+    #####:  314:            while(quantityOfTrench <= 0){
+    %%%%%:  314-block  0
+    %%%%%:  314-block  1
+branch  0 never executed
+branch  1 never executed
+    #####:  315:                std::cout << "The quantity must be a positive integer!" << std::endl;
+    %%%%%:  315-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  315-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  316:                std::cout << "Enter the quantity of the trench coat: ";
+    %%%%%:  316-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  317:                std::cin >> quantityOfTrench;
+    %%%%%:  317-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  318:            }
+        -:  319:
+    #####:  320:            std::cout << "Enter the photography link of the trench coat: ";
+    %%%%%:  320-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  321:            std::cin >> photography_linkOfTrench;
+    %%%%%:  321-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  322:
+    #####:  323:            std:: cout << "Updating trench coat..." << std::endl;
+    %%%%%:  323-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  323-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  324:            this->controller.updateTrenchCoat(id, 
+    %%%%%:  324-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  324-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  324-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:  324-block  3
+call    9 never executed
+call   10 never executed
+    $$$$$:  324-block  4
+call   11 never executed
+    $$$$$:  324-block  5
+    $$$$$:  324-block  6
+call   12 never executed
+    $$$$$:  324-block  7
+        -:  325:                                    newID, 
+        -:  326:                                    sizeOfTrench, 
+        -:  327:                                    colourOfTrench, 
+        -:  328:                                    priceOfTrench, 
+        -:  329:                                    quantityOfTrench, 
+        -:  330:                                    photography_linkOfTrench);
+        -:  331:        }
+        -:  332:    }
+    #####:  333:}
+    %%%%%:  333-block  0
+call    0 never executed
+call    1 never executed
+    $$$$$:  333-block  1
+call    2 never executed
+    $$$$$:  333-block  2
+call    3 never executed
+        -:  334:
+function _ZN2UI13getTrenchCoatEv called 0 returned 0% blocks executed 0%
+    #####:  335:void UI::getTrenchCoat()
+        -:  336:{
+        -:  337:    int id;
+    #####:  338:    std::cout << "Enter the ID of the trench coat you want to get: ";
+    %%%%%:  338-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  339:    std::cin >> id;
+    %%%%%:  339-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  340:
+    #####:  341:    while(id <= 0){
+    %%%%%:  341-block  0
+    %%%%%:  341-block  1
+branch  0 never executed
+branch  1 never executed
+    #####:  342:        std::cout << "The ID must be a positive integer!" << std::endl;
+    %%%%%:  342-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  342-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  343:        std::cout << "Enter the ID of the trench coat you want to get: ";
+    %%%%%:  343-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  344:        std::cin >> id;
+    %%%%%:  344-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  345:    }
+        -:  346:
+    #####:  347:    if(!this->controller.trenchCoatExists(id)){
+    %%%%%:  347-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  347-block  1
+branch  3 never executed
+branch  4 never executed
+    #####:  348:        std::cout << ("The trench coat does not exist!") << std::endl;
+    %%%%%:  348-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  348-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  349:    }else{
+    #####:  350:        std::cout << "Getting trench coat..." << std::endl;
+    %%%%%:  350-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  350-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  351:        this->controller.getTrenchCoat(id);
+    %%%%%:  351-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  351-block  1
+call    3 never executed
+    #####:  352:        std::cout << "The Trench Coat! Is here!" << std::endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  352-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  353:    }
+    #####:  354:}
+    %%%%%:  354-block  0
+        -:  355:
+function _ZN2UI15writeToDatabaseEv called 0 returned 0% blocks executed 0%
+    #####:  356:void UI::writeToDatabase(){
+    #####:  357:    this->controller.saveProgress();
+    %%%%%:  357-block  0
+call    0 never executed
+    #####:  358:}
+        -:  359:
+function _ZN2UI16readFromDatabaseEv called 0 returned 0% blocks executed 0%
+    #####:  360:void UI::readFromDatabase(){
+    #####:  361:    this->controller.loadFromFile();
+    %%%%%:  361-block  0
+call    0 never executed
+    #####:  362:    std::cout << "The database has been loaded!" << std::endl;
+call    0 never executed
+call    1 never executed
+    #####:  363:}
+        -:  364:
+        -:  365://User Mode Functions
+function _ZN2UI23cycleThroughTrenchCoatsEv called 0 returned 0% blocks executed 0%
+    #####:  366:void UI::cycleThroughTrenchCoats()
+        -:  367:{
+    #####:  368:    int sizeToFilterBy, totalCost = 0;
+    #####:  369:    std::cout << "Enter the size of the trench coats you want to see,";
+    %%%%%:  369-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  370:    std::cout << " or press 0 to see all trench coats1> " << std::endl;
+    %%%%%:  370-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  370-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  371:    std::cin >> sizeToFilterBy;
+    %%%%%:  371-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  372:
+    #####:  373:    int index = 0;
+        -:  374:    int command;
+    #####:  375:    this->printUserBrowsingMenu();
+    %%%%%:  375-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  376:
+    #####:  377:    dynamicVector<TrenchCoat> trenchCoats; 
+    %%%%%:  377-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  378:
+    #####:  379:    if(sizeToFilterBy != 0){    
+    %%%%%:  379-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  380:        trenchCoats = this->controller.filterBySize(sizeToFilterBy);
+    %%%%%:  380-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  380-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  380-block  2
+call    6 never executed
+    $$$$$:  380-block  3
+call    7 never executed
+    $$$$$:  380-block  4
+        -:  381:    }else{
+    #####:  382:        trenchCoats = this->controller.getAllTrenchCoats();
+    %%%%%:  382-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  382-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  382-block  2
+call    6 never executed
+    $$$$$:  382-block  3
+call    7 never executed
+    $$$$$:  382-block  4
+        -:  383:    }
+        -:  384:
+    #####:  385:    std::cin >> command;
+    %%%%%:  385-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  386:    if(trenchCoats.getSize() == 0){
+    %%%%%:  386-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  387:        std::cout << "There are no trench coats with that size!" << std::endl;
+    %%%%%:  387-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  387-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  388:        return;
+    %%%%%:  388-block  0
+        -:  389:    }else{
+    #####:  390:        while(command != 4){
+    %%%%%:  390-block  0
+    %%%%%:  390-block  1
+branch  0 never executed
+branch  1 never executed
+    #####:  391:            if(command == 1){
+    %%%%%:  391-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  392:                if(index == 0){
+    %%%%%:  392-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  393:                    index = trenchCoats.getSize() - 1;{
+    %%%%%:  393-block  0
+call    0 never executed
+    #####:  394:                        this->printTrenchCoat(trenchCoats[index]);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  394-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  394-block  1
+call    6 never executed
+    $$$$$:  394-block  2
+call    7 never executed
+    $$$$$:  394-block  3
+    #####:  395:                        std::string completeUrl = "https://www.google.com/search?q=" + trenchCoats[index].getTrenchPhotographyLink();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  395-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  395-block  1
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+    $$$$$:  395-block  2
+    $$$$$:  395-block  3
+    #####:  396:                        system(std::string("start " + completeUrl).c_str());
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  396-block  0
+call    3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  396-block  1
+call    7 never executed
+    $$$$$:  396-block  2
+call    8 never executed
+    $$$$$:  396-block  3
+    #####:  397:                        this->printAddToCartButton();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  398:                    }
+    %%%%%:  398-block  0
+call    0 never executed
+    $$$$$:  398-block  1
+call    1 never executed
+        -:  399:                }else{
+    #####:  400:                    index--;{
+    #####:  401:                        this->printTrenchCoat(trenchCoats[index]);
+    %%%%%:  401-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  401-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  401-block  2
+call    6 never executed
+    $$$$$:  401-block  3
+call    7 never executed
+    $$$$$:  401-block  4
+    #####:  402:                        this->printAddToCartButton();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  403:                    }
+        -:  404:                }
+    #####:  405:            }else if(command == 2){
+    %%%%%:  405-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  406:                if(index == trenchCoats.getSize() - 1){
+    %%%%%:  406-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  407:                    index = 0;{
+    #####:  408:                        this->printTrenchCoat(trenchCoats[index]);
+    %%%%%:  408-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  408-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  408-block  2
+call    6 never executed
+    $$$$$:  408-block  3
+call    7 never executed
+    $$$$$:  408-block  4
+    #####:  409:                        this->printAddToCartButton();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  410:                    }
+        -:  411:                }else{
+    #####:  412:                    index++;
+        -:  413:                    {
+    #####:  414:                        this->printTrenchCoat(trenchCoats[index]);
+    %%%%%:  414-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  414-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  414-block  2
+call    6 never executed
+    $$$$$:  414-block  3
+call    7 never executed
+    $$$$$:  414-block  4
+    #####:  415:                        this->printAddToCartButton();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  416:                    }
+        -:  417:                }
+    #####:  418:            }else if(command == 3){
+    %%%%%:  418-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  419:                this->addTrenchCoatToShoppingBasket(trenchCoats[index]);
+    %%%%%:  419-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  419-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  419-block  2
+call    6 never executed
+    $$$$$:  419-block  3
+call    7 never executed
+    $$$$$:  419-block  4
+    #####:  420:                std::cout << "Trench coat added to the shopping basket!" << std::endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  420-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  421:                totalCost += trenchCoats[index].getTrenchPrice();
+    %%%%%:  421-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  421-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  421-block  2
+call    6 never executed
+    $$$$$:  421-block  3
+call    7 never executed
+    $$$$$:  421-block  4
+    #####:  422:                std::cout << "Total cost: " << totalCost << std::endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  422-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  422-block  1
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+        -:  423:            }else{
+    #####:  424:                std::cout << "Invalid command!" << std::endl;
+    %%%%%:  424-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  424-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  425:            }
+    #####:  426:            std::cout << "> ";
+    %%%%%:  426-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  427:            std::cin >> command;
+    %%%%%:  427-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  428:        }
+        -:  429:    }
+    #####:  430:}
+    %%%%%:  430-block  0
+    %%%%%:  430-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    $$$$$:  430-block  2
+call    3 never executed
+        -:  431:
+function _ZN2UI29addTrenchCoatToShoppingBasketE10TrenchCoat called 0 returned 0% blocks executed 0%
+    #####:  432:void UI::addTrenchCoatToShoppingBasket(TrenchCoat trenchCoatToAdd)
+        -:  433:{
+    #####:  434:    this->basket_controller.addTrenchCoat(trenchCoatToAdd.getTrenchID(),
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  434-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  434-block  1
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:  434-block  2
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+        -:  435:                                          trenchCoatToAdd.getTrenchSize(),
+    #####:  436:                                          trenchCoatToAdd.getTrenchColour(),
+    %%%%%:  436-block  0
+call    0 never executed
+    $$$$$:  436-block  1
+call    1 never executed
+    $$$$$:  436-block  2
+    #####:  437:                                          trenchCoatToAdd.getTrenchPrice(),
+    %%%%%:  437-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  437-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  438:                                          trenchCoatToAdd.getTrenchQuantity(),
+    #####:  439:                                          trenchCoatToAdd.getTrenchPhotographyLink());
+    %%%%%:  439-block  0
+call    0 never executed
+call    1 never executed
+    $$$$$:  439-block  1
+call    2 never executed
+    #####:  440:}
+        -:  441:
+        -:  442:/*
+        -:  443:void UI::removeTrenchCoatFromShoppingBasket(int trenchCoatID)
+        -:  444:{
+        -:  445:    this->basket_controller.removeTrenchCoat(trenchCoatID);
+        -:  446:}
+        -:  447:*/
+        -:  448:
+function _ZN2UI19printShoppingBasketEv called 0 returned 0% blocks executed 0%
+    #####:  449:void UI::printShoppingBasket()
+        -:  450:{
+    #####:  451:    int totalCost = 0;
+    #####:  452:    dynamicVector<TrenchCoat> shoppingBasket = this->basket_controller.getAllTrenchCoats();
+    %%%%%:  452-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  453:    for(int i = 0; i < shoppingBasket.getSize(); i++){
+    %%%%%:  453-block  0
+    %%%%%:  453-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  454:        this->printTrenchCoat(shoppingBasket[i]);
+    %%%%%:  454-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  454-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  454-block  2
+call    6 never executed
+    $$$$$:  454-block  3
+call    7 never executed
+    $$$$$:  454-block  4
+    #####:  455:        totalCost += shoppingBasket[i].getTrenchPrice();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  455-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  455-block  1
+call    6 never executed
+    $$$$$:  455-block  2
+call    7 never executed
+    $$$$$:  455-block  3
+        -:  456:    }
+    #####:  457:    std::cout << "Total cost: " << totalCost << std::endl;
+    %%%%%:  457-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  457-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  457-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    #####:  458:}
+    %%%%%:  458-block  0
+call    0 never executed
+    $$$$$:  458-block  1
+call    1 never executed
+        -:  459:
+function _ZN2UI24emptyBasketOfTrenchCoatsEv called 0 returned 0% blocks executed 0%
+    #####:  460:void UI::emptyBasketOfTrenchCoats()
+        -:  461:{
+    #####:  462:    dynamicVector<TrenchCoat> shoppingBasket = this->basket_controller.getAllTrenchCoats();
+    %%%%%:  462-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  463:    for(int i = 0; i < shoppingBasket.getSize(); i++){
+    %%%%%:  463-block  0
+    %%%%%:  463-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  464:
+    #####:  465:        this->controller.updateTrenchCoat(shoppingBasket[i].getTrenchID(),
+    %%%%%:  465-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  465-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  465-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:  465-block  3
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:  465-block  4
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+    %%%%%:  465-block  5
+call   15 never executed
+branch 16 never executed
+branch 17 never executed
+    %%%%%:  465-block  6
+call   18 never executed
+branch 19 never executed
+branch 20 never executed
+    %%%%%:  465-block  7
+call   21 never executed
+call   22 never executed
+call   23 never executed
+    $$$$$:  465-block  8
+call   24 never executed
+    $$$$$:  465-block  9
+    $$$$$:  465-block 10
+call   25 never executed
+    $$$$$:  465-block 11
+    $$$$$:  465-block 12
+call   26 never executed
+    $$$$$:  465-block 13
+        -:  466:                                            shoppingBasket[i].getTrenchID(),
+        -:  467:                                            shoppingBasket[i].getTrenchSize(),
+    #####:  468:                                            shoppingBasket[i].getTrenchColour(),
+    %%%%%:  468-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+call    4 never executed
+    $$$$$:  468-block  1
+call    5 never executed
+    $$$$$:  468-block  2
+    $$$$$:  468-block  3
+call    6 never executed
+    $$$$$:  468-block  4
+    #####:  469:                                            shoppingBasket[i].getTrenchPrice(),
+    %%%%%:  469-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  469-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+    $$$$$:  469-block  2
+call    7 never executed
+    $$$$$:  469-block  3
+    #####:  470:                                            shoppingBasket[i].getTrenchQuantity() - 1,
+    %%%%%:  470-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  470-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  470-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+    $$$$$:  470-block  3
+call   10 never executed
+    $$$$$:  470-block  4
+    #####:  471:                                            shoppingBasket[i].getTrenchPhotographyLink());
+    %%%%%:  471-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  471-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+call    7 never executed
+    $$$$$:  471-block  2
+call    8 never executed
+    $$$$$:  471-block  3
+    $$$$$:  471-block  4
+call    9 never executed
+    $$$$$:  471-block  5
+        -:  472:
+    #####:  473:        this->basket_controller.removeTrenchCoat(shoppingBasket[i].getTrenchID());
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  473-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  473-block  1
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:  473-block  2
+call    9 never executed
+    $$$$$:  473-block  3
+call   10 never executed
+    $$$$$:  473-block  4
+        -:  474:    }
+    #####:  475:}
+    %%%%%:  475-block  0
+call    0 never executed
+    $$$$$:  475-block  1
+call    1 never executed
+        -:  476:
+function _ZN2UI8userModeEv called 0 returned 0% blocks executed 0%
+    #####:  477:void UI::userMode(){
+    #####:  478:    this->printUserMenu();
+    %%%%%:  478-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  479:    this->controller.loadFromFile();
+    %%%%%:  479-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  480:    int command;
+    #####:  481:    std::cin >> command;
+    %%%%%:  481-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  482:
+    #####:  483:    while (command < 4 && command > 0)
+    %%%%%:  483-block  0
+    %%%%%:  483-block  1
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  483-block  2
+branch  2 never executed
+branch  3 never executed
+        -:  484:    {
+    #####:  485:        switch (command)
+    %%%%%:  485-block  0
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+        -:  486:        {
+    #####:  487:        case 1:
+    #####:  488:            this->cycleThroughTrenchCoats();
+    %%%%%:  488-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  489:            break;
+    %%%%%:  489-block  0
+    #####:  490:        case 2:
+    #####:  491:             this->printShoppingBasket();
+    %%%%%:  491-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  492:            break;
+    %%%%%:  492-block  0
+    #####:  493:        case 3:
+    #####:  494:            this->printPurchaseMessage();
+    %%%%%:  494-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  495:            this->emptyBasketOfTrenchCoats();
+    %%%%%:  495-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  496:            break;
+    %%%%%:  496-block  0
+    #####:  497:        case 4:
+    #####:  498:            this->printGoodbyeMessage();
+    %%%%%:  498-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  499:            break;
+    %%%%%:  499-block  0
+    #####:  500:        default:
+    #####:  501:            std::cout << "Invalid command!" << std::endl;
+    %%%%%:  501-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  501-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  502:            break;
+    %%%%%:  502-block  0
+        -:  503:        }
+    #####:  504:        this->printUserMenu();
+    %%%%%:  504-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  505:        std::cin >> command;
+    %%%%%:  505-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  506:    }
+    #####:  507:}
+    %%%%%:  507-block  0
+        -:  508:
+function _ZN2UI14runApplicationEv called 0 returned 0% blocks executed 0%
+    #####:  509:void UI::runApplication(){
+    #####:  510:    this->printQuestioningMessage();
+    %%%%%:  510-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  511:    int command;
+    #####:  512:    std::cin >> command;
+    %%%%%:  512-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  513:    while (command < 3 && command > 0)
+    %%%%%:  513-block  0
+    %%%%%:  513-block  1
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  513-block  2
+branch  2 never executed
+branch  3 never executed
+        -:  514:    {
+    #####:  515:        switch (command)
+    %%%%%:  515-block  0
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  516:        {
+    #####:  517:        case 1:
+    #####:  518:            this->administratorMode();
+    %%%%%:  518-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  519:            break;
+    %%%%%:  519-block  0
+    #####:  520:        case 2:
+    #####:  521:            this->userMode();
+    %%%%%:  521-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  522:            break;
+    %%%%%:  522-block  0
+    #####:  523:        default:
+    #####:  524:            std::cout << "Invalid command!" << std::endl;
+    %%%%%:  524-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  524-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  525:            break;
+    %%%%%:  525-block  0
+        -:  526:        }
+    #####:  527:        this->printQuestioningMessage();
+    %%%%%:  527-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  528:        std::cin >> command;
+    %%%%%:  528-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  529:    }
+    #####:  530:    this->printGoodbyeMessage();
+    %%%%%:  530-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  531:}
+    %%%%%:  531-block  0
+        -:  532:

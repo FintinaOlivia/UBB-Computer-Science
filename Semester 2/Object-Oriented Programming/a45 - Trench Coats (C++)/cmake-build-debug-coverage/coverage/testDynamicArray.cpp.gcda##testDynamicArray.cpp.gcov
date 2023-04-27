@@ -1,0 +1,778 @@
+        -:    0:Source:/home/theo/CLionProjects/a45-913-Fintina-Olivia/testDynamicArray.cpp
+        -:    0:Graph:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/testDynamicArray.cpp.gcno
+        -:    0:Data:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/testDynamicArray.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "DynamicArray.h"
+        -:    2:#include "Domain.h"
+        -:    3:#include "TestAll.h"
+        -:    4:#include <iostream>
+        -:    5:#include <assert.h>
+        -:    6:
+        -:    7:using namespace std;
+        -:    8:
+function _Z16testDynamicArrayv called 1 returned 100% blocks executed 45%
+        1:    9:void testDynamicArray()
+        -:   10:{
+        1:   11:    dynamicVector<TrenchCoat> dynamicVector{1};
+        1:   11-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   12:
+        2:   13:    TrenchCoat trenchCoat1(1, 2, "red", 3, 4, "link");
+        1:   13-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   13-block  1
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   13-block  2
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   13-block  3
+    $$$$$:   13-block  4
+    $$$$$:   13-block  5
+    $$$$$:   13-block  6
+        2:   14:    TrenchCoat trenchCoat2(2, 3, "blue", 4, 5, "link2");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   14-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   14-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   14-block  2
+    $$$$$:   14-block  3
+    $$$$$:   14-block  4
+    $$$$$:   14-block  5
+        2:   15:    TrenchCoat trenchCoat3(3, 4, "green", 5, 6, "link3");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   15-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   15-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   15-block  2
+    $$$$$:   15-block  3
+    $$$$$:   15-block  4
+    $$$$$:   15-block  5
+        2:   16:    TrenchCoat trenchCoat4(4, 5, "yellow", 6, 7, "link4");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   16-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   16-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   16-block  2
+    $$$$$:   16-block  3
+    $$$$$:   16-block  4
+    $$$$$:   16-block  5
+        2:   17:    TrenchCoat trenchCoat5(5, 6, "black", 7, 8, "link5");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   17-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   17-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   17-block  2
+    $$$$$:   17-block  3
+    $$$$$:   17-block  4
+    $$$$$:   17-block  5
+        2:   18:    TrenchCoat trenchCoat6(6, 7, "white", 8, 9, "link6");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   18-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   18-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   18-block  2
+    $$$$$:   18-block  3
+    $$$$$:   18-block  4
+    $$$$$:   18-block  5
+        2:   19:    TrenchCoat trenchCoat7(7, 8, "purple", 9, 10, "link7");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   19-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   19-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   19-block  2
+    $$$$$:   19-block  3
+    $$$$$:   19-block  4
+    $$$$$:   19-block  5
+        2:   20:    TrenchCoat trenchCoat8(8, 9, "orange", 10, 11, "link8");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   20-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   20-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   20-block  2
+    $$$$$:   20-block  3
+    $$$$$:   20-block  4
+    $$$$$:   20-block  5
+        2:   21:    TrenchCoat trenchCoat9(9, 10, "brown", 11, 12, "link9");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   21-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   21-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   21-block  2
+    $$$$$:   21-block  3
+    $$$$$:   21-block  4
+    $$$$$:   21-block  5
+        2:   22:    TrenchCoat trenchCoat10(10, 11, "grey", 12, 13, "link10");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   22-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   22-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   22-block  2
+    $$$$$:   22-block  3
+    $$$$$:   22-block  4
+    $$$$$:   22-block  5
+        2:   23:    TrenchCoat trenchCoat11(11, 12, "pink", 13, 14, "link11");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   23-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   23-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   23-block  2
+    $$$$$:   23-block  3
+    $$$$$:   23-block  4
+    $$$$$:   23-block  5
+        2:   24:    TrenchCoat trenchCoat12(12, 13, "cyan", 14, 15, "link12");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   24-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   24-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   24-block  2
+    $$$$$:   24-block  3
+    $$$$$:   24-block  4
+    $$$$$:   24-block  5
+        2:   25:    TrenchCoat trenchCoat13(13, 14, "magenta", 15, 16, "link13");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   25-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   25-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   25-block  2
+    $$$$$:   25-block  3
+    $$$$$:   25-block  4
+    $$$$$:   25-block  5
+        2:   26:    TrenchCoat trenchCoat14(14, 15, "lime", 16, 17, "link14");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   26-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   26-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   26-block  2
+    $$$$$:   26-block  3
+    $$$$$:   26-block  4
+    $$$$$:   26-block  5
+        2:   27:    TrenchCoat trenchCoat15(15, 16, "maroon", 17, 18, "link15");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   27-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   27-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   27-block  2
+    $$$$$:   27-block  3
+    $$$$$:   27-block  4
+    $$$$$:   27-block  5
+        2:   28:    TrenchCoat trenchCoat16(16, 17, "olive", 18, 19, "link16");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   28-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   28-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   28-block  2
+    $$$$$:   28-block  3
+    $$$$$:   28-block  4
+    $$$$$:   28-block  5
+        2:   29:    TrenchCoat trenchCoat17(17, 18, "navy", 19, 20, "link17");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   29-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   29-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   29-block  2
+    $$$$$:   29-block  3
+    $$$$$:   29-block  4
+    $$$$$:   29-block  5
+        -:   30:    
+        1:   31:    dynamicVector.append(trenchCoat1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   31-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   31-block  1
+call    6 returned 1
+    $$$$$:   31-block  2
+call    7 never executed
+    $$$$$:   31-block  3
+        1:   32:    dynamicVector.append(trenchCoat2);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   32-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   32-block  1
+call    6 returned 1
+    $$$$$:   32-block  2
+call    7 never executed
+    $$$$$:   32-block  3
+        1:   33:    dynamicVector.append(trenchCoat3);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   33-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   33-block  1
+call    6 returned 1
+    $$$$$:   33-block  2
+call    7 never executed
+    $$$$$:   33-block  3
+        1:   34:    dynamicVector.append(trenchCoat4);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   34-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   34-block  1
+call    6 returned 1
+    $$$$$:   34-block  2
+call    7 never executed
+    $$$$$:   34-block  3
+        1:   35:    dynamicVector.append(trenchCoat5);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   35-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   35-block  1
+call    6 returned 1
+    $$$$$:   35-block  2
+call    7 never executed
+    $$$$$:   35-block  3
+        1:   36:    dynamicVector.append(trenchCoat6);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   36-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   36-block  1
+call    6 returned 1
+    $$$$$:   36-block  2
+call    7 never executed
+    $$$$$:   36-block  3
+        1:   37:    dynamicVector.append(trenchCoat7);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   37-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   37-block  1
+call    6 returned 1
+    $$$$$:   37-block  2
+call    7 never executed
+    $$$$$:   37-block  3
+        1:   38:    dynamicVector.append(trenchCoat8);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   38-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   38-block  1
+call    6 returned 1
+    $$$$$:   38-block  2
+call    7 never executed
+    $$$$$:   38-block  3
+        1:   39:    dynamicVector.append(trenchCoat9);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   39-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   39-block  1
+call    6 returned 1
+    $$$$$:   39-block  2
+call    7 never executed
+    $$$$$:   39-block  3
+        1:   40:    dynamicVector.append(trenchCoat10);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   40-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   40-block  1
+call    6 returned 1
+    $$$$$:   40-block  2
+call    7 never executed
+    $$$$$:   40-block  3
+        1:   41:    dynamicVector.append(trenchCoat11);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   41-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   41-block  1
+call    6 returned 1
+    $$$$$:   41-block  2
+call    7 never executed
+    $$$$$:   41-block  3
+        1:   42:    dynamicVector.append(trenchCoat12);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   42-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   42-block  1
+call    6 returned 1
+    $$$$$:   42-block  2
+call    7 never executed
+    $$$$$:   42-block  3
+        1:   43:    dynamicVector.append(trenchCoat13);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   43-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   43-block  1
+call    6 returned 1
+    $$$$$:   43-block  2
+call    7 never executed
+    $$$$$:   43-block  3
+        1:   44:    dynamicVector.append(trenchCoat14);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   44-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   44-block  1
+call    6 returned 1
+    $$$$$:   44-block  2
+call    7 never executed
+    $$$$$:   44-block  3
+        1:   45:    dynamicVector.append(trenchCoat15);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   45-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   45-block  1
+call    6 returned 1
+    $$$$$:   45-block  2
+call    7 never executed
+    $$$$$:   45-block  3
+        1:   46:    dynamicVector.append(trenchCoat16);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   46-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   46-block  1
+call    6 returned 1
+    $$$$$:   46-block  2
+call    7 never executed
+    $$$$$:   46-block  3
+        1:   47:    dynamicVector.append(trenchCoat17);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   47-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   47-block  1
+call    6 returned 1
+    $$$$$:   47-block  2
+call    7 never executed
+    $$$$$:   47-block  3
+        -:   48:
+       1*:   49:    assert(dynamicVector.getSize() == 17);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   49-block  0
+call    3 never executed
+       1*:   50:    assert(dynamicVector.getCapacity() == 32);
+        1:   50-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   50-block  1
+call    3 never executed
+        -:   51:
+        1:   52:    dynamicVector.remove(0);
+        1:   52-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   53:    assert(dynamicVector.getSize() == 16);
+        1:   53-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   53-block  1
+call    3 never executed
+       1*:   54:    assert(dynamicVector.getCapacity() == 32);
+        1:   54-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   54-block  1
+call    3 never executed
+        -:   55:
+        1:   56:    dynamicVector.remove(15);
+        1:   56-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   57:    assert(dynamicVector.getSize() == 15);
+        1:   57-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   57-block  1
+call    3 never executed
+       1*:   58:    assert(dynamicVector.getCapacity() == 32);
+        1:   58-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   58-block  1
+call    3 never executed
+        -:   59:
+        1:   60:    dynamicVector.update(0, trenchCoat1);
+        1:   60-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   60-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   60-block  2
+call    6 returned 1
+    $$$$$:   60-block  3
+call    7 never executed
+    $$$$$:   60-block  4
+       1*:   61:    assert(dynamicVector[0] == trenchCoat1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   61-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   61-block  1
+branch  6 taken 0 (fallthrough)
+branch  7 taken 1
+    %%%%%:   61-block  2
+call    8 never executed
+        1:   61-block  3
+call    9 returned 1
+    $$$$$:   61-block  4
+call   10 never executed
+    $$$$$:   61-block  5
+        -:   62:
+        1:   63:    dynamicVector.update(-1, trenchCoat1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   63-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   63-block  1
+call    6 returned 1
+    $$$$$:   63-block  2
+call    7 never executed
+    $$$$$:   63-block  3
+        1:   64:    dynamicVector.remove(-1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   65:    assert(dynamicVector.getSize() == 15);
+        1:   65-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   65-block  1
+call    3 never executed
+        1:   66:    std::cout << "Dynamic array tests passed!" << std::endl;
+        1:   66-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   66-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   67:}
+        1:   67-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+call    4 returned 1
+call    5 returned 1
+call    6 returned 1
+call    7 returned 1
+call    8 returned 1
+call    9 returned 1
+call   10 returned 1
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+call   15 returned 1
+call   16 returned 1
+call   17 returned 1
+    $$$$$:   67-block  1
+call   18 never executed
+    $$$$$:   67-block  2
+call   19 never executed
+    $$$$$:   67-block  3
+call   20 never executed
+    $$$$$:   67-block  4
+call   21 never executed
+    $$$$$:   67-block  5
+call   22 never executed
+    $$$$$:   67-block  6
+call   23 never executed
+    $$$$$:   67-block  7
+call   24 never executed
+    $$$$$:   67-block  8
+call   25 never executed
+    $$$$$:   67-block  9
+call   26 never executed
+    $$$$$:   67-block 10
+call   27 never executed
+    $$$$$:   67-block 11
+call   28 never executed
+    $$$$$:   67-block 12
+call   29 never executed
+    $$$$$:   67-block 13
+call   30 never executed
+    $$$$$:   67-block 14
+call   31 never executed
+    $$$$$:   67-block 15
+call   32 never executed
+    $$$$$:   67-block 16
+call   33 never executed
+    $$$$$:   67-block 17
+call   34 never executed
+    $$$$$:   67-block 18
+call   35 never executed

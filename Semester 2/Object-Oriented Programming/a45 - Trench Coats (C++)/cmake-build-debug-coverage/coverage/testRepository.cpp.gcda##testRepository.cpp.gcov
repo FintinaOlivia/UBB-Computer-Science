@@ -1,0 +1,1173 @@
+        -:    0:Source:/home/theo/CLionProjects/a45-913-Fintina-Olivia/testRepository.cpp
+        -:    0:Graph:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/testRepository.cpp.gcno
+        -:    0:Data:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/testRepository.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include <assert.h>
+        -:    2:#include <iostream>
+        -:    3:#include <string>
+        -:    4:#include "Repository.h"
+        -:    5:#include "Domain.h"
+        -:    6:#include "TestAll.h"
+        -:    7:
+function _Z17testAddTrenchCoatv called 1 returned 100% blocks executed 46%
+        1:    8:void testAddTrenchCoat()
+        -:    9:{
+        2:   10:    Repository repository("test.txt");
+        1:   10-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   10-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+call    7 returned 1
+    $$$$$:   10-block  2
+    $$$$$:   10-block  3
+        -:   11:
+        2:   12:    TrenchCoat trenchToAdd(1, 2, "red", 3, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   12-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   12-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   12-block  2
+    $$$$$:   12-block  3
+    $$$$$:   12-block  4
+    $$$$$:   12-block  5
+        1:   13:    repository.addTrenchCoat(1, 2, "red", 3, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   13-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   13-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   13-block  2
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   13-block  3
+call   15 never executed
+    $$$$$:   13-block  4
+    $$$$$:   13-block  5
+call   16 never executed
+    $$$$$:   13-block  6
+    $$$$$:   13-block  7
+call   17 never executed
+    $$$$$:   13-block  8
+    $$$$$:   13-block  9
+call   18 never executed
+    $$$$$:   13-block 10
+       1*:   14:    assert(repository.getSize() == 1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   14-block  0
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   14-block  1
+call    5 never executed
+       1*:   15:    assert(repository.getAllTrenchCoats()[0] == trenchToAdd);
+        1:   15-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   15-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   15-block  2
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:   15-block  3
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:   15-block  4
+call   11 never executed
+        1:   15-block  5
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   15-block  6
+call   14 never executed
+    $$$$$:   15-block  7
+    $$$$$:   15-block  8
+call   15 never executed
+    $$$$$:   15-block  9
+        -:   16:
+        1:   17:    repository.addTrenchCoat(1, 5, "blue", 2, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   17-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   17-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   17-block  2
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   17-block  3
+call   15 never executed
+    $$$$$:   17-block  4
+    $$$$$:   17-block  5
+call   16 never executed
+    $$$$$:   17-block  6
+    $$$$$:   17-block  7
+call   17 never executed
+    $$$$$:   17-block  8
+    $$$$$:   17-block  9
+call   18 never executed
+    $$$$$:   17-block 10
+        2:   18:    TrenchCoat trenchToUpdate(1, 5, "blue", 2, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   18-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   18-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   18-block  2
+    $$$$$:   18-block  3
+    $$$$$:   18-block  4
+    $$$$$:   18-block  5
+       1*:   19:    assert(repository.getSize() == 2);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   19-block  0
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   19-block  1
+call    5 never executed
+       1*:   20:    assert(repository.getAllTrenchCoats()[1] == trenchToUpdate);
+        1:   20-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   20-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   20-block  2
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:   20-block  3
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:   20-block  4
+call   11 never executed
+        1:   20-block  5
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   20-block  6
+call   14 never executed
+    $$$$$:   20-block  7
+    $$$$$:   20-block  8
+call   15 never executed
+    $$$$$:   20-block  9
+        -:   21:    
+        1:   22:    std :: cout << "AddTrenchCoat test passed!" << std :: endl;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   22-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   23:}
+        1:   23-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+    $$$$$:   23-block  1
+call    3 never executed
+    $$$$$:   23-block  2
+call    4 never executed
+    $$$$$:   23-block  3
+call    5 never executed
+        -:   24:
+function _Z20testRemoveTrenchCoatv called 1 returned 100% blocks executed 49%
+        1:   25:void testRemoveTrenchCoat()
+        -:   26:{
+        2:   27:    Repository repository("test.txt");
+        1:   27-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   27-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+call    7 returned 1
+    $$$$$:   27-block  2
+    $$$$$:   27-block  3
+        2:   28:    TrenchCoat trenchToAdd(1, 2, "red", 3, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   28-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   28-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   28-block  2
+    $$$$$:   28-block  3
+    $$$$$:   28-block  4
+    $$$$$:   28-block  5
+        1:   29:    repository.addTrenchCoat(1, 2, "red", 3, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   29-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   29-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   29-block  2
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   29-block  3
+call   15 never executed
+    $$$$$:   29-block  4
+    $$$$$:   29-block  5
+call   16 never executed
+    $$$$$:   29-block  6
+    $$$$$:   29-block  7
+call   17 never executed
+    $$$$$:   29-block  8
+    $$$$$:   29-block  9
+call   18 never executed
+    $$$$$:   29-block 10
+        1:   30:    repository.removeTrenchCoat(-1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   31:    assert(repository.getSize() == 1);
+        1:   31-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   31-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   31-block  2
+call    5 never executed
+        1:   32:    repository.removeTrenchCoat(1);
+        1:   32-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   33:    assert(repository.getSize() == 0);
+        1:   33-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   33-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   33-block  2
+call    5 never executed
+        1:   34:    std :: cout << "RemoveTrenchCoat test passed!" << std :: endl;
+        1:   34-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   34-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   35:}
+        1:   35-block  0
+call    0 returned 1
+call    1 returned 1
+    $$$$$:   35-block  1
+call    2 never executed
+    $$$$$:   35-block  2
+call    3 never executed
+        -:   36:
+function _Z20testUpdateTrenchCoatv called 1 returned 100% blocks executed 46%
+        1:   37:void testUpdateTrenchCoat()
+        -:   38:{
+        2:   39:    Repository repository("test.txt");
+        1:   39-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   39-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+call    7 returned 1
+    $$$$$:   39-block  2
+    $$$$$:   39-block  3
+        -:   40:
+        1:   41:    repository.addTrenchCoat(1, 2, "red", 3, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   41-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   41-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   41-block  2
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   41-block  3
+call   15 never executed
+    $$$$$:   41-block  4
+    $$$$$:   41-block  5
+call   16 never executed
+    $$$$$:   41-block  6
+    $$$$$:   41-block  7
+call   17 never executed
+    $$$$$:   41-block  8
+    $$$$$:   41-block  9
+call   18 never executed
+    $$$$$:   41-block 10
+        1:   42:    repository.updateTrenchCoat(1, 1, 3, "blue", 4, 5, "link2");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   42-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   42-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   42-block  2
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   42-block  3
+call   15 never executed
+    $$$$$:   42-block  4
+    $$$$$:   42-block  5
+call   16 never executed
+    $$$$$:   42-block  6
+    $$$$$:   42-block  7
+call   17 never executed
+    $$$$$:   42-block  8
+    $$$$$:   42-block  9
+call   18 never executed
+    $$$$$:   42-block 10
+        2:   43:    TrenchCoat trenchToUpdate( 1, 3, "blue", 4, 5, "link2");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   43-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   43-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   43-block  2
+    $$$$$:   43-block  3
+    $$$$$:   43-block  4
+    $$$$$:   43-block  5
+       1*:   44:    assert(repository.getSize() == 1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   44-block  0
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   44-block  1
+call    5 never executed
+       1*:   45:    assert(repository.getAllTrenchCoats()[0] == trenchToUpdate);
+        1:   45-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   45-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   45-block  2
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:   45-block  3
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:   45-block  4
+call   11 never executed
+        1:   45-block  5
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   45-block  6
+call   14 never executed
+    $$$$$:   45-block  7
+    $$$$$:   45-block  8
+call   15 never executed
+    $$$$$:   45-block  9
+        1:   46:    std :: cout << "UpdateTrenchCoat test passed!" << std :: endl;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   46-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   47:}
+        1:   47-block  0
+call    0 returned 1
+call    1 returned 1
+    $$$$$:   47-block  1
+call    2 never executed
+    $$$$$:   47-block  2
+call    3 never executed
+        -:   48:
+function _Z17testGetTrenchCoatv called 1 returned 100% blocks executed 46%
+        1:   49:void testGetTrenchCoat()
+        -:   50:{
+        2:   51:    Repository repository("test.txt");
+        1:   51-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   51-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+call    7 returned 1
+    $$$$$:   51-block  2
+    $$$$$:   51-block  3
+        1:   52:    repository.addTrenchCoat(1, 2, "red", 3, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   52-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   52-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   52-block  2
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   52-block  3
+call   15 never executed
+    $$$$$:   52-block  4
+    $$$$$:   52-block  5
+call   16 never executed
+    $$$$$:   52-block  6
+    $$$$$:   52-block  7
+call   17 never executed
+    $$$$$:   52-block  8
+    $$$$$:   52-block  9
+call   18 never executed
+    $$$$$:   52-block 10
+        2:   53:    TrenchCoat trenchToAdd(1, 2, "red", 3, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   53-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   53-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   53-block  2
+    $$$$$:   53-block  3
+    $$$$$:   53-block  4
+    $$$$$:   53-block  5
+       1*:   54:    assert(repository.getTrenchCoat(1) == trenchToAdd);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   54-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   54-block  1
+branch  6 taken 0 (fallthrough)
+branch  7 taken 1
+    %%%%%:   54-block  2
+call    8 never executed
+        1:   54-block  3
+call    9 returned 1
+    $$$$$:   54-block  4
+call   10 never executed
+    $$$$$:   54-block  5
+        1:   55:    repository.removeTrenchCoat(1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   56:
+       1*:   57:    assert(repository.getTrenchCoat(100) == TrenchCoat(-1, -1, "", -1, -1, ""));
+        1:   57-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   57-block  1
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   57-block  2
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   57-block  3
+call   11 returned 1
+branch 12 taken 1 (fallthrough)
+branch 13 taken 0 (throw)
+        1:   57-block  4
+call   14 returned 1
+branch 15 taken 1 (fallthrough)
+branch 16 taken 0 (throw)
+        1:   57-block  5
+branch 17 taken 0 (fallthrough)
+branch 18 taken 1
+    %%%%%:   57-block  6
+call   19 never executed
+        1:   57-block  7
+call   20 returned 1
+call   21 returned 1
+call   22 returned 1
+call   23 returned 1
+call   24 returned 1
+call   25 returned 1
+    $$$$$:   57-block  8
+call   26 never executed
+    $$$$$:   57-block  9
+    $$$$$:   57-block 10
+call   27 never executed
+    $$$$$:   57-block 11
+    $$$$$:   57-block 12
+call   28 never executed
+    $$$$$:   57-block 13
+    $$$$$:   57-block 14
+call   29 never executed
+    $$$$$:   57-block 15
+    $$$$$:   57-block 16
+call   30 never executed
+    $$$$$:   57-block 17
+    $$$$$:   57-block 18
+call   31 never executed
+    $$$$$:   57-block 19
+        1:   58:    std :: cout << "GetTrenchCoat test passed!" << std :: endl;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   58-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   59:}
+        1:   59-block  0
+call    0 returned 1
+call    1 returned 1
+    $$$$$:   59-block  1
+call    2 never executed
+    $$$$$:   59-block  2
+call    3 never executed
+        -:   60:
+function _Z21testGetAllTrenchCoatsv called 1 returned 100% blocks executed 47%
+        1:   61:void testGetAllTrenchCoats()
+        -:   62:{
+        2:   63:    Repository repository("test.txt");
+        1:   63-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   63-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+call    7 returned 1
+    $$$$$:   63-block  2
+    $$$$$:   63-block  3
+        1:   64:    repository.addTrenchCoat(1, 2, "red", 3, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   64-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   64-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   64-block  2
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   64-block  3
+call   15 never executed
+    $$$$$:   64-block  4
+    $$$$$:   64-block  5
+call   16 never executed
+    $$$$$:   64-block  6
+    $$$$$:   64-block  7
+call   17 never executed
+    $$$$$:   64-block  8
+    $$$$$:   64-block  9
+call   18 never executed
+    $$$$$:   64-block 10
+        2:   65:    TrenchCoat trenchToAdd(1, 2, "red", 3, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   65-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   65-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   65-block  2
+    $$$$$:   65-block  3
+    $$$$$:   65-block  4
+    $$$$$:   65-block  5
+       1*:   66:    assert(repository.getAllTrenchCoats()[0] == trenchToAdd);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   66-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   66-block  1
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:   66-block  2
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:   66-block  3
+call   11 never executed
+        1:   66-block  4
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   66-block  5
+call   14 never executed
+    $$$$$:   66-block  6
+    $$$$$:   66-block  7
+call   15 never executed
+    $$$$$:   66-block  8
+        1:   67:    repository.removeTrenchCoat(1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   68:    std :: cout << "GetAllTrench coats test passed!" << std :: endl;
+        1:   68-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   68-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   69:}
+        1:   69-block  0
+call    0 returned 1
+call    1 returned 1
+    $$$$$:   69-block  1
+call    2 never executed
+    $$$$$:   69-block  2
+call    3 never executed
+        -:   70:
+function _Z11testGetSizev called 1 returned 100% blocks executed 51%
+        1:   71:void testGetSize()
+        -:   72:{
+        2:   73:    Repository repository("test.txt");
+        1:   73-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   73-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+call    7 returned 1
+    $$$$$:   73-block  2
+    $$$$$:   73-block  3
+        1:   74:    repository.addTrenchCoat(1, 2, "red", 3, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   74-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   74-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   74-block  2
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   74-block  3
+call   15 never executed
+    $$$$$:   74-block  4
+    $$$$$:   74-block  5
+call   16 never executed
+    $$$$$:   74-block  6
+    $$$$$:   74-block  7
+call   17 never executed
+    $$$$$:   74-block  8
+    $$$$$:   74-block  9
+call   18 never executed
+    $$$$$:   74-block 10
+       1*:   75:    assert(repository.getSize() == 1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   75-block  0
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   75-block  1
+call    5 never executed
+        1:   76:    repository.removeTrenchCoat(1);
+        1:   76-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   77:    std :: cout << "GetSize test passed!" << std :: endl;
+        1:   77-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   77-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   78:}
+        1:   78-block  0
+call    0 returned 1
+    $$$$$:   78-block  1
+call    1 never executed
+        -:   79:
+function _Z15testSetFileNamev called 1 returned 100% blocks executed 56%
+        1:   80:void testSetFileName()
+        -:   81:{
+        2:   82:    Repository repository("test.txt");
+        1:   82-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   82-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+call    7 returned 1
+    $$$$$:   82-block  2
+    $$$$$:   82-block  3
+        1:   83:    repository.setFileName("test2.txt");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   83-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   83-block  1
+call    7 returned 1
+call    8 returned 1
+    $$$$$:   83-block  2
+call    9 never executed
+    $$$$$:   83-block  3
+    $$$$$:   83-block  4
+call   10 never executed
+    $$$$$:   83-block  5
+       1*:   84:    assert(repository.getFileName() == "test2.txt");
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   84-block  0
+call    3 returned 1
+branch  4 taken 0 (fallthrough)
+branch  5 taken 1
+    %%%%%:   84-block  1
+call    6 never executed
+        1:   84-block  2
+call    7 returned 1
+        1:   85:    std :: cout << "SetFile name test passed!" << std :: endl;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   85-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   86:}
+        1:   86-block  0
+call    0 returned 1
+    $$$$$:   86-block  1
+call    1 never executed
+        -:   87:
+function _Z15testWriteToFilev called 1 returned 100% blocks executed 51%
+        1:   88:void testWriteToFile()
+        -:   89:{
+        2:   90:    Repository repository("test.txt");
+        1:   90-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   90-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+call    7 returned 1
+    $$$$$:   90-block  2
+    $$$$$:   90-block  3
+        2:   91:    TrenchCoat trenchToAdd(1, 2, "red", 3, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   91-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   91-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   91-block  2
+    $$$$$:   91-block  3
+    $$$$$:   91-block  4
+    $$$$$:   91-block  5
+        1:   92:    repository.addTrenchCoat(1, 2, "red", 3, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   92-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   92-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   92-block  2
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   92-block  3
+call   15 never executed
+    $$$$$:   92-block  4
+    $$$$$:   92-block  5
+call   16 never executed
+    $$$$$:   92-block  6
+    $$$$$:   92-block  7
+call   17 never executed
+    $$$$$:   92-block  8
+    $$$$$:   92-block  9
+call   18 never executed
+    $$$$$:   92-block 10
+        1:   93:    repository.writeToFile();
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   94:    repository.removeTrenchCoat(1);
+        1:   94-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   95:    assert(repository.getSize() == 0);
+        1:   95-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   95-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   95-block  2
+call    5 never executed
+        1:   96:    repository.readFromFile();
+        1:   96-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+       1*:   97:    assert(repository.getSize() == 1);
+        1:   97-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   97-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   97-block  2
+call    5 never executed
+       1*:   98:    assert(repository.getAllTrenchCoats()[0] == trenchToAdd);
+        1:   98-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   98-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   98-block  2
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:   98-block  3
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:   98-block  4
+call   11 never executed
+        1:   98-block  5
+call   12 returned 1
+call   13 returned 1
+    $$$$$:   98-block  6
+call   14 never executed
+    $$$$$:   98-block  7
+    $$$$$:   98-block  8
+call   15 never executed
+    $$$$$:   98-block  9
+        1:   99:    repository.removeTrenchCoat(1);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  100:    repository.writeToFile();
+        1:  100-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  101:    std :: cout << "WriteToFile test passed!" << std :: endl;
+        1:  101-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  101-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:  102:}
+        1:  102-block  0
+call    0 returned 1
+call    1 returned 1
+    $$$$$:  102-block  1
+call    2 never executed
+    $$$$$:  102-block  2
+call    3 never executed
+        -:  103:
+function _Z11testValidIDv called 1 returned 100% blocks executed 52%
+        1:  104:void testValidID()
+        -:  105:{
+        2:  106:    Repository repository("test.txt");
+        1:  106-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:  106-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+call    7 returned 1
+    $$$$$:  106-block  2
+    $$$$$:  106-block  3
+        1:  107:    repository.addTrenchCoat(1, 2, "red", 3, 4, "link");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:  107-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:  107-block  1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:  107-block  2
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:  107-block  3
+call   15 never executed
+    $$$$$:  107-block  4
+    $$$$$:  107-block  5
+call   16 never executed
+    $$$$$:  107-block  6
+    $$$$$:  107-block  7
+call   17 never executed
+    $$$$$:  107-block  8
+    $$$$$:  107-block  9
+call   18 never executed
+    $$$$$:  107-block 10
+       1*:  108:    assert(repository.validID(1) == true);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  108-block  0
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:  108-block  1
+call    5 never executed
+       1*:  109:    assert(repository.validID(2) == false);
+        1:  109-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  109-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:  109-block  2
+call    5 never executed
+        1:  110:    repository.removeTrenchCoat(1);
+        1:  110-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  111:    std :: cout << "ValidID test passed!" << std :: endl;
+        1:  111-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  111-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:  112:}
+        1:  112-block  0
+call    0 returned 1
+    $$$$$:  112-block  1
+call    1 never executed
+        -:  113:
+        -:  114:
+function _Z14testRepositoryv called 1 returned 100% blocks executed 100%
+        1:  115:void testRepository()
+        -:  116:{
+        1:  117:    testAddTrenchCoat();
+        1:  117-block  0
+call    0 returned 1
+        1:  118:    testRemoveTrenchCoat();
+call    0 returned 1
+        1:  119:    testUpdateTrenchCoat();
+call    0 returned 1
+        1:  120:    testGetTrenchCoat();
+call    0 returned 1
+        1:  121:    testGetAllTrenchCoats();
+call    0 returned 1
+        1:  122:    testGetSize();
+call    0 returned 1
+        1:  123:    testSetFileName();
+call    0 returned 1
+        1:  124:    testWriteToFile();
+call    0 returned 1
+        1:  125:    testValidID();
+call    0 returned 1
+        1:  126:}

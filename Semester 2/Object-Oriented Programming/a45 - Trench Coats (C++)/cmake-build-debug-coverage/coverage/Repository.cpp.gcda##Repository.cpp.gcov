@@ -1,0 +1,566 @@
+        -:    0:Source:/home/theo/CLionProjects/a45-913-Fintina-Olivia/Repository.cpp
+        -:    0:Graph:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/Repository.cpp.gcno
+        -:    0:Data:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/Repository.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "Repository.h"
+        -:    2:#include <fstream>
+        -:    3:#include <iostream>
+        -:    4:#include <string>
+        -:    5:
+function _ZN10Repository13addTrenchCoatEiiRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEfiS7_ called 20 returned 100% blocks executed 58%
+       20:    6:void Repository::addTrenchCoat(int id,
+        -:    7:                                int sizeOfTrench,
+        -:    8:                                const std::string& colourOfTrench,
+        -:    9:                                float priceOfTrench,
+        -:   10:                                int quantityOfTrench,
+        -:   11:                                const std::string& photography_linkOfTrench)
+        -:   12:{
+        -:   13:    TrenchCoat trenchToAdd = TrenchCoat(id,
+        -:   14:                                        sizeOfTrench,
+        -:   15:                                        colourOfTrench,
+        -:   16:                                        priceOfTrench,
+        -:   17:                                        quantityOfTrench,
+       20:   18:                                        photography_linkOfTrench);
+       20:   18-block  0
+call    0 returned 20
+branch  1 taken 20 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   19:
+        -:   20:   
+       20:   21:    this->trenchCoats.append(trenchToAdd);
+       20:   21-block  0
+call    0 returned 20
+branch  1 taken 20 (fallthrough)
+branch  2 taken 0 (throw)
+       20:   21-block  1
+call    3 returned 20
+branch  4 taken 20 (fallthrough)
+branch  5 taken 0 (throw)
+       20:   21-block  2
+call    6 returned 20
+    $$$$$:   21-block  3
+call    7 never executed
+    $$$$$:   21-block  4
+       20:   22:}
+call    0 returned 20
+    $$$$$:   22-block  0
+call    1 never executed
+        -:   23:
+function _ZN10Repository16removeTrenchCoatEi called 12 returned 100% blocks executed 86%
+       12:   24:void Repository::removeTrenchCoat(int trenchID)
+        -:   25:{
+       13:   26:    for (int i = 0; i < this->trenchCoats.getSize(); i++)
+       12:   26-block  0
+        1:   26-block  1
+       13:   26-block  2
+call    0 returned 13
+branch  1 taken 12
+branch  2 taken 1 (fallthrough)
+        -:   27:    {
+       12:   28:        if (this->trenchCoats[i].getTrenchID() == trenchID)
+       12:   28-block  0
+call    0 returned 12
+call    1 returned 12
+branch  2 taken 12 (fallthrough)
+branch  3 taken 0 (throw)
+       12:   28-block  1
+call    4 returned 12
+branch  5 taken 11 (fallthrough)
+branch  6 taken 1
+    $$$$$:   28-block  2
+call    7 never executed
+        -:   29:        {
+       11:   30:            this->trenchCoats.remove(i);
+       11:   30-block  0
+call    0 returned 11
+       11:   31:            return;
+        -:   32:        }
+        -:   33:    }
+        -:   34:}
+        -:   35:
+function _ZN10Repository16updateTrenchCoatEiiiRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEfiS7_ called 3 returned 100% blocks executed 100%
+        3:   36:void Repository::updateTrenchCoat(int trenchID, 
+        -:   37:                                    int newID,
+        -:   38:                                    int newSizeOfTrench, 
+        -:   39:                                    const std::string& newColourOfTrench, 
+        -:   40:                                    float newPriceOfTrench, 
+        -:   41:                                    int newQuantityOfTrench, 
+        -:   42:                                    const std::string& newPhotography_linkOfTrench)
+        -:   43:{
+        3:   44:    this->removeTrenchCoat(trenchID);
+        3:   44-block  0
+call    0 returned 3
+        3:   45:    this->addTrenchCoat(newID,
+call    0 returned 3
+        -:   46:                        newSizeOfTrench,
+        -:   47:                        newColourOfTrench,
+        -:   48:                        newPriceOfTrench, 
+        -:   49:                        newQuantityOfTrench, 
+        -:   50:                        newPhotography_linkOfTrench);
+        -:   51:    /*
+        -:   52:    TrenchCoat trenchToUpdate(newID,
+        -:   53:                            newSizeOfTrench,
+        -:   54:                            newColourOfTrench,
+        -:   55:                            newPriceOfTrench,
+        -:   56:                            newQuantityOfTrench,
+        -:   57:                            newPhotography_linkOfTrench);
+        -:   58:
+        -:   59:    for (int i = 0; i < this->trenchCoats.getSize(); i++)
+        -:   60:    {
+        -:   61:        if (this->trenchCoats[i].getTrenchID() == trenchID)
+        -:   62:        {
+        -:   63:            this->trenchCoats[i].setTrenchID(newID);
+        -:   64:            this->trenchCoats[i].setTrenchSize(newSizeOfTrench);
+        -:   65:            this->trenchCoats[i].setTrenchColour(newColourOfTrench);
+        -:   66:            this->trenchCoats[i].setTrenchPrice(newPriceOfTrench);
+        -:   67:            this->trenchCoats[i].setTrenchQuantity(newQuantityOfTrench);
+        -:   68:            this->trenchCoats[i].setTrenchPhotographyLink(newPhotography_linkOfTrench);
+        -:   69:            return;
+        -:   70:        }
+        -:   71:    }
+        -:   72:    */
+        3:   73:}
+        -:   74:
+function _ZN10Repository7validIDEi called 2 returned 100% blocks executed 86%
+        2:   75:bool Repository::validID(int trenchID)
+        -:   76:{
+        3:   77:    for (int i = 0; i < this->trenchCoats.getSize(); i++)
+        2:   77-block  0
+        1:   77-block  1
+        3:   77-block  2
+call    0 returned 3
+branch  1 taken 2
+branch  2 taken 1 (fallthrough)
+        -:   78:    {
+        2:   79:        if (this->trenchCoats[i].getTrenchID() == trenchID)
+        2:   79-block  0
+call    0 returned 2
+call    1 returned 2
+branch  2 taken 2 (fallthrough)
+branch  3 taken 0 (throw)
+        2:   79-block  1
+call    4 returned 2
+branch  5 taken 1 (fallthrough)
+branch  6 taken 1
+    $$$$$:   79-block  2
+call    7 never executed
+        -:   80:        {
+        1:   81:            return true;
+        1:   81-block  0
+        -:   82:        }
+        -:   83:    }
+        1:   84:    return false;
+        1:   84-block  0
+        -:   85:}
+        -:   86:
+function _ZN10Repository13getTrenchCoatEi called 4 returned 100% blocks executed 57%
+        4:   87:TrenchCoat Repository::getTrenchCoat(int trenchID)
+        -:   88:{
+       4*:   89:    for (int i = 0; i < this->trenchCoats.getSize(); i++)
+        4:   89-block  0
+    %%%%%:   89-block  1
+        4:   89-block  2
+call    0 returned 4
+branch  1 taken 3
+branch  2 taken 1 (fallthrough)
+        -:   90:    {
+        3:   91:        if (this->trenchCoats[i].getTrenchID() == trenchID)
+        3:   91-block  0
+call    0 returned 3
+call    1 returned 3
+branch  2 taken 3 (fallthrough)
+branch  3 taken 0 (throw)
+        3:   91-block  1
+call    4 returned 3
+branch  5 taken 3 (fallthrough)
+branch  6 taken 0
+    $$$$$:   91-block  2
+call    7 never executed
+    $$$$$:   91-block  3
+call    8 never executed
+        -:   92:        {
+        3:   93:            return this->trenchCoats[i];
+        3:   93-block  0
+call    0 returned 3
+        -:   94:        }
+        -:   95:    }
+        1:   96:    return TrenchCoat(-1,-1, "", -1, -1, "");
+        1:   96-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   96-block  1
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   96-block  2
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   96-block  3
+call   11 returned 1
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+    $$$$$:   96-block  4
+call   15 never executed
+    $$$$$:   96-block  5
+    $$$$$:   96-block  6
+call   16 never executed
+    $$$$$:   96-block  7
+    $$$$$:   96-block  8
+call   17 never executed
+    $$$$$:   96-block  9
+    $$$$$:   96-block 10
+call   18 never executed
+        -:   97:}
+        -:   98:
+function _ZN10Repository17getAllTrenchCoatsEv called 41 returned 100% blocks executed 100%
+       41:   99:dynamicVector<TrenchCoat> Repository::getAllTrenchCoats()
+        -:  100:{
+       41:  101:    return this->trenchCoats;
+       41:  101-block  0
+call    0 returned 41
+        -:  102:}
+        -:  103:
+function _ZN10Repository7getSizeEv called 68 returned 100% blocks executed 100%
+       68:  104:int Repository::getSize()
+        -:  105:{
+       68:  106:    return this->trenchCoats.getSize();
+       68:  106-block  0
+call    0 returned 68
+        -:  107:}
+        -:  108:
+function _ZN10Repository11setFileNameENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 4 returned 100% blocks executed 100%
+        4:  109:void Repository::setFileName(std::string newFileName)
+        -:  110:{
+        4:  111:    this->FileName = newFileName;
+        4:  111-block  0
+call    0 returned 4
+        4:  112:}
+        -:  113:
+function _ZNK10Repository11getFileNameB5cxx11Ev called 2 returned 100% blocks executed 100%
+        2:  114:std::string Repository::getFileName() const
+        -:  115:{
+        2:  116:    return this->FileName;
+        2:  116-block  0
+call    0 returned 2
+        -:  117:}
+        -:  118:
+function _ZN10Repository11writeToFileEv called 3 returned 100% blocks executed 63%
+        3:  119:void Repository::writeToFile()
+        -:  120:{
+        3:  121:    ofstream file(this->FileName);
+        3:  121-block  0
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
+branch  2 taken 0 (throw)
+        3:  122:    if (file.is_open())
+        3:  122-block  0
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
+branch  2 taken 0 (throw)
+        3:  122-block  1
+branch  3 taken 3 (fallthrough)
+branch  4 taken 0
+        -:  123:    {
+        5:  124:        for (int i = 0; i < this->trenchCoats.getSize(); i++)
+        3:  124-block  0
+        2:  124-block  1
+        5:  124-block  2
+call    0 returned 5
+branch  1 taken 2
+branch  2 taken 3 (fallthrough)
+        -:  125:        {
+        2:  126:            file << this->trenchCoats[i].getTrenchID() << " ";
+        2:  126-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  126-block  1
+call    3 returned 2
+branch  4 taken 2 (fallthrough)
+branch  5 taken 0 (throw)
+        2:  126-block  2
+call    6 returned 2
+branch  7 taken 2 (fallthrough)
+branch  8 taken 0 (throw)
+        2:  126-block  3
+call    9 returned 2
+branch 10 taken 2 (fallthrough)
+branch 11 taken 0 (throw)
+        2:  126-block  4
+call   12 returned 2
+    $$$$$:  126-block  5
+call   13 never executed
+    $$$$$:  126-block  6
+        2:  127:            file << this->trenchCoats[i].getTrenchSize() << " ";
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  127-block  0
+call    3 returned 2
+branch  4 taken 2 (fallthrough)
+branch  5 taken 0 (throw)
+        2:  127-block  1
+call    6 returned 2
+branch  7 taken 2 (fallthrough)
+branch  8 taken 0 (throw)
+        2:  127-block  2
+call    9 returned 2
+branch 10 taken 2 (fallthrough)
+branch 11 taken 0 (throw)
+        2:  127-block  3
+call   12 returned 2
+    $$$$$:  127-block  4
+call   13 never executed
+    $$$$$:  127-block  5
+        2:  128:            file << this->trenchCoats[i].getTrenchColour() << " ";
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  128-block  0
+call    3 returned 2
+branch  4 taken 2 (fallthrough)
+branch  5 taken 0 (throw)
+        2:  128-block  1
+call    6 returned 2
+branch  7 taken 2 (fallthrough)
+branch  8 taken 0 (throw)
+        2:  128-block  2
+call    9 returned 2
+branch 10 taken 2 (fallthrough)
+branch 11 taken 0 (throw)
+        2:  128-block  3
+call   12 returned 2
+call   13 returned 2
+    $$$$$:  128-block  4
+call   14 never executed
+    $$$$$:  128-block  5
+    $$$$$:  128-block  6
+call   15 never executed
+    $$$$$:  128-block  7
+        2:  129:            file << this->trenchCoats[i].getTrenchPrice() << " ";
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  129-block  0
+call    3 returned 2
+branch  4 taken 2 (fallthrough)
+branch  5 taken 0 (throw)
+        2:  129-block  1
+call    6 returned 2
+branch  7 taken 2 (fallthrough)
+branch  8 taken 0 (throw)
+        2:  129-block  2
+call    9 returned 2
+branch 10 taken 2 (fallthrough)
+branch 11 taken 0 (throw)
+        2:  129-block  3
+call   12 returned 2
+    $$$$$:  129-block  4
+call   13 never executed
+    $$$$$:  129-block  5
+        2:  130:            file << this->trenchCoats[i].getTrenchQuantity() << " ";
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  130-block  0
+call    3 returned 2
+branch  4 taken 2 (fallthrough)
+branch  5 taken 0 (throw)
+        2:  130-block  1
+call    6 returned 2
+branch  7 taken 2 (fallthrough)
+branch  8 taken 0 (throw)
+        2:  130-block  2
+call    9 returned 2
+branch 10 taken 2 (fallthrough)
+branch 11 taken 0 (throw)
+        2:  130-block  3
+call   12 returned 2
+    $$$$$:  130-block  4
+call   13 never executed
+    $$$$$:  130-block  5
+        2:  131:            file << this->trenchCoats[i].getTrenchPhotographyLink() << " ";
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  131-block  0
+call    3 returned 2
+branch  4 taken 2 (fallthrough)
+branch  5 taken 0 (throw)
+        2:  131-block  1
+call    6 returned 2
+branch  7 taken 2 (fallthrough)
+branch  8 taken 0 (throw)
+        2:  131-block  2
+call    9 returned 2
+branch 10 taken 2 (fallthrough)
+branch 11 taken 0 (throw)
+        2:  131-block  3
+call   12 returned 2
+call   13 returned 2
+    $$$$$:  131-block  4
+call   14 never executed
+    $$$$$:  131-block  5
+    $$$$$:  131-block  6
+call   15 never executed
+    $$$$$:  131-block  7
+        2:  132:            file << endl;
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  133:        }
+        -:  134:    }
+        3:  135:    file.close();
+        3:  135-block  0
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
+branch  2 taken 0 (throw)
+        3:  136:}
+        3:  136-block  0
+call    0 returned 3
+    $$$$$:  136-block  1
+call    1 never executed
+        -:  137:
+function _ZN10Repository12readFromFileEv called 12 returned 100% blocks executed 68%
+       12:  138:void Repository::readFromFile()
+        -:  139:{
+       12:  140:    ifstream file(this->FileName);
+       12:  140-block  0
+call    0 returned 12
+branch  1 taken 12 (fallthrough)
+branch  2 taken 0 (throw)
+       12:  141:    if (file.is_open())
+       12:  141-block  0
+call    0 returned 12
+branch  1 taken 12 (fallthrough)
+branch  2 taken 0 (throw)
+       12:  141-block  1
+branch  3 taken 11 (fallthrough)
+branch  4 taken 1
+        -:  142:    {
+        -:  143:        int id, size, quantity;
+        -:  144:        float price;
+       11:  145:        std::string colour, photographyLink;
+       11:  145-block  0
+call    0 returned 11
+call    1 returned 11
+       13:  146:        while (file >> id >> size >> colour >> price >> quantity >> photographyLink)
+       13:  146-block  0
+call    0 returned 13
+branch  1 taken 13 (fallthrough)
+branch  2 taken 0 (throw)
+       13:  146-block  1
+call    3 returned 13
+branch  4 taken 13 (fallthrough)
+branch  5 taken 0 (throw)
+       13:  146-block  2
+call    6 returned 13
+branch  7 taken 13 (fallthrough)
+branch  8 taken 0 (throw)
+       13:  146-block  3
+call    9 returned 13
+branch 10 taken 13 (fallthrough)
+branch 11 taken 0 (throw)
+       13:  146-block  4
+call   12 returned 13
+branch 13 taken 13 (fallthrough)
+branch 14 taken 0 (throw)
+       13:  146-block  5
+call   15 returned 13
+branch 16 taken 13 (fallthrough)
+branch 17 taken 0 (throw)
+       13:  146-block  6
+call   18 returned 13
+branch 19 taken 13 (fallthrough)
+branch 20 taken 0 (throw)
+       13:  146-block  7
+branch 21 taken 2
+branch 22 taken 11 (fallthrough)
+        -:  147:        {
+        2:  148:            TrenchCoat trenchToAdd(id, size, colour, price, quantity, photographyLink);
+        2:  148-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  149:            this->trenchCoats.append(trenchToAdd);
+        2:  149-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  149-block  1
+call    3 returned 2
+branch  4 taken 2 (fallthrough)
+branch  5 taken 0 (throw)
+        2:  149-block  2
+call    6 returned 2
+    $$$$$:  149-block  3
+call    7 never executed
+    $$$$$:  149-block  4
+        2:  150:        }
+call    0 returned 2
+    $$$$$:  150-block  0
+call    1 never executed
+       11:  151:    }
+       11:  151-block  0
+call    0 returned 11
+call    1 returned 11
+    $$$$$:  151-block  1
+call    2 never executed
+    $$$$$:  151-block  2
+call    3 never executed
+       12:  152:    file.close();
+       12:  152-block  0
+call    0 returned 12
+branch  1 taken 12 (fallthrough)
+branch  2 taken 0 (throw)
+       12:  153:}
+       12:  153-block  0
+call    0 returned 12
+    $$$$$:  153-block  1
+call    1 never executed
+        -:  154:
+function _ZN10RepositoryC2Ev called 11 returned 100% blocks executed 62%
+       11:  155:Repository::Repository()
+       11:  155-block  0
+call    0 returned 11
+call    1 returned 11
+        -:  156:{
+       11:  157:    this->FileName = "default.txt";
+call    0 returned 11
+branch  1 taken 11 (fallthrough)
+branch  2 taken 0 (throw)
+       11:  158:}
+       11:  158-block  0
+    $$$$$:  158-block  1
+call    0 never executed
+    $$$$$:  158-block  2
+call    1 never executed
+        -:  159:
+function _ZN10RepositoryC2ENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 10 returned 100% blocks executed 67%
+       10:  160:Repository::Repository(std::string FileName)
+       10:  160-block  0
+call    0 returned 10
+call    1 returned 10
+        -:  161:{
+       10:  162:    this->FileName = FileName;
+call    0 returned 10
+branch  1 taken 10 (fallthrough)
+branch  2 taken 0 (throw)
+       10:  163:    this->readFromFile();
+       10:  163-block  0
+call    0 returned 10
+branch  1 taken 10 (fallthrough)
+branch  2 taken 0 (throw)
+       10:  164:}
+       10:  164-block  0
+    $$$$$:  164-block  1
+call    0 never executed
+    $$$$$:  164-block  2
+call    1 never executed
+        -:  165:
+        -:  166:

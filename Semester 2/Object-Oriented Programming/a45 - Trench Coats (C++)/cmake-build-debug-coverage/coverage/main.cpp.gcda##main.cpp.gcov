@@ -1,0 +1,82 @@
+        -:    0:Source:/home/theo/CLionProjects/a45-913-Fintina-Olivia/main.cpp
+        -:    0:Graph:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/main.cpp.gcno
+        -:    0:Data:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/main.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "UI.h"
+        -:    2:#include "Repository.h"
+        -:    3:#include "Controller.h"
+        -:    4:#include "TestAll.h"
+        -:    5:
+function main called 1 returned 100% blocks executed 55%
+        1:    6:int main()
+        -:    7:{
+        1:    8:    testDomain();
+        1:    8-block  0
+call    0 returned 1
+        1:    9:    testDynamicArray();
+call    0 returned 1
+        1:   10:    testRepository();
+call    0 returned 1
+        1:   11:    testController();
+call    0 returned 1
+        1:   12:    testTrenchCoatExists();
+call    0 returned 1
+        -:   13:
+        -:   14:    {
+        1:   15:        Controller controller;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        2:   16:        Repository basket_repository("basket.txt");
+        1:   16-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   16-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+call    7 returned 1
+    $$$$$:   16-block  2
+    $$$$$:   16-block  3
+        1:   17:        Controller basket_controller(basket_repository);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   17-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+    $$$$$:   17-block  1
+        -:   18:
+        2:   19:        UI ui(controller, basket_controller);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   19-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   19-block  1
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+call    9 returned 1
+    $$$$$:   19-block  2
+    $$$$$:   19-block  3
+        -:   20:        //ui.runApplication();
+        1:   21:    }
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+    $$$$$:   21-block  0
+call    4 never executed
+    $$$$$:   21-block  1
+call    5 never executed
+    $$$$$:   21-block  2
+call    6 never executed
+        -:   22:
+        1:   23:    return 0;
+        -:   24:}

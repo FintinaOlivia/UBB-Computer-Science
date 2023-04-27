@@ -8,12 +8,13 @@ int main()
     testDomain();
     testRepository();
     testController();
+    {
+        Controller controller;
+        Repository basket_repository("basket.txt");
+        Controller basket_controller(basket_repository);
 
-    Controller controller;
-    Repository basket_repository("basket.txt");
-    Controller basket_controller(basket_repository);
-
-    UI ui(controller, basket_controller);
-    //ui.runApplication();
+        UI ui(controller, basket_controller);
+        //ui.runApplication();
+    }
     return 0;
 }

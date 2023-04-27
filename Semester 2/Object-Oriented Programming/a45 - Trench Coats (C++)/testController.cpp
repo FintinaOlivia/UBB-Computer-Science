@@ -33,6 +33,25 @@ void testController()
 
     assert(controller.getSize() == 1);
     assert(controller.getFileName() == "trenchCoats.txt");
+
+    controller.saveProgress();
+    controller.setFileName("trenchCoats.txt");
+    controller.loadFromFile();
+
+    //Testing FilterBySize
+    controller.addTrenchCoat(2, 3, "red", 3, 4, "photo");
+    controller.addTrenchCoat(3, 4, "red", 3, 4, "photo");
+    controller.addTrenchCoat(4, 4, "red", 3, 4, "photo");
+    controller.addTrenchCoat(5, 6, "red", 3, 4, "photo");
+    controller.addTrenchCoat(6, 6, "red", 3, 4, "photo");
+    controller.addTrenchCoat(7, 6, "red", 3, 4, "photo");
+    assert(controller.addTrenchCoat(7, 6, "red", 3, 4, "photo") == false);
+
+    dynamicVector<TrenchCoat> filteredTrenchCoats = controller.filterBySize(6);
+    assert(filteredTrenchCoats.getSize() == 3);
+
+    dynamicVector<TrenchCoat> allTrenchCoats = controller.getAllTrenchCoats();
+    assert(allTrenchCoats.getSize() == 7);
 }
 
 void testTrenchCoatExists()

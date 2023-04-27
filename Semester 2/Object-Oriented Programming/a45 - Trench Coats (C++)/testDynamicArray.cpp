@@ -60,5 +60,8 @@ void testDynamicArray()
     dynamicVector.update(0, trenchCoat1);
     assert(dynamicVector[0] == trenchCoat1);
 
+    dynamicVector.update(-1, trenchCoat1);
+    dynamicVector.remove(-1);
+    assert(dynamicVector.getSize() == 15);
     std::cout << "Dynamic array tests passed!" << std::endl;
 }

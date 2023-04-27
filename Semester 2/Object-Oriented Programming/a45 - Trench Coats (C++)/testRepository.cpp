@@ -54,6 +54,7 @@ void testGetTrenchCoat()
     assert(repository.getTrenchCoat(1) == trenchToAdd);
     repository.removeTrenchCoat(1);
 
+    assert(repository.getTrenchCoat(100) == TrenchCoat(-1, -1, "", -1, -1, ""));
     std :: cout << "GetTrenchCoat test passed!" << std :: endl;
 }
 

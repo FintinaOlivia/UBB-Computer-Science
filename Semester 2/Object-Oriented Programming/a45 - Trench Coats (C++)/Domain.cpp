@@ -32,28 +32,6 @@ TrenchCoat::TrenchCoat(int id,
 
 }
 
-// TrenchCoat::TrenchCoat(int id, 
-//                     int sizeOfTrench, 
-//                     const std::string &colourOfTrench, 
-//                     float priceOfTrench, 
-//                     int quantityOfTrench, 
-//                     const std::string &photographyLinkOfTrench) {
-
-//     id = (id);
-//     size = (sizeOfTrench);
-//     colour = (colourOfTrench);
-//     price = (priceOfTrench);
-//     quantity = (quantityOfTrench);
-//     photographyLink = (photographyLinkOfTrench);
-
-//     // size{sizeOfTrench}; 
-//     // colour{colourOfTrench}; 
-//     // price{priceOfTrench};
-//     // quantity{quantityOfTrench};
-//     // photographyLink{photographyLinkOfTrench};
-
-// }
-
 //Getters
 int TrenchCoat::getTrenchID()
 {

@@ -12,10 +12,7 @@ void testDomain()
         assert(true);
 
     TrenchCoat trenchCoat(1, 2, "red", 3, 4, "link");
-
-    if(auxTrenchCoat == trenchCoat)
-        assert(false);
-
+    assert((trenchCoat == TrenchCoat(1, 6, "red", 3, 4, "link") == false));
     assert(trenchCoat.getTrenchID() == 1);
     assert(trenchCoat.getTrenchSize() == 2);
     assert(trenchCoat.getTrenchColour() == "red");

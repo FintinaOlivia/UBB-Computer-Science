@@ -33,5 +33,7 @@ void testDomain()
     trenchCoat.setTrenchPhotographyLink("link2");
     assert(trenchCoat.getTrenchPhotographyLink() == "link2");
 
+    TrenchCoat trenchCoat2(1, 2, "red", 3, 4, "link");
+    assert_perror(trenchCoat == trenchCoat2);
     std::cout << "Domain tests passed!" << std::endl;
 }

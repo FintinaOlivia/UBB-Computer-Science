@@ -19,7 +19,8 @@ void testRepository(){
     repository.addTrenchCoat(5, 6, "black", 7, 8, "link5");
     assert(repository.getSize() == 5);
     assert(repository.validID(1));
-
+    assert(repository.addTrenchCoat(5, 6, "black", 7, 8, "link5") == false);
+    
     repository.removeTrenchCoat(1);
     assert(repository.getSize() == 4);
     assert(!repository.validID(1));

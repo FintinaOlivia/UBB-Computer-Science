@@ -14,17 +14,17 @@ class UI
 
     public:
         UI(Controller controller, Controller basket_controller);
-        void printWelcomeMessage();
-        void printAdminMenu();
+        static void printWelcomeMessage();
+        static void printAdminMenu();
 
         void printAllTrenchCoats(int codeOfController);
-        void printGoodbyeMessage();
-        void printQuestioningMessage();
+        static void printGoodbyeMessage();
+        static void printQuestioningMessage();
         void printUserMenu();
-        void printPurchaseMessage();
-        void printUserBrowsingMenu();
-        void printAddToCartButton();
-        void printTrenchCoat(TrenchCoat trenchCoatToPrint);
+        static void printPurchaseMessage();
+        static void printUserBrowsingMenu();
+        static void printAddToCartButton();
+        static void printTrenchCoat(TrenchCoat trenchCoatToPrint);
 
         void administratorMode();
         void userMode();

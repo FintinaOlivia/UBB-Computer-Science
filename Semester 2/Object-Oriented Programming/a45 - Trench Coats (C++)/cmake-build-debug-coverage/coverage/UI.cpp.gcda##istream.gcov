@@ -1,0 +1,1015 @@
+        -:    0:Source:/usr/include/c++/11/istream
+        -:    0:Graph:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/UI.cpp.gcno
+        -:    0:Data:/home/theo/CLionProjects/a45-913-Fintina-Olivia/cmake-build-debug-coverage/CMakeFiles/a45_913_Fintina_Olivia_main.dir/UI.cpp.gcda
+        -:    0:Runs:1
+        -:    1:// Input streams -*- C++ -*-
+        -:    2:
+        -:    3:// Copyright (C) 1997-2021 Free Software Foundation, Inc.
+        -:    4://
+        -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
+        -:    6:// software; you can redistribute it and/or modify it under the
+        -:    7:// terms of the GNU General Public License as published by the
+        -:    8:// Free Software Foundation; either version 3, or (at your option)
+        -:    9:// any later version.
+        -:   10:
+        -:   11:// This library is distributed in the hope that it will be useful,
+        -:   12:// but WITHOUT ANY WARRANTY; without even the implied warranty of
+        -:   13:// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        -:   14:// GNU General Public License for more details.
+        -:   15:
+        -:   16:// Under Section 7 of GPL version 3, you are granted additional
+        -:   17:// permissions described in the GCC Runtime Library Exception, version
+        -:   18:// 3.1, as published by the Free Software Foundation.
+        -:   19:
+        -:   20:// You should have received a copy of the GNU General Public License and
+        -:   21:// a copy of the GCC Runtime Library Exception along with this program;
+        -:   22:// see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+        -:   23:// <http://www.gnu.org/licenses/>.
+        -:   24:
+        -:   25://
+        -:   26:// ISO C++ 14882: 27.6.1  Input streams
+        -:   27://
+        -:   28:
+        -:   29:/** @file include/istream
+        -:   30: *  This is a Standard C++ Library header.
+        -:   31: */
+        -:   32:
+        -:   33:#ifndef _GLIBCXX_ISTREAM
+        -:   34:#define _GLIBCXX_ISTREAM 1
+        -:   35:
+        -:   36:#pragma GCC system_header
+        -:   37:
+        -:   38:#include <ios>
+        -:   39:#include <ostream>
+        -:   40:
+        -:   41:namespace std _GLIBCXX_VISIBILITY(default)
+        -:   42:{
+        -:   43:_GLIBCXX_BEGIN_NAMESPACE_VERSION
+        -:   44:
+        -:   45:  /**
+        -:   46:   *  @brief  Template class basic_istream.
+        -:   47:   *  @ingroup io
+        -:   48:   *
+        -:   49:   *  @tparam _CharT  Type of character stream.
+        -:   50:   *  @tparam _Traits  Traits for character type, defaults to
+        -:   51:   *                   char_traits<_CharT>.
+        -:   52:   *
+        -:   53:   *  This is the base class for all input streams.  It provides text
+        -:   54:   *  formatting of all builtin types, and communicates with any class
+        -:   55:   *  derived from basic_streambuf to do the actual input.
+        -:   56:  */
+        -:   57:  template<typename _CharT, typename _Traits>
+        -:   58:    class basic_istream : virtual public basic_ios<_CharT, _Traits>
+        -:   59:    {
+        -:   60:    public:
+        -:   61:      // Types (inherited from basic_ios (27.4.4)):
+        -:   62:      typedef _CharT			 		char_type;
+        -:   63:      typedef typename _Traits::int_type 		int_type;
+        -:   64:      typedef typename _Traits::pos_type 		pos_type;
+        -:   65:      typedef typename _Traits::off_type 		off_type;
+        -:   66:      typedef _Traits			 		traits_type;
+        -:   67:
+        -:   68:      // Non-standard Types:
+        -:   69:      typedef basic_streambuf<_CharT, _Traits> 		__streambuf_type;
+        -:   70:      typedef basic_ios<_CharT, _Traits>		__ios_type;
+        -:   71:      typedef basic_istream<_CharT, _Traits>		__istream_type;
+        -:   72:      typedef num_get<_CharT, istreambuf_iterator<_CharT, _Traits> >
+        -:   73: 							__num_get_type;
+        -:   74:      typedef ctype<_CharT>	      			__ctype_type;
+        -:   75:
+        -:   76:    protected:
+        -:   77:      // Data Members:
+        -:   78:      /**
+        -:   79:       *  The number of characters extracted in the previous unformatted
+        -:   80:       *  function; see gcount().
+        -:   81:      */
+        -:   82:      streamsize 		_M_gcount;
+        -:   83:
+        -:   84:    public:
+        -:   85:      /**
+        -:   86:       *  @brief  Base constructor.
+        -:   87:       *
+        -:   88:       *  This ctor is almost never called by the user directly, rather from
+        -:   89:       *  derived classes' initialization lists, which pass a pointer to
+        -:   90:       *  their own stream buffer.
+        -:   91:      */
+        -:   92:      explicit
+        -:   93:      basic_istream(__streambuf_type* __sb)
+        -:   94:      : _M_gcount(streamsize(0))
+        -:   95:      { this->init(__sb); }
+        -:   96:
+        -:   97:      /**
+        -:   98:       *  @brief  Base destructor.
+        -:   99:       *
+        -:  100:       *  This does very little apart from providing a virtual base dtor.
+        -:  101:      */
+        -:  102:      virtual
+        -:  103:      ~basic_istream()
+        -:  104:      { _M_gcount = streamsize(0); }
+        -:  105:
+        -:  106:      /// Safe prefix/suffix operations.
+        -:  107:      class sentry;
+        -:  108:      friend class sentry;
+        -:  109:
+        -:  110:      ///@{
+        -:  111:      /**
+        -:  112:       *  @brief  Interface for manipulators.
+        -:  113:       *
+        -:  114:       *  Manipulators such as @c std::ws and @c std::dec use these
+        -:  115:       *  functions in constructs like
+        -:  116:       *  <code>std::cin >> std::ws</code>.
+        -:  117:       *  For more information, see the iomanip header.
+        -:  118:      */
+        -:  119:      __istream_type&
+        -:  120:      operator>>(__istream_type& (*__pf)(__istream_type&))
+        -:  121:      { return __pf(*this); }
+        -:  122:
+        -:  123:      __istream_type&
+        -:  124:      operator>>(__ios_type& (*__pf)(__ios_type&))
+        -:  125:      {
+        -:  126:	__pf(*this);
+        -:  127:	return *this;
+        -:  128:      }
+        -:  129:
+        -:  130:      __istream_type&
+        -:  131:      operator>>(ios_base& (*__pf)(ios_base&))
+        -:  132:      {
+        -:  133:	__pf(*this);
+        -:  134:	return *this;
+        -:  135:      }
+        -:  136:      ///@}
+        -:  137:
+        -:  138:      ///@{
+        -:  139:      /**
+        -:  140:       *  @name Extractors
+        -:  141:       *
+        -:  142:       *  All the @c operator>> functions (aka <em>formatted input
+        -:  143:       *  functions</em>) have some common behavior.  Each starts by
+        -:  144:       *  constructing a temporary object of type std::basic_istream::sentry
+        -:  145:       *  with the second argument (noskipws) set to false.  This has several
+        -:  146:       *  effects, concluding with the setting of a status flag; see the
+        -:  147:       *  sentry documentation for more.
+        -:  148:       *
+        -:  149:       *  If the sentry status is good, the function tries to extract
+        -:  150:       *  whatever data is appropriate for the type of the argument.
+        -:  151:       *
+        -:  152:       *  If an exception is thrown during extraction, ios_base::badbit
+        -:  153:       *  will be turned on in the stream's error state (without causing an
+        -:  154:       *  ios_base::failure to be thrown) and the original exception will
+        -:  155:       *  be rethrown if badbit is set in the exceptions mask.
+        -:  156:      */
+        -:  157:
+        -:  158:      ///@{
+        -:  159:      /**
+        -:  160:       *  @brief  Integer arithmetic extractors
+        -:  161:       *  @param  __n A variable of builtin integral type.
+        -:  162:       *  @return  @c *this if successful
+        -:  163:       *
+        -:  164:       *  These functions use the stream's current locale (specifically, the
+        -:  165:       *  @c num_get facet) to parse the input data.
+        -:  166:      */
+        -:  167:      __istream_type&
+        -:  168:      operator>>(bool& __n)
+        -:  169:      { return _M_extract(__n); }
+        -:  170:
+        -:  171:      __istream_type&
+        -:  172:      operator>>(short& __n);
+        -:  173:
+        -:  174:      __istream_type&
+        -:  175:      operator>>(unsigned short& __n)
+        -:  176:      { return _M_extract(__n); }
+        -:  177:
+        -:  178:      __istream_type&
+        -:  179:      operator>>(int& __n);
+        -:  180:
+        -:  181:      __istream_type&
+        -:  182:      operator>>(unsigned int& __n)
+        -:  183:      { return _M_extract(__n); }
+        -:  184:
+        -:  185:      __istream_type&
+        -:  186:      operator>>(long& __n)
+        -:  187:      { return _M_extract(__n); }
+        -:  188:
+        -:  189:      __istream_type&
+        -:  190:      operator>>(unsigned long& __n)
+        -:  191:      { return _M_extract(__n); }
+        -:  192:
+        -:  193:#ifdef _GLIBCXX_USE_LONG_LONG
+        -:  194:      __istream_type&
+        -:  195:      operator>>(long long& __n)
+        -:  196:      { return _M_extract(__n); }
+        -:  197:
+        -:  198:      __istream_type&
+        -:  199:      operator>>(unsigned long long& __n)
+        -:  200:      { return _M_extract(__n); }
+        -:  201:#endif
+        -:  202:      ///@}
+        -:  203:
+        -:  204:      ///@{
+        -:  205:      /**
+        -:  206:       *  @brief  Floating point arithmetic extractors
+        -:  207:       *  @param  __f A variable of builtin floating point type.
+        -:  208:       *  @return  @c *this if successful
+        -:  209:       *
+        -:  210:       *  These functions use the stream's current locale (specifically, the
+        -:  211:       *  @c num_get facet) to parse the input data.
+        -:  212:      */
+        -:  213:      __istream_type&
+        -:  214:      operator>>(float& __f)
+        -:  215:      { return _M_extract(__f); }
+        -:  216:
+        -:  217:      __istream_type&
+        -:  218:      operator>>(double& __f)
+        -:  219:      { return _M_extract(__f); }
+        -:  220:
+        -:  221:      __istream_type&
+        -:  222:      operator>>(long double& __f)
+        -:  223:      { return _M_extract(__f); }
+        -:  224:      ///@}
+        -:  225:
+        -:  226:      /**
+        -:  227:       *  @brief  Basic arithmetic extractors
+        -:  228:       *  @param  __p A variable of pointer type.
+        -:  229:       *  @return  @c *this if successful
+        -:  230:       *
+        -:  231:       *  These functions use the stream's current locale (specifically, the
+        -:  232:       *  @c num_get facet) to parse the input data.
+        -:  233:      */
+        -:  234:      __istream_type&
+        -:  235:      operator>>(void*& __p)
+        -:  236:      { return _M_extract(__p); }
+        -:  237:
+        -:  238:      /**
+        -:  239:       *  @brief  Extracting into another streambuf.
+        -:  240:       *  @param  __sb  A pointer to a streambuf
+        -:  241:       *
+        -:  242:       *  This function behaves like one of the basic arithmetic extractors,
+        -:  243:       *  in that it also constructs a sentry object and has the same error
+        -:  244:       *  handling behavior.
+        -:  245:       *
+        -:  246:       *  If @p __sb is NULL, the stream will set failbit in its error state.
+        -:  247:       *
+        -:  248:       *  Characters are extracted from this stream and inserted into the
+        -:  249:       *  @p __sb streambuf until one of the following occurs:
+        -:  250:       *
+        -:  251:       *  - the input stream reaches end-of-file,
+        -:  252:       *  - insertion into the output buffer fails (in this case, the
+        -:  253:       *    character that would have been inserted is not extracted), or
+        -:  254:       *  - an exception occurs (and in this case is caught)
+        -:  255:       *
+        -:  256:       *  If the function inserts no characters, failbit is set.
+        -:  257:      */
+        -:  258:      __istream_type&
+        -:  259:      operator>>(__streambuf_type* __sb);
+        -:  260:      ///@}
+        -:  261:
+        -:  262:      // [27.6.1.3] unformatted input
+        -:  263:      /**
+        -:  264:       *  @brief  Character counting
+        -:  265:       *  @return  The number of characters extracted by the previous
+        -:  266:       *           unformatted input function dispatched for this stream.
+        -:  267:      */
+        -:  268:      streamsize
+        -:  269:      gcount() const
+        -:  270:      { return _M_gcount; }
+        -:  271:
+        -:  272:      ///@{
+        -:  273:      /**
+        -:  274:       *  @name Unformatted Input Functions
+        -:  275:       *
+        -:  276:       *  All the unformatted input functions have some common behavior.
+        -:  277:       *  Each starts by constructing a temporary object of type
+        -:  278:       *  std::basic_istream::sentry with the second argument (noskipws)
+        -:  279:       *  set to true.  This has several effects, concluding with the
+        -:  280:       *  setting of a status flag; see the sentry documentation for more.
+        -:  281:       *
+        -:  282:       *  If the sentry status is good, the function tries to extract
+        -:  283:       *  whatever data is appropriate for the type of the argument.
+        -:  284:       *
+        -:  285:       *  The number of characters extracted is stored for later retrieval
+        -:  286:       *  by gcount().
+        -:  287:       *
+        -:  288:       *  If an exception is thrown during extraction, ios_base::badbit
+        -:  289:       *  will be turned on in the stream's error state (without causing an
+        -:  290:       *  ios_base::failure to be thrown) and the original exception will
+        -:  291:       *  be rethrown if badbit is set in the exceptions mask.
+        -:  292:      */
+        -:  293:
+        -:  294:      /**
+        -:  295:       *  @brief  Simple extraction.
+        -:  296:       *  @return  A character, or eof().
+        -:  297:       *
+        -:  298:       *  Tries to extract a character.  If none are available, sets failbit
+        -:  299:       *  and returns traits::eof().
+        -:  300:      */
+        -:  301:      int_type
+        -:  302:      get();
+        -:  303:
+        -:  304:      /**
+        -:  305:       *  @brief  Simple extraction.
+        -:  306:       *  @param  __c  The character in which to store data.
+        -:  307:       *  @return  *this
+        -:  308:       *
+        -:  309:       *  Tries to extract a character and store it in @a __c.  If none are
+        -:  310:       *  available, sets failbit and returns traits::eof().
+        -:  311:       *
+        -:  312:       *  @note  This function is not overloaded on signed char and
+        -:  313:       *         unsigned char.
+        -:  314:      */
+        -:  315:      __istream_type&
+        -:  316:      get(char_type& __c);
+        -:  317:
+        -:  318:      /**
+        -:  319:       *  @brief  Simple multiple-character extraction.
+        -:  320:       *  @param  __s  Pointer to an array.
+        -:  321:       *  @param  __n  Maximum number of characters to store in @a __s.
+        -:  322:       *  @param  __delim  A "stop" character.
+        -:  323:       *  @return  *this
+        -:  324:       *
+        -:  325:       *  Characters are extracted and stored into @a __s until one of the
+        -:  326:       *  following happens:
+        -:  327:       *
+        -:  328:       *  - @c __n-1 characters are stored
+        -:  329:       *  - the input sequence reaches EOF
+        -:  330:       *  - the next character equals @a __delim, in which case the character
+        -:  331:       *    is not extracted
+        -:  332:       *
+        -:  333:       * If no characters are stored, failbit is set in the stream's error
+        -:  334:       * state.
+        -:  335:       *
+        -:  336:       * In any case, a null character is stored into the next location in
+        -:  337:       * the array.
+        -:  338:       *
+        -:  339:       *  @note  This function is not overloaded on signed char and
+        -:  340:       *         unsigned char.
+        -:  341:      */
+        -:  342:      __istream_type&
+        -:  343:      get(char_type* __s, streamsize __n, char_type __delim);
+        -:  344:
+        -:  345:      /**
+        -:  346:       *  @brief  Simple multiple-character extraction.
+        -:  347:       *  @param  __s  Pointer to an array.
+        -:  348:       *  @param  __n  Maximum number of characters to store in @a s.
+        -:  349:       *  @return  *this
+        -:  350:       *
+        -:  351:       *  Returns @c get(__s,__n,widen(&apos;\\n&apos;)).
+        -:  352:      */
+        -:  353:      __istream_type&
+        -:  354:      get(char_type* __s, streamsize __n)
+        -:  355:      { return this->get(__s, __n, this->widen('\n')); }
+        -:  356:
+        -:  357:      /**
+        -:  358:       *  @brief  Extraction into another streambuf.
+        -:  359:       *  @param  __sb  A streambuf in which to store data.
+        -:  360:       *  @param  __delim  A "stop" character.
+        -:  361:       *  @return  *this
+        -:  362:       *
+        -:  363:       *  Characters are extracted and inserted into @a __sb until one of the
+        -:  364:       *  following happens:
+        -:  365:       *
+        -:  366:       *  - the input sequence reaches EOF
+        -:  367:       *  - insertion into the output buffer fails (in this case, the
+        -:  368:       *    character that would have been inserted is not extracted)
+        -:  369:       *  - the next character equals @a __delim (in this case, the character
+        -:  370:       *    is not extracted)
+        -:  371:       *  - an exception occurs (and in this case is caught)
+        -:  372:       *
+        -:  373:       * If no characters are stored, failbit is set in the stream's error
+        -:  374:       * state.
+        -:  375:      */
+        -:  376:      __istream_type&
+        -:  377:      get(__streambuf_type& __sb, char_type __delim);
+        -:  378:
+        -:  379:      /**
+        -:  380:       *  @brief  Extraction into another streambuf.
+        -:  381:       *  @param  __sb  A streambuf in which to store data.
+        -:  382:       *  @return  *this
+        -:  383:       *
+        -:  384:       *  Returns @c get(__sb,widen(&apos;\\n&apos;)).
+        -:  385:      */
+        -:  386:      __istream_type&
+        -:  387:      get(__streambuf_type& __sb)
+        -:  388:      { return this->get(__sb, this->widen('\n')); }
+        -:  389:
+        -:  390:      /**
+        -:  391:       *  @brief  String extraction.
+        -:  392:       *  @param  __s  A character array in which to store the data.
+        -:  393:       *  @param  __n  Maximum number of characters to extract.
+        -:  394:       *  @param  __delim  A "stop" character.
+        -:  395:       *  @return  *this
+        -:  396:       *
+        -:  397:       *  Extracts and stores characters into @a __s until one of the
+        -:  398:       *  following happens.  Note that these criteria are required to be
+        -:  399:       *  tested in the order listed here, to allow an input line to exactly
+        -:  400:       *  fill the @a __s array without setting failbit.
+        -:  401:       *
+        -:  402:       *  -# the input sequence reaches end-of-file, in which case eofbit
+        -:  403:       *     is set in the stream error state
+        -:  404:       *  -# the next character equals @c __delim, in which case the character
+        -:  405:       *     is extracted (and therefore counted in @c gcount()) but not stored
+        -:  406:       *  -# @c __n-1 characters are stored, in which case failbit is set
+        -:  407:       *     in the stream error state
+        -:  408:       *
+        -:  409:       *  If no characters are extracted, failbit is set.  (An empty line of
+        -:  410:       *  input should therefore not cause failbit to be set.)
+        -:  411:       *
+        -:  412:       *  In any case, a null character is stored in the next location in
+        -:  413:       *  the array.
+        -:  414:      */
+        -:  415:      __istream_type&
+        -:  416:      getline(char_type* __s, streamsize __n, char_type __delim);
+        -:  417:
+        -:  418:      /**
+        -:  419:       *  @brief  String extraction.
+        -:  420:       *  @param  __s  A character array in which to store the data.
+        -:  421:       *  @param  __n  Maximum number of characters to extract.
+        -:  422:       *  @return  *this
+        -:  423:       *
+        -:  424:       *  Returns @c getline(__s,__n,widen(&apos;\\n&apos;)).
+        -:  425:      */
+        -:  426:      __istream_type&
+        -:  427:      getline(char_type* __s, streamsize __n)
+        -:  428:      { return this->getline(__s, __n, this->widen('\n')); }
+        -:  429:
+        -:  430:      /**
+        -:  431:       *  @brief  Discarding characters
+        -:  432:       *  @param  __n  Number of characters to discard.
+        -:  433:       *  @param  __delim  A "stop" character.
+        -:  434:       *  @return  *this
+        -:  435:       *
+        -:  436:       *  Extracts characters and throws them away until one of the
+        -:  437:       *  following happens:
+        -:  438:       *  - if @a __n @c != @c std::numeric_limits<int>::max(), @a __n
+        -:  439:       *    characters are extracted
+        -:  440:       *  - the input sequence reaches end-of-file
+        -:  441:       *  - the next character equals @a __delim (in this case, the character
+        -:  442:       *    is extracted); note that this condition will never occur if
+        -:  443:       *    @a __delim equals @c traits::eof().
+        -:  444:       *
+        -:  445:       *  NB: Provide three overloads, instead of the single function
+        -:  446:       *  (with defaults) mandated by the Standard: this leads to a
+        -:  447:       *  better performing implementation, while still conforming to
+        -:  448:       *  the Standard.
+        -:  449:      */
+        -:  450:      __istream_type&
+        -:  451:      ignore(streamsize __n, int_type __delim);
+        -:  452:
+        -:  453:      __istream_type&
+        -:  454:      ignore(streamsize __n);
+        -:  455:
+        -:  456:      __istream_type&
+        -:  457:      ignore();
+        -:  458:
+        -:  459:      /**
+        -:  460:       *  @brief  Looking ahead in the stream
+        -:  461:       *  @return  The next character, or eof().
+        -:  462:       *
+        -:  463:       *  If, after constructing the sentry object, @c good() is false,
+        -:  464:       *  returns @c traits::eof().  Otherwise reads but does not extract
+        -:  465:       *  the next input character.
+        -:  466:      */
+        -:  467:      int_type
+        -:  468:      peek();
+        -:  469:
+        -:  470:      /**
+        -:  471:       *  @brief  Extraction without delimiters.
+        -:  472:       *  @param  __s  A character array.
+        -:  473:       *  @param  __n  Maximum number of characters to store.
+        -:  474:       *  @return  *this
+        -:  475:       *
+        -:  476:       *  If the stream state is @c good(), extracts characters and stores
+        -:  477:       *  them into @a __s until one of the following happens:
+        -:  478:       *  - @a __n characters are stored
+        -:  479:       *  - the input sequence reaches end-of-file, in which case the error
+        -:  480:       *    state is set to @c failbit|eofbit.
+        -:  481:       *
+        -:  482:       *  @note  This function is not overloaded on signed char and
+        -:  483:       *         unsigned char.
+        -:  484:      */
+        -:  485:      __istream_type&
+        -:  486:      read(char_type* __s, streamsize __n);
+        -:  487:
+        -:  488:      /**
+        -:  489:       *  @brief  Extraction until the buffer is exhausted, but no more.
+        -:  490:       *  @param  __s  A character array.
+        -:  491:       *  @param  __n  Maximum number of characters to store.
+        -:  492:       *  @return  The number of characters extracted.
+        -:  493:       *
+        -:  494:       *  Extracts characters and stores them into @a __s depending on the
+        -:  495:       *  number of characters remaining in the streambuf's buffer,
+        -:  496:       *  @c rdbuf()->in_avail(), called @c A here:
+        -:  497:       *  - if @c A @c == @c -1, sets eofbit and extracts no characters
+        -:  498:       *  - if @c A @c == @c 0, extracts no characters
+        -:  499:       *  - if @c A @c > @c 0, extracts @c min(A,n)
+        -:  500:       *
+        -:  501:       *  The goal is to empty the current buffer, and to not request any
+        -:  502:       *  more from the external input sequence controlled by the streambuf.
+        -:  503:      */
+        -:  504:      streamsize
+        -:  505:      readsome(char_type* __s, streamsize __n);
+        -:  506:
+        -:  507:      /**
+        -:  508:       *  @brief  Unextracting a single character.
+        -:  509:       *  @param  __c  The character to push back into the input stream.
+        -:  510:       *  @return  *this
+        -:  511:       *
+        -:  512:       *  If @c rdbuf() is not null, calls @c rdbuf()->sputbackc(c).
+        -:  513:       *
+        -:  514:       *  If @c rdbuf() is null or if @c sputbackc() fails, sets badbit in
+        -:  515:       *  the error state.
+        -:  516:       *
+        -:  517:       *  @note  This function first clears eofbit.  Since no characters
+        -:  518:       *         are extracted, the next call to @c gcount() will return 0,
+        -:  519:       *         as required by DR 60.
+        -:  520:      */
+        -:  521:      __istream_type&
+        -:  522:      putback(char_type __c);
+        -:  523:
+        -:  524:      /**
+        -:  525:       *  @brief  Unextracting the previous character.
+        -:  526:       *  @return  *this
+        -:  527:       *
+        -:  528:       *  If @c rdbuf() is not null, calls @c rdbuf()->sungetc(c).
+        -:  529:       *
+        -:  530:       *  If @c rdbuf() is null or if @c sungetc() fails, sets badbit in
+        -:  531:       *  the error state.
+        -:  532:       *
+        -:  533:       *  @note  This function first clears eofbit.  Since no characters
+        -:  534:       *         are extracted, the next call to @c gcount() will return 0,
+        -:  535:       *         as required by DR 60.
+        -:  536:      */
+        -:  537:      __istream_type&
+        -:  538:      unget();
+        -:  539:
+        -:  540:      /**
+        -:  541:       *  @brief  Synchronizing the stream buffer.
+        -:  542:       *  @return  0 on success, -1 on failure
+        -:  543:       *
+        -:  544:       *  If @c rdbuf() is a null pointer, returns -1.
+        -:  545:       *
+        -:  546:       *  Otherwise, calls @c rdbuf()->pubsync(), and if that returns -1,
+        -:  547:       *  sets badbit and returns -1.
+        -:  548:       *
+        -:  549:       *  Otherwise, returns 0.
+        -:  550:       *
+        -:  551:       *  @note  This function does not count the number of characters
+        -:  552:       *         extracted, if any, and therefore does not affect the next
+        -:  553:       *         call to @c gcount().
+        -:  554:      */
+        -:  555:      int
+        -:  556:      sync();
+        -:  557:
+        -:  558:      /**
+        -:  559:       *  @brief  Getting the current read position.
+        -:  560:       *  @return  A file position object.
+        -:  561:       *
+        -:  562:       *  If @c fail() is not false, returns @c pos_type(-1) to indicate
+        -:  563:       *  failure.  Otherwise returns @c rdbuf()->pubseekoff(0,cur,in).
+        -:  564:       *
+        -:  565:       *  @note  This function does not count the number of characters
+        -:  566:       *         extracted, if any, and therefore does not affect the next
+        -:  567:       *         call to @c gcount().  At variance with putback, unget and
+        -:  568:       *         seekg, eofbit is not cleared first.
+        -:  569:      */
+        -:  570:      pos_type
+        -:  571:      tellg();
+        -:  572:
+        -:  573:      /**
+        -:  574:       *  @brief  Changing the current read position.
+        -:  575:       *  @param  __pos  A file position object.
+        -:  576:       *  @return  *this
+        -:  577:       *
+        -:  578:       *  If @c fail() is not true, calls @c rdbuf()->pubseekpos(__pos).  If
+        -:  579:       *  that function fails, sets failbit.
+        -:  580:       *
+        -:  581:       *  @note  This function first clears eofbit.  It does not count the
+        -:  582:       *         number of characters extracted, if any, and therefore does
+        -:  583:       *         not affect the next call to @c gcount().
+        -:  584:      */
+        -:  585:      __istream_type&
+        -:  586:      seekg(pos_type);
+        -:  587:
+        -:  588:      /**
+        -:  589:       *  @brief  Changing the current read position.
+        -:  590:       *  @param  __off  A file offset object.
+        -:  591:       *  @param  __dir  The direction in which to seek.
+        -:  592:       *  @return  *this
+        -:  593:       *
+        -:  594:       *  If @c fail() is not true, calls @c rdbuf()->pubseekoff(__off,__dir).
+        -:  595:       *  If that function fails, sets failbit.
+        -:  596:       *
+        -:  597:       *  @note  This function first clears eofbit.  It does not count the
+        -:  598:       *         number of characters extracted, if any, and therefore does
+        -:  599:       *         not affect the next call to @c gcount().
+        -:  600:      */
+        -:  601:      __istream_type&
+        -:  602:      seekg(off_type, ios_base::seekdir);
+        -:  603:      ///@}
+        -:  604:
+        -:  605:    protected:
+        -:  606:      basic_istream()
+        -:  607:      : _M_gcount(streamsize(0))
+        -:  608:      { this->init(0); }
+        -:  609:
+        -:  610:#if __cplusplus >= 201103L
+        -:  611:      basic_istream(const basic_istream&) = delete;
+        -:  612:
+        -:  613:      basic_istream(basic_istream&& __rhs)
+        -:  614:      : __ios_type(), _M_gcount(__rhs._M_gcount)
+        -:  615:      {
+        -:  616:	__ios_type::move(__rhs);
+        -:  617:	__rhs._M_gcount = 0;
+        -:  618:      }
+        -:  619:
+        -:  620:      // 27.7.3.3 Assign/swap
+        -:  621:
+        -:  622:      basic_istream& operator=(const basic_istream&) = delete;
+        -:  623:
+        -:  624:      basic_istream&
+        -:  625:      operator=(basic_istream&& __rhs)
+        -:  626:      {
+        -:  627:	swap(__rhs);
+        -:  628:	return *this;
+        -:  629:      }
+        -:  630:
+        -:  631:      void
+        -:  632:      swap(basic_istream& __rhs)
+        -:  633:      {
+        -:  634:	__ios_type::swap(__rhs);
+        -:  635:	std::swap(_M_gcount, __rhs._M_gcount);
+        -:  636:      }
+        -:  637:#endif
+        -:  638:
+        -:  639:      template<typename _ValueT>
+        -:  640:	__istream_type&
+        -:  641:	_M_extract(_ValueT& __v);
+        -:  642:    };
+        -:  643:
+        -:  644:  /// Explicit specialization declarations, defined in src/istream.cc.
+        -:  645:  template<>
+        -:  646:    basic_istream<char>&
+        -:  647:    basic_istream<char>::
+        -:  648:    getline(char_type* __s, streamsize __n, char_type __delim);
+        -:  649:
+        -:  650:  template<>
+        -:  651:    basic_istream<char>&
+        -:  652:    basic_istream<char>::
+        -:  653:    ignore(streamsize __n);
+        -:  654:
+        -:  655:  template<>
+        -:  656:    basic_istream<char>&
+        -:  657:    basic_istream<char>::
+        -:  658:    ignore(streamsize __n, int_type __delim);
+        -:  659:
+        -:  660:#ifdef _GLIBCXX_USE_WCHAR_T
+        -:  661:  template<>
+        -:  662:    basic_istream<wchar_t>&
+        -:  663:    basic_istream<wchar_t>::
+        -:  664:    getline(char_type* __s, streamsize __n, char_type __delim);
+        -:  665:
+        -:  666:  template<>
+        -:  667:    basic_istream<wchar_t>&
+        -:  668:    basic_istream<wchar_t>::
+        -:  669:    ignore(streamsize __n);
+        -:  670:
+        -:  671:  template<>
+        -:  672:    basic_istream<wchar_t>&
+        -:  673:    basic_istream<wchar_t>::
+        -:  674:    ignore(streamsize __n, int_type __delim);
+        -:  675:#endif
+        -:  676:
+        -:  677:  /**
+        -:  678:   *  @brief  Performs setup work for input streams.
+        -:  679:   *
+        -:  680:   *  Objects of this class are created before all of the standard
+        -:  681:   *  extractors are run.  It is responsible for <em>exception-safe
+        -:  682:   *  prefix and suffix operations,</em> although only prefix actions
+        -:  683:   *  are currently required by the standard.
+        -:  684:  */
+        -:  685:  template<typename _CharT, typename _Traits>
+        -:  686:    class basic_istream<_CharT, _Traits>::sentry
+        -:  687:    {
+        -:  688:      // Data Members.
+        -:  689:      bool _M_ok;
+        -:  690:
+        -:  691:    public:
+        -:  692:      /// Easy access to dependent types.
+        -:  693:      typedef _Traits 					traits_type;
+        -:  694:      typedef basic_streambuf<_CharT, _Traits> 		__streambuf_type;
+        -:  695:      typedef basic_istream<_CharT, _Traits> 		__istream_type;
+        -:  696:      typedef typename __istream_type::__ctype_type 	__ctype_type;
+        -:  697:      typedef typename _Traits::int_type		__int_type;
+        -:  698:
+        -:  699:      /**
+        -:  700:       *  @brief  The constructor performs all the work.
+        -:  701:       *  @param  __is  The input stream to guard.
+        -:  702:       *  @param  __noskipws  Whether to consume whitespace or not.
+        -:  703:       *
+        -:  704:       *  If the stream state is good (@a __is.good() is true), then the
+        -:  705:       *  following actions are performed, otherwise the sentry state
+        -:  706:       *  is false (<em>not okay</em>) and failbit is set in the
+        -:  707:       *  stream state.
+        -:  708:       *
+        -:  709:       *  The sentry's preparatory actions are:
+        -:  710:       *
+        -:  711:       *  -# if the stream is tied to an output stream, @c is.tie()->flush()
+        -:  712:       *     is called to synchronize the output sequence
+        -:  713:       *  -# if @a __noskipws is false, and @c ios_base::skipws is set in
+        -:  714:       *     @c is.flags(), the sentry extracts and discards whitespace
+        -:  715:       *     characters from the stream.  The currently imbued locale is
+        -:  716:       *     used to determine whether each character is whitespace.
+        -:  717:       *
+        -:  718:       *  If the stream state is still good, then the sentry state becomes
+        -:  719:       *  true (@a okay).
+        -:  720:      */
+        -:  721:      explicit
+        -:  722:      sentry(basic_istream<_CharT, _Traits>& __is, bool __noskipws = false);
+        -:  723:
+        -:  724:      /**
+        -:  725:       *  @brief  Quick status checking.
+        -:  726:       *  @return  The sentry state.
+        -:  727:       *
+        -:  728:       *  For ease of use, sentries may be converted to booleans.  The
+        -:  729:       *  return value is that of the sentry state (true == okay).
+        -:  730:      */
+        -:  731:#if __cplusplus >= 201103L
+        -:  732:      explicit
+        -:  733:#endif
+        -:  734:      operator bool() const
+        -:  735:      { return _M_ok; }
+        -:  736:    };
+        -:  737:
+        -:  738:  ///@{
+        -:  739:  /**
+        -:  740:   *  @brief  Character extractors
+        -:  741:   *  @param  __in  An input stream.
+        -:  742:   *  @param  __c  A character reference.
+        -:  743:   *  @return  in
+        -:  744:   *
+        -:  745:   *  Behaves like one of the formatted arithmetic extractors described in
+        -:  746:   *  std::basic_istream.  After constructing a sentry object with good
+        -:  747:   *  status, this function extracts a character (if one is available) and
+        -:  748:   *  stores it in @a __c.  Otherwise, sets failbit in the input stream.
+        -:  749:  */
+        -:  750:  template<typename _CharT, typename _Traits>
+        -:  751:    basic_istream<_CharT, _Traits>&
+        -:  752:    operator>>(basic_istream<_CharT, _Traits>& __in, _CharT& __c);
+        -:  753:
+        -:  754:  template<class _Traits>
+        -:  755:    inline basic_istream<char, _Traits>&
+        -:  756:    operator>>(basic_istream<char, _Traits>& __in, unsigned char& __c)
+        -:  757:    { return (__in >> reinterpret_cast<char&>(__c)); }
+        -:  758:
+        -:  759:  template<class _Traits>
+        -:  760:    inline basic_istream<char, _Traits>&
+        -:  761:    operator>>(basic_istream<char, _Traits>& __in, signed char& __c)
+        -:  762:    { return (__in >> reinterpret_cast<char&>(__c)); }
+        -:  763:  ///@}
+        -:  764:
+        -:  765:
+        -:  766:  template<typename _CharT, typename _Traits>
+        -:  767:    void
+        -:  768:    __istream_extract(basic_istream<_CharT, _Traits>&, _CharT*, streamsize);
+        -:  769:
+        -:  770:  void __istream_extract(istream&, char*, streamsize);
+        -:  771:
+        -:  772:  ///@{
+        -:  773:  /**
+        -:  774:   *  @brief  Character string extractors
+        -:  775:   *  @param  __in  An input stream.
+        -:  776:   *  @param  __s  A character array (or a pointer to an array before C++20).
+        -:  777:   *  @return  __in
+        -:  778:   *
+        -:  779:   *  Behaves like one of the formatted arithmetic extractors described in
+        -:  780:   *  `std::basic_istream`.  After constructing a sentry object with good
+        -:  781:   *  status, this function extracts up to `n` characters and stores them
+        -:  782:   *  into the array `__s`.  `n` is defined as:
+        -:  783:   *
+        -:  784:   *  - if `width()` is greater than zero, `n` is `min(width(), n)`
+        -:  785:   *  - otherwise `n` is the number of elements of the array
+        -:  786:   *  - (before C++20 the pointer is assumed to point to an array of
+        -:  787:   *  - the largest possible size for an array of `char_type`).
+        -:  788:   *
+        -:  789:   *  Characters are extracted and stored until one of the following happens:
+        -:  790:   *  - `n - 1` characters are stored
+        -:  791:   *  - EOF is reached
+        -:  792:   *  - the next character is whitespace according to the current locale
+        -:  793:   *
+        -:  794:   *  `width(0)` is then called for the input stream.
+        -:  795:   *
+        -:  796:   *  If no characters are extracted, sets failbit.
+        -:  797:  */
+        -:  798:
+        -:  799:#if __cplusplus <= 201703L
+        -:  800:  template<typename _CharT, typename _Traits>
+        -:  801:    __attribute__((__nonnull__(2), __access__(__write_only__, 2)))
+        -:  802:    inline basic_istream<_CharT, _Traits>&
+function _ZStrsIcSt11char_traitsIcEERSt13basic_istreamIT_T0_ES6_PS3_ called 0 returned 0% blocks executed 0%
+    #####:  803:    operator>>(basic_istream<_CharT, _Traits>& __in, _CharT* __s)
+        -:  804:    {
+    #####:  805:      size_t __n = __builtin_object_size(__s, 0);
+    #####:  806:      if (__builtin_expect(__n < sizeof(_CharT), false))
+    %%%%%:  806-block  0
+branch  0 never executed
+branch  1 never executed
+        -:  807:	{
+        -:  808:	  // There is not even space for the required null terminator.
+        -:  809:	  __glibcxx_assert(__n >= sizeof(_CharT));
+    #####:  810:	  __in.width(0);
+    %%%%%:  810-block  0
+call    0 never executed
+    #####:  811:	  __in.setstate(ios_base::failbit);
+call    0 never executed
+        -:  812:	}
+        -:  813:      else
+        -:  814:	{
+    #####:  815:	  if (__n == (size_t)-1)
+    %%%%%:  815-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  816:	    __n = __gnu_cxx::__numeric_traits<streamsize>::__max;
+    %%%%%:  816-block  0
+    #####:  817:	  std::__istream_extract(__in, __s, __n / sizeof(_CharT));
+    %%%%%:  817-block  0
+call    0 never executed
+        -:  818:	}
+    #####:  819:      return __in;
+    %%%%%:  819-block  0
+        -:  820:    }
+        -:  821:
+        -:  822:  template<class _Traits>
+        -:  823:    __attribute__((__nonnull__(2), __access__(__write_only__, 2)))
+        -:  824:    inline basic_istream<char, _Traits>&
+        -:  825:    operator>>(basic_istream<char, _Traits>& __in, unsigned char* __s)
+        -:  826:    { return __in >> reinterpret_cast<char*>(__s); }
+        -:  827:
+        -:  828:  template<class _Traits>
+        -:  829:    __attribute__((__nonnull__(2), __access__(__write_only__, 2)))
+        -:  830:    inline basic_istream<char, _Traits>&
+        -:  831:    operator>>(basic_istream<char, _Traits>& __in, signed char* __s)
+        -:  832:    { return __in >> reinterpret_cast<char*>(__s); }
+        -:  833:#else
+        -:  834:  // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  835:  // 2499. operator>>(istream&, char*) makes it hard to avoid buffer overflows
+        -:  836:  template<typename _CharT, typename _Traits, size_t _Num>
+        -:  837:    inline basic_istream<_CharT, _Traits>&
+        -:  838:    operator>>(basic_istream<_CharT, _Traits>& __in, _CharT (&__s)[_Num])
+        -:  839:    {
+        -:  840:      static_assert(_Num <= __gnu_cxx::__numeric_traits<streamsize>::__max);
+        -:  841:      std::__istream_extract(__in, __s, _Num);
+        -:  842:      return __in;
+        -:  843:    }
+        -:  844:
+        -:  845:  template<class _Traits, size_t _Num>
+        -:  846:    inline basic_istream<char, _Traits>&
+        -:  847:    operator>>(basic_istream<char, _Traits>& __in, unsigned char (&__s)[_Num])
+        -:  848:    { return __in >> reinterpret_cast<char(&)[_Num]>(__s); }
+        -:  849:
+        -:  850:  template<class _Traits, size_t _Num>
+        -:  851:    inline basic_istream<char, _Traits>&
+        -:  852:    operator>>(basic_istream<char, _Traits>& __in, signed char (&__s)[_Num])
+        -:  853:    { return __in >> reinterpret_cast<char(&)[_Num]>(__s); }
+        -:  854:#endif
+        -:  855:  ///@}
+        -:  856:
+        -:  857:  /**
+        -:  858:   *  @brief  Template class basic_iostream
+        -:  859:   *  @ingroup io
+        -:  860:   *
+        -:  861:   *  @tparam _CharT  Type of character stream.
+        -:  862:   *  @tparam _Traits  Traits for character type, defaults to
+        -:  863:   *                   char_traits<_CharT>.
+        -:  864:   *
+        -:  865:   *  This class multiply inherits from the input and output stream classes
+        -:  866:   *  simply to provide a single interface.
+        -:  867:  */
+        -:  868:  template<typename _CharT, typename _Traits>
+        -:  869:    class basic_iostream
+        -:  870:    : public basic_istream<_CharT, _Traits>,
+        -:  871:      public basic_ostream<_CharT, _Traits>
+        -:  872:    {
+        -:  873:    public:
+        -:  874:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  875:      // 271. basic_iostream missing typedefs
+        -:  876:      // Types (inherited):
+        -:  877:      typedef _CharT			 		char_type;
+        -:  878:      typedef typename _Traits::int_type 		int_type;
+        -:  879:      typedef typename _Traits::pos_type 		pos_type;
+        -:  880:      typedef typename _Traits::off_type 		off_type;
+        -:  881:      typedef _Traits			 		traits_type;
+        -:  882:
+        -:  883:      // Non-standard Types:
+        -:  884:      typedef basic_istream<_CharT, _Traits>		__istream_type;
+        -:  885:      typedef basic_ostream<_CharT, _Traits>		__ostream_type;
+        -:  886:
+        -:  887:      /**
+        -:  888:       *  @brief  Constructor does nothing.
+        -:  889:       *
+        -:  890:       *  Both of the parent classes are initialized with the same
+        -:  891:       *  streambuf pointer passed to this constructor.
+        -:  892:      */
+        -:  893:      explicit
+        -:  894:      basic_iostream(basic_streambuf<_CharT, _Traits>* __sb)
+        -:  895:      : __istream_type(__sb), __ostream_type(__sb) { }
+        -:  896:
+        -:  897:      /**
+        -:  898:       *  @brief  Destructor does nothing.
+        -:  899:      */
+        -:  900:      virtual
+        -:  901:      ~basic_iostream() { }
+        -:  902:
+        -:  903:    protected:
+        -:  904:      basic_iostream()
+        -:  905:      : __istream_type(), __ostream_type() { }
+        -:  906:
+        -:  907:#if __cplusplus >= 201103L
+        -:  908:      basic_iostream(const basic_iostream&) = delete;
+        -:  909:
+        -:  910:      basic_iostream(basic_iostream&& __rhs)
+        -:  911:      : __istream_type(std::move(__rhs)), __ostream_type(*this)
+        -:  912:      { }
+        -:  913:
+        -:  914:      // 27.7.3.3 Assign/swap
+        -:  915:
+        -:  916:      basic_iostream& operator=(const basic_iostream&) = delete;
+        -:  917:
+        -:  918:      basic_iostream&
+        -:  919:      operator=(basic_iostream&& __rhs)
+        -:  920:      {
+        -:  921:	swap(__rhs);
+        -:  922:	return *this;
+        -:  923:      }
+        -:  924:
+        -:  925:      void
+        -:  926:      swap(basic_iostream& __rhs)
+        -:  927:      { __istream_type::swap(__rhs); }
+        -:  928:#endif
+        -:  929:    };
+        -:  930:
+        -:  931:  /**
+        -:  932:   *  @brief  Quick and easy way to eat whitespace
+        -:  933:   *
+        -:  934:   *  This manipulator extracts whitespace characters, stopping when the
+        -:  935:   *  next character is non-whitespace, or when the input sequence is empty.
+        -:  936:   *  If the sequence is empty, @c eofbit is set in the stream, but not
+        -:  937:   *  @c failbit.
+        -:  938:   *
+        -:  939:   *  The current locale is used to distinguish whitespace characters.
+        -:  940:   *
+        -:  941:   *  Example:
+        -:  942:   *  @code
+        -:  943:   *     MyClass   mc;
+        -:  944:   *
+        -:  945:   *     std::cin >> std::ws >> mc;
+        -:  946:   *  @endcode
+        -:  947:   *  will skip leading whitespace before calling operator>> on cin and your
+        -:  948:   *  object.  Note that the same effect can be achieved by creating a
+        -:  949:   *  std::basic_istream::sentry inside your definition of operator>>.
+        -:  950:  */
+        -:  951:  template<typename _CharT, typename _Traits>
+        -:  952:    basic_istream<_CharT, _Traits>&
+        -:  953:    ws(basic_istream<_CharT, _Traits>& __is);
+        -:  954:
+        -:  955:#if __cplusplus >= 201103L
+        -:  956:  // C++11 27.7.2.6 Rvalue stream extraction [istream.rvalue]
+        -:  957:  // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  958:  // 2328. Rvalue stream extraction should use perfect forwarding
+        -:  959:  // 1203. More useful rvalue stream insertion
+        -:  960:
+        -:  961:#if __cpp_lib_concepts
+        -:  962:  template<typename _Is, typename _Tp>
+        -:  963:    requires __derived_from_ios_base<_Is>
+        -:  964:      && requires (_Is& __is, _Tp&& __t) { __is >> std::forward<_Tp>(__t); }
+        -:  965:    using __rvalue_stream_extraction_t = _Is&&;
+        -:  966:#else
+        -:  967:  template<typename _Is, typename _Tp,
+        -:  968:	   typename = _Require_derived_from_ios_base<_Is>,
+        -:  969:	   typename = decltype(std::declval<_Is&>() >> std::declval<_Tp>())>
+        -:  970:    using __rvalue_stream_extraction_t = _Is&&;
+        -:  971:#endif
+        -:  972:
+        -:  973:  /**
+        -:  974:   *  @brief  Generic extractor for rvalue stream
+        -:  975:   *  @param  __is  An input stream.
+        -:  976:   *  @param  __x  A reference to the extraction target.
+        -:  977:   *  @return  __is
+        -:  978:   *
+        -:  979:   *  This is just a forwarding function to allow extraction from
+        -:  980:   *  rvalue streams since they won't bind to the extractor functions
+        -:  981:   *  that take an lvalue reference.
+        -:  982:  */
+        -:  983:  template<typename _Istream, typename _Tp>
+        -:  984:    inline __rvalue_stream_extraction_t<_Istream, _Tp>
+        -:  985:    operator>>(_Istream&& __is, _Tp&& __x)
+        -:  986:    {
+        -:  987:      __is >> std::forward<_Tp>(__x);
+        -:  988:      return std::move(__is);
+        -:  989:    }
+        -:  990:#endif // C++11
+        -:  991:
+        -:  992:_GLIBCXX_END_NAMESPACE_VERSION
+        -:  993:} // namespace
+        -:  994:
+        -:  995:#include <bits/istream.tcc>
+        -:  996:
+        -:  997:#endif	/* _GLIBCXX_ISTREAM */

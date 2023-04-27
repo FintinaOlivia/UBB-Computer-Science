@@ -1,7 +1,8 @@
 #include "UI.h"
 #include <string>
 #include <iostream>
-#include <stdlib.h>
+#include <utility>
+#include <cstdlib>
 
 using namespace std;
 #define MAX_NAME_LEN 60
@@ -9,8 +10,8 @@ using namespace std;
 //Constructor
 UI::UI(Controller controller, Controller basket_controller)
 {
-    this->controller = controller;
-    this->basket_controller = basket_controller;
+    this->controller = std::move(controller);
+    this->basket_controller = std::move(basket_controller);
 }
 
 //Prints
@@ -191,34 +192,40 @@ void UI::addTrenchCoat()
     std::cout << "Enter the size of the trench coat: ";
     std::cin >> sizeOfTrench;
 
-    while(sizeOfTrench <= 30 || sizeOfTrench >= 50){
+    while(sizeOfTrench < 30 || sizeOfTrench > 50){
         std::cout << "The size must be in the range [30,60]!" << std::endl;
         std::cout << "Enter the size of the trench coat: ";
         std::cin >> sizeOfTrench;
     }
 
     std::cout << "Enter the colour of the trench coat: ";
+    std::cin.ignore();
     std::cin >> colourOfTrench;
 
     std::cout << "Enter the price of the trench coat: ";
+    std::cin.ignore();
     std::cin >> priceOfTrench;
 
     while(priceOfTrench <= 0){
         std::cout << "The price must be a positive number!" << std::endl;
         std::cout << "Enter the price of the trench coat: ";
+        std::cin.ignore();
         std::cin >> priceOfTrench;
     }
 
     std::cout << "Enter the quantity of the trench coat: ";
+    std::cin.ignore();
     std::cin >> quantityOfTrench;
 
     while(quantityOfTrench <= 0){
         std::cout << "The quantity must be a positive integer!" << std::endl;
         std::cout << "Enter the quantity of the trench coat: ";
+        std::cin.ignore();
         std::cin >> quantityOfTrench;
     }
 
     std::cout << "Enter the photography link of the trench coat: ";
+    std::cin.ignore();
     std::cin >> photography_linkOfTrench;
                             
     std:: cout << "Adding trench coat..." << std::endl;
