@@ -1,0 +1,775 @@
+        -:    0:Source:C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/x86_64-w64-mingw32/include/stdlib.h
+        -:    0:Graph:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\Domain\Bill.cpp.gcno
+        -:    0:Data:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\Domain\Bill.cpp.gcda
+        -:    0:Runs:1
+        -:    1:/**
+        -:    2: * This file has no copyright assigned and is placed in the Public Domain.
+        -:    3: * This file is part of the mingw-w64 runtime package.
+        -:    4: * No warranty is given; refer to the file DISCLAIMER.PD within this package.
+        -:    5: */
+        -:    6:#ifndef _INC_STDLIB
+        -:    7:#define _INC_STDLIB
+        -:    8:
+        -:    9:#include <corecrt.h>
+        -:   10:#include <corecrt_wstdlib.h>
+        -:   11:#include <limits.h>
+        -:   12:
+        -:   13:#if __USE_MINGW_ANSI_STDIO && !defined (__USE_MINGW_STRTOX) && !defined(_CRTBLD)
+        -:   14:#define __USE_MINGW_STRTOX 1
+        -:   15:#endif
+        -:   16:
+        -:   17:#if defined(__LIBMSVCRT__)
+        -:   18:/* When building mingw-w64, this should be blank.  */
+        -:   19:#define _SECIMP
+        -:   20:#else
+        -:   21:#ifndef _SECIMP
+        -:   22:#define _SECIMP __declspec(dllimport)
+        -:   23:#endif /* _SECIMP */
+        -:   24:#endif /* defined(_CRTBLD) || defined(__LIBMSVCRT__) */
+        -:   25:
+        -:   26:#pragma pack(push,_CRT_PACKING)
+        -:   27:
+        -:   28:#ifdef __cplusplus
+        -:   29:extern "C" {
+        -:   30:#endif
+        -:   31:
+        -:   32:#ifndef NULL
+        -:   33:#ifdef __cplusplus
+        -:   34:#ifndef _WIN64
+        -:   35:#define NULL 0
+        -:   36:#else
+        -:   37:#define NULL 0LL
+        -:   38:#endif  /* W64 */
+        -:   39:#else
+        -:   40:#define NULL ((void *)0)
+        -:   41:#endif
+        -:   42:#endif
+        -:   43:
+        -:   44:#define EXIT_SUCCESS 0
+        -:   45:#define EXIT_FAILURE 1
+        -:   46:
+        -:   47:#ifndef _ONEXIT_T_DEFINED
+        -:   48:#define _ONEXIT_T_DEFINED
+        -:   49:
+        -:   50:  typedef int (__cdecl *_onexit_t)(void);
+        -:   51:
+        -:   52:#ifndef	NO_OLDNAMES
+        -:   53:#define onexit_t _onexit_t
+        -:   54:#endif
+        -:   55:#endif
+        -:   56:
+        -:   57:#ifndef _DIV_T_DEFINED
+        -:   58:#define _DIV_T_DEFINED
+        -:   59:
+        -:   60:  typedef struct _div_t {
+        -:   61:    int quot;
+        -:   62:    int rem;
+        -:   63:  } div_t;
+        -:   64:
+        -:   65:  typedef struct _ldiv_t {
+        -:   66:    long quot;
+        -:   67:    long rem;
+        -:   68:  } ldiv_t;
+        -:   69:#endif
+        -:   70:
+        -:   71:#ifndef _CRT_DOUBLE_DEC
+        -:   72:#define _CRT_DOUBLE_DEC
+        -:   73:
+        -:   74:#pragma pack(4)
+        -:   75:  typedef struct {
+        -:   76:    unsigned char ld[10];
+        -:   77:  } _LDOUBLE;
+        -:   78:#pragma pack()
+        -:   79:
+        -:   80:#define _PTR_LD(x) ((unsigned char *)(&(x)->ld))
+        -:   81:
+        -:   82:  typedef struct {
+        -:   83:    double x;
+        -:   84:  } _CRT_DOUBLE;
+        -:   85:
+        -:   86:  typedef struct {
+        -:   87:    float f;
+        -:   88:  } _CRT_FLOAT;
+        -:   89:
+        -:   90:#pragma push_macro("long")
+        -:   91:#undef long
+        -:   92:
+        -:   93:  typedef struct {
+        -:   94:    long double x;
+        -:   95:  } _LONGDOUBLE;
+        -:   96:
+        -:   97:#pragma pop_macro("long")
+        -:   98:
+        -:   99:#pragma pack(4)
+        -:  100:  typedef struct {
+        -:  101:    unsigned char ld12[12];
+        -:  102:  } _LDBL12;
+        -:  103:#pragma pack()
+        -:  104:#endif
+        -:  105:
+        -:  106:#define RAND_MAX 0x7fff
+        -:  107:
+        -:  108:#ifndef MB_CUR_MAX
+        -:  109:#define MB_CUR_MAX ___mb_cur_max_func()
+        -:  110:#ifndef __mb_cur_max
+        -:  111:#ifdef _MSVCRT_
+        -:  112:  extern int __mb_cur_max;
+        -:  113:#define __mb_cur_max	__mb_cur_max
+        -:  114:#else
+        -:  115:#ifndef _UCRT
+        -:  116:  extern int * __MINGW_IMP_SYMBOL(__mb_cur_max);
+        -:  117:#endif
+        -:  118:#define __mb_cur_max	(___mb_cur_max_func())
+        -:  119:#endif
+        -:  120:#endif
+        -:  121:_CRTIMP int __cdecl ___mb_cur_max_func(void);
+        -:  122:#endif
+        -:  123:
+        -:  124:#define __max(a,b) (((a) > (b)) ? (a) : (b))
+        -:  125:#define __min(a,b) (((a) < (b)) ? (a) : (b))
+        -:  126:
+        -:  127:#define _MAX_PATH 260
+        -:  128:#define _MAX_DRIVE 3
+        -:  129:#define _MAX_DIR 256
+        -:  130:#define _MAX_FNAME 256
+        -:  131:#define _MAX_EXT 256
+        -:  132:
+        -:  133:#define _OUT_TO_DEFAULT 0
+        -:  134:#define _OUT_TO_STDERR 1
+        -:  135:#define _OUT_TO_MSGBOX 2
+        -:  136:#define _REPORT_ERRMODE 3
+        -:  137:
+        -:  138:#define _WRITE_ABORT_MSG 0x1
+        -:  139:#define _CALL_REPORTFAULT 0x2
+        -:  140:
+        -:  141:#define _MAX_ENV 32767
+        -:  142:
+        -:  143:  typedef void (__cdecl *_purecall_handler)(void);
+        -:  144:
+        -:  145:  _CRTIMP _purecall_handler __cdecl _set_purecall_handler(_purecall_handler _Handler);
+        -:  146:  _CRTIMP _purecall_handler __cdecl _get_purecall_handler(void);
+        -:  147:
+        -:  148:  typedef void (__cdecl *_invalid_parameter_handler)(const wchar_t *,const wchar_t *,const wchar_t *,unsigned int,uintptr_t);
+        -:  149:  _CRTIMP _invalid_parameter_handler __cdecl _set_invalid_parameter_handler(_invalid_parameter_handler _Handler);
+        -:  150:  _CRTIMP _invalid_parameter_handler __cdecl _get_invalid_parameter_handler(void);
+        -:  151:
+        -:  152:#ifndef _CRT_ERRNO_DEFINED
+        -:  153:#define _CRT_ERRNO_DEFINED
+        -:  154:  _CRTIMP extern int *__cdecl _errno(void);
+        -:  155:#define errno (*_errno())
+        -:  156:  errno_t __cdecl _set_errno(int _Value);
+        -:  157:  errno_t __cdecl _get_errno(int *_Value);
+        -:  158:#endif
+        -:  159:  _CRTIMP unsigned long *__cdecl __doserrno(void);
+        -:  160:#define _doserrno (*__doserrno())
+        -:  161:  errno_t __cdecl _set_doserrno(unsigned long _Value);
+        -:  162:  errno_t __cdecl _get_doserrno(unsigned long *_Value);
+        -:  163:#ifdef _MSVCRT_
+        -:  164:  extern char *_sys_errlist[];
+        -:  165:  extern int _sys_nerr;
+        -:  166:#else
+        -:  167:#ifdef _UCRT
+        -:  168:  _CRTIMP char **__cdecl __sys_errlist(void);
+        -:  169:  _CRTIMP int *__cdecl __sys_nerr(void);
+        -:  170:#define _sys_nerr (*__sys_nerr())
+        -:  171:#define _sys_errlist (__sys_errlist())
+        -:  172:#else
+        -:  173:  extern __declspec(dllimport) char *_sys_errlist[1];
+        -:  174:  extern __declspec(dllimport) int _sys_nerr;
+        -:  175:#endif /* !_UCRT */
+        -:  176:#endif
+        -:  177:
+        -:  178:  /* We have a fallback definition of __p___argv and __p__fmode for
+        -:  179:     msvcrt versions that lack it. */
+        -:  180:  _CRTIMP char ***__cdecl __p___argv(void);
+        -:  181:  _CRTIMP int *__cdecl __p__fmode(void);
+        -:  182:#if (defined(_X86_) && !defined(__x86_64)) || defined(_UCRT)
+        -:  183:  _CRTIMP int *__cdecl __p___argc(void);
+        -:  184:  _CRTIMP wchar_t ***__cdecl __p___wargv(void);
+        -:  185:  _CRTIMP char ***__cdecl __p__environ(void);
+        -:  186:  _CRTIMP wchar_t ***__cdecl __p__wenviron(void);
+        -:  187:  _CRTIMP char **__cdecl __p__pgmptr(void);
+        -:  188:  _CRTIMP wchar_t **__cdecl __p__wpgmptr(void);
+        -:  189:#endif
+        -:  190:
+        -:  191:  errno_t __cdecl _get_pgmptr(char **_Value);
+        -:  192:  errno_t __cdecl _get_wpgmptr(wchar_t **_Value);
+        -:  193:  _CRTIMP errno_t __cdecl _set_fmode(int _Mode);
+        -:  194:  _CRTIMP errno_t __cdecl _get_fmode(int *_PMode);
+        -:  195:
+        -:  196:#ifndef _fmode
+        -:  197:#define _fmode (* __p__fmode())
+        -:  198:#endif
+        -:  199:
+        -:  200:#ifdef _MSVCRT_
+        -:  201:
+        -:  202:#ifndef __argc
+        -:  203:  extern int __argc;
+        -:  204:#endif
+        -:  205:#ifndef __argv
+        -:  206:  extern char **__argv;
+        -:  207:#endif
+        -:  208:#ifndef __wargv
+        -:  209:  extern wchar_t **__wargv;
+        -:  210:#endif
+        -:  211:
+        -:  212:#ifndef _POSIX_
+        -:  213:#ifndef _environ
+        -:  214:  extern char **_environ;
+        -:  215:#endif
+        -:  216:#ifndef _wenviron
+        -:  217:  extern wchar_t **_wenviron;
+        -:  218:#endif
+        -:  219:#endif /* !_POSIX_ */
+        -:  220:
+        -:  221:#ifndef _pgmptr
+        -:  222:  extern char *_pgmptr;
+        -:  223:#endif
+        -:  224:
+        -:  225:#ifndef _wpgmptr
+        -:  226:  extern wchar_t *_wpgmptr;
+        -:  227:#endif
+        -:  228:
+        -:  229:#ifndef _osplatform
+        -:  230:  extern unsigned int _osplatform;
+        -:  231:#endif
+        -:  232:
+        -:  233:#ifndef _osver
+        -:  234:  extern unsigned int _osver;
+        -:  235:#endif
+        -:  236:
+        -:  237:#ifndef _winver
+        -:  238:  extern unsigned int _winver;
+        -:  239:#endif
+        -:  240:
+        -:  241:#ifndef _winmajor
+        -:  242:  extern unsigned int _winmajor;
+        -:  243:#endif
+        -:  244:
+        -:  245:#ifndef _winminor
+        -:  246:  extern unsigned int _winminor;
+        -:  247:#endif
+        -:  248:
+        -:  249:#elif defined(_UCRT)
+        -:  250:
+        -:  251:#ifndef __argc
+        -:  252:#define __argc (* __p___argc())
+        -:  253:#endif
+        -:  254:#ifndef __argv
+        -:  255:#define __argv (* __p___argv())
+        -:  256:#endif
+        -:  257:#ifndef __wargv
+        -:  258:#define __wargv (* __p___wargv())
+        -:  259:#endif
+        -:  260:
+        -:  261:#ifndef _POSIX_
+        -:  262:#ifndef _environ
+        -:  263:#define _environ (* __p__environ())
+        -:  264:#endif
+        -:  265:
+        -:  266:#ifndef _wenviron
+        -:  267:#define _wenviron (* __p__wenviron())
+        -:  268:#endif
+        -:  269:#endif /* !_POSIX_ */
+        -:  270:
+        -:  271:#ifndef _pgmptr
+        -:  272:#define _pgmptr (* __p__pgmptr())
+        -:  273:#endif
+        -:  274:
+        -:  275:#ifndef _wpgmptr
+        -:  276:#define _wpgmptr (* __p__wpgmptr())
+        -:  277:#endif
+        -:  278:
+        -:  279:#else /* _UCRT */
+        -:  280:
+        -:  281:#ifndef __argc
+        -:  282:  extern int * __MINGW_IMP_SYMBOL(__argc);
+        -:  283:#define __argc (* __MINGW_IMP_SYMBOL(__argc))
+        -:  284:#endif
+        -:  285:#ifndef __argv
+        -:  286:  extern char *** __MINGW_IMP_SYMBOL(__argv);
+        -:  287:#define __argv	(* __p___argv())
+        -:  288:#endif
+        -:  289:#ifndef __wargv
+        -:  290:  extern wchar_t *** __MINGW_IMP_SYMBOL(__wargv);
+        -:  291:#define __wargv (* __MINGW_IMP_SYMBOL(__wargv))
+        -:  292:#endif
+        -:  293:
+        -:  294:#ifndef _POSIX_
+        -:  295:#if (defined(_ARM_) || defined(__arm__) || defined(_ARM64_) || defined(__aarch64__))
+        -:  296:  /* The plain msvcrt.dll for arm/aarch64 (and msvcr120_app.dll for arm) lacks
+        -:  297:   * _environ/_wenviron, but has these functions instead. */
+        -:  298:  _CRTIMP void __cdecl _get_environ(char ***);
+        -:  299:  _CRTIMP void __cdecl _get_wenviron(wchar_t ***);
+        -:  300:
+        -:  301:  static __inline char **__get_environ_ptr(void) {
+        -:  302:    char **__ptr;
+        -:  303:    _get_environ(&__ptr);
+        -:  304:    return __ptr;
+        -:  305:  }
+        -:  306:
+        -:  307:  static __inline wchar_t **__get_wenviron_ptr(void) {
+        -:  308:    wchar_t **__ptr;
+        -:  309:    _get_wenviron(&__ptr);
+        -:  310:    return __ptr;
+        -:  311:  }
+        -:  312:
+        -:  313:#ifndef _environ
+        -:  314:#define _environ (__get_environ_ptr())
+        -:  315:#endif
+        -:  316:
+        -:  317:#ifndef _wenviron
+        -:  318:#define _wenviron (__get_wenviron_ptr())
+        -:  319:#endif
+        -:  320:#else /* ARM/ARM64 */
+        -:  321:#ifndef _environ
+        -:  322:  extern char *** __MINGW_IMP_SYMBOL(_environ);
+        -:  323:#define _environ (* __MINGW_IMP_SYMBOL(_environ))
+        -:  324:#endif
+        -:  325:
+        -:  326:#ifndef _wenviron
+        -:  327:  extern wchar_t *** __MINGW_IMP_SYMBOL(_wenviron);
+        -:  328:#define _wenviron (* __MINGW_IMP_SYMBOL(_wenviron))
+        -:  329:#endif
+        -:  330:#endif /* !ARM/ARM64 */
+        -:  331:#endif /* !_POSIX_ */
+        -:  332:
+        -:  333:#ifndef _pgmptr
+        -:  334:  extern char ** __MINGW_IMP_SYMBOL(_pgmptr);
+        -:  335:#define _pgmptr	(* __MINGW_IMP_SYMBOL(_pgmptr))
+        -:  336:#endif
+        -:  337:
+        -:  338:#ifndef _wpgmptr
+        -:  339:  extern wchar_t ** __MINGW_IMP_SYMBOL(_wpgmptr);
+        -:  340:#define _wpgmptr (* __MINGW_IMP_SYMBOL(_wpgmptr))
+        -:  341:#endif
+        -:  342:
+        -:  343:#ifndef _osplatform
+        -:  344:  extern unsigned int * __MINGW_IMP_SYMBOL(_osplatform);
+        -:  345:#define _osplatform (* __MINGW_IMP_SYMBOL(_osplatform))
+        -:  346:#endif
+        -:  347:
+        -:  348:#ifndef _osver
+        -:  349:  extern unsigned int * __MINGW_IMP_SYMBOL(_osver);
+        -:  350:#define _osver	(* __MINGW_IMP_SYMBOL(_osver))
+        -:  351:#endif
+        -:  352:
+        -:  353:#ifndef _winver
+        -:  354:  extern unsigned int * __MINGW_IMP_SYMBOL(_winver);
+        -:  355:#define _winver	(* __MINGW_IMP_SYMBOL(_winver))
+        -:  356:#endif
+        -:  357:
+        -:  358:#ifndef _winmajor
+        -:  359:  extern unsigned int * __MINGW_IMP_SYMBOL(_winmajor);
+        -:  360:#define _winmajor (* __MINGW_IMP_SYMBOL(_winmajor))
+        -:  361:#endif
+        -:  362:
+        -:  363:#ifndef _winminor
+        -:  364:  extern unsigned int * __MINGW_IMP_SYMBOL(_winminor);
+        -:  365:#define _winminor (* __MINGW_IMP_SYMBOL(_winminor))
+        -:  366:#endif
+        -:  367:
+        -:  368:#endif /* !_MSVCRT_ && !_UCRT */
+        -:  369:
+        -:  370:  errno_t __cdecl _get_osplatform(unsigned int *_Value);
+        -:  371:  errno_t __cdecl _get_osver(unsigned int *_Value);
+        -:  372:  errno_t __cdecl _get_winver(unsigned int *_Value);
+        -:  373:  errno_t __cdecl _get_winmajor(unsigned int *_Value);
+        -:  374:  errno_t __cdecl _get_winminor(unsigned int *_Value);
+        -:  375:#ifndef _countof
+        -:  376:#ifndef __cplusplus
+        -:  377:#define _countof(_Array) (sizeof(_Array) / sizeof(_Array[0]))
+        -:  378:#else
+        -:  379:  extern "C++" {
+        -:  380:    template <typename _CountofType,size_t _SizeOfArray> char (*__countof_helper(UNALIGNED _CountofType (&_Array)[_SizeOfArray]))[_SizeOfArray];
+        -:  381:#define _countof(_Array) sizeof(*__countof_helper(_Array))
+        -:  382:  }
+        -:  383:#endif
+        -:  384:#endif
+        -:  385:
+        -:  386:#ifndef _CRT_TERMINATE_DEFINED
+        -:  387:#define _CRT_TERMINATE_DEFINED
+        -:  388:  void __cdecl __MINGW_NOTHROW exit(int _Code) __MINGW_ATTRIB_NORETURN;
+        -:  389:  void __cdecl __MINGW_NOTHROW _exit(int _Code) __MINGW_ATTRIB_NORETURN;
+        -:  390:#ifdef _UCRT
+        -:  391:  void __cdecl __MINGW_NOTHROW quick_exit(int _Code) __MINGW_ATTRIB_NORETURN;
+        -:  392:#endif
+        -:  393:
+        -:  394:#if !defined __NO_ISOCEXT /* extern stub in static libmingwex.a */
+        -:  395:  /* C99 function name */
+        -:  396:  void __cdecl _Exit(int) __MINGW_ATTRIB_NORETURN;
+        -:  397:#ifndef __CRT__NO_INLINE
+        -:  398:  __CRT_INLINE __MINGW_ATTRIB_NORETURN void  __cdecl _Exit(int status)
+        -:  399:  {  _exit(status); }
+        -:  400:#endif /* !__CRT__NO_INLINE */
+        -:  401:#endif /* Not  __NO_ISOCEXT */
+        -:  402:
+        -:  403:#pragma push_macro("abort")
+        -:  404:#undef abort
+        -:  405:  void __cdecl __MINGW_ATTRIB_NORETURN abort(void);
+        -:  406:#pragma pop_macro("abort")
+        -:  407:
+        -:  408:#endif /* _CRT_TERMINATE_DEFINED */
+        -:  409:
+        -:  410:  _CRTIMP unsigned int __cdecl _set_abort_behavior(unsigned int _Flags,unsigned int _Mask);
+        -:  411:
+        -:  412:#ifndef _CRT_ABS_DEFINED
+        -:  413:#define _CRT_ABS_DEFINED
+        -:  414:  int __cdecl abs(int _X);
+        -:  415:  long __cdecl labs(long _X);
+        -:  416:#endif
+        -:  417:
+        -:  418:  __MINGW_EXTENSION __int64 __cdecl _abs64(__int64);
+        -:  419:#ifdef __MINGW_INTRIN_INLINE
+        -:  420:  __MINGW_INTRIN_INLINE __int64 __cdecl _abs64(__int64 x) {
+        -:  421:    return __builtin_llabs(x);
+        -:  422:  }
+        -:  423:#endif
+        -:  424:
+        -:  425:  int __cdecl atexit(void (__cdecl *)(void));
+        -:  426:#ifdef _UCRT
+        -:  427:  int __cdecl at_quick_exit(void (__cdecl *)(void));
+        -:  428:#endif
+        -:  429:#ifndef _CRT_ATOF_DEFINED
+        -:  430:#define _CRT_ATOF_DEFINED
+        -:  431:  double __cdecl atof(const char *_String);
+        -:  432:  double __cdecl _atof_l(const char *_String,_locale_t _Locale);
+        -:  433:#endif
+        -:  434:  int __cdecl atoi(const char *_Str);
+        -:  435:  _CRTIMP int __cdecl _atoi_l(const char *_Str,_locale_t _Locale);
+        -:  436:  long __cdecl atol(const char *_Str);
+        -:  437:  _CRTIMP long __cdecl _atol_l(const char *_Str,_locale_t _Locale);
+        -:  438:#ifndef _CRT_ALGO_DEFINED
+        -:  439:#define _CRT_ALGO_DEFINED
+        -:  440:  void *__cdecl bsearch(const void *_Key,const void *_Base,size_t _NumOfElements,size_t _SizeOfElements,int (__cdecl *_PtFuncCompare)(const void *,const void *));
+        -:  441:  void __cdecl qsort(void *_Base,size_t _NumOfElements,size_t _SizeOfElements,int (__cdecl *_PtFuncCompare)(const void *,const void *));
+        -:  442:#endif
+        -:  443:  unsigned short __cdecl _byteswap_ushort(unsigned short _Short);
+        -:  444:  unsigned long __cdecl _byteswap_ulong (unsigned long _Long);
+        -:  445:  __MINGW_EXTENSION unsigned __int64 __cdecl _byteswap_uint64(unsigned __int64 _Int64);
+        -:  446:  div_t __cdecl div(int _Numerator,int _Denominator);
+        -:  447:  char *__cdecl getenv(const char *_VarName) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  448:  _CRTIMP char *__cdecl _itoa(int _Value,char *_Dest,int _Radix);
+        -:  449:  __MINGW_EXTENSION _CRTIMP char *__cdecl _i64toa(__int64 _Val,char *_DstBuf,int _Radix) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  450:  __MINGW_EXTENSION _CRTIMP char *__cdecl _ui64toa(unsigned __int64 _Val,char *_DstBuf,int _Radix) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  451:  __MINGW_EXTENSION _CRTIMP __int64 __cdecl _atoi64(const char *_String);
+        -:  452:  __MINGW_EXTENSION _CRTIMP __int64 __cdecl _atoi64_l(const char *_String,_locale_t _Locale);
+        -:  453:  __MINGW_EXTENSION _CRTIMP __int64 __cdecl _strtoi64(const char *_String,char **_EndPtr,int _Radix);
+        -:  454:  __MINGW_EXTENSION _CRTIMP __int64 __cdecl _strtoi64_l(const char *_String,char **_EndPtr,int _Radix,_locale_t _Locale);
+        -:  455:  __MINGW_EXTENSION _CRTIMP unsigned __int64 __cdecl _strtoui64(const char *_String,char **_EndPtr,int _Radix);
+        -:  456:  __MINGW_EXTENSION _CRTIMP unsigned __int64 __cdecl _strtoui64_l(const char *_String,char **_EndPtr,int _Radix,_locale_t _Locale);
+        -:  457:  ldiv_t __cdecl ldiv(long _Numerator,long _Denominator);
+        -:  458:  _CRTIMP char *__cdecl _ltoa(long _Value,char *_Dest,int _Radix) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  459:  int __cdecl mblen(const char *_Ch,size_t _MaxCount);
+        -:  460:  _CRTIMP int __cdecl _mblen_l(const char *_Ch,size_t _MaxCount,_locale_t _Locale);
+        -:  461:  _CRTIMP size_t __cdecl _mbstrlen(const char *_Str);
+        -:  462:  _CRTIMP size_t __cdecl _mbstrlen_l(const char *_Str,_locale_t _Locale);
+        -:  463:  _CRTIMP size_t __cdecl _mbstrnlen(const char *_Str,size_t _MaxCount);
+        -:  464:  _CRTIMP size_t __cdecl _mbstrnlen_l(const char *_Str,size_t _MaxCount,_locale_t _Locale);
+        -:  465:  int __cdecl mbtowc(wchar_t * __restrict__ _DstCh,const char * __restrict__ _SrcCh,size_t _SrcSizeInBytes);
+        -:  466:  _CRTIMP int __cdecl _mbtowc_l(wchar_t * __restrict__ _DstCh,const char * __restrict__ _SrcCh,size_t _SrcSizeInBytes,_locale_t _Locale);
+        -:  467:  size_t __cdecl mbstowcs(wchar_t * __restrict__ _Dest,const char * __restrict__ _Source,size_t _MaxCount);
+        -:  468:  _CRTIMP size_t __cdecl _mbstowcs_l(wchar_t * __restrict__ _Dest,const char * __restrict__ _Source,size_t _MaxCount,_locale_t _Locale);
+        -:  469:  int __cdecl mkstemp(char *template_name);
+        -:  470:  int __cdecl rand(void);
+        -:  471:  _CRTIMP int __cdecl _set_error_mode(int _Mode);
+        -:  472:  void __cdecl srand(unsigned int _Seed);
+        -:  473:#if defined(_POSIX) || defined(_POSIX_THREAD_SAFE_FUNCTIONS)
+        -:  474:  #ifndef rand_r
+        -:  475:  #define rand_r(__seed) (__seed == __seed ? rand () : rand ())
+        -:  476:  #endif
+        -:  477:#endif
+        -:  478:#ifdef _CRT_RAND_S
+        -:  479:  _SECIMP errno_t __cdecl rand_s(unsigned int *randomValue);
+        -:  480:#endif
+        -:  481:
+        -:  482:#if defined(__USE_MINGW_STRTOX)
+        -:  483:__mingw_ovr
+function strtod called 5 returned 100% blocks executed 100%
+        5:  484:double __cdecl __MINGW_NOTHROW strtod(const char * __restrict__ _Str,char ** __restrict__ _EndPtr)
+        -:  485:{
+        -:  486:  double __cdecl __mingw_strtod (const char * __restrict__, char ** __restrict__);
+        5:  487:  return __mingw_strtod( _Str, _EndPtr);
+        5:  487-block  0
+call    0 returned 5
+        -:  488:}
+        -:  489:
+        -:  490:__mingw_ovr
+        -:  491:float __cdecl __MINGW_NOTHROW strtof(const char * __restrict__ _Str,char ** __restrict__ _EndPtr)
+        -:  492:{
+        -:  493:  float __cdecl __mingw_strtof (const char * __restrict__, char ** __restrict__);
+        -:  494:  return __mingw_strtof( _Str, _EndPtr);
+        -:  495:}
+        -:  496:
+        -:  497:/* strtold is already an alias to __mingw_strtold */
+        -:  498:#else
+        -:  499:  double __cdecl __MINGW_NOTHROW strtod(const char * __restrict__ _Str,char ** __restrict__ _EndPtr);
+        -:  500:  float __cdecl __MINGW_NOTHROW strtof(const char * __restrict__ nptr, char ** __restrict__ endptr);
+        -:  501:#endif /* defined(__USE_MINGW_STRTOX) */
+        -:  502:  long double __cdecl __MINGW_NOTHROW strtold(const char * __restrict__ , char ** __restrict__ );
+        -:  503:#if !defined __NO_ISOCEXT
+        -:  504:  /* libmingwex.a provides a c99-compliant strtod() exported as __strtod() */
+        -:  505:  extern double __cdecl __MINGW_NOTHROW
+        -:  506:  __strtod (const char * __restrict__ , char ** __restrict__);
+        -:  507:/* The UCRT version of strtod is C99 compliant, so we don't need to redirect it to the mingw version. */
+        -:  508:#if !defined(__USE_MINGW_STRTOX) && !defined(_UCRT)
+        -:  509:#define strtod __strtod
+        -:  510:#endif /* !defined(__USE_MINGW_STRTOX) */
+        -:  511:#endif /* __NO_ISOCEXT */
+        -:  512:
+        -:  513:#if !defined __NO_ISOCEXT  /* in libmingwex.a */
+        -:  514:  float __cdecl __mingw_strtof (const char * __restrict__, char ** __restrict__);
+        -:  515:  double __cdecl __mingw_strtod (const char * __restrict__, char ** __restrict__);
+        -:  516:  long double __cdecl __mingw_strtold(const char * __restrict__, char ** __restrict__);
+        -:  517:#endif /* __NO_ISOCEXT */
+        -:  518:  _CRTIMP double __cdecl _strtod_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,_locale_t _Locale);
+        -:  519:  long __cdecl strtol(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix);
+        -:  520:  _CRTIMP long __cdecl _strtol_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
+        -:  521:  unsigned long __cdecl strtoul(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix);
+        -:  522:  _CRTIMP unsigned long __cdecl _strtoul_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
+        -:  523:#ifndef _CRT_SYSTEM_DEFINED
+        -:  524:#define _CRT_SYSTEM_DEFINED
+        -:  525:  int __cdecl system(const char *_Command);
+        -:  526:#endif
+        -:  527:  _CRTIMP char *__cdecl _ultoa(unsigned long _Value,char *_Dest,int _Radix) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  528:  int __cdecl wctomb(char *_MbCh,wchar_t _WCh) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  529:  _CRTIMP int __cdecl _wctomb_l(char *_MbCh,wchar_t _WCh,_locale_t _Locale) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  530:  size_t __cdecl wcstombs(char * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _MaxCount) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  531:  _CRTIMP size_t __cdecl _wcstombs_l(char * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _MaxCount,_locale_t _Locale) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  532:
+        -:  533:#ifndef _CRT_ALLOCATION_DEFINED
+        -:  534:#define _CRT_ALLOCATION_DEFINED
+        -:  535:  void *__cdecl calloc(size_t _NumOfElements,size_t _SizeOfElements);
+        -:  536:  void __cdecl free(void *_Memory);
+        -:  537:  void *__cdecl malloc(size_t _Size);
+        -:  538:  void *__cdecl realloc(void *_Memory,size_t _NewSize);
+        -:  539:  _CRTIMP void *__cdecl _recalloc(void *_Memory,size_t _Count,size_t _Size);
+        -:  540:  _CRTIMP void __cdecl _aligned_free(void *_Memory);
+        -:  541:  _CRTIMP void *__cdecl _aligned_malloc(size_t _Size,size_t _Alignment);
+        -:  542:  _CRTIMP void *__cdecl _aligned_offset_malloc(size_t _Size,size_t _Alignment,size_t _Offset);
+        -:  543:  _CRTIMP void *__cdecl _aligned_realloc(void *_Memory,size_t _Size,size_t _Alignment);
+        -:  544:  _CRTIMP void *__cdecl _aligned_recalloc(void *_Memory,size_t _Count,size_t _Size,size_t _Alignment);
+        -:  545:  _CRTIMP void *__cdecl _aligned_offset_realloc(void *_Memory,size_t _Size,size_t _Alignment,size_t _Offset);
+        -:  546:  _CRTIMP void *__cdecl _aligned_offset_recalloc(void *_Memory,size_t _Count,size_t _Size,size_t _Alignment,size_t _Offset);
+        -:  547:#endif
+        -:  548:
+        -:  549:#ifndef _WSTDLIB_DEFINED
+        -:  550:#define _WSTDLIB_DEFINED
+        -:  551:
+        -:  552:  _CRTIMP wchar_t *__cdecl _itow(int _Value,wchar_t *_Dest,int _Radix) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  553:  _CRTIMP wchar_t *__cdecl _ltow(long _Value,wchar_t *_Dest,int _Radix) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  554:  _CRTIMP wchar_t *__cdecl _ultow(unsigned long _Value,wchar_t *_Dest,int _Radix) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  555:
+        -:  556:  double __cdecl __mingw_wcstod(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr);
+        -:  557:  float __cdecl __mingw_wcstof(const wchar_t * __restrict__ nptr, wchar_t ** __restrict__ endptr);
+        -:  558:  long double __cdecl __mingw_wcstold(const wchar_t * __restrict__, wchar_t ** __restrict__);
+        -:  559:
+        -:  560:#if defined(__USE_MINGW_STRTOX)
+        -:  561:  __mingw_ovr
+        -:  562:  double __cdecl wcstod(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr){
+        -:  563:    return __mingw_wcstod(_Str,_EndPtr);
+        -:  564:  }
+        -:  565:  __mingw_ovr
+        -:  566:  float __cdecl wcstof(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr){
+        -:  567:    return __mingw_wcstof(_Str,_EndPtr);
+        -:  568:  }
+        -:  569:  /* wcstold is already a mingw implementation */
+        -:  570:#else
+        -:  571:  double __cdecl wcstod(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr);
+        -:  572:  float __cdecl wcstof(const wchar_t * __restrict__ nptr, wchar_t ** __restrict__ endptr);
+        -:  573:#endif /* defined(__USE_MINGW_STRTOX) */
+        -:  574:#if !defined __NO_ISOCEXT /* in libmingwex.a */
+        -:  575:  long double __cdecl wcstold(const wchar_t * __restrict__, wchar_t ** __restrict__);
+        -:  576:#endif /* __NO_ISOCEXT */
+        -:  577:  _CRTIMP double __cdecl _wcstod_l(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,_locale_t _Locale);
+        -:  578:  long __cdecl wcstol(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix);
+        -:  579:  _CRTIMP long __cdecl _wcstol_l(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
+        -:  580:  unsigned long __cdecl wcstoul(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix);
+        -:  581:  _CRTIMP unsigned long __cdecl _wcstoul_l(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
+        -:  582:  _CRTIMP wchar_t *__cdecl _wgetenv(const wchar_t *_VarName) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  583:#ifndef _CRT_WSYSTEM_DEFINED
+        -:  584:#define _CRT_WSYSTEM_DEFINED
+        -:  585:  _CRTIMP int __cdecl _wsystem(const wchar_t *_Command);
+        -:  586:#endif
+        -:  587:  _CRTIMP double __cdecl _wtof(const wchar_t *_Str);
+        -:  588:  _CRTIMP double __cdecl _wtof_l(const wchar_t *_Str,_locale_t _Locale);
+        -:  589:  _CRTIMP int __cdecl _wtoi(const wchar_t *_Str);
+        -:  590:  _CRTIMP int __cdecl _wtoi_l(const wchar_t *_Str,_locale_t _Locale);
+        -:  591:  _CRTIMP long __cdecl _wtol(const wchar_t *_Str);
+        -:  592:  _CRTIMP long __cdecl _wtol_l(const wchar_t *_Str,_locale_t _Locale);
+        -:  593:
+        -:  594:  __MINGW_EXTENSION _CRTIMP wchar_t *__cdecl _i64tow(__int64 _Val,wchar_t *_DstBuf,int _Radix) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  595:  __MINGW_EXTENSION _CRTIMP wchar_t *__cdecl _ui64tow(unsigned __int64 _Val,wchar_t *_DstBuf,int _Radix) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  596:  __MINGW_EXTENSION _CRTIMP __int64 __cdecl _wtoi64(const wchar_t *_Str);
+        -:  597:  __MINGW_EXTENSION _CRTIMP __int64 __cdecl _wtoi64_l(const wchar_t *_Str,_locale_t _Locale);
+        -:  598:  __MINGW_EXTENSION _CRTIMP __int64 __cdecl _wcstoi64(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix);
+        -:  599:  __MINGW_EXTENSION _CRTIMP __int64 __cdecl _wcstoi64_l(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix,_locale_t _Locale);
+        -:  600:  __MINGW_EXTENSION _CRTIMP unsigned __int64 __cdecl _wcstoui64(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix);
+        -:  601:  __MINGW_EXTENSION _CRTIMP unsigned __int64 __cdecl _wcstoui64_l(const wchar_t *_Str ,wchar_t **_EndPtr,int _Radix,_locale_t _Locale);
+        -:  602:#endif
+        -:  603:
+        -:  604:  _CRTIMP int __cdecl _putenv(const char *_EnvString);
+        -:  605:  _CRTIMP int __cdecl _wputenv(const wchar_t *_EnvString);
+        -:  606:
+        -:  607:#ifndef _POSIX_
+        -:  608:#define _CVTBUFSIZE (309+40)
+        -:  609:  _CRTIMP char *__cdecl _fullpath(char *_FullPath,const char *_Path,size_t _SizeInBytes);
+        -:  610:  _CRTIMP char *__cdecl _ecvt(double _Val,int _NumOfDigits,int *_PtDec,int *_PtSign) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  611:  _CRTIMP char *__cdecl _fcvt(double _Val,int _NumOfDec,int *_PtDec,int *_PtSign) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  612:  _CRTIMP char *__cdecl _gcvt(double _Val,int _NumOfDigits,char *_DstBuf) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  613:  _CRTIMP int __cdecl _atodbl(_CRT_DOUBLE *_Result,char *_Str);
+        -:  614:  _CRTIMP int __cdecl _atoldbl(_LDOUBLE *_Result,char *_Str);
+        -:  615:  _CRTIMP int __cdecl _atoflt(_CRT_FLOAT *_Result,char *_Str);
+        -:  616:  _CRTIMP int __cdecl _atodbl_l(_CRT_DOUBLE *_Result,char *_Str,_locale_t _Locale);
+        -:  617:  _CRTIMP int __cdecl _atoldbl_l(_LDOUBLE *_Result,char *_Str,_locale_t _Locale);
+        -:  618:  _CRTIMP int __cdecl _atoflt_l(_CRT_FLOAT *_Result,char *_Str,_locale_t _Locale);
+        -:  619:
+        -:  620:#if defined(__INTRIN_H_) || \
+        -:  621:   (defined(_X86INTRIN_H_INCLUDED) && \
+        -:  622:     ((__MINGW_GCC_VERSION >= 40902) || defined(__LP64__) || defined(_X86_)))
+        -:  623:
+        -:  624:/* We already have bug-free prototypes and inline definitions for _lrotl
+        -:  625:   and _lrotr from either intrin.h or x86intrin.h. */
+        -:  626:
+        -:  627:#else
+        -:  628:
+        -:  629:/* Remove buggy x86intrin.h definitions if present (see gcc bug 61662). */
+        -:  630:#undef _lrotr
+        -:  631:#undef _lrotl
+        -:  632:
+        -:  633:/* These prototypes work for x86, x64 (native Windows), and cyginwin64. */
+        -:  634:unsigned long __cdecl _lrotl(unsigned long,int);
+        -:  635:unsigned long __cdecl _lrotr(unsigned long,int);
+        -:  636:
+        -:  637:#endif /* defined(__INTRIN_H_) || \
+        -:  638:    (defined(_X86INTRIN_H_INCLUDED) && \
+        -:  639:       ((__MINGW_GCC_VERSION >= 40902) || defined(__LP64__))) */
+        -:  640:
+        -:  641:  _CRTIMP void __cdecl _makepath(char *_Path,const char *_Drive,const char *_Dir,const char *_Filename,const char *_Ext);
+        -:  642:  _onexit_t __cdecl _onexit(_onexit_t _Func);
+        -:  643:
+        -:  644:#ifndef _CRT_PERROR_DEFINED
+        -:  645:#define _CRT_PERROR_DEFINED
+        -:  646:  void __cdecl perror(const char *_ErrMsg);
+        -:  647:#endif
+        -:  648:#pragma push_macro ("_rotr64")
+        -:  649:#pragma push_macro ("_rotl64")
+        -:  650:#undef _rotl64
+        -:  651:#undef _rotr64
+        -:  652:  __MINGW_EXTENSION unsigned __int64 __cdecl _rotl64(unsigned __int64 _Val,int _Shift);
+        -:  653:  __MINGW_EXTENSION unsigned __int64 __cdecl _rotr64(unsigned __int64 Value,int Shift);
+        -:  654:#pragma pop_macro ("_rotl64")
+        -:  655:#pragma pop_macro ("_rotr64")
+        -:  656:#pragma push_macro ("_rotr")
+        -:  657:#pragma push_macro ("_rotl")
+        -:  658:#undef _rotr
+        -:  659:#undef _rotl
+        -:  660:  unsigned int __cdecl _rotr(unsigned int _Val,int _Shift);
+        -:  661:  unsigned int __cdecl _rotl(unsigned int _Val,int _Shift);
+        -:  662:#pragma pop_macro ("_rotl")
+        -:  663:#pragma pop_macro ("_rotr")
+        -:  664:  __MINGW_EXTENSION unsigned __int64 __cdecl _rotr64(unsigned __int64 _Val,int _Shift);
+        -:  665:  _CRTIMP void __cdecl _searchenv(const char *_Filename,const char *_EnvVar,char *_ResultPath) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  666:  _CRTIMP void __cdecl _splitpath(const char *_FullPath,char *_Drive,char *_Dir,char *_Filename,char *_Ext) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  667:  _CRTIMP void __cdecl _swab(char *_Buf1,char *_Buf2,int _SizeInBytes);
+        -:  668:
+        -:  669:#ifndef _WSTDLIBP_DEFINED
+        -:  670:#define _WSTDLIBP_DEFINED
+        -:  671:  _CRTIMP wchar_t *__cdecl _wfullpath(wchar_t *_FullPath,const wchar_t *_Path,size_t _SizeInWords);
+        -:  672:  _CRTIMP void __cdecl _wmakepath(wchar_t *_ResultPath,const wchar_t *_Drive,const wchar_t *_Dir,const wchar_t *_Filename,const wchar_t *_Ext);
+        -:  673:#ifndef _CRT_WPERROR_DEFINED
+        -:  674:#define _CRT_WPERROR_DEFINED
+        -:  675:  _CRTIMP void __cdecl _wperror(const wchar_t *_ErrMsg);
+        -:  676:#endif
+        -:  677:  _CRTIMP void __cdecl _wsearchenv(const wchar_t *_Filename,const wchar_t *_EnvVar,wchar_t *_ResultPath) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  678:  _CRTIMP void __cdecl _wsplitpath(const wchar_t *_FullPath,wchar_t *_Drive,wchar_t *_Dir,wchar_t *_Filename,wchar_t *_Ext) __MINGW_ATTRIB_DEPRECATED_SEC_WARN;
+        -:  679:#endif
+        -:  680:
+        -:  681:  _CRTIMP void __cdecl _beep(unsigned _Frequency,unsigned _Duration) __MINGW_ATTRIB_DEPRECATED;
+        -:  682:  /* Not to be confused with  _set_error_mode (int).  */
+        -:  683:  _CRTIMP void __cdecl _seterrormode(int _Mode) __MINGW_ATTRIB_DEPRECATED;
+        -:  684:  _CRTIMP void __cdecl _sleep(unsigned long _Duration) __MINGW_ATTRIB_DEPRECATED;
+        -:  685:#endif
+        -:  686:
+        -:  687:#ifndef	NO_OLDNAMES
+        -:  688:#ifndef _POSIX_
+        -:  689:#if 0
+        -:  690:#ifndef __cplusplus
+        -:  691:#ifndef NOMINMAX
+        -:  692:#ifndef max
+        -:  693:#define max(a,b) (((a) > (b)) ? (a) : (b))
+        -:  694:#endif
+        -:  695:#ifndef min
+        -:  696:#define min(a,b) (((a) < (b)) ? (a) : (b))
+        -:  697:#endif
+        -:  698:#endif
+        -:  699:#endif
+        -:  700:#endif
+        -:  701:
+        -:  702:#define sys_errlist _sys_errlist
+        -:  703:#define sys_nerr _sys_nerr
+        -:  704:#define environ _environ
+        -:  705:  char *__cdecl ecvt(double _Val,int _NumOfDigits,int *_PtDec,int *_PtSign) __MINGW_ATTRIB_DEPRECATED_MSVC2005;
+        -:  706:  char *__cdecl fcvt(double _Val,int _NumOfDec,int *_PtDec,int *_PtSign) __MINGW_ATTRIB_DEPRECATED_MSVC2005;
+        -:  707:  char *__cdecl gcvt(double _Val,int _NumOfDigits,char *_DstBuf) __MINGW_ATTRIB_DEPRECATED_MSVC2005;
+        -:  708:  char *__cdecl itoa(int _Val,char *_DstBuf,int _Radix) __MINGW_ATTRIB_DEPRECATED_MSVC2005;
+        -:  709:  char *__cdecl ltoa(long _Val,char *_DstBuf,int _Radix) __MINGW_ATTRIB_DEPRECATED_MSVC2005;
+        -:  710:  int __cdecl putenv(const char *_EnvString) __MINGW_ATTRIB_DEPRECATED_MSVC2005;
+        -:  711:
+        -:  712:#ifndef _CRT_SWAB_DEFINED
+        -:  713:#define _CRT_SWAB_DEFINED  /* Also in unistd.h */
+        -:  714:  void __cdecl swab(char *_Buf1,char *_Buf2,int _SizeInBytes) __MINGW_ATTRIB_DEPRECATED_MSVC2005;
+        -:  715:#endif
+        -:  716:
+        -:  717:  char *__cdecl ultoa(unsigned long _Val,char *_Dstbuf,int _Radix) __MINGW_ATTRIB_DEPRECATED_MSVC2005;
+        -:  718:  onexit_t __cdecl onexit(onexit_t _Func);
+        -:  719:#endif
+        -:  720:#endif
+        -:  721:
+        -:  722:#if !defined __NO_ISOCEXT /* externs in static libmingwex.a */
+        -:  723:
+        -:  724:  typedef struct { __MINGW_EXTENSION long long quot, rem; } lldiv_t;
+        -:  725:
+        -:  726:  __MINGW_EXTENSION lldiv_t __cdecl lldiv(long long, long long);
+        -:  727:
+        -:  728:  __MINGW_EXTENSION long long __cdecl llabs(long long);
+        -:  729:#ifndef __CRT__NO_INLINE
+        -:  730:  __MINGW_EXTENSION __CRT_INLINE long long __cdecl llabs(long long _j) { return (_j >= 0 ? _j : -_j); }
+        -:  731:#endif
+        -:  732:
+        -:  733:  __MINGW_EXTENSION long long  __cdecl strtoll(const char * __restrict__, char ** __restrict, int);
+        -:  734:  __MINGW_EXTENSION unsigned long long  __cdecl strtoull(const char * __restrict__, char ** __restrict__, int);
+        -:  735:
+        -:  736:  /* these are stubs for MS _i64 versions */
+        -:  737:  __MINGW_EXTENSION long long  __cdecl atoll (const char *);
+        -:  738:
+        -:  739:#ifndef __STRICT_ANSI__
+        -:  740:  __MINGW_EXTENSION long long  __cdecl wtoll (const wchar_t *);
+        -:  741:  __MINGW_EXTENSION char *__cdecl lltoa (long long, char *, int);
+        -:  742:  __MINGW_EXTENSION char *__cdecl ulltoa (unsigned long long , char *, int);
+        -:  743:  __MINGW_EXTENSION wchar_t *__cdecl lltow (long long, wchar_t *, int);
+        -:  744:  __MINGW_EXTENSION wchar_t *__cdecl ulltow (unsigned long long, wchar_t *, int);
+        -:  745:
+        -:  746:  /* __CRT_INLINE using non-ansi functions */
+        -:  747:#ifndef __CRT__NO_INLINE
+        -:  748:  __MINGW_EXTENSION __CRT_INLINE long long  __cdecl atoll (const char * _c) { return _atoi64 (_c); }
+        -:  749:  __MINGW_EXTENSION __CRT_INLINE char *__cdecl lltoa (long long _n, char * _c, int _i) { return _i64toa (_n, _c, _i); }
+        -:  750:  __MINGW_EXTENSION __CRT_INLINE char *__cdecl ulltoa (unsigned long long _n, char * _c, int _i) { return _ui64toa (_n, _c, _i); }
+        -:  751:  __MINGW_EXTENSION __CRT_INLINE long long  __cdecl wtoll (const wchar_t * _w) { return _wtoi64 (_w); }
+        -:  752:  __MINGW_EXTENSION __CRT_INLINE wchar_t *__cdecl lltow (long long _n, wchar_t * _w, int _i) { return _i64tow (_n, _w, _i); }
+        -:  753:  __MINGW_EXTENSION __CRT_INLINE wchar_t *__cdecl ulltow (unsigned long long _n, wchar_t * _w, int _i) { return _ui64tow (_n, _w, _i); }
+        -:  754:#endif /* !__CRT__NO_INLINE */
+        -:  755:#endif /* (__STRICT_ANSI__)  */
+        -:  756:
+        -:  757:#endif /* !__NO_ISOCEXT */
+        -:  758:
+        -:  759:#ifdef __cplusplus
+        -:  760:}
+        -:  761:#endif
+        -:  762:
+        -:  763:#pragma pack(pop)
+        -:  764:
+        -:  765:#include <sec_api/stdlib_s.h>
+        -:  766:#include <malloc.h>
+        -:  767:
+        -:  768:#endif

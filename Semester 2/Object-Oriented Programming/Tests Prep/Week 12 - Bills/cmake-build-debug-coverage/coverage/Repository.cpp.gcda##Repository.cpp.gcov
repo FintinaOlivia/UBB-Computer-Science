@@ -1,0 +1,87 @@
+        -:    0:Source:C:/Users/Th/CLionProjects/W12-Test-Attempt-Bills/Repository.cpp
+        -:    0:Graph:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\Repository.cpp.gcno
+        -:    0:Data:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\Repository.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by Th on 20/05/2023.
+        -:    3://
+        -:    4:
+        -:    5:#include <fstream>
+        -:    6:#include "Repository.h"
+        -:    7:#include "Domain/Bill.h"
+        -:    8:
+function _ZN10RepositoryC2Ev called 1 returned 100% blocks executed 80%
+        1:    9:Repository::Repository() {
+        1:    9-block  0
+call    0 returned 1
+        1:   10:    this->LoadData();
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   11:}
+        1:   11-block  0
+    $$$$$:   11-block  1
+call    0 never executed
+        -:   12:
+function _ZN10RepositoryD2Ev called 1 returned 100% blocks executed 100%
+        1:   13:Repository::~Repository() = default;
+        1:   13-block  0
+call    0 returned 1
+        -:   14:
+function _ZN10Repository6getAllEv called 3 returned 100% blocks executed 100%
+        3:   15:std::vector<Bill> Repository::getAll() {
+        3:   16:    return this->elements;
+        3:   16-block  0
+call    0 returned 3
+        -:   17:}
+        -:   18:
+function _ZN10Repository8LoadDataEv called 1 returned 100% blocks executed 76%
+        1:   19:void Repository::LoadData() {
+        1:   20:    std::ifstream inFile(R"(C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\input.txt)");
+        1:   20-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   21:    Bill CurrentElement;
+        1:   21-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   22:    this->elements.clear();
+        1:   22-block  0
+call    0 returned 1
+        6:   23:    while (inFile >> CurrentElement)
+        6:   23-block  0
+call    0 returned 6
+branch  1 taken 6 (fallthrough)
+branch  2 taken 0 (throw)
+        6:   23-block  1
+call    3 returned 6
+branch  4 taken 6 (fallthrough)
+branch  5 taken 0 (throw)
+        6:   23-block  2
+branch  6 taken 5
+branch  7 taken 1 (fallthrough)
+        -:   24:    {
+        5:   25:        this->elements.push_back(CurrentElement);
+        5:   25-block  0
+call    0 returned 5
+branch  1 taken 5 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   26:    }
+        1:   27:    inFile.close();
+        1:   27-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   28:
+        1:   29:}
+        1:   29-block  0
+call    0 returned 1
+call    1 returned 1
+    $$$$$:   29-block  1
+call    2 never executed
+    $$$$$:   29-block  2
+call    3 never executed
+        -:   30:
+        -:   31:

@@ -1,0 +1,75 @@
+        -:    0:Source:C:/Qt/6.5.0/mingw_64/include/QtCore/qobject_impl.h
+        -:    0:Graph:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\GUI\GUI.cpp.gcno
+        -:    0:Data:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\GUI\GUI.cpp.gcda
+        -:    0:Runs:1
+        -:    1:// Copyright (C) 2016 The Qt Company Ltd.
+        -:    2:// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+        -:    3:
+        -:    4:#ifndef Q_QDOC
+        -:    5:
+        -:    6:#ifndef QOBJECT_H
+        -:    7:#error Do not include qobject_impl.h directly
+        -:    8:#endif
+        -:    9:
+        -:   10:#if 0
+        -:   11:#pragma qt_sync_skip_header_check
+        -:   12:#pragma qt_sync_stop_processing
+        -:   13:#endif
+        -:   14:
+        -:   15:QT_BEGIN_NAMESPACE
+        -:   16:
+        -:   17:
+        -:   18:namespace QtPrivate {
+        -:   19:    /*
+        -:   20:        Logic to statically generate the array of qMetaTypeId
+        -:   21:        ConnectionTypes<FunctionPointer<Signal>::Arguments>::types() returns an array
+        -:   22:        of int that is suitable for the types arguments of the connection functions.
+        -:   23:
+        -:   24:        The array only exist of all the types are declared as a metatype
+        -:   25:        (detected using the TypesAreDeclaredMetaType helper struct)
+        -:   26:        If one of the type is not declared, the function return 0 and the signal
+        -:   27:        cannot be used in queued connection.
+        -:   28:    */
+        -:   29:    template <typename ArgList> struct TypesAreDeclaredMetaType { enum { Value = false }; };
+        -:   30:    template <> struct TypesAreDeclaredMetaType<List<>> { enum { Value = true }; };
+        -:   31:    template <typename Arg, typename... Tail> struct TypesAreDeclaredMetaType<List<Arg, Tail...> >
+        -:   32:    { enum { Value = QMetaTypeId2<Arg>::Defined && TypesAreDeclaredMetaType<List<Tail...>>::Value }; };
+        -:   33:
+        -:   34:    template <typename ArgList, bool Declared = TypesAreDeclaredMetaType<ArgList>::Value > struct ConnectionTypes
+        -:   35:    { static const int *types() { return nullptr; } };
+        -:   36:    template <> struct ConnectionTypes<List<>, true>
+        -:   37:    { static const int *types() { return nullptr; } };
+        -:   38:    template <typename... Args> struct ConnectionTypes<List<Args...>, true>
+function _ZN9QtPrivate15ConnectionTypesINS_4ListIJbEEELb1EE5typesEv called 0 returned 0% blocks executed 0%
+    #####:   39:    { static const int *types() { static const int t[sizeof...(Args) + 1] = { (QtPrivate::QMetaTypeIdHelper<Args>::qt_metatype_id())..., 0 }; return t; } };
+    %%%%%:   39-block  0
+        -:   40:
+        -:   41:    // implementation of QSlotObjectBase for which the slot is a static function
+        -:   42:    // Args and R are the List of arguments and the return type of the signal to which the slot is connected.
+        -:   43:    template<typename Func, typename Args, typename R> class QStaticSlotObject : public QSlotObjectBase
+        -:   44:    {
+        -:   45:        typedef QtPrivate::FunctionPointer<Func> FuncType;
+        -:   46:        Func function;
+        -:   47:        static void impl(int which, QSlotObjectBase *this_, QObject *r, void **a, bool *ret)
+        -:   48:        {
+        -:   49:            switch (which) {
+        -:   50:            case Destroy:
+        -:   51:                delete static_cast<QStaticSlotObject*>(this_);
+        -:   52:                break;
+        -:   53:            case Call:
+        -:   54:                FuncType::template call<Args, R>(static_cast<QStaticSlotObject*>(this_)->function, r, a);
+        -:   55:                break;
+        -:   56:            case Compare:   // not implemented
+        -:   57:            case NumOperations:
+        -:   58:                Q_UNUSED(ret);
+        -:   59:            }
+        -:   60:        }
+        -:   61:    public:
+        -:   62:        explicit QStaticSlotObject(Func f) : QSlotObjectBase(&impl), function(f) {}
+        -:   63:    };
+        -:   64:}
+        -:   65:
+        -:   66:
+        -:   67:QT_END_NAMESPACE
+        -:   68:
+        -:   69:#endif

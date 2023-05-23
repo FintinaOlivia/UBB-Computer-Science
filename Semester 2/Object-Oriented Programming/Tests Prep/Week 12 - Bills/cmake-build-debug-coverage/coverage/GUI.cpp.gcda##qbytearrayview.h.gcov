@@ -1,0 +1,387 @@
+        -:    0:Source:C:/Qt/6.5.0/mingw_64/include/QtCore/qbytearrayview.h
+        -:    0:Graph:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\GUI\GUI.cpp.gcno
+        -:    0:Data:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\GUI\GUI.cpp.gcda
+        -:    0:Runs:1
+        -:    1:// Copyright (C) 2021 The Qt Company Ltd.
+        -:    2:// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+        -:    3:#ifndef QBYTEARRAYVIEW_H
+        -:    4:#define QBYTEARRAYVIEW_H
+        -:    5:
+        -:    6:#include <QtCore/qbytearrayalgorithms.h>
+        -:    7:#include <QtCore/qstringfwd.h>
+        -:    8:#include <QtCore/qarraydata.h>
+        -:    9:
+        -:   10:#include <string>
+        -:   11:#include <QtCore/q20type_traits.h>
+        -:   12:
+        -:   13:QT_BEGIN_NAMESPACE
+        -:   14:
+        -:   15:namespace QtPrivate {
+        -:   16:
+        -:   17:template <typename Byte>
+        -:   18:struct IsCompatibleByteTypeHelper
+        -:   19:    : std::integral_constant<bool,
+        -:   20:                             std::is_same_v<Byte, char> ||
+        -:   21:                             std::is_same_v<Byte, uchar> ||
+        -:   22:                             std::is_same_v<Byte, signed char> ||
+        -:   23:                             std::is_same_v<Byte, std::byte>> {};
+        -:   24:
+        -:   25:template <typename Byte>
+        -:   26:struct IsCompatibleByteType
+        -:   27:    : IsCompatibleByteTypeHelper<q20::remove_cvref_t<Byte>> {};
+        -:   28:
+        -:   29:template <typename Pointer>
+        -:   30:struct IsCompatibleByteArrayPointerHelper : std::false_type {};
+        -:   31:template <typename Byte>
+        -:   32:struct IsCompatibleByteArrayPointerHelper<Byte *>
+        -:   33:    : IsCompatibleByteType<Byte> {};
+        -:   34:template<typename Pointer>
+        -:   35:struct IsCompatibleByteArrayPointer
+        -:   36:    : IsCompatibleByteArrayPointerHelper<q20::remove_cvref_t<Pointer>> {};
+        -:   37:
+        -:   38:template <typename T, typename Enable = void>
+        -:   39:struct IsContainerCompatibleWithQByteArrayView : std::false_type {};
+        -:   40:
+        -:   41:template <typename T>
+        -:   42:struct IsContainerCompatibleWithQByteArrayView<T, std::enable_if_t<
+        -:   43:        std::conjunction_v<
+        -:   44:                // lacking concepts and ranges, we accept any T whose std::data yields a suitable
+        -:   45:                // pointer ...
+        -:   46:                IsCompatibleByteArrayPointer<decltype(std::data(std::declval<const T &>()))>,
+        -:   47:                // ... and that has a suitable size ...
+        -:   48:                std::is_convertible<decltype(std::size(std::declval<const T &>())), qsizetype>,
+        -:   49:                // ... and it's a range as it defines an iterator-like API
+        -:   50:                IsCompatibleByteType<typename std::iterator_traits<decltype(
+        -:   51:                        std::begin(std::declval<const T &>()))>::value_type>,
+        -:   52:                std::is_convertible<decltype(std::begin(std::declval<const T &>())
+        -:   53:                                             != std::end(std::declval<const T &>())),
+        -:   54:                                    bool>,
+        -:   55:
+        -:   56:                // This needs to be treated specially due to the empty vs null distinction
+        -:   57:                std::negation<std::is_same<std::decay_t<T>, QByteArray>>,
+        -:   58:
+        -:   59:                // We handle array literals specially for source compat reasons
+        -:   60:                std::negation<std::is_array<T>>,
+        -:   61:
+        -:   62:                // Don't make an accidental copy constructor
+        -:   63:                std::negation<std::is_same<std::decay_t<T>, QByteArrayView>>>>> : std::true_type {};
+        -:   64:
+        -:   65:// Used by QLatin1StringView too
+        -:   66:template <typename Char>
+function _ZN9QtPrivateL19lengthHelperPointerIcEExPKT_ called 4 returned 100% blocks executed 100%
+        4:   67:static constexpr qsizetype lengthHelperPointer(const Char *data) noexcept
+        -:   68:{
+        4:   69:    return qsizetype(std::char_traits<Char>::length(data));
+        4:   69-block  0
+call    0 returned 4
+        -:   70:}
+        -:   71:
+        -:   72:} // namespace QtPrivate
+        -:   73:
+        -:   74:class Q_CORE_EXPORT QByteArrayView
+        -:   75:{
+        -:   76:public:
+        -:   77:    typedef char storage_type;
+        -:   78:    typedef const char value_type;
+        -:   79:    typedef qptrdiff difference_type;
+        -:   80:    typedef qsizetype size_type;
+        -:   81:    typedef value_type &reference;
+        -:   82:    typedef value_type &const_reference;
+        -:   83:    typedef value_type *pointer;
+        -:   84:    typedef value_type *const_pointer;
+        -:   85:
+        -:   86:    typedef pointer iterator;
+        -:   87:    typedef const_pointer const_iterator;
+        -:   88:    typedef std::reverse_iterator<iterator> reverse_iterator;
+        -:   89:    typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
+        -:   90:
+        -:   91:private:
+        -:   92:    template <typename Byte>
+        -:   93:    using if_compatible_byte =
+        -:   94:            typename std::enable_if_t<QtPrivate::IsCompatibleByteType<Byte>::value, bool>;
+        -:   95:
+        -:   96:    template <typename Pointer>
+        -:   97:    using if_compatible_pointer =
+        -:   98:            typename std::enable_if_t<QtPrivate::IsCompatibleByteArrayPointer<Pointer>::value,
+        -:   99:                                      bool>;
+        -:  100:
+        -:  101:    template <typename T>
+        -:  102:    using if_compatible_qbytearray_like =
+        -:  103:            typename std::enable_if_t<std::is_same_v<T, QByteArray>, bool>;
+        -:  104:
+        -:  105:    template <typename T>
+        -:  106:    using if_compatible_container =
+        -:  107:            typename std::enable_if_t<QtPrivate::IsContainerCompatibleWithQByteArrayView<T>::value,
+        -:  108:                                      bool>;
+        -:  109:
+        -:  110:    template <typename Container>
+        -:  111:    static constexpr qsizetype lengthHelperContainer(const Container &c) noexcept
+        -:  112:    {
+        -:  113:        return qsizetype(std::size(c));
+        -:  114:    }
+        -:  115:
+        -:  116:    static constexpr qsizetype lengthHelperCharArray(const char *data, size_t size) noexcept
+        -:  117:    {
+        -:  118:        const auto it = std::char_traits<char>::find(data, size, '\0');
+        -:  119:        const auto end = it ? it : std::next(data, size);
+        -:  120:        return qsizetype(std::distance(data, end));
+        -:  121:    }
+        -:  122:
+        -:  123:    template <typename Byte>
+        -:  124:    static const storage_type *castHelper(const Byte *data) noexcept
+        -:  125:    { return reinterpret_cast<const storage_type*>(data); }
+function _ZN14QByteArrayView10castHelperEPKc called 15 returned 100% blocks executed 100%
+       15:  126:    static constexpr const storage_type *castHelper(const storage_type *data) noexcept
+       15:  127:    { return data; }
+       15:  127-block  0
+        -:  128:
+        -:  129:public:
+        -:  130:    constexpr QByteArrayView() noexcept
+        -:  131:        : m_size(0), m_data(nullptr) {}
+        -:  132:    constexpr QByteArrayView(std::nullptr_t) noexcept
+        -:  133:        : QByteArrayView() {}
+        -:  134:
+        -:  135:    template <typename Byte, if_compatible_byte<Byte> = true>
+function _ZN14QByteArrayViewC1IcLb1EEEPKT_x called 15 returned 100% blocks executed 57%
+       15:  136:    constexpr QByteArrayView(const Byte *data, qsizetype len)
+      15*:  137:        : m_size((Q_ASSERT(len >= 0), Q_ASSERT(data || !len), len)),
+       15:  137-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 15
+    %%%%%:  137-block  1
+call    2 never executed
+       15:  137-block  2
+branch  3 taken 0 (fallthrough)
+branch  4 taken 15
+    %%%%%:  137-block  3
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  137-block  4
+call    7 never executed
+       15:  138:          m_data(castHelper(data)) {}
+       15:  138-block  0
+call    0 returned 15
+        -:  139:
+        -:  140:    template <typename Byte, if_compatible_byte<Byte> = true>
+        -:  141:    constexpr QByteArrayView(const Byte *first, const Byte *last)
+        -:  142:        : QByteArrayView(first, last - first) {}
+        -:  143:
+        -:  144:#ifdef Q_QDOC
+        -:  145:    template <typename Byte>
+        -:  146:    constexpr QByteArrayView(const Byte *data) noexcept;
+        -:  147:#else
+        -:  148:    template <typename Pointer, if_compatible_pointer<Pointer> = true>
+function _ZN14QByteArrayViewC1IPKcLb1EEERKT_ called 4 returned 100% blocks executed 80%
+        4:  149:    constexpr QByteArrayView(const Pointer &data) noexcept
+        -:  150:        : QByteArrayView(
+       4*:  151:              data, data ? QtPrivate::lengthHelperPointer(data) : 0) {}
+        4:  151-block  0
+branch  0 taken 4 (fallthrough)
+branch  1 taken 0
+        4:  151-block  1
+call    2 returned 4
+    %%%%%:  151-block  2
+        4:  151-block  3
+call    3 returned 4
+        -:  152:#endif
+        -:  153:
+        -:  154:#ifdef Q_QDOC
+        -:  155:    QByteArrayView(const QByteArray &data) noexcept;
+        -:  156:#else
+        -:  157:    template <typename ByteArray, if_compatible_qbytearray_like<ByteArray> = true>
+        -:  158:    QByteArrayView(const ByteArray &ba) noexcept
+        -:  159:        : QByteArrayView(ba.isNull() ? nullptr : ba.data(), qsizetype(ba.size())) {}
+        -:  160:#endif
+        -:  161:
+        -:  162:    template <typename Container, if_compatible_container<Container> = true>
+        -:  163:    constexpr QByteArrayView(const Container &c) noexcept
+        -:  164:        : QByteArrayView(std::data(c), lengthHelperContainer(c)) {}
+        -:  165:    template <size_t Size>
+        -:  166:    constexpr QByteArrayView(const char (&data)[Size]) noexcept
+        -:  167:        : QByteArrayView(data, lengthHelperCharArray(data, Size)) {}
+        -:  168:
+        -:  169:#ifdef Q_QDOC
+        -:  170:    template <typename Byte, size_t Size>
+        -:  171:#else
+        -:  172:    template <typename Byte, size_t Size, if_compatible_byte<Byte> = true>
+        -:  173:#endif
+        -:  174:    [[nodiscard]] constexpr static QByteArrayView fromArray(const Byte (&data)[Size]) noexcept
+        -:  175:    { return QByteArrayView(data, Size); }
+        -:  176:    [[nodiscard]] inline QByteArray toByteArray() const; // defined in qbytearray.h
+        -:  177:
+        -:  178:    [[nodiscard]] constexpr qsizetype size() const noexcept { return m_size; }
+        -:  179:    [[nodiscard]] constexpr const_pointer data() const noexcept { return m_data; }
+        -:  180:    [[nodiscard]] constexpr const_pointer constData() const noexcept { return data(); }
+        -:  181:
+        -:  182:    [[nodiscard]] constexpr char operator[](qsizetype n) const
+        -:  183:    { Q_ASSERT(n >= 0); Q_ASSERT(n < size()); return m_data[n]; }
+        -:  184:
+        -:  185:    //
+        -:  186:    // QByteArray API
+        -:  187:    //
+        -:  188:    [[nodiscard]] constexpr char at(qsizetype n) const { return (*this)[n]; }
+        -:  189:
+        -:  190:    [[nodiscard]] constexpr QByteArrayView first(qsizetype n) const
+        -:  191:    { Q_ASSERT(n >= 0); Q_ASSERT(n <= size()); return QByteArrayView(data(), n); }
+        -:  192:    [[nodiscard]] constexpr QByteArrayView last(qsizetype n) const
+        -:  193:    { Q_ASSERT(n >= 0); Q_ASSERT(n <= size()); return QByteArrayView(data() + size() - n, n); }
+        -:  194:    [[nodiscard]] constexpr QByteArrayView sliced(qsizetype pos) const
+        -:  195:    { Q_ASSERT(pos >= 0); Q_ASSERT(pos <= size()); return QByteArrayView(data() + pos, size() - pos); }
+        -:  196:    [[nodiscard]] constexpr QByteArrayView sliced(qsizetype pos, qsizetype n) const
+        -:  197:    { Q_ASSERT(pos >= 0); Q_ASSERT(n >= 0); Q_ASSERT(size_t(pos) + size_t(n) <= size_t(size())); return QByteArrayView(data() + pos, n); }
+        -:  198:    [[nodiscard]] constexpr QByteArrayView chopped(qsizetype len) const
+        -:  199:    { Q_ASSERT(len >= 0); Q_ASSERT(len <= size()); return first(size() - len); }
+        -:  200:
+        -:  201:    [[nodiscard]] constexpr QByteArrayView left(qsizetype n) const
+        -:  202:    { if (n < 0 || n > size()) n = size(); return QByteArrayView(data(), n); }
+        -:  203:    [[nodiscard]] constexpr QByteArrayView right(qsizetype n) const
+        -:  204:    { if (n < 0 || n > size()) n = size(); if (n < 0) n = 0; return QByteArrayView(data() + size() - n, n); }
+        -:  205:    [[nodiscard]] constexpr QByteArrayView mid(qsizetype pos, qsizetype n = -1) const
+        -:  206:    {
+        -:  207:        using namespace QtPrivate;
+        -:  208:        auto result = QContainerImplHelper::mid(size(), &pos, &n);
+        -:  209:        return result == QContainerImplHelper::Null ? QByteArrayView()
+        -:  210:                                                    : QByteArrayView(m_data + pos, n);
+        -:  211:    }
+        -:  212:
+        -:  213:    constexpr void truncate(qsizetype n)
+        -:  214:    { Q_ASSERT(n >= 0); Q_ASSERT(n <= size()); m_size = n; }
+        -:  215:    constexpr void chop(qsizetype n)
+        -:  216:    { Q_ASSERT(n >= 0); Q_ASSERT(n <= size()); m_size -= n; }
+        -:  217:
+        -:  218:    // Defined in qbytearray.cpp:
+        -:  219:    [[nodiscard]] QByteArrayView trimmed() const noexcept
+        -:  220:    { return QtPrivate::trimmed(*this); }
+        -:  221:    [[nodiscard]] short toShort(bool *ok = nullptr, int base = 10) const
+        -:  222:    { return QtPrivate::toIntegral<short>(*this, ok, base); }
+        -:  223:    [[nodiscard]] ushort toUShort(bool *ok = nullptr, int base = 10) const
+        -:  224:    { return QtPrivate::toIntegral<ushort>(*this, ok, base); }
+        -:  225:    [[nodiscard]] int toInt(bool *ok = nullptr, int base = 10) const
+        -:  226:    { return QtPrivate::toIntegral<int>(*this, ok, base); }
+        -:  227:    [[nodiscard]] uint toUInt(bool *ok = nullptr, int base = 10) const
+        -:  228:    { return QtPrivate::toIntegral<uint>(*this, ok, base); }
+        -:  229:    [[nodiscard]] long toLong(bool *ok = nullptr, int base = 10) const
+        -:  230:    { return QtPrivate::toIntegral<long>(*this, ok, base); }
+        -:  231:    [[nodiscard]] ulong toULong(bool *ok = nullptr, int base = 10) const
+        -:  232:    { return QtPrivate::toIntegral<ulong>(*this, ok, base); }
+        -:  233:    [[nodiscard]] qlonglong toLongLong(bool *ok = nullptr, int base = 10) const
+        -:  234:    { return QtPrivate::toIntegral<qlonglong>(*this, ok, base); }
+        -:  235:    [[nodiscard]] qulonglong toULongLong(bool *ok = nullptr, int base = 10) const
+        -:  236:    { return QtPrivate::toIntegral<qulonglong>(*this, ok, base); }
+        -:  237:    [[nodiscard]] float toFloat(bool *ok = nullptr) const
+        -:  238:    {
+        -:  239:        const auto r = QtPrivate::toFloat(*this);
+        -:  240:        if (ok)
+        -:  241:            *ok = bool(r);
+        -:  242:        return r.value_or(0.0f);
+        -:  243:    }
+        -:  244:    [[nodiscard]] double toDouble(bool *ok = nullptr) const
+        -:  245:    {
+        -:  246:        const auto r = QtPrivate::toDouble(*this);
+        -:  247:        if (ok)
+        -:  248:            *ok = bool(r);
+        -:  249:        return r.value_or(0.0);
+        -:  250:    }
+        -:  251:
+        -:  252:    [[nodiscard]] bool startsWith(QByteArrayView other) const noexcept
+        -:  253:    { return QtPrivate::startsWith(*this, other); }
+        -:  254:    [[nodiscard]] bool startsWith(char c) const noexcept
+        -:  255:    { return !empty() && front() == c; }
+        -:  256:
+        -:  257:    [[nodiscard]] bool endsWith(QByteArrayView other) const noexcept
+        -:  258:    { return QtPrivate::endsWith(*this, other); }
+        -:  259:    [[nodiscard]] bool endsWith(char c) const noexcept
+        -:  260:    { return !empty() && back() == c; }
+        -:  261:
+        -:  262:    [[nodiscard]] qsizetype indexOf(QByteArrayView a, qsizetype from = 0) const noexcept
+        -:  263:    { return QtPrivate::findByteArray(*this, from, a); }
+        -:  264:    [[nodiscard]] qsizetype indexOf(char ch, qsizetype from = 0) const noexcept
+        -:  265:    { return QtPrivate::findByteArray(*this, from, QByteArrayView(&ch, 1)); }
+        -:  266:
+        -:  267:    [[nodiscard]] bool contains(QByteArrayView a) const noexcept
+        -:  268:    { return indexOf(a) != qsizetype(-1); }
+        -:  269:    [[nodiscard]] bool contains(char c) const noexcept
+        -:  270:    { return indexOf(c) != qsizetype(-1); }
+        -:  271:
+        -:  272:    [[nodiscard]] qsizetype lastIndexOf(QByteArrayView a) const noexcept
+        -:  273:    { return lastIndexOf(a, size()); }
+        -:  274:    [[nodiscard]] qsizetype lastIndexOf(QByteArrayView a, qsizetype from) const noexcept
+        -:  275:    { return QtPrivate::lastIndexOf(*this, from, a); }
+        -:  276:    [[nodiscard]] qsizetype lastIndexOf(char ch, qsizetype from = -1) const noexcept
+        -:  277:    { return QtPrivate::lastIndexOf(*this, from, QByteArrayView(&ch, 1)); }
+        -:  278:
+        -:  279:    [[nodiscard]] qsizetype count(QByteArrayView a) const noexcept
+        -:  280:    { return QtPrivate::count(*this, a); }
+        -:  281:    [[nodiscard]] qsizetype count(char ch) const noexcept
+        -:  282:    { return QtPrivate::count(*this, QByteArrayView(&ch, 1)); }
+        -:  283:
+        -:  284:    inline int compare(QByteArrayView a, Qt::CaseSensitivity cs = Qt::CaseSensitive) const noexcept;
+        -:  285:
+        -:  286:    [[nodiscard]] inline bool isValidUtf8() const noexcept { return QtPrivate::isValidUtf8(*this); }
+        -:  287:
+        -:  288:    //
+        -:  289:    // STL compatibility API:
+        -:  290:    //
+        -:  291:    [[nodiscard]] constexpr const_iterator begin()   const noexcept { return data(); }
+        -:  292:    [[nodiscard]] constexpr const_iterator end()     const noexcept { return data() + size(); }
+        -:  293:    [[nodiscard]] constexpr const_iterator cbegin()  const noexcept { return begin(); }
+        -:  294:    [[nodiscard]] constexpr const_iterator cend()    const noexcept { return end(); }
+        -:  295:    [[nodiscard]] constexpr const_reverse_iterator rbegin()  const noexcept { return const_reverse_iterator(end()); }
+        -:  296:    [[nodiscard]] constexpr const_reverse_iterator rend()    const noexcept { return const_reverse_iterator(begin()); }
+        -:  297:    [[nodiscard]] constexpr const_reverse_iterator crbegin() const noexcept { return rbegin(); }
+        -:  298:    [[nodiscard]] constexpr const_reverse_iterator crend()   const noexcept { return rend(); }
+        -:  299:
+        -:  300:    [[nodiscard]] constexpr bool empty() const noexcept { return size() == 0; }
+        -:  301:    [[nodiscard]] constexpr char front() const { Q_ASSERT(!empty()); return m_data[0]; }
+        -:  302:    [[nodiscard]] constexpr char back()  const { Q_ASSERT(!empty()); return m_data[m_size - 1]; }
+        -:  303:
+        -:  304:    //
+        -:  305:    // Qt compatibility API:
+        -:  306:    //
+        -:  307:    [[nodiscard]] constexpr bool isNull() const noexcept { return !m_data; }
+        -:  308:    [[nodiscard]] constexpr bool isEmpty() const noexcept { return empty(); }
+        -:  309:    [[nodiscard]] constexpr qsizetype length() const noexcept
+        -:  310:    { return size(); }
+        -:  311:    [[nodiscard]] constexpr char first() const { return front(); }
+        -:  312:    [[nodiscard]] constexpr char last()  const { return back(); }
+        -:  313:
+        -:  314:    friend inline bool operator==(QByteArrayView lhs, QByteArrayView rhs) noexcept
+        -:  315:    { return lhs.size() == rhs.size() && (!lhs.size() || memcmp(lhs.data(), rhs.data(), lhs.size()) == 0); }
+        -:  316:    friend inline bool operator!=(QByteArrayView lhs, QByteArrayView rhs) noexcept
+        -:  317:    { return !(lhs == rhs); }
+        -:  318:    friend inline bool operator< (QByteArrayView lhs, QByteArrayView rhs) noexcept
+        -:  319:    { return QtPrivate::compareMemory(lhs, rhs) <  0; }
+        -:  320:    friend inline bool operator<=(QByteArrayView lhs, QByteArrayView rhs) noexcept
+        -:  321:    { return QtPrivate::compareMemory(lhs, rhs) <= 0; }
+        -:  322:    friend inline bool operator> (QByteArrayView lhs, QByteArrayView rhs) noexcept
+        -:  323:    { return !(lhs <= rhs); }
+        -:  324:    friend inline bool operator>=(QByteArrayView lhs, QByteArrayView rhs) noexcept
+        -:  325:    { return !(lhs < rhs); }
+        -:  326:
+        -:  327:private:
+        -:  328:    qsizetype m_size;
+        -:  329:    const storage_type *m_data;
+        -:  330:};
+        -:  331:Q_DECLARE_TYPEINFO(QByteArrayView, Q_PRIMITIVE_TYPE);
+        -:  332:
+        -:  333:template<typename QByteArrayLike,
+        -:  334:         std::enable_if_t<std::is_same_v<QByteArrayLike, QByteArray>, bool> = true>
+        -:  335:[[nodiscard]] inline QByteArrayView qToByteArrayViewIgnoringNull(const QByteArrayLike &b) noexcept
+        -:  336:{ return QByteArrayView(b.data(), b.size()); }
+        -:  337:
+        -:  338:inline int QByteArrayView::compare(QByteArrayView a, Qt::CaseSensitivity cs) const noexcept
+        -:  339:{
+        -:  340:    return cs == Qt::CaseSensitive ? QtPrivate::compareMemory(*this, a) :
+        -:  341:                                     qstrnicmp(data(), size(), a.data(), a.size());
+        -:  342:}
+        -:  343:
+        -:  344:#if QT_DEPRECATED_SINCE(6, 0)
+        -:  345:QT_DEPRECATED_VERSION_X_6_0("Use the QByteArrayView overload.")
+        -:  346:inline quint16 qChecksum(const char *s, qsizetype len,
+        -:  347:                         Qt::ChecksumType standard = Qt::ChecksumIso3309)
+        -:  348:{ return qChecksum(QByteArrayView(s, len), standard); }
+        -:  349:#endif
+        -:  350:
+        -:  351:QT_END_NAMESPACE
+        -:  352:
+        -:  353:#endif // QBYTEARRAYVIEW_H

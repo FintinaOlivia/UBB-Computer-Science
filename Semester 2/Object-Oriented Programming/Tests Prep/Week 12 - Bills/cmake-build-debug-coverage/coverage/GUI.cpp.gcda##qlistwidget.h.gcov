@@ -1,0 +1,298 @@
+        -:    0:Source:C:/Qt/6.5.0/mingw_64/include/QtWidgets/qlistwidget.h
+        -:    0:Graph:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\GUI\GUI.cpp.gcno
+        -:    0:Data:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\GUI\GUI.cpp.gcda
+        -:    0:Runs:1
+        -:    1:// Copyright (C) 2016 The Qt Company Ltd.
+        -:    2:// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+        -:    3:
+        -:    4:#ifndef QLISTWIDGET_H
+        -:    5:#define QLISTWIDGET_H
+        -:    6:
+        -:    7:#include <QtWidgets/qlistview.h>
+        -:    8:#include <QtWidgets/qtwidgetsglobal.h>
+        -:    9:#include <QtCore/qlist.h>
+        -:   10:#include <QtCore/qitemselectionmodel.h>
+        -:   11:#include <QtCore/qvariant.h>
+        -:   12:
+        -:   13:QT_REQUIRE_CONFIG(listwidget);
+        -:   14:
+        -:   15:QT_BEGIN_NAMESPACE
+        -:   16:
+        -:   17:class QListWidget;
+        -:   18:class QListModel;
+        -:   19:class QWidgetItemData;
+        -:   20:class QListWidgetItemPrivate;
+        -:   21:
+        -:   22:class Q_WIDGETS_EXPORT QListWidgetItem
+        -:   23:{
+        -:   24:    friend class QListModel;
+        -:   25:    friend class QListWidget;
+        -:   26:public:
+        -:   27:    enum ItemType { Type = 0, UserType = 1000 };
+        -:   28:    explicit QListWidgetItem(QListWidget *listview = nullptr, int type = Type);
+        -:   29:    explicit QListWidgetItem(const QString &text, QListWidget *listview = nullptr, int type = Type);
+        -:   30:    explicit QListWidgetItem(const QIcon &icon, const QString &text,
+        -:   31:                             QListWidget *listview = nullptr, int type = Type);
+        -:   32:    QListWidgetItem(const QListWidgetItem &other);
+        -:   33:    virtual ~QListWidgetItem();
+        -:   34:
+        -:   35:    virtual QListWidgetItem *clone() const;
+        -:   36:
+        -:   37:    inline QListWidget *listWidget() const { return view; }
+        -:   38:
+        -:   39:    void setSelected(bool select);
+        -:   40:    bool isSelected() const;
+        -:   41:
+        -:   42:    inline void setHidden(bool hide);
+        -:   43:    inline bool isHidden() const;
+        -:   44:
+        -:   45:    inline Qt::ItemFlags flags() const { return itemFlags; }
+        -:   46:    void setFlags(Qt::ItemFlags flags);
+        -:   47:
+        -:   48:    inline QString text() const
+        -:   49:        { return data(Qt::DisplayRole).toString(); }
+        -:   50:    inline void setText(const QString &text);
+        -:   51:
+        -:   52:    inline QIcon icon() const
+        -:   53:        { return qvariant_cast<QIcon>(data(Qt::DecorationRole)); }
+        -:   54:    inline void setIcon(const QIcon &icon);
+        -:   55:
+        -:   56:    inline QString statusTip() const
+        -:   57:        { return data(Qt::StatusTipRole).toString(); }
+        -:   58:    inline void setStatusTip(const QString &statusTip);
+        -:   59:
+        -:   60:#if QT_CONFIG(tooltip)
+        -:   61:    inline QString toolTip() const
+        -:   62:        { return data(Qt::ToolTipRole).toString(); }
+        -:   63:    inline void setToolTip(const QString &toolTip);
+        -:   64:#endif
+        -:   65:
+        -:   66:#if QT_CONFIG(whatsthis)
+        -:   67:    inline QString whatsThis() const
+        -:   68:        { return data(Qt::WhatsThisRole).toString(); }
+        -:   69:    inline void setWhatsThis(const QString &whatsThis);
+        -:   70:#endif
+        -:   71:
+        -:   72:    inline QFont font() const
+        -:   73:        { return qvariant_cast<QFont>(data(Qt::FontRole)); }
+        -:   74:    inline void setFont(const QFont &font);
+        -:   75:
+        -:   76:#if QT_VERSION < QT_VERSION_CHECK(7, 0, 0)
+        -:   77:    inline int textAlignment() const
+        -:   78:        { return data(Qt::TextAlignmentRole).toInt(); }
+        -:   79:#else
+        -:   80:    inline Qt::Alignment textAlignment() const
+        -:   81:    { return qvariant_cast<Qt::Alignment>(data(Qt::TextAlignmentRole)); }
+        -:   82:#endif
+        -:   83:#if QT_DEPRECATED_SINCE(6, 4)
+        -:   84:    QT_DEPRECATED_VERSION_X_6_4("Use the overload taking Qt::Alignment")
+        -:   85:    inline void setTextAlignment(int alignment)
+        -:   86:        { setData(Qt::TextAlignmentRole, alignment); }
+        -:   87:    inline void setTextAlignment(Qt::AlignmentFlag alignment)
+        -:   88:        { setData(Qt::TextAlignmentRole, QVariant::fromValue(Qt::Alignment(alignment))); }
+        -:   89:#endif
+        -:   90:    inline void setTextAlignment(Qt::Alignment alignment)
+        -:   91:        { setData(Qt::TextAlignmentRole, QVariant::fromValue(alignment)); }
+        -:   92:
+        -:   93:    inline QBrush background() const
+        -:   94:        { return qvariant_cast<QBrush>(data(Qt::BackgroundRole)); }
+        -:   95:    inline void setBackground(const QBrush &brush)
+        -:   96:        { setData(Qt::BackgroundRole, brush.style() != Qt::NoBrush ? QVariant(brush) : QVariant()); }
+        -:   97:
+        -:   98:    inline QBrush foreground() const
+        -:   99:        { return qvariant_cast<QBrush>(data(Qt::ForegroundRole)); }
+        -:  100:    inline void setForeground(const QBrush &brush)
+        -:  101:        { setData(Qt::ForegroundRole, brush.style() != Qt::NoBrush ? QVariant(brush) : QVariant()); }
+        -:  102:
+        -:  103:    inline Qt::CheckState checkState() const
+        -:  104:        { return qvariant_cast<Qt::CheckState>(data(Qt::CheckStateRole)); }
+        -:  105:    inline void setCheckState(Qt::CheckState state)
+        -:  106:        { setData(Qt::CheckStateRole, static_cast<int>(state)); }
+        -:  107:
+        -:  108:    inline QSize sizeHint() const
+        -:  109:        { return qvariant_cast<QSize>(data(Qt::SizeHintRole)); }
+        -:  110:    inline void setSizeHint(const QSize &size)
+        -:  111:        { setData(Qt::SizeHintRole, size.isValid() ? QVariant(size) : QVariant()); }
+        -:  112:
+        -:  113:    virtual QVariant data(int role) const;
+        -:  114:    virtual void setData(int role, const QVariant &value);
+        -:  115:
+        -:  116:    virtual bool operator<(const QListWidgetItem &other) const;
+        -:  117:
+        -:  118:#ifndef QT_NO_DATASTREAM
+        -:  119:    virtual void read(QDataStream &in);
+        -:  120:    virtual void write(QDataStream &out) const;
+        -:  121:#endif
+        -:  122:    QListWidgetItem &operator=(const QListWidgetItem &other);
+        -:  123:
+        -:  124:    inline int type() const { return rtti; }
+        -:  125:
+        -:  126:private:
+        -:  127:    QListModel *listModel() const;
+        -:  128:    int rtti;
+        -:  129:    QListWidget *view;
+        -:  130:    QListWidgetItemPrivate *d;
+        -:  131:    Qt::ItemFlags itemFlags;
+        -:  132:};
+        -:  133:
+        -:  134:inline void QListWidgetItem::setText(const QString &atext)
+        -:  135:{ setData(Qt::DisplayRole, atext); }
+        -:  136:
+        -:  137:inline void QListWidgetItem::setIcon(const QIcon &aicon)
+        -:  138:{ setData(Qt::DecorationRole, aicon); }
+        -:  139:
+        -:  140:inline void QListWidgetItem::setStatusTip(const QString &astatusTip)
+        -:  141:{ setData(Qt::StatusTipRole, astatusTip); }
+        -:  142:
+        -:  143:#if QT_CONFIG(tooltip)
+        -:  144:inline void QListWidgetItem::setToolTip(const QString &atoolTip)
+        -:  145:{ setData(Qt::ToolTipRole, atoolTip); }
+        -:  146:#endif
+        -:  147:
+        -:  148:#if QT_CONFIG(whatsthis)
+        -:  149:inline void QListWidgetItem::setWhatsThis(const QString &awhatsThis)
+        -:  150:{ setData(Qt::WhatsThisRole, awhatsThis); }
+        -:  151:#endif
+        -:  152:
+        -:  153:inline void QListWidgetItem::setFont(const QFont &afont)
+        -:  154:{ setData(Qt::FontRole, afont); }
+        -:  155:
+        -:  156:#ifndef QT_NO_DATASTREAM
+        -:  157:Q_WIDGETS_EXPORT QDataStream &operator<<(QDataStream &out, const QListWidgetItem &item);
+        -:  158:Q_WIDGETS_EXPORT QDataStream &operator>>(QDataStream &in, QListWidgetItem &item);
+        -:  159:#endif
+        -:  160:
+        -:  161:class QListWidgetPrivate;
+        -:  162:
+        -:  163:class Q_WIDGETS_EXPORT QListWidget : public QListView
+        -:  164:{
+        -:  165:    Q_OBJECT
+        -:  166:    Q_PROPERTY(int count READ count)
+        -:  167:    Q_PROPERTY(int currentRow READ currentRow WRITE setCurrentRow NOTIFY currentRowChanged
+        -:  168:               USER true)
+        -:  169:    Q_PROPERTY(bool sortingEnabled READ isSortingEnabled WRITE setSortingEnabled)
+        -:  170:
+        -:  171:    friend class QListWidgetItem;
+        -:  172:    friend class QListModel;
+        -:  173:public:
+        -:  174:    explicit QListWidget(QWidget *parent = nullptr);
+        -:  175:    ~QListWidget();
+        -:  176:
+        -:  177:    void setSelectionModel(QItemSelectionModel *selectionModel) override;
+        -:  178:
+        -:  179:    QListWidgetItem *item(int row) const;
+        -:  180:    int row(const QListWidgetItem *item) const;
+        -:  181:    void insertItem(int row, QListWidgetItem *item);
+        -:  182:    void insertItem(int row, const QString &label);
+        -:  183:    void insertItems(int row, const QStringList &labels);
+function _ZN11QListWidget7addItemERK7QString called 11 returned 100% blocks executed 100%
+       11:  184:    inline void addItem(const QString &label) { insertItem(count(), label); }
+       11:  184-block  0
+call    0 returned 11
+call    1 returned 11
+        -:  185:    inline void addItem(QListWidgetItem *item);
+        -:  186:    inline void addItems(const QStringList &labels) { insertItems(count(), labels); }
+        -:  187:    QListWidgetItem *takeItem(int row);
+        -:  188:    int count() const;
+        -:  189:
+        -:  190:    QListWidgetItem *currentItem() const;
+        -:  191:    void setCurrentItem(QListWidgetItem *item);
+        -:  192:    void setCurrentItem(QListWidgetItem *item, QItemSelectionModel::SelectionFlags command);
+        -:  193:
+        -:  194:    int currentRow() const;
+        -:  195:    void setCurrentRow(int row);
+        -:  196:    void setCurrentRow(int row, QItemSelectionModel::SelectionFlags command);
+        -:  197:
+        -:  198:    QListWidgetItem *itemAt(const QPoint &p) const;
+        -:  199:    inline QListWidgetItem *itemAt(int x, int y) const;
+        -:  200:    QRect visualItemRect(const QListWidgetItem *item) const;
+        -:  201:
+        -:  202:    void sortItems(Qt::SortOrder order = Qt::AscendingOrder);
+        -:  203:    void setSortingEnabled(bool enable);
+        -:  204:    bool isSortingEnabled() const;
+        -:  205:
+        -:  206:    void editItem(QListWidgetItem *item);
+        -:  207:    void openPersistentEditor(QListWidgetItem *item);
+        -:  208:    void closePersistentEditor(QListWidgetItem *item);
+        -:  209:    using QAbstractItemView::isPersistentEditorOpen;
+        -:  210:    bool isPersistentEditorOpen(QListWidgetItem *item) const;
+        -:  211:
+        -:  212:    QWidget *itemWidget(QListWidgetItem *item) const;
+        -:  213:    void setItemWidget(QListWidgetItem *item, QWidget *widget);
+        -:  214:    inline void removeItemWidget(QListWidgetItem *item);
+        -:  215:
+        -:  216:    QList<QListWidgetItem*> selectedItems() const;
+        -:  217:    QList<QListWidgetItem*> findItems(const QString &text, Qt::MatchFlags flags) const;
+        -:  218:
+        -:  219:    QList<QListWidgetItem*> items(const QMimeData *data) const;
+        -:  220:
+        -:  221:    QModelIndex indexFromItem(const QListWidgetItem *item) const;
+        -:  222:    QListWidgetItem *itemFromIndex(const QModelIndex &index) const;
+        -:  223:
+        -:  224:protected:
+        -:  225:#if QT_CONFIG(draganddrop)
+        -:  226:    void dropEvent(QDropEvent *event) override;
+        -:  227:#endif
+        -:  228:public Q_SLOTS:
+        -:  229:    void scrollToItem(const QListWidgetItem *item, QAbstractItemView::ScrollHint hint = EnsureVisible);
+        -:  230:    void clear();
+        -:  231:
+        -:  232:Q_SIGNALS:
+        -:  233:    void itemPressed(QListWidgetItem *item);
+        -:  234:    void itemClicked(QListWidgetItem *item);
+        -:  235:    void itemDoubleClicked(QListWidgetItem *item);
+        -:  236:    void itemActivated(QListWidgetItem *item);
+        -:  237:    void itemEntered(QListWidgetItem *item);
+        -:  238:    void itemChanged(QListWidgetItem *item);
+        -:  239:
+        -:  240:    void currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+        -:  241:    void currentTextChanged(const QString &currentText);
+        -:  242:    void currentRowChanged(int currentRow);
+        -:  243:
+        -:  244:    void itemSelectionChanged();
+        -:  245:
+        -:  246:protected:
+        -:  247:    bool event(QEvent *e) override;
+        -:  248:    virtual QStringList mimeTypes() const;
+        -:  249:    virtual QMimeData *mimeData(const QList<QListWidgetItem *> &items) const;
+        -:  250:#if QT_CONFIG(draganddrop)
+        -:  251:    virtual bool dropMimeData(int index, const QMimeData *data, Qt::DropAction action);
+        -:  252:    virtual Qt::DropActions supportedDropActions() const;
+        -:  253:#endif
+        -:  254:
+        -:  255:private:
+        -:  256:    void setModel(QAbstractItemModel *model) override;
+        -:  257:    Qt::SortOrder sortOrder() const;
+        -:  258:
+        -:  259:    Q_DECLARE_PRIVATE(QListWidget)
+        -:  260:    Q_DISABLE_COPY(QListWidget)
+        -:  261:
+        -:  262:    Q_PRIVATE_SLOT(d_func(), void _q_emitItemPressed(const QModelIndex &index))
+        -:  263:    Q_PRIVATE_SLOT(d_func(), void _q_emitItemClicked(const QModelIndex &index))
+        -:  264:    Q_PRIVATE_SLOT(d_func(), void _q_emitItemDoubleClicked(const QModelIndex &index))
+        -:  265:    Q_PRIVATE_SLOT(d_func(), void _q_emitItemActivated(const QModelIndex &index))
+        -:  266:    Q_PRIVATE_SLOT(d_func(), void _q_emitItemEntered(const QModelIndex &index))
+        -:  267:    Q_PRIVATE_SLOT(d_func(), void _q_emitItemChanged(const QModelIndex &index))
+        -:  268:    Q_PRIVATE_SLOT(d_func(), void _q_emitCurrentItemChanged(const QModelIndex &previous, const QModelIndex &current))
+        -:  269:    Q_PRIVATE_SLOT(d_func(), void _q_sort())
+        -:  270:    Q_PRIVATE_SLOT(d_func(), void _q_dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight))
+        -:  271:};
+        -:  272:
+        -:  273:inline void QListWidget::removeItemWidget(QListWidgetItem *aItem)
+        -:  274:{ setItemWidget(aItem, nullptr); }
+        -:  275:
+        -:  276:inline void QListWidget::addItem(QListWidgetItem *aitem)
+        -:  277:{ insertItem(count(), aitem); }
+        -:  278:
+        -:  279:inline QListWidgetItem *QListWidget::itemAt(int ax, int ay) const
+        -:  280:{ return itemAt(QPoint(ax, ay)); }
+        -:  281:
+        -:  282:inline void QListWidgetItem::setHidden(bool ahide)
+        -:  283:{ if (view) view->setRowHidden(view->row(this), ahide); }
+        -:  284:
+        -:  285:inline bool QListWidgetItem::isHidden() const
+        -:  286:{ return (view ? view->isRowHidden(view->row(this)) : false); }
+        -:  287:
+        -:  288:QT_END_NAMESPACE
+        -:  289:
+        -:  290:#endif // QLISTWIDGET_H

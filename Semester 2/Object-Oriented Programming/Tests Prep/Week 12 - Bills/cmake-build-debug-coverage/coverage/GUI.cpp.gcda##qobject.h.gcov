@@ -1,0 +1,597 @@
+        -:    0:Source:C:/Qt/6.5.0/mingw_64/include/QtCore/qobject.h
+        -:    0:Graph:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\GUI\GUI.cpp.gcno
+        -:    0:Data:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\GUI\GUI.cpp.gcda
+        -:    0:Runs:1
+        -:    1:// Copyright (C) 2020 The Qt Company Ltd.
+        -:    2:// Copyright (C) 2013 Olivier Goffart <ogoffart@woboq.com>
+        -:    3:// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+        -:    4:
+        -:    5:#ifndef QOBJECT_H
+        -:    6:#define QOBJECT_H
+        -:    7:
+        -:    8:#ifndef QT_NO_QOBJECT
+        -:    9:
+        -:   10:#include <QtCore/qobjectdefs.h>
+        -:   11:#include <QtCore/qstring.h>
+        -:   12:#include <QtCore/qbytearray.h>
+        -:   13:#include <QtCore/qlist.h>
+        -:   14:#ifdef QT_INCLUDE_COMPAT
+        -:   15:#include <QtCore/qcoreevent.h>
+        -:   16:#endif
+        -:   17:#include <QtCore/qscopedpointer.h>
+        -:   18:#include <QtCore/qmetatype.h>
+        -:   19:
+        -:   20:#include <QtCore/qobject_impl.h>
+        -:   21:#include <QtCore/qbindingstorage.h>
+        -:   22:
+        -:   23:#include <chrono>
+        -:   24:
+        -:   25:QT_BEGIN_NAMESPACE
+        -:   26:
+        -:   27:
+        -:   28:template <typename T> class QBindable;
+        -:   29:class QEvent;
+        -:   30:class QTimerEvent;
+        -:   31:class QChildEvent;
+        -:   32:struct QMetaObject;
+        -:   33:class QVariant;
+        -:   34:class QObjectPrivate;
+        -:   35:class QObject;
+        -:   36:class QThread;
+        -:   37:class QWidget;
+        -:   38:class QAccessibleWidget;
+        -:   39:#if QT_CONFIG(regularexpression)
+        -:   40:class QRegularExpression;
+        -:   41:#endif
+        -:   42:struct QDynamicMetaObjectData;
+        -:   43:
+        -:   44:typedef QList<QObject*> QObjectList;
+        -:   45:
+        -:   46:Q_CORE_EXPORT void qt_qFindChildren_helper(const QObject *parent, const QString &name,
+        -:   47:                                           const QMetaObject &mo, QList<void *> *list, Qt::FindChildOptions options);
+        -:   48:Q_CORE_EXPORT void qt_qFindChildren_helper(const QObject *parent, const QMetaObject &mo,
+        -:   49:                                           QList<void *> *list, Qt::FindChildOptions options);
+        -:   50:Q_CORE_EXPORT void qt_qFindChildren_helper(const QObject *parent, const QRegularExpression &re,
+        -:   51:                                           const QMetaObject &mo, QList<void *> *list, Qt::FindChildOptions options);
+        -:   52:Q_CORE_EXPORT QObject *qt_qFindChild_helper(const QObject *parent, const QString &name, const QMetaObject &mo, Qt::FindChildOptions options);
+        -:   53:
+        -:   54:class Q_CORE_EXPORT QObjectData
+        -:   55:{
+        -:   56:    Q_DISABLE_COPY(QObjectData)
+        -:   57:public:
+        -:   58:    QObjectData() = default;
+        -:   59:    virtual ~QObjectData() = 0;
+        -:   60:    QObject *q_ptr;
+        -:   61:    QObject *parent;
+        -:   62:    QObjectList children;
+        -:   63:
+        -:   64:    uint isWidget : 1;
+        -:   65:    uint blockSig : 1;
+        -:   66:    uint wasDeleted : 1;
+        -:   67:    uint isDeletingChildren : 1;
+        -:   68:    uint sendChildEvents : 1;
+        -:   69:    uint receiveChildEvents : 1;
+        -:   70:    uint isWindow : 1; // for QWindow
+        -:   71:    uint deleteLaterCalled : 1;
+        -:   72:    uint isQuickItem : 1;
+        -:   73:    uint willBeWidget : 1; // for handling widget-specific bits in QObject's ctor
+        -:   74:    uint wasWidget : 1; // for properly cleaning up in QObject's dtor
+        -:   75:    uint unused : 21;
+        -:   76:    QAtomicInt postedEvents;
+        -:   77:    QDynamicMetaObjectData *metaObject;
+        -:   78:    QBindingStorage bindingStorage;
+        -:   79:
+        -:   80:    // ### Qt7: Make this return a const QMetaObject *. You should not mess with
+        -:   81:    //          the metaobjects of existing objects.
+        -:   82:    QMetaObject *dynamicMetaObject() const;
+        -:   83:
+        -:   84:#ifdef QT_DEBUG
+        -:   85:    enum { CheckForParentChildLoopsWarnDepth = 4096 };
+        -:   86:#endif
+        -:   87:};
+        -:   88:
+        -:   89:class Q_CORE_EXPORT QObject
+        -:   90:{
+        -:   91:    Q_OBJECT
+        -:   92:
+        -:   93:    Q_PROPERTY(QString objectName READ objectName WRITE setObjectName NOTIFY objectNameChanged
+        -:   94:               BINDABLE bindableObjectName)
+        -:   95:    Q_DECLARE_PRIVATE(QObject)
+        -:   96:
+        -:   97:public:
+        -:   98:    Q_INVOKABLE explicit QObject(QObject *parent = nullptr);
+        -:   99:    virtual ~QObject();
+        -:  100:
+        -:  101:    virtual bool event(QEvent *event);
+        -:  102:    virtual bool eventFilter(QObject *watched, QEvent *event);
+        -:  103:
+        -:  104:#if defined(QT_NO_TRANSLATION) || defined(Q_QDOC)
+        -:  105:    static QString tr(const char *sourceText, const char * = nullptr, int = -1)
+        -:  106:        { return QString::fromUtf8(sourceText); }
+        -:  107:#endif // QT_NO_TRANSLATION
+        -:  108:
+        -:  109:    QString objectName() const;
+        -:  110:#if QT_CORE_REMOVED_SINCE(6, 4)
+        -:  111:    void setObjectName(const QString &name);
+        -:  112:#endif
+        -:  113:    Q_WEAK_OVERLOAD
+        -:  114:    void setObjectName(const QString &name) { doSetObjectName(name); }
+        -:  115:    void setObjectName(QAnyStringView name);
+        -:  116:    QBindable<QString> bindableObjectName();
+        -:  117:
+        -:  118:    inline bool isWidgetType() const { return d_ptr->isWidget; }
+        -:  119:    inline bool isWindowType() const { return d_ptr->isWindow; }
+        -:  120:    inline bool isQuickItemType() const { return d_ptr->isQuickItem; }
+        -:  121:
+        -:  122:    inline bool signalsBlocked() const noexcept { return d_ptr->blockSig; }
+        -:  123:    bool blockSignals(bool b) noexcept;
+        -:  124:
+        -:  125:    QThread *thread() const;
+        -:  126:    void moveToThread(QThread *thread);
+        -:  127:
+        -:  128:    int startTimer(int interval, Qt::TimerType timerType = Qt::CoarseTimer);
+        -:  129:    Q_ALWAYS_INLINE
+        -:  130:    int startTimer(std::chrono::milliseconds time, Qt::TimerType timerType = Qt::CoarseTimer)
+        -:  131:    {
+        -:  132:        return startTimer(int(time.count()), timerType);
+        -:  133:    }
+        -:  134:    void killTimer(int id);
+        -:  135:
+        -:  136:    template<typename T>
+        -:  137:    inline T findChild(const QString &aName = QString(), Qt::FindChildOptions options = Qt::FindChildrenRecursively) const
+        -:  138:    {
+        -:  139:        typedef typename std::remove_cv<typename std::remove_pointer<T>::type>::type ObjType;
+        -:  140:        return static_cast<T>(qt_qFindChild_helper(this, aName, ObjType::staticMetaObject, options));
+        -:  141:    }
+        -:  142:
+        -:  143:    template<typename T>
+        -:  144:    inline QList<T> findChildren(const QString &aName, Qt::FindChildOptions options = Qt::FindChildrenRecursively) const
+        -:  145:    {
+        -:  146:        typedef typename std::remove_cv<typename std::remove_pointer<T>::type>::type ObjType;
+        -:  147:        QList<T> list;
+        -:  148:        qt_qFindChildren_helper(this, aName, ObjType::staticMetaObject,
+        -:  149:                                reinterpret_cast<QList<void *> *>(&list), options);
+        -:  150:        return list;
+        -:  151:    }
+        -:  152:
+        -:  153:    template<typename T>
+        -:  154:    QList<T> findChildren(Qt::FindChildOptions options = Qt::FindChildrenRecursively) const
+        -:  155:    {
+        -:  156:        typedef typename std::remove_cv<typename std::remove_pointer<T>::type>::type ObjType;
+        -:  157:        QList<T> list;
+        -:  158:        qt_qFindChildren_helper(this, ObjType::staticMetaObject,
+        -:  159:                                reinterpret_cast<QList<void *> *>(&list), options);
+        -:  160:        return list;
+        -:  161:    }
+        -:  162:
+        -:  163:#if QT_CONFIG(regularexpression)
+        -:  164:    template<typename T>
+        -:  165:    inline QList<T> findChildren(const QRegularExpression &re, Qt::FindChildOptions options = Qt::FindChildrenRecursively) const
+        -:  166:    {
+        -:  167:        typedef typename std::remove_cv<typename std::remove_pointer<T>::type>::type ObjType;
+        -:  168:        QList<T> list;
+        -:  169:        qt_qFindChildren_helper(this, re, ObjType::staticMetaObject,
+        -:  170:                                reinterpret_cast<QList<void *> *>(&list), options);
+        -:  171:        return list;
+        -:  172:    }
+        -:  173:#endif // QT_CONFIG(regularexpression)
+        -:  174:
+        -:  175:    inline const QObjectList &children() const { return d_ptr->children; }
+        -:  176:
+        -:  177:    void setParent(QObject *parent);
+        -:  178:    void installEventFilter(QObject *filterObj);
+        -:  179:    void removeEventFilter(QObject *obj);
+        -:  180:
+        -:  181:    static QMetaObject::Connection connect(const QObject *sender, const char *signal,
+        -:  182:                        const QObject *receiver, const char *member, Qt::ConnectionType = Qt::AutoConnection);
+        -:  183:
+        -:  184:    static QMetaObject::Connection connect(const QObject *sender, const QMetaMethod &signal,
+        -:  185:                        const QObject *receiver, const QMetaMethod &method,
+        -:  186:                        Qt::ConnectionType type = Qt::AutoConnection);
+        -:  187:
+        -:  188:    inline QMetaObject::Connection connect(const QObject *sender, const char *signal,
+        -:  189:                        const char *member, Qt::ConnectionType type = Qt::AutoConnection) const;
+        -:  190:
+        -:  191:#ifdef Q_QDOC
+        -:  192:    template<typename PointerToMemberFunction>
+        -:  193:    static QMetaObject::Connection connect(const QObject *sender, PointerToMemberFunction signal, const QObject *receiver, PointerToMemberFunction method, Qt::ConnectionType type = Qt::AutoConnection);
+        -:  194:    template<typename PointerToMemberFunction, typename Functor>
+        -:  195:    static QMetaObject::Connection connect(const QObject *sender, PointerToMemberFunction signal, Functor functor);
+        -:  196:    template<typename PointerToMemberFunction, typename Functor>
+        -:  197:    static QMetaObject::Connection connect(const QObject *sender, PointerToMemberFunction signal, const QObject *context, Functor functor, Qt::ConnectionType type = Qt::AutoConnection);
+        -:  198:#else
+        -:  199:    //Connect a signal to a pointer to qobject member function
+        -:  200:    template <typename Func1, typename Func2>
+function _ZN7QObject7connectIM15QAbstractButtonFvbEM3GUIFvvEEEN11QMetaObject10ConnectionEPKN9QtPrivate15FunctionPointerIT_E6ObjectESB_PKNSA_IT0_E6ObjectESG_N2Qt14ConnectionTypeE called 2 returned 100% blocks executed 75%
+        2:  201:    static inline QMetaObject::Connection connect(const typename QtPrivate::FunctionPointer<Func1>::Object *sender, Func1 signal,
+        -:  202:                                     const typename QtPrivate::FunctionPointer<Func2>::Object *receiver, Func2 slot,
+        -:  203:                                     Qt::ConnectionType type = Qt::AutoConnection)
+        -:  204:    {
+        -:  205:        typedef QtPrivate::FunctionPointer<Func1> SignalType;
+        -:  206:        typedef QtPrivate::FunctionPointer<Func2> SlotType;
+        -:  207:
+        -:  208:        static_assert(QtPrivate::HasQ_OBJECT_Macro<typename SignalType::Object>::Value,
+        -:  209:                          "No Q_OBJECT in the class with the signal");
+        -:  210:
+        -:  211:        //compilation error if the arguments does not match.
+        -:  212:        static_assert(int(SignalType::ArgumentCount) >= int(SlotType::ArgumentCount),
+        -:  213:                          "The slot requires more arguments than the signal provides.");
+        -:  214:        static_assert((QtPrivate::CheckCompatibleArguments<typename SignalType::Arguments, typename SlotType::Arguments>::value),
+        -:  215:                          "Signal and slot arguments are not compatible.");
+        -:  216:        static_assert((QtPrivate::AreArgumentsCompatible<typename SlotType::ReturnType, typename SignalType::ReturnType>::value),
+        -:  217:                          "Return type of the slot is not compatible with the return type of the signal.");
+        -:  218:
+        2:  219:        const int *types = nullptr;
+        2:  220:        if (type == Qt::QueuedConnection || type == Qt::BlockingQueuedConnection)
+        2:  220-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 0
+        2:  220-block  1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 2
+    #####:  221:            types = QtPrivate::ConnectionTypes<typename SignalType::Arguments>::types();
+    %%%%%:  221-block  0
+call    0 never executed
+        -:  222:
+        -:  223:        return connectImpl(sender, reinterpret_cast<void **>(&signal),
+        -:  224:                           receiver, reinterpret_cast<void **>(&slot),
+        2:  225:                           new QtPrivate::QSlotObject<Func2, typename QtPrivate::List_Left<typename SignalType::Arguments, SlotType::ArgumentCount>::Value,
+        2:  225-block  0
+call    0 returned 2
+call    1 returned 2
+        -:  226:                                           typename SignalType::ReturnType>(slot),
+        2:  227:                            type, types, &SignalType::Object::staticMetaObject);
+call    0 returned 2
+        -:  228:    }
+        -:  229:
+        -:  230:    //connect to a function pointer  (not a member)
+        -:  231:    template <typename Func1, typename Func2>
+        -:  232:    static inline typename std::enable_if<int(QtPrivate::FunctionPointer<Func2>::ArgumentCount) >= 0, QMetaObject::Connection>::type
+        -:  233:            connect(const typename QtPrivate::FunctionPointer<Func1>::Object *sender, Func1 signal, Func2 slot)
+        -:  234:    {
+        -:  235:        return connect(sender, signal, sender, slot, Qt::DirectConnection);
+        -:  236:    }
+        -:  237:
+        -:  238:    //connect to a function pointer  (not a member)
+        -:  239:    template <typename Func1, typename Func2>
+        -:  240:    static inline typename std::enable_if<int(QtPrivate::FunctionPointer<Func2>::ArgumentCount) >= 0 &&
+        -:  241:                                          !QtPrivate::FunctionPointer<Func2>::IsPointerToMemberFunction, QMetaObject::Connection>::type
+        -:  242:            connect(const typename QtPrivate::FunctionPointer<Func1>::Object *sender, Func1 signal, const QObject *context, Func2 slot,
+        -:  243:                    Qt::ConnectionType type = Qt::AutoConnection)
+        -:  244:    {
+        -:  245:        typedef QtPrivate::FunctionPointer<Func1> SignalType;
+        -:  246:        typedef QtPrivate::FunctionPointer<Func2> SlotType;
+        -:  247:
+        -:  248:        static_assert(QtPrivate::HasQ_OBJECT_Macro<typename SignalType::Object>::Value,
+        -:  249:                          "No Q_OBJECT in the class with the signal");
+        -:  250:
+        -:  251:        //compilation error if the arguments does not match.
+        -:  252:        static_assert(int(SignalType::ArgumentCount) >= int(SlotType::ArgumentCount),
+        -:  253:                          "The slot requires more arguments than the signal provides.");
+        -:  254:        static_assert((QtPrivate::CheckCompatibleArguments<typename SignalType::Arguments, typename SlotType::Arguments>::value),
+        -:  255:                          "Signal and slot arguments are not compatible.");
+        -:  256:        static_assert((QtPrivate::AreArgumentsCompatible<typename SlotType::ReturnType, typename SignalType::ReturnType>::value),
+        -:  257:                          "Return type of the slot is not compatible with the return type of the signal.");
+        -:  258:
+        -:  259:        const int *types = nullptr;
+        -:  260:        if (type == Qt::QueuedConnection || type == Qt::BlockingQueuedConnection)
+        -:  261:            types = QtPrivate::ConnectionTypes<typename SignalType::Arguments>::types();
+        -:  262:
+        -:  263:        return connectImpl(sender, reinterpret_cast<void **>(&signal), context, nullptr,
+        -:  264:                           new QtPrivate::QStaticSlotObject<Func2,
+        -:  265:                                                 typename QtPrivate::List_Left<typename SignalType::Arguments, SlotType::ArgumentCount>::Value,
+        -:  266:                                                 typename SignalType::ReturnType>(slot),
+        -:  267:                           type, types, &SignalType::Object::staticMetaObject);
+        -:  268:    }
+        -:  269:
+        -:  270:    //connect to a functor
+        -:  271:    template <typename Func1, typename Func2>
+        -:  272:    static inline typename std::enable_if<
+        -:  273:        QtPrivate::FunctionPointer<Func2>::ArgumentCount == -1 &&
+        -:  274:        !std::is_convertible_v<Func2, const char*>, // don't match old-style connect
+        -:  275:    QMetaObject::Connection>::type
+        -:  276:            connect(const typename QtPrivate::FunctionPointer<Func1>::Object *sender, Func1 signal, Func2 slot)
+        -:  277:    {
+        -:  278:        return connect(sender, signal, sender, std::move(slot), Qt::DirectConnection);
+        -:  279:    }
+        -:  280:
+        -:  281:    //connect to a functor, with a "context" object defining in which event loop is going to be executed
+        -:  282:    template <typename Func1, typename Func2>
+        -:  283:    static inline typename std::enable_if<
+        -:  284:        QtPrivate::FunctionPointer<Func2>::ArgumentCount == -1 &&
+        -:  285:        !std::is_convertible_v<Func2, const char*>, // don't match old-style connect
+        -:  286:    QMetaObject::Connection>::type
+        -:  287:            connect(const typename QtPrivate::FunctionPointer<Func1>::Object *sender, Func1 signal, const QObject *context, Func2 slot,
+        -:  288:                    Qt::ConnectionType type = Qt::AutoConnection)
+        -:  289:    {
+        -:  290:        typedef QtPrivate::FunctionPointer<Func1> SignalType;
+        -:  291:        const int FunctorArgumentCount = QtPrivate::ComputeFunctorArgumentCount<Func2 , typename SignalType::Arguments>::Value;
+        -:  292:
+        -:  293:        static_assert((FunctorArgumentCount >= 0),
+        -:  294:                          "Signal and slot arguments are not compatible.");
+        -:  295:        const int SlotArgumentCount = (FunctorArgumentCount >= 0) ? FunctorArgumentCount : 0;
+        -:  296:        typedef typename QtPrivate::FunctorReturnType<Func2, typename QtPrivate::List_Left<typename SignalType::Arguments, SlotArgumentCount>::Value>::Value SlotReturnType;
+        -:  297:
+        -:  298:        static_assert((QtPrivate::AreArgumentsCompatible<SlotReturnType, typename SignalType::ReturnType>::value),
+        -:  299:                          "Return type of the slot is not compatible with the return type of the signal.");
+        -:  300:
+        -:  301:        static_assert(QtPrivate::HasQ_OBJECT_Macro<typename SignalType::Object>::Value,
+        -:  302:                          "No Q_OBJECT in the class with the signal");
+        -:  303:
+        -:  304:        const int *types = nullptr;
+        -:  305:        if (type == Qt::QueuedConnection || type == Qt::BlockingQueuedConnection)
+        -:  306:            types = QtPrivate::ConnectionTypes<typename SignalType::Arguments>::types();
+        -:  307:
+        -:  308:        return connectImpl(sender, reinterpret_cast<void **>(&signal), context, nullptr,
+        -:  309:                           new QtPrivate::QFunctorSlotObject<Func2, SlotArgumentCount,
+        -:  310:                                typename QtPrivate::List_Left<typename SignalType::Arguments, SlotArgumentCount>::Value,
+        -:  311:                                typename SignalType::ReturnType>(std::move(slot)),
+        -:  312:                           type, types, &SignalType::Object::staticMetaObject);
+        -:  313:    }
+        -:  314:#endif //Q_QDOC
+        -:  315:
+        -:  316:    static bool disconnect(const QObject *sender, const char *signal,
+        -:  317:                           const QObject *receiver, const char *member);
+        -:  318:    static bool disconnect(const QObject *sender, const QMetaMethod &signal,
+        -:  319:                           const QObject *receiver, const QMetaMethod &member);
+        -:  320:    inline bool disconnect(const char *signal = nullptr,
+        -:  321:                           const QObject *receiver = nullptr, const char *member = nullptr) const
+        -:  322:        { return disconnect(this, signal, receiver, member); }
+        -:  323:    inline bool disconnect(const QObject *receiver, const char *member = nullptr) const
+        -:  324:        { return disconnect(this, nullptr, receiver, member); }
+        -:  325:    static bool disconnect(const QMetaObject::Connection &);
+        -:  326:
+        -:  327:#ifdef Q_QDOC
+        -:  328:    template<typename PointerToMemberFunction>
+        -:  329:    static bool disconnect(const QObject *sender, PointerToMemberFunction signal, const QObject *receiver, PointerToMemberFunction method);
+        -:  330:#else
+        -:  331:    template <typename Func1, typename Func2>
+        -:  332:    static inline bool disconnect(const typename QtPrivate::FunctionPointer<Func1>::Object *sender, Func1 signal,
+        -:  333:                                  const typename QtPrivate::FunctionPointer<Func2>::Object *receiver, Func2 slot)
+        -:  334:    {
+        -:  335:        typedef QtPrivate::FunctionPointer<Func1> SignalType;
+        -:  336:        typedef QtPrivate::FunctionPointer<Func2> SlotType;
+        -:  337:
+        -:  338:        static_assert(QtPrivate::HasQ_OBJECT_Macro<typename SignalType::Object>::Value,
+        -:  339:                          "No Q_OBJECT in the class with the signal");
+        -:  340:
+        -:  341:        //compilation error if the arguments does not match.
+        -:  342:        static_assert((QtPrivate::CheckCompatibleArguments<typename SignalType::Arguments, typename SlotType::Arguments>::value),
+        -:  343:                          "Signal and slot arguments are not compatible.");
+        -:  344:
+        -:  345:        return disconnectImpl(sender, reinterpret_cast<void **>(&signal), receiver, reinterpret_cast<void **>(&slot),
+        -:  346:                              &SignalType::Object::staticMetaObject);
+        -:  347:    }
+        -:  348:    template <typename Func1>
+        -:  349:    static inline bool disconnect(const typename QtPrivate::FunctionPointer<Func1>::Object *sender, Func1 signal,
+        -:  350:                                  const QObject *receiver, void **zero)
+        -:  351:    {
+        -:  352:        // This is the overload for when one wish to disconnect a signal from any slot. (slot=nullptr)
+        -:  353:        // Since the function template parameter cannot be deduced from '0', we use a
+        -:  354:        // dummy void ** parameter that must be equal to 0
+        -:  355:        Q_ASSERT(!zero);
+        -:  356:        typedef QtPrivate::FunctionPointer<Func1> SignalType;
+        -:  357:        return disconnectImpl(sender, reinterpret_cast<void **>(&signal), receiver, zero,
+        -:  358:                              &SignalType::Object::staticMetaObject);
+        -:  359:    }
+        -:  360:#endif //Q_QDOC
+        -:  361:
+        -:  362:    void dumpObjectTree() const;
+        -:  363:    void dumpObjectInfo() const;
+        -:  364:
+        -:  365:    bool setProperty(const char *name, const QVariant &value);
+        -:  366:    QVariant property(const char *name) const;
+        -:  367:    QList<QByteArray> dynamicPropertyNames() const;
+        -:  368:    QBindingStorage *bindingStorage() { return &d_ptr->bindingStorage; }
+        -:  369:    const QBindingStorage *bindingStorage() const { return &d_ptr->bindingStorage; }
+        -:  370:
+        -:  371:Q_SIGNALS:
+        -:  372:    void destroyed(QObject * = nullptr);
+        -:  373:    void objectNameChanged(const QString &objectName, QPrivateSignal);
+        -:  374:
+        -:  375:public:
+        -:  376:    inline QObject *parent() const { return d_ptr->parent; }
+        -:  377:
+        -:  378:    inline bool inherits(const char *classname) const
+        -:  379:    {
+        -:  380:        return const_cast<QObject *>(this)->qt_metacast(classname) != nullptr;
+        -:  381:    }
+        -:  382:
+        -:  383:public Q_SLOTS:
+        -:  384:    void deleteLater();
+        -:  385:
+        -:  386:protected:
+        -:  387:    QObject *sender() const;
+        -:  388:    int senderSignalIndex() const;
+        -:  389:    int receivers(const char *signal) const;
+        -:  390:    bool isSignalConnected(const QMetaMethod &signal) const;
+        -:  391:
+        -:  392:    virtual void timerEvent(QTimerEvent *event);
+        -:  393:    virtual void childEvent(QChildEvent *event);
+        -:  394:    virtual void customEvent(QEvent *event);
+        -:  395:
+        -:  396:    virtual void connectNotify(const QMetaMethod &signal);
+        -:  397:    virtual void disconnectNotify(const QMetaMethod &signal);
+        -:  398:
+        -:  399:protected:
+        -:  400:    QObject(QObjectPrivate &dd, QObject *parent = nullptr);
+        -:  401:
+        -:  402:protected:
+        -:  403:    QScopedPointer<QObjectData> d_ptr;
+        -:  404:
+        -:  405:    friend struct QMetaObject;
+        -:  406:    friend struct QMetaObjectPrivate;
+        -:  407:    friend class QMetaCallEvent;
+        -:  408:    friend class QApplication;
+        -:  409:    friend class QApplicationPrivate;
+        -:  410:    friend class QCoreApplication;
+        -:  411:    friend class QCoreApplicationPrivate;
+        -:  412:    friend class QWidget;
+        -:  413:    friend class QAccessibleWidget;
+        -:  414:    friend class QThreadData;
+        -:  415:
+        -:  416:private:
+        -:  417:    void doSetObjectName(const QString &name);
+        -:  418:    Q_DISABLE_COPY(QObject)
+        -:  419:    Q_PRIVATE_SLOT(d_func(), void _q_reregisterTimers(void *))
+        -:  420:
+        -:  421:private:
+        -:  422:    static QMetaObject::Connection connectImpl(const QObject *sender, void **signal,
+        -:  423:                                               const QObject *receiver, void **slotPtr,
+        -:  424:                                               QtPrivate::QSlotObjectBase *slot, Qt::ConnectionType type,
+        -:  425:                                               const int *types, const QMetaObject *senderMetaObject);
+        -:  426:
+        -:  427:    static bool disconnectImpl(const QObject *sender, void **signal, const QObject *receiver, void **slot,
+        -:  428:                               const QMetaObject *senderMetaObject);
+        -:  429:
+        -:  430:};
+        -:  431:
+        -:  432:inline QMetaObject::Connection QObject::connect(const QObject *asender, const char *asignal,
+        -:  433:                                            const char *amember, Qt::ConnectionType atype) const
+        -:  434:{ return connect(asender, asignal, this, amember, atype); }
+        -:  435:
+        -:  436:template <class T>
+        -:  437:inline T qobject_cast(QObject *object)
+        -:  438:{
+        -:  439:    typedef typename std::remove_cv<typename std::remove_pointer<T>::type>::type ObjType;
+        -:  440:    static_assert(QtPrivate::HasQ_OBJECT_Macro<ObjType>::Value,
+        -:  441:                    "qobject_cast requires the type to have a Q_OBJECT macro");
+        -:  442:    return static_cast<T>(ObjType::staticMetaObject.cast(object));
+        -:  443:}
+        -:  444:
+        -:  445:template <class T>
+        -:  446:inline T qobject_cast(const QObject *object)
+        -:  447:{
+        -:  448:    typedef typename std::remove_cv<typename std::remove_pointer<T>::type>::type ObjType;
+        -:  449:    static_assert(QtPrivate::HasQ_OBJECT_Macro<ObjType>::Value,
+        -:  450:                      "qobject_cast requires the type to have a Q_OBJECT macro");
+        -:  451:    return static_cast<T>(ObjType::staticMetaObject.cast(object));
+        -:  452:}
+        -:  453:
+        -:  454:
+        -:  455:template <class T> constexpr const char * qobject_interface_iid() = delete;
+        -:  456:template <class T> inline T *
+        -:  457:qobject_iid_cast(QObject *object, const char *IId = qobject_interface_iid<T *>())
+        -:  458:{
+        -:  459:    return reinterpret_cast<T *>((object ? object->qt_metacast(IId) : nullptr));
+        -:  460:}
+        -:  461:template <class T> inline std::enable_if_t<std::is_const<T>::value, T *>
+        -:  462:qobject_iid_cast(const QObject *object)
+        -:  463:{
+        -:  464:    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
+        -:  465:    QObject *o = const_cast<QObject *>(object);
+        -:  466:    return qobject_iid_cast<std::remove_cv_t<T>>(o);
+        -:  467:}
+        -:  468:
+        -:  469:#if defined(Q_QDOC)
+        -:  470:#  define Q_DECLARE_INTERFACE(IFace, IId)
+        -:  471:#elif !defined(Q_MOC_RUN)
+        -:  472:#  define Q_DECLARE_INTERFACE(IFace, IId) \
+        -:  473:    template <> constexpr const char *qobject_interface_iid<IFace *>() \
+        -:  474:    { return IId; } \
+        -:  475:    template <> inline IFace *qobject_cast<IFace *>(QObject *object) \
+        -:  476:    { return qobject_iid_cast<IFace>(object); } \
+        -:  477:    template <> inline const IFace *qobject_cast<const IFace *>(const QObject *object) \
+        -:  478:    { return qobject_iid_cast<const IFace>(object); }
+        -:  479:#endif // Q_MOC_RUN
+        -:  480:
+        -:  481:inline const QBindingStorage *qGetBindingStorage(const QObject *o)
+        -:  482:{
+        -:  483:    return o->bindingStorage();
+        -:  484:}
+        -:  485:inline QBindingStorage *qGetBindingStorage(QObject *o)
+        -:  486:{
+        -:  487:    return o->bindingStorage();
+        -:  488:}
+        -:  489:
+        -:  490:#ifndef QT_NO_DEBUG_STREAM
+        -:  491:Q_CORE_EXPORT QDebug operator<<(QDebug, const QObject *);
+        -:  492:#endif
+        -:  493:
+        -:  494:class QSignalBlocker
+        -:  495:{
+        -:  496:public:
+        -:  497:    inline explicit QSignalBlocker(QObject *o) noexcept;
+        -:  498:    inline explicit QSignalBlocker(QObject &o) noexcept;
+        -:  499:    inline ~QSignalBlocker();
+        -:  500:
+        -:  501:    inline QSignalBlocker(QSignalBlocker &&other) noexcept;
+        -:  502:    inline QSignalBlocker &operator=(QSignalBlocker &&other) noexcept;
+        -:  503:
+        -:  504:    inline void reblock() noexcept;
+        -:  505:    inline void unblock() noexcept;
+        -:  506:
+        -:  507:private:
+        -:  508:    Q_DISABLE_COPY(QSignalBlocker)
+        -:  509:    QObject *m_o;
+        -:  510:    bool m_blocked;
+        -:  511:    bool m_inhibited;
+        -:  512:};
+        -:  513:
+        -:  514:QSignalBlocker::QSignalBlocker(QObject *o) noexcept
+        -:  515:    : m_o(o),
+        -:  516:      m_blocked(o && o->blockSignals(true)),
+        -:  517:      m_inhibited(false)
+        -:  518:{}
+        -:  519:
+        -:  520:QSignalBlocker::QSignalBlocker(QObject &o) noexcept
+        -:  521:    : m_o(&o),
+        -:  522:      m_blocked(o.blockSignals(true)),
+        -:  523:      m_inhibited(false)
+        -:  524:{}
+        -:  525:
+        -:  526:QSignalBlocker::QSignalBlocker(QSignalBlocker &&other) noexcept
+        -:  527:    : m_o(other.m_o),
+        -:  528:      m_blocked(other.m_blocked),
+        -:  529:      m_inhibited(other.m_inhibited)
+        -:  530:{
+        -:  531:    other.m_o = nullptr;
+        -:  532:}
+        -:  533:
+        -:  534:QSignalBlocker &QSignalBlocker::operator=(QSignalBlocker &&other) noexcept
+        -:  535:{
+        -:  536:    if (this != &other) {
+        -:  537:        // if both *this and other block the same object's signals:
+        -:  538:        // unblock *this iff our dtor would unblock, but other's wouldn't
+        -:  539:        if (m_o != other.m_o || (!m_inhibited && other.m_inhibited))
+        -:  540:            unblock();
+        -:  541:        m_o = other.m_o;
+        -:  542:        m_blocked = other.m_blocked;
+        -:  543:        m_inhibited = other.m_inhibited;
+        -:  544:        // disable other:
+        -:  545:        other.m_o = nullptr;
+        -:  546:    }
+        -:  547:    return *this;
+        -:  548:}
+        -:  549:
+        -:  550:QSignalBlocker::~QSignalBlocker()
+        -:  551:{
+        -:  552:    if (m_o && !m_inhibited)
+        -:  553:        m_o->blockSignals(m_blocked);
+        -:  554:}
+        -:  555:
+        -:  556:void QSignalBlocker::reblock() noexcept
+        -:  557:{
+        -:  558:    if (m_o)
+        -:  559:        m_o->blockSignals(true);
+        -:  560:    m_inhibited = false;
+        -:  561:}
+        -:  562:
+        -:  563:void QSignalBlocker::unblock() noexcept
+        -:  564:{
+        -:  565:    if (m_o)
+        -:  566:        m_o->blockSignals(m_blocked);
+        -:  567:    m_inhibited = true;
+        -:  568:}
+        -:  569:
+        -:  570:namespace QtPrivate {
+        -:  571:    inline QObject & deref_for_methodcall(QObject &o) { return  o; }
+        -:  572:    inline QObject & deref_for_methodcall(QObject *o) { return *o; }
+        -:  573:}
+        -:  574:#define Q_SET_OBJECT_NAME(obj) QT_PREPEND_NAMESPACE(QtPrivate)::deref_for_methodcall(obj).setObjectName(QLatin1StringView(#obj))
+        -:  575:
+        -:  576:QT_END_NAMESPACE
+        -:  577:
+        -:  578:#endif
+        -:  579:
+        -:  580:#endif // QOBJECT_H

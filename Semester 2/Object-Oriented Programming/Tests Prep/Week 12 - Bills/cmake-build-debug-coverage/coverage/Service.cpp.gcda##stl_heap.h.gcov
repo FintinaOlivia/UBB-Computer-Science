@@ -1,0 +1,766 @@
+        -:    0:Source:C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_heap.h
+        -:    0:Graph:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\Service\Service.cpp.gcno
+        -:    0:Data:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\Service\Service.cpp.gcda
+        -:    0:Runs:1
+        -:    1:// Heap implementation -*- C++ -*-
+        -:    2:
+        -:    3:// Copyright (C) 2001-2021 Free Software Foundation, Inc.
+        -:    4://
+        -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
+        -:    6:// software; you can redistribute it and/or modify it under the
+        -:    7:// terms of the GNU General Public License as published by the
+        -:    8:// Free Software Foundation; either version 3, or (at your option)
+        -:    9:// any later version.
+        -:   10:
+        -:   11:// This library is distributed in the hope that it will be useful,
+        -:   12:// but WITHOUT ANY WARRANTY; without even the implied warranty of
+        -:   13:// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        -:   14:// GNU General Public License for more details.
+        -:   15:
+        -:   16:// Under Section 7 of GPL version 3, you are granted additional
+        -:   17:// permissions described in the GCC Runtime Library Exception, version
+        -:   18:// 3.1, as published by the Free Software Foundation.
+        -:   19:
+        -:   20:// You should have received a copy of the GNU General Public License and
+        -:   21:// a copy of the GCC Runtime Library Exception along with this program;
+        -:   22:// see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+        -:   23:// <http://www.gnu.org/licenses/>.
+        -:   24:
+        -:   25:/*
+        -:   26: *
+        -:   27: * Copyright (c) 1994
+        -:   28: * Hewlett-Packard Company
+        -:   29: *
+        -:   30: * Permission to use, copy, modify, distribute and sell this software
+        -:   31: * and its documentation for any purpose is hereby granted without fee,
+        -:   32: * provided that the above copyright notice appear in all copies and
+        -:   33: * that both that copyright notice and this permission notice appear
+        -:   34: * in supporting documentation.  Hewlett-Packard Company makes no
+        -:   35: * representations about the suitability of this software for any
+        -:   36: * purpose.  It is provided "as is" without express or implied warranty.
+        -:   37: *
+        -:   38: * Copyright (c) 1997
+        -:   39: * Silicon Graphics Computer Systems, Inc.
+        -:   40: *
+        -:   41: * Permission to use, copy, modify, distribute and sell this software
+        -:   42: * and its documentation for any purpose is hereby granted without fee,
+        -:   43: * provided that the above copyright notice appear in all copies and
+        -:   44: * that both that copyright notice and this permission notice appear
+        -:   45: * in supporting documentation.  Silicon Graphics makes no
+        -:   46: * representations about the suitability of this software for any
+        -:   47: * purpose.  It is provided "as is" without express or implied warranty.
+        -:   48: */
+        -:   49:
+        -:   50:/** @file bits/stl_heap.h
+        -:   51: *  This is an internal header file, included by other library headers.
+        -:   52: *  Do not attempt to use it directly. @headername{queue}
+        -:   53: */
+        -:   54:
+        -:   55:#ifndef _STL_HEAP_H
+        -:   56:#define _STL_HEAP_H 1
+        -:   57:
+        -:   58:#include <debug/debug.h>
+        -:   59:#include <bits/move.h>
+        -:   60:#include <bits/predefined_ops.h>
+        -:   61:
+        -:   62:namespace std _GLIBCXX_VISIBILITY(default)
+        -:   63:{
+        -:   64:_GLIBCXX_BEGIN_NAMESPACE_VERSION
+        -:   65:
+        -:   66:  /**
+        -:   67:   * @defgroup heap_algorithms Heap
+        -:   68:   * @ingroup sorting_algorithms
+        -:   69:   */
+        -:   70:
+        -:   71:  template<typename _RandomAccessIterator, typename _Distance,
+        -:   72:	   typename _Compare>
+        -:   73:    _GLIBCXX20_CONSTEXPR
+        -:   74:    _Distance
+        -:   75:    __is_heap_until(_RandomAccessIterator __first, _Distance __n,
+        -:   76:		    _Compare& __comp)
+        -:   77:    {
+        -:   78:      _Distance __parent = 0;
+        -:   79:      for (_Distance __child = 1; __child < __n; ++__child)
+        -:   80:	{
+        -:   81:	  if (__comp(__first + __parent, __first + __child))
+        -:   82:	    return __child;
+        -:   83:	  if ((__child & 1) == 0)
+        -:   84:	    ++__parent;
+        -:   85:	}
+        -:   86:      return __n;
+        -:   87:    }
+        -:   88:
+        -:   89:  // __is_heap, a predicate testing whether or not a range is a heap.
+        -:   90:  // This function is an extension, not part of the C++ standard.
+        -:   91:  template<typename _RandomAccessIterator, typename _Distance>
+        -:   92:    _GLIBCXX20_CONSTEXPR
+        -:   93:    inline bool
+        -:   94:    __is_heap(_RandomAccessIterator __first, _Distance __n)
+        -:   95:    {
+        -:   96:      __gnu_cxx::__ops::_Iter_less_iter __comp;
+        -:   97:      return std::__is_heap_until(__first, __n, __comp) == __n;
+        -:   98:    }
+        -:   99:
+        -:  100:  template<typename _RandomAccessIterator, typename _Compare,
+        -:  101:	   typename _Distance>
+        -:  102:    _GLIBCXX20_CONSTEXPR
+        -:  103:    inline bool
+        -:  104:    __is_heap(_RandomAccessIterator __first, _Compare __comp, _Distance __n)
+        -:  105:    {
+        -:  106:      typedef __decltype(__comp) _Cmp;
+        -:  107:      __gnu_cxx::__ops::_Iter_comp_iter<_Cmp> __cmp(_GLIBCXX_MOVE(__comp));
+        -:  108:      return std::__is_heap_until(__first, __n, __cmp) == __n;
+        -:  109:    }
+        -:  110:
+        -:  111:  template<typename _RandomAccessIterator>
+        -:  112:    _GLIBCXX20_CONSTEXPR
+        -:  113:    inline bool
+        -:  114:    __is_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
+        -:  115:    { return std::__is_heap(__first, std::distance(__first, __last)); }
+        -:  116:
+        -:  117:  template<typename _RandomAccessIterator, typename _Compare>
+        -:  118:    _GLIBCXX20_CONSTEXPR
+        -:  119:    inline bool
+        -:  120:    __is_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+        -:  121:	      _Compare __comp)
+        -:  122:    {
+        -:  123:      return std::__is_heap(__first, _GLIBCXX_MOVE(__comp),
+        -:  124:			    std::distance(__first, __last));
+        -:  125:    }
+        -:  126:
+        -:  127:  // Heap-manipulation functions: push_heap, pop_heap, make_heap, sort_heap,
+        -:  128:  // + is_heap and is_heap_until in C++0x.
+        -:  129:
+        -:  130:  template<typename _RandomAccessIterator, typename _Distance, typename _Tp,
+        -:  131:	   typename _Compare>
+        -:  132:    _GLIBCXX20_CONSTEXPR
+        -:  133:    void
+function _ZSt11__push_heapIN9__gnu_cxx17__normal_iteratorIP4BillSt6vectorIS2_SaIS2_EEEExS2_NS0_5__ops14_Iter_comp_valIZN7Service10sortByNameEvEUlS2_S2_E_EEEvT_T0_SE_T1_RT2_ called 0 returned 0% blocks executed 0%
+    #####:  134:    __push_heap(_RandomAccessIterator __first,
+        -:  135:		_Distance __holeIndex, _Distance __topIndex, _Tp __value,
+        -:  136:		_Compare& __comp)
+        -:  137:    {
+    #####:  138:      _Distance __parent = (__holeIndex - 1) / 2;
+    #####:  139:      while (__holeIndex > __topIndex && __comp(__first + __parent, __value))
+    %%%%%:  139-block  0
+    %%%%%:  139-block  1
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  139-block  2
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  139-block  3
+    %%%%%:  139-block  4
+    %%%%%:  139-block  5
+branch  6 never executed
+branch  7 never executed
+        -:  140:	{
+    #####:  141:	  *(__first + __holeIndex) = _GLIBCXX_MOVE(*(__first + __parent));
+    %%%%%:  141-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    $$$$$:  141-block  1
+    $$$$$:  141-block  2
+call    8 never executed
+    #####:  142:	  __holeIndex = __parent;
+    #####:  143:	  __parent = (__holeIndex - 1) / 2;
+    %%%%%:  143-block  0
+        -:  144:	}
+    #####:  145:      *(__first + __holeIndex) = _GLIBCXX_MOVE(__value);
+    %%%%%:  145-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  146:    }
+    %%%%%:  146-block  0
+        -:  147:
+        -:  148:  /**
+        -:  149:   *  @brief  Push an element onto a heap.
+        -:  150:   *  @param  __first  Start of heap.
+        -:  151:   *  @param  __last   End of heap + element.
+        -:  152:   *  @ingroup heap_algorithms
+        -:  153:   *
+        -:  154:   *  This operation pushes the element at last-1 onto the valid heap
+        -:  155:   *  over the range [__first,__last-1).  After completion,
+        -:  156:   *  [__first,__last) is a valid heap.
+        -:  157:  */
+        -:  158:  template<typename _RandomAccessIterator>
+        -:  159:    _GLIBCXX20_CONSTEXPR
+        -:  160:    inline void
+        -:  161:    push_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
+        -:  162:    {
+        -:  163:      typedef typename iterator_traits<_RandomAccessIterator>::value_type
+        -:  164:	  _ValueType;
+        -:  165:      typedef typename iterator_traits<_RandomAccessIterator>::difference_type
+        -:  166:	  _DistanceType;
+        -:  167:
+        -:  168:      // concept requirements
+        -:  169:      __glibcxx_function_requires(_Mutable_RandomAccessIteratorConcept<
+        -:  170:	    _RandomAccessIterator>)
+        -:  171:      __glibcxx_function_requires(_LessThanComparableConcept<_ValueType>)
+        -:  172:      __glibcxx_requires_valid_range(__first, __last);
+        -:  173:      __glibcxx_requires_irreflexive(__first, __last);
+        -:  174:      __glibcxx_requires_heap(__first, __last - 1);
+        -:  175:
+        -:  176:      __gnu_cxx::__ops::_Iter_less_val __comp;
+        -:  177:      _ValueType __value = _GLIBCXX_MOVE(*(__last - 1));
+        -:  178:      std::__push_heap(__first, _DistanceType((__last - __first) - 1),
+        -:  179:		       _DistanceType(0), _GLIBCXX_MOVE(__value), __comp);
+        -:  180:    }
+        -:  181:
+        -:  182:  /**
+        -:  183:   *  @brief  Push an element onto a heap using comparison functor.
+        -:  184:   *  @param  __first  Start of heap.
+        -:  185:   *  @param  __last   End of heap + element.
+        -:  186:   *  @param  __comp   Comparison functor.
+        -:  187:   *  @ingroup heap_algorithms
+        -:  188:   *
+        -:  189:   *  This operation pushes the element at __last-1 onto the valid
+        -:  190:   *  heap over the range [__first,__last-1).  After completion,
+        -:  191:   *  [__first,__last) is a valid heap.  Compare operations are
+        -:  192:   *  performed using comp.
+        -:  193:  */
+        -:  194:  template<typename _RandomAccessIterator, typename _Compare>
+        -:  195:    _GLIBCXX20_CONSTEXPR
+        -:  196:    inline void
+        -:  197:    push_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+        -:  198:	      _Compare __comp)
+        -:  199:    {
+        -:  200:      typedef typename iterator_traits<_RandomAccessIterator>::value_type
+        -:  201:	  _ValueType;
+        -:  202:      typedef typename iterator_traits<_RandomAccessIterator>::difference_type
+        -:  203:	  _DistanceType;
+        -:  204:
+        -:  205:      // concept requirements
+        -:  206:      __glibcxx_function_requires(_Mutable_RandomAccessIteratorConcept<
+        -:  207:	    _RandomAccessIterator>)
+        -:  208:      __glibcxx_requires_valid_range(__first, __last);
+        -:  209:      __glibcxx_requires_irreflexive_pred(__first, __last, __comp);
+        -:  210:      __glibcxx_requires_heap_pred(__first, __last - 1, __comp);
+        -:  211:
+        -:  212:      __decltype(__gnu_cxx::__ops::__iter_comp_val(_GLIBCXX_MOVE(__comp)))
+        -:  213:	__cmp(_GLIBCXX_MOVE(__comp));
+        -:  214:      _ValueType __value = _GLIBCXX_MOVE(*(__last - 1));
+        -:  215:      std::__push_heap(__first, _DistanceType((__last - __first) - 1),
+        -:  216:		       _DistanceType(0), _GLIBCXX_MOVE(__value), __cmp);
+        -:  217:    }
+        -:  218:
+        -:  219:  template<typename _RandomAccessIterator, typename _Distance,
+        -:  220:	   typename _Tp, typename _Compare>
+        -:  221:    _GLIBCXX20_CONSTEXPR
+        -:  222:    void
+function _ZSt13__adjust_heapIN9__gnu_cxx17__normal_iteratorIP4BillSt6vectorIS2_SaIS2_EEEExS2_NS0_5__ops15_Iter_comp_iterIZN7Service10sortByNameEvEUlS2_S2_E_EEEvT_T0_SE_T1_T2_ called 0 returned 0% blocks executed 0%
+    #####:  223:    __adjust_heap(_RandomAccessIterator __first, _Distance __holeIndex,
+        -:  224:		  _Distance __len, _Tp __value, _Compare __comp)
+        -:  225:    {
+    #####:  226:      const _Distance __topIndex = __holeIndex;
+    #####:  227:      _Distance __secondChild = __holeIndex;
+    #####:  228:      while (__secondChild < (__len - 1) / 2)
+    %%%%%:  228-block  0
+    %%%%%:  228-block  1
+branch  0 never executed
+branch  1 never executed
+        -:  229:	{
+    #####:  230:	  __secondChild = 2 * (__secondChild + 1);
+    #####:  231:	  if (__comp(__first + __secondChild,
+    %%%%%:  231-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  231-block  1
+branch  5 never executed
+branch  6 never executed
+        -:  232:		     __first + (__secondChild - 1)))
+    #####:  233:	    __secondChild--;
+    %%%%%:  233-block  0
+    #####:  234:	  *(__first + __holeIndex) = _GLIBCXX_MOVE(*(__first + __secondChild));
+    %%%%%:  234-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    $$$$$:  234-block  1
+    $$$$$:  234-block  2
+    #####:  235:	  __holeIndex = __secondChild;
+    %%%%%:  235-block  0
+        -:  236:	}
+    #####:  237:      if ((__len & 1) == 0 && __secondChild == (__len - 2) / 2)
+    %%%%%:  237-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  237-block  1
+branch  2 never executed
+branch  3 never executed
+        -:  238:	{
+    #####:  239:	  __secondChild = 2 * (__secondChild + 1);
+    #####:  240:	  *(__first + __holeIndex) = _GLIBCXX_MOVE(*(__first
+    %%%%%:  240-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    $$$$$:  240-block  1
+    $$$$$:  240-block  2
+        -:  241:						     + (__secondChild - 1)));
+    #####:  242:	  __holeIndex = __secondChild - 1;
+    %%%%%:  242-block  0
+        -:  243:	}
+        -:  244:      __decltype(__gnu_cxx::__ops::__iter_comp_val(_GLIBCXX_MOVE(__comp)))
+    #####:  245:	__cmp(_GLIBCXX_MOVE(__comp));
+    %%%%%:  245-block  0
+call    0 never executed
+call    1 never executed
+    #####:  246:      std::__push_heap(__first, __holeIndex, __topIndex,
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  246-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  246-block  1
+call    6 never executed
+    $$$$$:  246-block  2
+call    7 never executed
+    $$$$$:  246-block  3
+    #####:  247:		       _GLIBCXX_MOVE(__value), __cmp);
+call    0 never executed
+    #####:  248:    }
+        -:  249:
+        -:  250:  template<typename _RandomAccessIterator, typename _Compare>
+        -:  251:    _GLIBCXX20_CONSTEXPR
+        -:  252:    inline void
+function _ZSt10__pop_heapIN9__gnu_cxx17__normal_iteratorIP4BillSt6vectorIS2_SaIS2_EEEENS0_5__ops15_Iter_comp_iterIZN7Service10sortByNameEvEUlS2_S2_E_EEEvT_SD_SD_RT0_ called 0 returned 0% blocks executed 0%
+    #####:  253:    __pop_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+        -:  254:	       _RandomAccessIterator __result, _Compare& __comp)
+        -:  255:    {
+        -:  256:      typedef typename iterator_traits<_RandomAccessIterator>::value_type
+        -:  257:	_ValueType;
+        -:  258:      typedef typename iterator_traits<_RandomAccessIterator>::difference_type
+        -:  259:	_DistanceType;
+        -:  260:
+    #####:  261:      _ValueType __value = _GLIBCXX_MOVE(*__result);
+    %%%%%:  261-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  262:      *__result = _GLIBCXX_MOVE(*__first);
+    %%%%%:  262-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  263:      std::__adjust_heap(__first, _DistanceType(0),
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  263-block  0
+call    6 never executed
+    $$$$$:  263-block  1
+call    7 never executed
+    $$$$$:  263-block  2
+    #####:  264:			 _DistanceType(__last - __first),
+    %%%%%:  264-block  0
+call    0 never executed
+    #####:  265:			 _GLIBCXX_MOVE(__value), __comp);
+    %%%%%:  265-block  0
+call    0 never executed
+    #####:  266:    }
+call    0 never executed
+    $$$$$:  266-block  0
+call    1 never executed
+        -:  267:
+        -:  268:  /**
+        -:  269:   *  @brief  Pop an element off a heap.
+        -:  270:   *  @param  __first  Start of heap.
+        -:  271:   *  @param  __last   End of heap.
+        -:  272:   *  @pre    [__first, __last) is a valid, non-empty range.
+        -:  273:   *  @ingroup heap_algorithms
+        -:  274:   *
+        -:  275:   *  This operation pops the top of the heap.  The elements __first
+        -:  276:   *  and __last-1 are swapped and [__first,__last-1) is made into a
+        -:  277:   *  heap.
+        -:  278:  */
+        -:  279:  template<typename _RandomAccessIterator>
+        -:  280:    _GLIBCXX20_CONSTEXPR
+        -:  281:    inline void
+        -:  282:    pop_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
+        -:  283:    {
+        -:  284:      // concept requirements
+        -:  285:      __glibcxx_function_requires(_Mutable_RandomAccessIteratorConcept<
+        -:  286:	    _RandomAccessIterator>)
+        -:  287:      __glibcxx_function_requires(_LessThanComparableConcept<
+        -:  288:	typename iterator_traits<_RandomAccessIterator>::value_type>)
+        -:  289:      __glibcxx_requires_non_empty_range(__first, __last);
+        -:  290:      __glibcxx_requires_valid_range(__first, __last);
+        -:  291:      __glibcxx_requires_irreflexive(__first, __last);
+        -:  292:      __glibcxx_requires_heap(__first, __last);
+        -:  293:
+        -:  294:      if (__last - __first > 1)
+        -:  295:	{
+        -:  296:	  --__last;
+        -:  297:	  __gnu_cxx::__ops::_Iter_less_iter __comp;
+        -:  298:	  std::__pop_heap(__first, __last, __last, __comp);
+        -:  299:	}
+        -:  300:    }
+        -:  301:
+        -:  302:  /**
+        -:  303:   *  @brief  Pop an element off a heap using comparison functor.
+        -:  304:   *  @param  __first  Start of heap.
+        -:  305:   *  @param  __last   End of heap.
+        -:  306:   *  @param  __comp   Comparison functor to use.
+        -:  307:   *  @ingroup heap_algorithms
+        -:  308:   *
+        -:  309:   *  This operation pops the top of the heap.  The elements __first
+        -:  310:   *  and __last-1 are swapped and [__first,__last-1) is made into a
+        -:  311:   *  heap.  Comparisons are made using comp.
+        -:  312:  */
+        -:  313:  template<typename _RandomAccessIterator, typename _Compare>
+        -:  314:    _GLIBCXX20_CONSTEXPR
+        -:  315:    inline void
+        -:  316:    pop_heap(_RandomAccessIterator __first,
+        -:  317:	     _RandomAccessIterator __last, _Compare __comp)
+        -:  318:    {
+        -:  319:      // concept requirements
+        -:  320:      __glibcxx_function_requires(_Mutable_RandomAccessIteratorConcept<
+        -:  321:	    _RandomAccessIterator>)
+        -:  322:      __glibcxx_requires_valid_range(__first, __last);
+        -:  323:      __glibcxx_requires_irreflexive_pred(__first, __last, __comp);
+        -:  324:      __glibcxx_requires_non_empty_range(__first, __last);
+        -:  325:      __glibcxx_requires_heap_pred(__first, __last, __comp);
+        -:  326:
+        -:  327:      if (__last - __first > 1)
+        -:  328:	{
+        -:  329:	  typedef __decltype(__comp) _Cmp;
+        -:  330:	  __gnu_cxx::__ops::_Iter_comp_iter<_Cmp> __cmp(_GLIBCXX_MOVE(__comp));
+        -:  331:	  --__last;
+        -:  332:	  std::__pop_heap(__first, __last, __last, __cmp);
+        -:  333:	}
+        -:  334:    }
+        -:  335:
+        -:  336:  template<typename _RandomAccessIterator, typename _Compare>
+        -:  337:    _GLIBCXX20_CONSTEXPR
+        -:  338:    void
+function _ZSt11__make_heapIN9__gnu_cxx17__normal_iteratorIP4BillSt6vectorIS2_SaIS2_EEEENS0_5__ops15_Iter_comp_iterIZN7Service10sortByNameEvEUlS2_S2_E_EEEvT_SD_RT0_ called 0 returned 0% blocks executed 0%
+    #####:  339:    __make_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+        -:  340:		_Compare& __comp)
+        -:  341:    {
+        -:  342:      typedef typename iterator_traits<_RandomAccessIterator>::value_type
+        -:  343:	  _ValueType;
+        -:  344:      typedef typename iterator_traits<_RandomAccessIterator>::difference_type
+        -:  345:	  _DistanceType;
+        -:  346:
+    #####:  347:      if (__last - __first < 2)
+    %%%%%:  347-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  348:	return;
+    %%%%%:  348-block  0
+        -:  349:
+    #####:  350:      const _DistanceType __len = __last - __first;
+    %%%%%:  350-block  0
+call    0 never executed
+    #####:  351:      _DistanceType __parent = (__len - 2) / 2;
+    #####:  352:      while (true)
+    %%%%%:  352-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  352-block  1
+    $$$$$:  352-block  2
+call    3 never executed
+        -:  353:	{
+    #####:  354:	  _ValueType __value = _GLIBCXX_MOVE(*(__first + __parent));
+    %%%%%:  354-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    $$$$$:  354-block  1
+    #####:  355:	  std::__adjust_heap(__first, __parent, __len, _GLIBCXX_MOVE(__value),
+    %%%%%:  355-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  355-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  355-block  2
+call    7 never executed
+    $$$$$:  355-block  3
+call    8 never executed
+    $$$$$:  355-block  4
+        -:  356:			     __comp);
+    #####:  357:	  if (__parent == 0)
+branch  0 never executed
+branch  1 never executed
+    #####:  358:	    return;
+    %%%%%:  358-block  0
+    #####:  359:	  __parent--;
+    %%%%%:  359-block  0
+        -:  360:	}
+        -:  361:    }
+        -:  362:  
+        -:  363:  /**
+        -:  364:   *  @brief  Construct a heap over a range.
+        -:  365:   *  @param  __first  Start of heap.
+        -:  366:   *  @param  __last   End of heap.
+        -:  367:   *  @ingroup heap_algorithms
+        -:  368:   *
+        -:  369:   *  This operation makes the elements in [__first,__last) into a heap.
+        -:  370:  */
+        -:  371:  template<typename _RandomAccessIterator>
+        -:  372:    _GLIBCXX20_CONSTEXPR
+        -:  373:    inline void
+        -:  374:    make_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
+        -:  375:    {
+        -:  376:      // concept requirements
+        -:  377:      __glibcxx_function_requires(_Mutable_RandomAccessIteratorConcept<
+        -:  378:	    _RandomAccessIterator>)
+        -:  379:      __glibcxx_function_requires(_LessThanComparableConcept<
+        -:  380:	    typename iterator_traits<_RandomAccessIterator>::value_type>)
+        -:  381:      __glibcxx_requires_valid_range(__first, __last);
+        -:  382:      __glibcxx_requires_irreflexive(__first, __last);
+        -:  383:
+        -:  384:      __gnu_cxx::__ops::_Iter_less_iter __comp;
+        -:  385:      std::__make_heap(__first, __last, __comp);
+        -:  386:    }
+        -:  387:
+        -:  388:  /**
+        -:  389:   *  @brief  Construct a heap over a range using comparison functor.
+        -:  390:   *  @param  __first  Start of heap.
+        -:  391:   *  @param  __last   End of heap.
+        -:  392:   *  @param  __comp   Comparison functor to use.
+        -:  393:   *  @ingroup heap_algorithms
+        -:  394:   *
+        -:  395:   *  This operation makes the elements in [__first,__last) into a heap.
+        -:  396:   *  Comparisons are made using __comp.
+        -:  397:  */
+        -:  398:  template<typename _RandomAccessIterator, typename _Compare>
+        -:  399:    _GLIBCXX20_CONSTEXPR
+        -:  400:    inline void
+        -:  401:    make_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+        -:  402:	      _Compare __comp)
+        -:  403:    {
+        -:  404:      // concept requirements
+        -:  405:      __glibcxx_function_requires(_Mutable_RandomAccessIteratorConcept<
+        -:  406:	    _RandomAccessIterator>)
+        -:  407:      __glibcxx_requires_valid_range(__first, __last);
+        -:  408:      __glibcxx_requires_irreflexive_pred(__first, __last, __comp);
+        -:  409:
+        -:  410:      typedef __decltype(__comp) _Cmp;
+        -:  411:      __gnu_cxx::__ops::_Iter_comp_iter<_Cmp> __cmp(_GLIBCXX_MOVE(__comp));
+        -:  412:      std::__make_heap(__first, __last, __cmp);
+        -:  413:    }
+        -:  414:
+        -:  415:  template<typename _RandomAccessIterator, typename _Compare>
+        -:  416:    _GLIBCXX20_CONSTEXPR
+        -:  417:    void
+function _ZSt11__sort_heapIN9__gnu_cxx17__normal_iteratorIP4BillSt6vectorIS2_SaIS2_EEEENS0_5__ops15_Iter_comp_iterIZN7Service10sortByNameEvEUlS2_S2_E_EEEvT_SD_RT0_ called 0 returned 0% blocks executed 0%
+    #####:  418:    __sort_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+        -:  419:		_Compare& __comp)
+        -:  420:    {
+    #####:  421:      while (__last - __first > 1)
+    %%%%%:  421-block  0
+    %%%%%:  421-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  422:	{
+    #####:  423:	  --__last;
+    %%%%%:  423-block  0
+call    0 never executed
+    #####:  424:	  std::__pop_heap(__first, __last, __last, __comp);
+call    0 never executed
+        -:  425:	}
+    #####:  426:    }
+        -:  427:
+        -:  428:  /**
+        -:  429:   *  @brief  Sort a heap.
+        -:  430:   *  @param  __first  Start of heap.
+        -:  431:   *  @param  __last   End of heap.
+        -:  432:   *  @ingroup heap_algorithms
+        -:  433:   *
+        -:  434:   *  This operation sorts the valid heap in the range [__first,__last).
+        -:  435:  */
+        -:  436:  template<typename _RandomAccessIterator>
+        -:  437:    _GLIBCXX20_CONSTEXPR
+        -:  438:    inline void
+        -:  439:    sort_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
+        -:  440:    {
+        -:  441:      // concept requirements
+        -:  442:      __glibcxx_function_requires(_Mutable_RandomAccessIteratorConcept<
+        -:  443:	    _RandomAccessIterator>)
+        -:  444:      __glibcxx_function_requires(_LessThanComparableConcept<
+        -:  445:	    typename iterator_traits<_RandomAccessIterator>::value_type>)
+        -:  446:      __glibcxx_requires_valid_range(__first, __last);
+        -:  447:      __glibcxx_requires_irreflexive(__first, __last);
+        -:  448:      __glibcxx_requires_heap(__first, __last);
+        -:  449:
+        -:  450:      __gnu_cxx::__ops::_Iter_less_iter __comp;
+        -:  451:      std::__sort_heap(__first, __last, __comp);
+        -:  452:    }
+        -:  453:
+        -:  454:  /**
+        -:  455:   *  @brief  Sort a heap using comparison functor.
+        -:  456:   *  @param  __first  Start of heap.
+        -:  457:   *  @param  __last   End of heap.
+        -:  458:   *  @param  __comp   Comparison functor to use.
+        -:  459:   *  @ingroup heap_algorithms
+        -:  460:   *
+        -:  461:   *  This operation sorts the valid heap in the range [__first,__last).
+        -:  462:   *  Comparisons are made using __comp.
+        -:  463:  */
+        -:  464:  template<typename _RandomAccessIterator, typename _Compare>
+        -:  465:    _GLIBCXX20_CONSTEXPR
+        -:  466:    inline void
+        -:  467:    sort_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+        -:  468:	      _Compare __comp)
+        -:  469:    {
+        -:  470:      // concept requirements
+        -:  471:      __glibcxx_function_requires(_Mutable_RandomAccessIteratorConcept<
+        -:  472:	    _RandomAccessIterator>)
+        -:  473:      __glibcxx_requires_valid_range(__first, __last);
+        -:  474:      __glibcxx_requires_irreflexive_pred(__first, __last, __comp);
+        -:  475:      __glibcxx_requires_heap_pred(__first, __last, __comp);
+        -:  476:
+        -:  477:      typedef __decltype(__comp) _Cmp;
+        -:  478:      __gnu_cxx::__ops::_Iter_comp_iter<_Cmp> __cmp(_GLIBCXX_MOVE(__comp));
+        -:  479:      std::__sort_heap(__first, __last, __cmp);
+        -:  480:    }
+        -:  481:
+        -:  482:#if __cplusplus >= 201103L
+        -:  483:  /**
+        -:  484:   *  @brief  Search the end of a heap.
+        -:  485:   *  @param  __first  Start of range.
+        -:  486:   *  @param  __last   End of range.
+        -:  487:   *  @return  An iterator pointing to the first element not in the heap.
+        -:  488:   *  @ingroup heap_algorithms
+        -:  489:   *
+        -:  490:   *  This operation returns the last iterator i in [__first, __last) for which
+        -:  491:   *  the range [__first, i) is a heap.
+        -:  492:  */
+        -:  493:  template<typename _RandomAccessIterator>
+        -:  494:    _GLIBCXX20_CONSTEXPR
+        -:  495:    inline _RandomAccessIterator
+        -:  496:    is_heap_until(_RandomAccessIterator __first, _RandomAccessIterator __last)
+        -:  497:    {
+        -:  498:      // concept requirements
+        -:  499:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
+        -:  500:	    _RandomAccessIterator>)
+        -:  501:      __glibcxx_function_requires(_LessThanComparableConcept<
+        -:  502:	    typename iterator_traits<_RandomAccessIterator>::value_type>)
+        -:  503:      __glibcxx_requires_valid_range(__first, __last);
+        -:  504:      __glibcxx_requires_irreflexive(__first, __last);
+        -:  505:
+        -:  506:      __gnu_cxx::__ops::_Iter_less_iter __comp;
+        -:  507:      return __first + 
+        -:  508:	std::__is_heap_until(__first, std::distance(__first, __last), __comp);
+        -:  509:    }
+        -:  510:
+        -:  511:  /**
+        -:  512:   *  @brief  Search the end of a heap using comparison functor.
+        -:  513:   *  @param  __first  Start of range.
+        -:  514:   *  @param  __last   End of range.
+        -:  515:   *  @param  __comp   Comparison functor to use.
+        -:  516:   *  @return  An iterator pointing to the first element not in the heap.
+        -:  517:   *  @ingroup heap_algorithms
+        -:  518:   *
+        -:  519:   *  This operation returns the last iterator i in [__first, __last) for which
+        -:  520:   *  the range [__first, i) is a heap.  Comparisons are made using __comp.
+        -:  521:  */
+        -:  522:  template<typename _RandomAccessIterator, typename _Compare>
+        -:  523:    _GLIBCXX20_CONSTEXPR
+        -:  524:    inline _RandomAccessIterator
+        -:  525:    is_heap_until(_RandomAccessIterator __first, _RandomAccessIterator __last,
+        -:  526:		  _Compare __comp)
+        -:  527:    {
+        -:  528:      // concept requirements
+        -:  529:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
+        -:  530:	    _RandomAccessIterator>)
+        -:  531:      __glibcxx_requires_valid_range(__first, __last);
+        -:  532:      __glibcxx_requires_irreflexive_pred(__first, __last, __comp);
+        -:  533:
+        -:  534:      typedef __decltype(__comp) _Cmp;
+        -:  535:      __gnu_cxx::__ops::_Iter_comp_iter<_Cmp> __cmp(_GLIBCXX_MOVE(__comp));
+        -:  536:      return __first
+        -:  537:	+ std::__is_heap_until(__first, std::distance(__first, __last), __cmp);
+        -:  538:    }
+        -:  539:
+        -:  540:  /**
+        -:  541:   *  @brief  Determines whether a range is a heap.
+        -:  542:   *  @param  __first  Start of range.
+        -:  543:   *  @param  __last   End of range.
+        -:  544:   *  @return  True if range is a heap, false otherwise.
+        -:  545:   *  @ingroup heap_algorithms
+        -:  546:  */
+        -:  547:  template<typename _RandomAccessIterator>
+        -:  548:    _GLIBCXX20_CONSTEXPR
+        -:  549:    inline bool
+        -:  550:    is_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
+        -:  551:    { return std::is_heap_until(__first, __last) == __last; }
+        -:  552:
+        -:  553:  /**
+        -:  554:   *  @brief  Determines whether a range is a heap using comparison functor.
+        -:  555:   *  @param  __first  Start of range.
+        -:  556:   *  @param  __last   End of range.
+        -:  557:   *  @param  __comp   Comparison functor to use.
+        -:  558:   *  @return  True if range is a heap, false otherwise.
+        -:  559:   *  @ingroup heap_algorithms
+        -:  560:  */
+        -:  561:  template<typename _RandomAccessIterator, typename _Compare>
+        -:  562:    _GLIBCXX20_CONSTEXPR
+        -:  563:    inline bool
+        -:  564:    is_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+        -:  565:	    _Compare __comp)
+        -:  566:    {
+        -:  567:      // concept requirements
+        -:  568:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
+        -:  569:	    _RandomAccessIterator>)
+        -:  570:      __glibcxx_requires_valid_range(__first, __last);
+        -:  571:      __glibcxx_requires_irreflexive_pred(__first, __last, __comp);
+        -:  572:
+        -:  573:      const auto __dist = std::distance(__first, __last);
+        -:  574:      typedef __decltype(__comp) _Cmp;
+        -:  575:      __gnu_cxx::__ops::_Iter_comp_iter<_Cmp> __cmp(_GLIBCXX_MOVE(__comp));
+        -:  576:      return std::__is_heap_until(__first, __dist, __cmp) == __dist;
+        -:  577:    }
+        -:  578:#endif
+        -:  579:
+        -:  580:_GLIBCXX_END_NAMESPACE_VERSION
+        -:  581:} // namespace
+        -:  582:
+        -:  583:#endif /* _STL_HEAP_H */

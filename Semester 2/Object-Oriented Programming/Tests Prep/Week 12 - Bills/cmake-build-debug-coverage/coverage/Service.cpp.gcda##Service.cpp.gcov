@@ -1,0 +1,105 @@
+        -:    0:Source:C:/Users/Th/CLionProjects/W12-Test-Attempt-Bills/Service/Service.cpp
+        -:    0:Graph:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\Service\Service.cpp.gcno
+        -:    0:Data:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\Service\Service.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by Th on 20/05/2023.
+        -:    3://
+        -:    4:
+        -:    5:#include <algorithm>
+        -:    6:#include "Service.h"
+        -:    7:
+function _ZN7ServiceC2ER10Repository called 1 returned 100% blocks executed 100%
+        1:    8:Service::Service(Repository &repository) : repository(repository) {}
+        -:    9:
+function _ZN7ServiceD2Ev called 1 returned 100% blocks executed 100%
+        1:   10:Service::~Service() {}
+        -:   11:
+function _ZN7Service6getAllEv called 1 returned 100% blocks executed 100%
+        1:   12:std::vector<Bill> Service::getAll() {
+        1:   13:    return this->repository.getAll();
+        1:   13-block  0
+call    0 returned 1
+        -:   14:}
+        -:   15:
+        -:   16:
+        -:   17:
+function _ZN7Service10sortByNameEv called 1 returned 100% blocks executed 88%
+        1:   18:std::vector<Bill> Service::sortByName() {
+        1:   19:    std::vector<Bill> bills = this->repository.getAll();
+        1:   19-block  0
+call    0 returned 1
+function _ZZN7Service10sortByNameEvENKUl4BillS0_E_clES0_S0_ called 9 returned 100% blocks executed 80%
+        1:   20:    std::sort(bills.begin(), bills.end(), [](Bill b1, Bill b2) {
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0 (throw)
+        9:   21:        return b1.getCompanyName() < b2.getCompanyName();
+        9:   21-block  0
+call    0 returned 9
+call    1 returned 9
+branch  2 taken 9 (fallthrough)
+branch  3 taken 0 (throw)
+        9:   21-block  1
+call    4 returned 9
+call    5 returned 9
+call    6 returned 9
+        9:   21-block  2
+    $$$$$:   21-block  3
+call    7 never executed
+        -:   22:    });
+        1:   23:    return bills;
+        1:   23-block  0
+        1:   23-block  1
+    =====:   24:}
+    $$$$$:   24-block  0
+call    0 never executed
+        -:   25:
+function _ZN7Service9getByNameENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 1 returned 100% blocks executed 65%
+        1:   26:std::vector<Bill> Service::getByName(std::string name) {
+        1:   27:    std::vector<Bill> bills = this->repository.getAll();
+        1:   27-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   28:    std::vector<Bill> filtered;
+        1:   28-block  0
+call    0 returned 1
+function _ZZN7Service9getByNameENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEENKUl4BillE_clES6_ called 5 returned 100% blocks executed 100%
+        1:   29:    std::copy_if(bills.begin(), bills.end(), std::back_inserter(filtered), [name](Bill b) {
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   29-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   29-block  1
+call    6 returned 1
+call    7 returned 1
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   29-block  2
+call   11 returned 1
+    $$$$$:   29-block  3
+call   12 never executed
+    $$$$$:   29-block  4
+        5:   30:        return b.getCompanyName() == name;
+        5:   30-block  0
+call    0 returned 5
+call    1 returned 5
+call    2 returned 5
+        -:   31:    });
+        2:   32:    return filtered;
+        1:   32-block  0
+        1:   33:}
+        1:   33-block  0
+call    0 returned 1
+    $$$$$:   33-block  1
+call    1 never executed
+    $$$$$:   33-block  2
+call    2 never executed
+        -:   34:

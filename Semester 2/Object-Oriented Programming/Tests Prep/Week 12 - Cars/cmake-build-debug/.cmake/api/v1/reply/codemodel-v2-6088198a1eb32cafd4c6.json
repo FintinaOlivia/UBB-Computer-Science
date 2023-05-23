@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "T3_Cars",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "T3_Cars::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-T3_Cars-Debug-62ffdcc88b7a13b92ea4.json",
+					"name" : "T3_Cars",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "T3_Cars_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-T3_Cars_autogen-Debug-05262460edd87fedee6e.json",
+					"name" : "T3_Cars_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "T3_Cars_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-T3_Cars_autogen_timestamp_deps-Debug-cc607e722e33e5c41d9a.json",
+					"name" : "T3_Cars_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Th/CLionProjects/T3-Cars/cmake-build-debug",
+		"source" : "C:/Users/Th/CLionProjects/T3-Cars"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

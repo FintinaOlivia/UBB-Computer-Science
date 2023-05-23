@@ -1,0 +1,295 @@
+        -:    0:Source:C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/move.h
+        -:    0:Graph:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\Service\Service.cpp.gcno
+        -:    0:Data:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\Service\Service.cpp.gcda
+        -:    0:Runs:1
+        -:    1:// Move, forward and identity for C++11 + swap -*- C++ -*-
+        -:    2:
+        -:    3:// Copyright (C) 2007-2021 Free Software Foundation, Inc.
+        -:    4://
+        -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
+        -:    6:// software; you can redistribute it and/or modify it under the
+        -:    7:// terms of the GNU General Public License as published by the
+        -:    8:// Free Software Foundation; either version 3, or (at your option)
+        -:    9:// any later version.
+        -:   10:
+        -:   11:// This library is distributed in the hope that it will be useful,
+        -:   12:// but WITHOUT ANY WARRANTY; without even the implied warranty of
+        -:   13:// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        -:   14:// GNU General Public License for more details.
+        -:   15:
+        -:   16:// Under Section 7 of GPL version 3, you are granted additional
+        -:   17:// permissions described in the GCC Runtime Library Exception, version
+        -:   18:// 3.1, as published by the Free Software Foundation.
+        -:   19:
+        -:   20:// You should have received a copy of the GNU General Public License and
+        -:   21:// a copy of the GCC Runtime Library Exception along with this program;
+        -:   22:// see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+        -:   23:// <http://www.gnu.org/licenses/>.
+        -:   24:
+        -:   25:/** @file bits/move.h
+        -:   26: *  This is an internal header file, included by other library headers.
+        -:   27: *  Do not attempt to use it directly. @headername{utility}
+        -:   28: */
+        -:   29:
+        -:   30:#ifndef _MOVE_H
+        -:   31:#define _MOVE_H 1
+        -:   32:
+        -:   33:#include <bits/c++config.h>
+        -:   34:#if __cplusplus < 201103L
+        -:   35:# include <bits/concept_check.h>
+        -:   36:#endif
+        -:   37:
+        -:   38:namespace std _GLIBCXX_VISIBILITY(default)
+        -:   39:{
+        -:   40:_GLIBCXX_BEGIN_NAMESPACE_VERSION
+        -:   41:
+        -:   42:  // Used, in C++03 mode too, by allocators, etc.
+        -:   43:  /**
+        -:   44:   *  @brief Same as C++11 std::addressof
+        -:   45:   *  @ingroup utilities
+        -:   46:   */
+        -:   47:  template<typename _Tp>
+        -:   48:    inline _GLIBCXX_CONSTEXPR _Tp*
+       1*:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
+       1*:   50:    { return __builtin_addressof(__r); }
+------------------
+_ZSt11__addressofI4BillEPT_RS1_:
+function _ZSt11__addressofI4BillEPT_RS1_ called 0 returned 0% blocks executed 0%
+    #####:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
+    #####:   50:    { return __builtin_addressof(__r); }
+    %%%%%:   50-block  0
+------------------
+_ZSt11__addressofISt6vectorI4BillSaIS1_EEEPT_RS4_:
+function _ZSt11__addressofISt6vectorI4BillSaIS1_EEEPT_RS4_ called 1 returned 100% blocks executed 100%
+        1:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
+        1:   50:    { return __builtin_addressof(__r); }
+        1:   50-block  0
+------------------
+        -:   51:
+        -:   52:#if __cplusplus >= 201103L
+        -:   53:
+        -:   54:_GLIBCXX_END_NAMESPACE_VERSION
+        -:   55:} // namespace
+        -:   56:
+        -:   57:#include <type_traits> // Brings in std::declval too.
+        -:   58:
+        -:   59:namespace std _GLIBCXX_VISIBILITY(default)
+        -:   60:{
+        -:   61:_GLIBCXX_BEGIN_NAMESPACE_VERSION
+        -:   62:
+        -:   63:  /**
+        -:   64:   *  @addtogroup utilities
+        -:   65:   *  @{
+        -:   66:   */
+        -:   67:
+        -:   68:  /**
+        -:   69:   *  @brief  Forward an lvalue.
+        -:   70:   *  @return The parameter cast to the specified type.
+        -:   71:   *
+        -:   72:   *  This function is used to implement "perfect forwarding".
+        -:   73:   */
+        -:   74:  template<typename _Tp>
+        -:   75:    _GLIBCXX_NODISCARD
+        -:   76:    constexpr _Tp&&
+function _ZSt7forwardIRK4BillEOT_RNSt16remove_referenceIS3_E4typeE called 0 returned 0% blocks executed 0%
+    #####:   77:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+    #####:   78:    { return static_cast<_Tp&&>(__t); }
+    %%%%%:   78-block  0
+        -:   79:
+        -:   80:  /**
+        -:   81:   *  @brief  Forward an rvalue.
+        -:   82:   *  @return The parameter cast to the specified type.
+        -:   83:   *
+        -:   84:   *  This function is used to implement "perfect forwarding".
+        -:   85:   */
+        -:   86:  template<typename _Tp>
+        -:   87:    _GLIBCXX_NODISCARD
+        -:   88:    constexpr _Tp&&
+        -:   89:    forward(typename std::remove_reference<_Tp>::type&& __t) noexcept
+        -:   90:    {
+        -:   91:      static_assert(!std::is_lvalue_reference<_Tp>::value, "template argument"
+        -:   92:		    " substituting _Tp must not be an lvalue reference type");
+        -:   93:      return static_cast<_Tp&&>(__t);
+        -:   94:    }
+        -:   95:
+        -:   96:  /**
+        -:   97:   *  @brief  Convert a value to an rvalue.
+        -:   98:   *  @param  __t  A thing of arbitrary type.
+        -:   99:   *  @return The parameter cast to an rvalue-reference to allow moving it.
+        -:  100:  */
+        -:  101:  template<typename _Tp>
+        -:  102:    _GLIBCXX_NODISCARD
+        -:  103:    constexpr typename std::remove_reference<_Tp>::type&&
+      20*:  104:    move(_Tp&& __t) noexcept
+      20*:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+------------------
+_ZSt4moveIRN9__gnu_cxx5__ops15_Iter_comp_iterIZN7Service10sortByNameEvEUl4BillS4_E_EEEONSt16remove_referenceIT_E4typeEOS9_:
+function _ZSt4moveIRN9__gnu_cxx5__ops15_Iter_comp_iterIZN7Service10sortByNameEvEUl4BillS4_E_EEEONSt16remove_referenceIT_E4typeEOS9_ called 3 returned 100% blocks executed 100%
+        3:  104:    move(_Tp&& __t) noexcept
+        3:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+        3:  105-block  0
+------------------
+_ZSt4moveIR4BillEONSt16remove_referenceIT_E4typeEOS3_:
+function _ZSt4moveIR4BillEONSt16remove_referenceIT_E4typeEOS3_ called 12 returned 100% blocks executed 100%
+       12:  104:    move(_Tp&& __t) noexcept
+       12:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+       12:  105-block  0
+------------------
+_ZSt4moveIRZN7Service10sortByNameEvEUl4BillS1_E_EONSt16remove_referenceIT_E4typeEOS5_:
+function _ZSt4moveIRZN7Service10sortByNameEvEUl4BillS1_E_EONSt16remove_referenceIT_E4typeEOS5_ called 5 returned 100% blocks executed 100%
+        5:  104:    move(_Tp&& __t) noexcept
+        5:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+        5:  105-block  0
+------------------
+_ZSt4moveIRSaIcEEONSt16remove_referenceIT_E4typeEOS3_:
+function _ZSt4moveIRSaIcEEONSt16remove_referenceIT_E4typeEOS3_ called 0 returned 0% blocks executed 0%
+    #####:  104:    move(_Tp&& __t) noexcept
+    #####:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+    %%%%%:  105-block  0
+------------------
+        -:  106:
+        -:  107:
+        -:  108:  template<typename _Tp>
+        -:  109:    struct __move_if_noexcept_cond
+        -:  110:    : public __and_<__not_<is_nothrow_move_constructible<_Tp>>,
+        -:  111:                    is_copy_constructible<_Tp>>::type { };
+        -:  112:
+        -:  113:  /**
+        -:  114:   *  @brief  Conditionally convert a value to an rvalue.
+        -:  115:   *  @param  __x  A thing of arbitrary type.
+        -:  116:   *  @return The parameter, possibly cast to an rvalue-reference.
+        -:  117:   *
+        -:  118:   *  Same as std::move unless the type's move constructor could throw and the
+        -:  119:   *  type is copyable, in which case an lvalue-reference is returned instead.
+        -:  120:   */
+        -:  121:  template<typename _Tp>
+        -:  122:    _GLIBCXX_NODISCARD
+        -:  123:    constexpr typename
+        -:  124:    conditional<__move_if_noexcept_cond<_Tp>::value, const _Tp&, _Tp&&>::type
+        -:  125:    move_if_noexcept(_Tp& __x) noexcept
+        -:  126:    { return std::move(__x); }
+        -:  127:
+        -:  128:  // declval, from type_traits.
+        -:  129:
+        -:  130:#if __cplusplus > 201402L
+        -:  131:  // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  132:  // 2296. std::addressof should be constexpr
+        -:  133:# define __cpp_lib_addressof_constexpr 201603
+        -:  134:#endif
+        -:  135:  /**
+        -:  136:   *  @brief Returns the actual address of the object or function
+        -:  137:   *         referenced by r, even in the presence of an overloaded
+        -:  138:   *         operator&.
+        -:  139:   *  @param  __r  Reference to an object or function.
+        -:  140:   *  @return   The actual address.
+        -:  141:  */
+        -:  142:  template<typename _Tp>
+        -:  143:    _GLIBCXX_NODISCARD
+        -:  144:    inline _GLIBCXX17_CONSTEXPR _Tp*
+        -:  145:    addressof(_Tp& __r) noexcept
+        -:  146:    { return std::__addressof(__r); }
+        -:  147:
+        -:  148:  // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  149:  // 2598. addressof works on temporaries
+        -:  150:  template<typename _Tp>
+        -:  151:    const _Tp* addressof(const _Tp&&) = delete;
+        -:  152:
+        -:  153:  // C++11 version of std::exchange for internal use.
+        -:  154:  template <typename _Tp, typename _Up = _Tp>
+        -:  155:    _GLIBCXX20_CONSTEXPR
+        -:  156:    inline _Tp
+        -:  157:    __exchange(_Tp& __obj, _Up&& __new_val)
+        -:  158:    {
+        -:  159:      _Tp __old_val = std::move(__obj);
+        -:  160:      __obj = std::forward<_Up>(__new_val);
+        -:  161:      return __old_val;
+        -:  162:    }
+        -:  163:
+        -:  164:  /// @} group utilities
+        -:  165:
+        -:  166:#define _GLIBCXX_FWDREF(_Tp) _Tp&&
+        -:  167:#define _GLIBCXX_MOVE(__val) std::move(__val)
+        -:  168:#define _GLIBCXX_FORWARD(_Tp, __val) std::forward<_Tp>(__val)
+        -:  169:#else
+        -:  170:#define _GLIBCXX_FWDREF(_Tp) const _Tp&
+        -:  171:#define _GLIBCXX_MOVE(__val) (__val)
+        -:  172:#define _GLIBCXX_FORWARD(_Tp, __val) (__val)
+        -:  173:#endif
+        -:  174:
+        -:  175:  /**
+        -:  176:   *  @addtogroup utilities
+        -:  177:   *  @{
+        -:  178:   */
+        -:  179:
+        -:  180:  /**
+        -:  181:   *  @brief Swaps two values.
+        -:  182:   *  @param  __a  A thing of arbitrary type.
+        -:  183:   *  @param  __b  Another thing of arbitrary type.
+        -:  184:   *  @return   Nothing.
+        -:  185:  */
+        -:  186:  template<typename _Tp>
+        -:  187:    _GLIBCXX20_CONSTEXPR
+        -:  188:    inline
+        -:  189:#if __cplusplus >= 201103L
+        -:  190:    typename enable_if<__and_<__not_<__is_tuple_like<_Tp>>,
+        -:  191:			      is_move_constructible<_Tp>,
+        -:  192:			      is_move_assignable<_Tp>>::value>::type
+        -:  193:#else
+        -:  194:    void
+        -:  195:#endif
+function _ZSt4swapI4BillENSt9enable_ifIXsrSt6__and_IJSt6__not_ISt15__is_tuple_likeIT_EESt21is_move_constructibleIS5_ESt18is_move_assignableIS5_EEE5valueEvE4typeERS5_SF_ called 0 returned 0% blocks executed 0%
+    #####:  196:    swap(_Tp& __a, _Tp& __b)
+        -:  197:    _GLIBCXX_NOEXCEPT_IF(__and_<is_nothrow_move_constructible<_Tp>,
+        -:  198:				is_nothrow_move_assignable<_Tp>>::value)
+        -:  199:    {
+        -:  200:#if __cplusplus < 201103L
+        -:  201:      // concept requirements
+        -:  202:      __glibcxx_function_requires(_SGIAssignableConcept<_Tp>)
+        -:  203:#endif
+    #####:  204:      _Tp __tmp = _GLIBCXX_MOVE(__a);
+    %%%%%:  204-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  205:      __a = _GLIBCXX_MOVE(__b);
+    %%%%%:  205-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  206:      __b = _GLIBCXX_MOVE(__tmp);
+    %%%%%:  206-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  207:    }
+    %%%%%:  207-block  0
+call    0 never executed
+    $$$$$:  207-block  1
+call    1 never executed
+        -:  208:
+        -:  209:  // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  210:  // DR 809. std::swap should be overloaded for array types.
+        -:  211:  /// Swap the contents of two arrays.
+        -:  212:  template<typename _Tp, size_t _Nm>
+        -:  213:    _GLIBCXX20_CONSTEXPR
+        -:  214:    inline
+        -:  215:#if __cplusplus >= 201103L
+        -:  216:    typename enable_if<__is_swappable<_Tp>::value>::type
+        -:  217:#else
+        -:  218:    void
+        -:  219:#endif
+        -:  220:    swap(_Tp (&__a)[_Nm], _Tp (&__b)[_Nm])
+        -:  221:    _GLIBCXX_NOEXCEPT_IF(__is_nothrow_swappable<_Tp>::value)
+        -:  222:    {
+        -:  223:      for (size_t __n = 0; __n < _Nm; ++__n)
+        -:  224:	swap(__a[__n], __b[__n]);
+        -:  225:    }
+        -:  226:
+        -:  227:  /// @} group utilities
+        -:  228:_GLIBCXX_END_NAMESPACE_VERSION
+        -:  229:} // namespace
+        -:  230:
+        -:  231:#endif /* _MOVE_H */

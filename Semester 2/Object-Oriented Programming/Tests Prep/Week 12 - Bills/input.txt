@@ -1,0 +1,5 @@
+Digi Sport;8741yeqw;87.41;false
+E-on;jlf123;123.45;true
+Alabama;4131sdf;41.31;false
+Digi Sport;8741da;100.5;false
+Digi Sport;875r2q;32.56;true

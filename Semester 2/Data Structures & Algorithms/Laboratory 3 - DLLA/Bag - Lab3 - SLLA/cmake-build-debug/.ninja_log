@@ -1,0 +1,13 @@
+# ninja log v5
+37	330	7060115012139408	CMakeFiles/Bag___Lab3___SLLA.dir/BagIterator.cpp.obj	a006230a0b6a25e7
+27	332	7060115012139408	CMakeFiles/Bag___Lab3___SLLA.dir/ShortTest.cpp.obj	7d7f32406e81b2a1
+12	531	7060115014138220	CMakeFiles/Bag___Lab3___SLLA.dir/App.cpp.obj	90ed4a9473008da9
+0	542	7060115014262022	CMakeFiles/Bag___Lab3___SLLA.dir/Bag.cpp.obj	a2c29dcae92ce4ec
+44	783	7060115016656483	CMakeFiles/Bag___Lab3___SLLA.dir/ExtendedTest.cpp.obj	b0bb3f7162ecef9
+784	1182	7060115020583438	Bag___Lab3___SLLA.exe	8379038d67c2df29
+27	211	7061162873461191	CMakeFiles/Bag___Lab3___SLLA.dir/ShortTest.cpp.obj	7d7f32406e81b2a1
+35	212	7061162873461191	CMakeFiles/Bag___Lab3___SLLA.dir/BagIterator.cpp.obj	a006230a0b6a25e7
+12	539	7061162876744271	CMakeFiles/Bag___Lab3___SLLA.dir/App.cpp.obj	90ed4a9473008da9
+4	557	7061162876914405	CMakeFiles/Bag___Lab3___SLLA.dir/Bag.cpp.obj	a2c29dcae92ce4ec
+19	725	7061162878597555	CMakeFiles/Bag___Lab3___SLLA.dir/ExtendedTest.cpp.obj	b0bb3f7162ecef9
+725	885	7061162880151608	Bag___Lab3___SLLA.exe	8379038d67c2df29

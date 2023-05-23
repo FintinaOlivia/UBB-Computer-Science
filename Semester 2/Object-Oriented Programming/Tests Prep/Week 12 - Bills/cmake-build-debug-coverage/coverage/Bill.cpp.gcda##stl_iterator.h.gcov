@@ -1,0 +1,2403 @@
+        -:    0:Source:C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_iterator.h
+        -:    0:Graph:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\Domain\Bill.cpp.gcno
+        -:    0:Data:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\Domain\Bill.cpp.gcda
+        -:    0:Runs:1
+        -:    1:// Iterators -*- C++ -*-
+        -:    2:
+        -:    3:// Copyright (C) 2001-2021 Free Software Foundation, Inc.
+        -:    4://
+        -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
+        -:    6:// software; you can redistribute it and/or modify it under the
+        -:    7:// terms of the GNU General Public License as published by the
+        -:    8:// Free Software Foundation; either version 3, or (at your option)
+        -:    9:// any later version.
+        -:   10:
+        -:   11:// This library is distributed in the hope that it will be useful,
+        -:   12:// but WITHOUT ANY WARRANTY; without even the implied warranty of
+        -:   13:// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        -:   14:// GNU General Public License for more details.
+        -:   15:
+        -:   16:// Under Section 7 of GPL version 3, you are granted additional
+        -:   17:// permissions described in the GCC Runtime Library Exception, version
+        -:   18:// 3.1, as published by the Free Software Foundation.
+        -:   19:
+        -:   20:// You should have received a copy of the GNU General Public License and
+        -:   21:// a copy of the GCC Runtime Library Exception along with this program;
+        -:   22:// see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+        -:   23:// <http://www.gnu.org/licenses/>.
+        -:   24:
+        -:   25:/*
+        -:   26: *
+        -:   27: * Copyright (c) 1994
+        -:   28: * Hewlett-Packard Company
+        -:   29: *
+        -:   30: * Permission to use, copy, modify, distribute and sell this software
+        -:   31: * and its documentation for any purpose is hereby granted without fee,
+        -:   32: * provided that the above copyright notice appear in all copies and
+        -:   33: * that both that copyright notice and this permission notice appear
+        -:   34: * in supporting documentation.  Hewlett-Packard Company makes no
+        -:   35: * representations about the suitability of this software for any
+        -:   36: * purpose.  It is provided "as is" without express or implied warranty.
+        -:   37: *
+        -:   38: *
+        -:   39: * Copyright (c) 1996-1998
+        -:   40: * Silicon Graphics Computer Systems, Inc.
+        -:   41: *
+        -:   42: * Permission to use, copy, modify, distribute and sell this software
+        -:   43: * and its documentation for any purpose is hereby granted without fee,
+        -:   44: * provided that the above copyright notice appear in all copies and
+        -:   45: * that both that copyright notice and this permission notice appear
+        -:   46: * in supporting documentation.  Silicon Graphics makes no
+        -:   47: * representations about the suitability of this software for any
+        -:   48: * purpose.  It is provided "as is" without express or implied warranty.
+        -:   49: */
+        -:   50:
+        -:   51:/** @file bits/stl_iterator.h
+        -:   52: *  This is an internal header file, included by other library headers.
+        -:   53: *  Do not attempt to use it directly. @headername{iterator}
+        -:   54: *
+        -:   55: *  This file implements reverse_iterator, back_insert_iterator,
+        -:   56: *  front_insert_iterator, insert_iterator, __normal_iterator, and their
+        -:   57: *  supporting functions and overloaded operators.
+        -:   58: */
+        -:   59:
+        -:   60:#ifndef _STL_ITERATOR_H
+        -:   61:#define _STL_ITERATOR_H 1
+        -:   62:
+        -:   63:#include <bits/cpp_type_traits.h>
+        -:   64:#include <bits/stl_iterator_base_types.h>
+        -:   65:#include <ext/type_traits.h>
+        -:   66:#include <bits/move.h>
+        -:   67:#include <bits/ptr_traits.h>
+        -:   68:
+        -:   69:#if __cplusplus >= 201103L
+        -:   70:# include <type_traits>
+        -:   71:#endif
+        -:   72:
+        -:   73:#if __cplusplus > 201703L
+        -:   74:# define __cpp_lib_array_constexpr 201811L
+        -:   75:# define __cpp_lib_constexpr_iterator 201811L
+        -:   76:#elif __cplusplus == 201703L
+        -:   77:# define __cpp_lib_array_constexpr 201803L
+        -:   78:#endif
+        -:   79:
+        -:   80:#if __cplusplus > 201703L
+        -:   81:# include <compare>
+        -:   82:# include <new>
+        -:   83:# include <bits/exception_defines.h>
+        -:   84:# include <bits/iterator_concepts.h>
+        -:   85:#endif
+        -:   86:
+        -:   87:namespace std _GLIBCXX_VISIBILITY(default)
+        -:   88:{
+        -:   89:_GLIBCXX_BEGIN_NAMESPACE_VERSION
+        -:   90:
+        -:   91:  /**
+        -:   92:   * @addtogroup iterators
+        -:   93:   * @{
+        -:   94:   */
+        -:   95:
+        -:   96:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -:   97:  namespace __detail
+        -:   98:  {
+        -:   99:    // Weaken iterator_category _Cat to _Limit if it is derived from that,
+        -:  100:    // otherwise use _Otherwise.
+        -:  101:    template<typename _Cat, typename _Limit, typename _Otherwise = _Cat>
+        -:  102:      using __clamp_iter_cat
+        -:  103:	= conditional_t<derived_from<_Cat, _Limit>, _Limit, _Otherwise>;
+        -:  104:  }
+        -:  105:#endif
+        -:  106:
+        -:  107:  // 24.4.1 Reverse iterators
+        -:  108:  /**
+        -:  109:   *  Bidirectional and random access iterators have corresponding reverse
+        -:  110:   *  %iterator adaptors that iterate through the data structure in the
+        -:  111:   *  opposite direction.  They have the same signatures as the corresponding
+        -:  112:   *  iterators.  The fundamental relation between a reverse %iterator and its
+        -:  113:   *  corresponding %iterator @c i is established by the identity:
+        -:  114:   *  @code
+        -:  115:   *      &*(reverse_iterator(i)) == &*(i - 1)
+        -:  116:   *  @endcode
+        -:  117:   *
+        -:  118:   *  <em>This mapping is dictated by the fact that while there is always a
+        -:  119:   *  pointer past the end of an array, there might not be a valid pointer
+        -:  120:   *  before the beginning of an array.</em> [24.4.1]/1,2
+        -:  121:   *
+        -:  122:   *  Reverse iterators can be tricky and surprising at first.  Their
+        -:  123:   *  semantics make sense, however, and the trickiness is a side effect of
+        -:  124:   *  the requirement that the iterators must be safe.
+        -:  125:  */
+        -:  126:  template<typename _Iterator>
+        -:  127:    class reverse_iterator
+        -:  128:    : public iterator<typename iterator_traits<_Iterator>::iterator_category,
+        -:  129:		      typename iterator_traits<_Iterator>::value_type,
+        -:  130:		      typename iterator_traits<_Iterator>::difference_type,
+        -:  131:		      typename iterator_traits<_Iterator>::pointer,
+        -:  132:                      typename iterator_traits<_Iterator>::reference>
+        -:  133:    {
+        -:  134:      template<typename _Iter>
+        -:  135:	friend class reverse_iterator;
+        -:  136:
+        -:  137:#if __cpp_lib_concepts
+        -:  138:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  139:      // 3435. three_way_comparable_with<reverse_iterator<int*>, [...]>
+        -:  140:      template<typename _Iter>
+        -:  141:	static constexpr bool __convertible = !is_same_v<_Iter, _Iterator>
+        -:  142:	    && convertible_to<const _Iter&, _Iterator>;
+        -:  143:#endif
+        -:  144:
+        -:  145:    protected:
+        -:  146:      _Iterator current;
+        -:  147:
+        -:  148:      typedef iterator_traits<_Iterator>		__traits_type;
+        -:  149:
+        -:  150:    public:
+        -:  151:      typedef _Iterator					iterator_type;
+        -:  152:      typedef typename __traits_type::pointer		pointer;
+        -:  153:#if __cplusplus <= 201703L
+        -:  154:      typedef typename __traits_type::difference_type	difference_type;
+        -:  155:      typedef typename __traits_type::reference		reference;
+        -:  156:#else
+        -:  157:      using iterator_concept
+        -:  158:	= conditional_t<random_access_iterator<_Iterator>,
+        -:  159:			random_access_iterator_tag,
+        -:  160:			bidirectional_iterator_tag>;
+        -:  161:      using iterator_category
+        -:  162:	= __detail::__clamp_iter_cat<typename __traits_type::iterator_category,
+        -:  163:				     random_access_iterator_tag>;
+        -:  164:      using value_type = iter_value_t<_Iterator>;
+        -:  165:      using difference_type = iter_difference_t<_Iterator>;
+        -:  166:      using reference = iter_reference_t<_Iterator>;
+        -:  167:#endif
+        -:  168:
+        -:  169:      /**
+        -:  170:       *  The default constructor value-initializes member @p current.
+        -:  171:       *  If it is a pointer, that means it is zero-initialized.
+        -:  172:      */
+        -:  173:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  174:      // 235 No specification of default ctor for reverse_iterator
+        -:  175:      // 1012. reverse_iterator default ctor should value initialize
+        -:  176:      _GLIBCXX17_CONSTEXPR
+        -:  177:      reverse_iterator() : current() { }
+        -:  178:
+        -:  179:      /**
+        -:  180:       *  This %iterator will move in the opposite direction that @p x does.
+        -:  181:      */
+        -:  182:      explicit _GLIBCXX17_CONSTEXPR
+        -:  183:      reverse_iterator(iterator_type __x) : current(__x) { }
+        -:  184:
+        -:  185:      /**
+        -:  186:       *  The copy constructor is normal.
+        -:  187:      */
+        -:  188:      _GLIBCXX17_CONSTEXPR
+        -:  189:      reverse_iterator(const reverse_iterator& __x)
+        -:  190:      : current(__x.current) { }
+        -:  191:
+        -:  192:#if __cplusplus >= 201103L
+        -:  193:      reverse_iterator& operator=(const reverse_iterator&) = default;
+        -:  194:#endif
+        -:  195:
+        -:  196:      /**
+        -:  197:       *  A %reverse_iterator across other types can be copied if the
+        -:  198:       *  underlying %iterator can be converted to the type of @c current.
+        -:  199:      */
+        -:  200:      template<typename _Iter>
+        -:  201:#if __cpp_lib_concepts
+        -:  202:	requires __convertible<_Iter>
+        -:  203:#endif
+        -:  204:	_GLIBCXX17_CONSTEXPR
+        -:  205:        reverse_iterator(const reverse_iterator<_Iter>& __x)
+        -:  206:	: current(__x.current) { }
+        -:  207:
+        -:  208:#if __cplusplus >= 201103L
+        -:  209:      template<typename _Iter>
+        -:  210:#if __cpp_lib_concepts
+        -:  211:	requires __convertible<_Iter>
+        -:  212:	  && assignable_from<_Iterator&, const _Iter&>
+        -:  213:#endif
+        -:  214:	_GLIBCXX17_CONSTEXPR
+        -:  215:	reverse_iterator&
+        -:  216:	operator=(const reverse_iterator<_Iter>& __x)
+        -:  217:	{
+        -:  218:	  current = __x.current;
+        -:  219:	  return *this;
+        -:  220:	}
+        -:  221:#endif
+        -:  222:
+        -:  223:      /**
+        -:  224:       *  @return  @c current, the %iterator used for underlying work.
+        -:  225:      */
+        -:  226:      _GLIBCXX17_CONSTEXPR iterator_type
+        -:  227:      base() const
+        -:  228:      { return current; }
+        -:  229:
+        -:  230:      /**
+        -:  231:       *  @return  A reference to the value at @c --current
+        -:  232:       *
+        -:  233:       *  This requires that @c --current is dereferenceable.
+        -:  234:       *
+        -:  235:       *  @warning This implementation requires that for an iterator of the
+        -:  236:       *           underlying iterator type, @c x, a reference obtained by
+        -:  237:       *           @c *x remains valid after @c x has been modified or
+        -:  238:       *           destroyed. This is a bug: http://gcc.gnu.org/PR51823
+        -:  239:      */
+        -:  240:      _GLIBCXX17_CONSTEXPR reference
+        -:  241:      operator*() const
+        -:  242:      {
+        -:  243:	_Iterator __tmp = current;
+        -:  244:	return *--__tmp;
+        -:  245:      }
+        -:  246:
+        -:  247:      /**
+        -:  248:       *  @return  A pointer to the value at @c --current
+        -:  249:       *
+        -:  250:       *  This requires that @c --current is dereferenceable.
+        -:  251:      */
+        -:  252:      _GLIBCXX17_CONSTEXPR pointer
+        -:  253:      operator->() const
+        -:  254:#if __cplusplus > 201703L && __cpp_concepts >= 201907L
+        -:  255:      requires is_pointer_v<_Iterator>
+        -:  256:	|| requires(const _Iterator __i) { __i.operator->(); }
+        -:  257:#endif
+        -:  258:      {
+        -:  259:	// _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  260:	// 1052. operator-> should also support smart pointers
+        -:  261:	_Iterator __tmp = current;
+        -:  262:	--__tmp;
+        -:  263:	return _S_to_pointer(__tmp);
+        -:  264:      }
+        -:  265:
+        -:  266:      /**
+        -:  267:       *  @return  @c *this
+        -:  268:       *
+        -:  269:       *  Decrements the underlying iterator.
+        -:  270:      */
+        -:  271:      _GLIBCXX17_CONSTEXPR reverse_iterator&
+        -:  272:      operator++()
+        -:  273:      {
+        -:  274:	--current;
+        -:  275:	return *this;
+        -:  276:      }
+        -:  277:
+        -:  278:      /**
+        -:  279:       *  @return  The original value of @c *this
+        -:  280:       *
+        -:  281:       *  Decrements the underlying iterator.
+        -:  282:      */
+        -:  283:      _GLIBCXX17_CONSTEXPR reverse_iterator
+        -:  284:      operator++(int)
+        -:  285:      {
+        -:  286:	reverse_iterator __tmp = *this;
+        -:  287:	--current;
+        -:  288:	return __tmp;
+        -:  289:      }
+        -:  290:
+        -:  291:      /**
+        -:  292:       *  @return  @c *this
+        -:  293:       *
+        -:  294:       *  Increments the underlying iterator.
+        -:  295:      */
+        -:  296:      _GLIBCXX17_CONSTEXPR reverse_iterator&
+        -:  297:      operator--()
+        -:  298:      {
+        -:  299:	++current;
+        -:  300:	return *this;
+        -:  301:      }
+        -:  302:
+        -:  303:      /**
+        -:  304:       *  @return  A reverse_iterator with the previous value of @c *this
+        -:  305:       *
+        -:  306:       *  Increments the underlying iterator.
+        -:  307:      */
+        -:  308:      _GLIBCXX17_CONSTEXPR reverse_iterator
+        -:  309:      operator--(int)
+        -:  310:      {
+        -:  311:	reverse_iterator __tmp = *this;
+        -:  312:	++current;
+        -:  313:	return __tmp;
+        -:  314:      }
+        -:  315:
+        -:  316:      /**
+        -:  317:       *  @return  A reverse_iterator that refers to @c current - @a __n
+        -:  318:       *
+        -:  319:       *  The underlying iterator must be a Random Access Iterator.
+        -:  320:      */
+        -:  321:      _GLIBCXX17_CONSTEXPR reverse_iterator
+        -:  322:      operator+(difference_type __n) const
+        -:  323:      { return reverse_iterator(current - __n); }
+        -:  324:
+        -:  325:      /**
+        -:  326:       *  @return  *this
+        -:  327:       *
+        -:  328:       *  Moves the underlying iterator backwards @a __n steps.
+        -:  329:       *  The underlying iterator must be a Random Access Iterator.
+        -:  330:      */
+        -:  331:      _GLIBCXX17_CONSTEXPR reverse_iterator&
+        -:  332:      operator+=(difference_type __n)
+        -:  333:      {
+        -:  334:	current -= __n;
+        -:  335:	return *this;
+        -:  336:      }
+        -:  337:
+        -:  338:      /**
+        -:  339:       *  @return  A reverse_iterator that refers to @c current - @a __n
+        -:  340:       *
+        -:  341:       *  The underlying iterator must be a Random Access Iterator.
+        -:  342:      */
+        -:  343:      _GLIBCXX17_CONSTEXPR reverse_iterator
+        -:  344:      operator-(difference_type __n) const
+        -:  345:      { return reverse_iterator(current + __n); }
+        -:  346:
+        -:  347:      /**
+        -:  348:       *  @return  *this
+        -:  349:       *
+        -:  350:       *  Moves the underlying iterator forwards @a __n steps.
+        -:  351:       *  The underlying iterator must be a Random Access Iterator.
+        -:  352:      */
+        -:  353:      _GLIBCXX17_CONSTEXPR reverse_iterator&
+        -:  354:      operator-=(difference_type __n)
+        -:  355:      {
+        -:  356:	current += __n;
+        -:  357:	return *this;
+        -:  358:      }
+        -:  359:
+        -:  360:      /**
+        -:  361:       *  @return  The value at @c current - @a __n - 1
+        -:  362:       *
+        -:  363:       *  The underlying iterator must be a Random Access Iterator.
+        -:  364:      */
+        -:  365:      _GLIBCXX17_CONSTEXPR reference
+        -:  366:      operator[](difference_type __n) const
+        -:  367:      { return *(*this + __n); }
+        -:  368:
+        -:  369:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -:  370:      friend constexpr iter_rvalue_reference_t<_Iterator>
+        -:  371:      iter_move(const reverse_iterator& __i)
+        -:  372:      noexcept(is_nothrow_copy_constructible_v<_Iterator>
+        -:  373:	       && noexcept(ranges::iter_move(--std::declval<_Iterator&>())))
+        -:  374:      {
+        -:  375:	auto __tmp = __i.base();
+        -:  376:	return ranges::iter_move(--__tmp);
+        -:  377:      }
+        -:  378:
+        -:  379:      template<indirectly_swappable<_Iterator> _Iter2>
+        -:  380:	friend constexpr void
+        -:  381:	iter_swap(const reverse_iterator& __x,
+        -:  382:		  const reverse_iterator<_Iter2>& __y)
+        -:  383:	noexcept(is_nothrow_copy_constructible_v<_Iterator>
+        -:  384:		 && is_nothrow_copy_constructible_v<_Iter2>
+        -:  385:		 && noexcept(ranges::iter_swap(--std::declval<_Iterator&>(),
+        -:  386:					       --std::declval<_Iter2&>())))
+        -:  387:	{
+        -:  388:	  auto __xtmp = __x.base();
+        -:  389:	  auto __ytmp = __y.base();
+        -:  390:	  ranges::iter_swap(--__xtmp, --__ytmp);
+        -:  391:	}
+        -:  392:#endif
+        -:  393:
+        -:  394:    private:
+        -:  395:      template<typename _Tp>
+        -:  396:	static _GLIBCXX17_CONSTEXPR _Tp*
+        -:  397:	_S_to_pointer(_Tp* __p)
+        -:  398:        { return __p; }
+        -:  399:
+        -:  400:      template<typename _Tp>
+        -:  401:	static _GLIBCXX17_CONSTEXPR pointer
+        -:  402:	_S_to_pointer(_Tp __t)
+        -:  403:        { return __t.operator->(); }
+        -:  404:    };
+        -:  405:
+        -:  406:  ///@{
+        -:  407:  /**
+        -:  408:   *  @param  __x  A %reverse_iterator.
+        -:  409:   *  @param  __y  A %reverse_iterator.
+        -:  410:   *  @return  A simple bool.
+        -:  411:   *
+        -:  412:   *  Reverse iterators forward comparisons to their underlying base()
+        -:  413:   *  iterators.
+        -:  414:   *
+        -:  415:  */
+        -:  416:#if __cplusplus <= 201703L || ! defined __cpp_lib_concepts
+        -:  417:  template<typename _Iterator>
+        -:  418:    inline _GLIBCXX17_CONSTEXPR bool
+        -:  419:    operator==(const reverse_iterator<_Iterator>& __x,
+        -:  420:	       const reverse_iterator<_Iterator>& __y)
+        -:  421:    { return __x.base() == __y.base(); }
+        -:  422:
+        -:  423:  template<typename _Iterator>
+        -:  424:    inline _GLIBCXX17_CONSTEXPR bool
+        -:  425:    operator<(const reverse_iterator<_Iterator>& __x,
+        -:  426:	      const reverse_iterator<_Iterator>& __y)
+        -:  427:    { return __y.base() < __x.base(); }
+        -:  428:
+        -:  429:  template<typename _Iterator>
+        -:  430:    inline _GLIBCXX17_CONSTEXPR bool
+        -:  431:    operator!=(const reverse_iterator<_Iterator>& __x,
+        -:  432:	       const reverse_iterator<_Iterator>& __y)
+        -:  433:    { return !(__x == __y); }
+        -:  434:
+        -:  435:  template<typename _Iterator>
+        -:  436:    inline _GLIBCXX17_CONSTEXPR bool
+        -:  437:    operator>(const reverse_iterator<_Iterator>& __x,
+        -:  438:	      const reverse_iterator<_Iterator>& __y)
+        -:  439:    { return __y < __x; }
+        -:  440:
+        -:  441:  template<typename _Iterator>
+        -:  442:    inline _GLIBCXX17_CONSTEXPR bool
+        -:  443:    operator<=(const reverse_iterator<_Iterator>& __x,
+        -:  444:	       const reverse_iterator<_Iterator>& __y)
+        -:  445:    { return !(__y < __x); }
+        -:  446:
+        -:  447:  template<typename _Iterator>
+        -:  448:    inline _GLIBCXX17_CONSTEXPR bool
+        -:  449:    operator>=(const reverse_iterator<_Iterator>& __x,
+        -:  450:	       const reverse_iterator<_Iterator>& __y)
+        -:  451:    { return !(__x < __y); }
+        -:  452:
+        -:  453:  // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  454:  // DR 280. Comparison of reverse_iterator to const reverse_iterator.
+        -:  455:
+        -:  456:  template<typename _IteratorL, typename _IteratorR>
+        -:  457:    inline _GLIBCXX17_CONSTEXPR bool
+        -:  458:    operator==(const reverse_iterator<_IteratorL>& __x,
+        -:  459:	       const reverse_iterator<_IteratorR>& __y)
+        -:  460:    { return __x.base() == __y.base(); }
+        -:  461:
+        -:  462:  template<typename _IteratorL, typename _IteratorR>
+        -:  463:    inline _GLIBCXX17_CONSTEXPR bool
+        -:  464:    operator<(const reverse_iterator<_IteratorL>& __x,
+        -:  465:	      const reverse_iterator<_IteratorR>& __y)
+        -:  466:    { return __x.base() > __y.base(); }
+        -:  467:
+        -:  468:  template<typename _IteratorL, typename _IteratorR>
+        -:  469:    inline _GLIBCXX17_CONSTEXPR bool
+        -:  470:    operator!=(const reverse_iterator<_IteratorL>& __x,
+        -:  471:	       const reverse_iterator<_IteratorR>& __y)
+        -:  472:    { return __x.base() != __y.base(); }
+        -:  473:
+        -:  474:  template<typename _IteratorL, typename _IteratorR>
+        -:  475:    inline _GLIBCXX17_CONSTEXPR bool
+        -:  476:    operator>(const reverse_iterator<_IteratorL>& __x,
+        -:  477:	      const reverse_iterator<_IteratorR>& __y)
+        -:  478:    { return __x.base() < __y.base(); }
+        -:  479:
+        -:  480:  template<typename _IteratorL, typename _IteratorR>
+        -:  481:    inline _GLIBCXX17_CONSTEXPR bool
+        -:  482:    operator<=(const reverse_iterator<_IteratorL>& __x,
+        -:  483:	       const reverse_iterator<_IteratorR>& __y)
+        -:  484:    { return __x.base() >= __y.base(); }
+        -:  485:
+        -:  486:  template<typename _IteratorL, typename _IteratorR>
+        -:  487:    inline _GLIBCXX17_CONSTEXPR bool
+        -:  488:    operator>=(const reverse_iterator<_IteratorL>& __x,
+        -:  489:	       const reverse_iterator<_IteratorR>& __y)
+        -:  490:    { return __x.base() <= __y.base(); }
+        -:  491:#else // C++20
+        -:  492:  template<typename _IteratorL, typename _IteratorR>
+        -:  493:    constexpr bool
+        -:  494:    operator==(const reverse_iterator<_IteratorL>& __x,
+        -:  495:	       const reverse_iterator<_IteratorR>& __y)
+        -:  496:    requires requires { { __x.base() == __y.base() } -> convertible_to<bool>; }
+        -:  497:    { return __x.base() == __y.base(); }
+        -:  498:
+        -:  499:  template<typename _IteratorL, typename _IteratorR>
+        -:  500:    constexpr bool
+        -:  501:    operator!=(const reverse_iterator<_IteratorL>& __x,
+        -:  502:	       const reverse_iterator<_IteratorR>& __y)
+        -:  503:    requires requires { { __x.base() != __y.base() } -> convertible_to<bool>; }
+        -:  504:    { return __x.base() != __y.base(); }
+        -:  505:
+        -:  506:  template<typename _IteratorL, typename _IteratorR>
+        -:  507:    constexpr bool
+        -:  508:    operator<(const reverse_iterator<_IteratorL>& __x,
+        -:  509:	      const reverse_iterator<_IteratorR>& __y)
+        -:  510:    requires requires { { __x.base() > __y.base() } -> convertible_to<bool>; }
+        -:  511:    { return __x.base() > __y.base(); }
+        -:  512:
+        -:  513:  template<typename _IteratorL, typename _IteratorR>
+        -:  514:    constexpr bool
+        -:  515:    operator>(const reverse_iterator<_IteratorL>& __x,
+        -:  516:	      const reverse_iterator<_IteratorR>& __y)
+        -:  517:    requires requires { { __x.base() < __y.base() } -> convertible_to<bool>; }
+        -:  518:    { return __x.base() < __y.base(); }
+        -:  519:
+        -:  520:  template<typename _IteratorL, typename _IteratorR>
+        -:  521:    constexpr bool
+        -:  522:    operator<=(const reverse_iterator<_IteratorL>& __x,
+        -:  523:	       const reverse_iterator<_IteratorR>& __y)
+        -:  524:    requires requires { { __x.base() >= __y.base() } -> convertible_to<bool>; }
+        -:  525:    { return __x.base() >= __y.base(); }
+        -:  526:
+        -:  527:  template<typename _IteratorL, typename _IteratorR>
+        -:  528:    constexpr bool
+        -:  529:    operator>=(const reverse_iterator<_IteratorL>& __x,
+        -:  530:	       const reverse_iterator<_IteratorR>& __y)
+        -:  531:    requires requires { { __x.base() <= __y.base() } -> convertible_to<bool>; }
+        -:  532:    { return __x.base() <= __y.base(); }
+        -:  533:
+        -:  534:  template<typename _IteratorL,
+        -:  535:	   three_way_comparable_with<_IteratorL> _IteratorR>
+        -:  536:    constexpr compare_three_way_result_t<_IteratorL, _IteratorR>
+        -:  537:    operator<=>(const reverse_iterator<_IteratorL>& __x,
+        -:  538:		const reverse_iterator<_IteratorR>& __y)
+        -:  539:    { return __y.base() <=> __x.base(); }
+        -:  540:#endif // C++20
+        -:  541:  ///@}
+        -:  542:
+        -:  543:#if __cplusplus < 201103L
+        -:  544:  template<typename _Iterator>
+        -:  545:    inline typename reverse_iterator<_Iterator>::difference_type
+        -:  546:    operator-(const reverse_iterator<_Iterator>& __x,
+        -:  547:	      const reverse_iterator<_Iterator>& __y)
+        -:  548:    { return __y.base() - __x.base(); }
+        -:  549:
+        -:  550:  template<typename _IteratorL, typename _IteratorR>
+        -:  551:    inline typename reverse_iterator<_IteratorL>::difference_type
+        -:  552:    operator-(const reverse_iterator<_IteratorL>& __x,
+        -:  553:	      const reverse_iterator<_IteratorR>& __y)
+        -:  554:    { return __y.base() - __x.base(); }
+        -:  555:#else
+        -:  556:  // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  557:  // DR 685. reverse_iterator/move_iterator difference has invalid signatures
+        -:  558:  template<typename _IteratorL, typename _IteratorR>
+        -:  559:    inline _GLIBCXX17_CONSTEXPR auto
+        -:  560:    operator-(const reverse_iterator<_IteratorL>& __x,
+        -:  561:	      const reverse_iterator<_IteratorR>& __y)
+        -:  562:    -> decltype(__y.base() - __x.base())
+        -:  563:    { return __y.base() - __x.base(); }
+        -:  564:#endif
+        -:  565:
+        -:  566:  template<typename _Iterator>
+        -:  567:    inline _GLIBCXX17_CONSTEXPR reverse_iterator<_Iterator>
+        -:  568:    operator+(typename reverse_iterator<_Iterator>::difference_type __n,
+        -:  569:	      const reverse_iterator<_Iterator>& __x)
+        -:  570:    { return reverse_iterator<_Iterator>(__x.base() - __n); }
+        -:  571:
+        -:  572:#if __cplusplus >= 201103L
+        -:  573:  // Same as C++14 make_reverse_iterator but used in C++11 mode too.
+        -:  574:  template<typename _Iterator>
+        -:  575:    inline _GLIBCXX17_CONSTEXPR reverse_iterator<_Iterator>
+        -:  576:    __make_reverse_iterator(_Iterator __i)
+        -:  577:    { return reverse_iterator<_Iterator>(__i); }
+        -:  578:
+        -:  579:# if __cplusplus >= 201402L
+        -:  580:#  define __cpp_lib_make_reverse_iterator 201402
+        -:  581:
+        -:  582:  // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  583:  // DR 2285. make_reverse_iterator
+        -:  584:  /// Generator function for reverse_iterator.
+        -:  585:  template<typename _Iterator>
+        -:  586:    inline _GLIBCXX17_CONSTEXPR reverse_iterator<_Iterator>
+        -:  587:    make_reverse_iterator(_Iterator __i)
+        -:  588:    { return reverse_iterator<_Iterator>(__i); }
+        -:  589:
+        -:  590:#  if __cplusplus > 201703L && defined __cpp_lib_concepts
+        -:  591:  template<typename _Iterator1, typename _Iterator2>
+        -:  592:    requires (!sized_sentinel_for<_Iterator1, _Iterator2>)
+        -:  593:    inline constexpr bool
+        -:  594:    disable_sized_sentinel_for<reverse_iterator<_Iterator1>,
+        -:  595:			       reverse_iterator<_Iterator2>> = true;
+        -:  596:#  endif // C++20
+        -:  597:# endif // C++14
+        -:  598:
+        -:  599:  template<typename _Iterator>
+        -:  600:    _GLIBCXX20_CONSTEXPR
+        -:  601:    auto
+        -:  602:    __niter_base(reverse_iterator<_Iterator> __it)
+        -:  603:    -> decltype(__make_reverse_iterator(__niter_base(__it.base())))
+        -:  604:    { return __make_reverse_iterator(__niter_base(__it.base())); }
+        -:  605:
+        -:  606:  template<typename _Iterator>
+        -:  607:    struct __is_move_iterator<reverse_iterator<_Iterator> >
+        -:  608:      : __is_move_iterator<_Iterator>
+        -:  609:    { };
+        -:  610:
+        -:  611:  template<typename _Iterator>
+        -:  612:    _GLIBCXX20_CONSTEXPR
+        -:  613:    auto
+        -:  614:    __miter_base(reverse_iterator<_Iterator> __it)
+        -:  615:    -> decltype(__make_reverse_iterator(__miter_base(__it.base())))
+        -:  616:    { return __make_reverse_iterator(__miter_base(__it.base())); }
+        -:  617:#endif // C++11
+        -:  618:
+        -:  619:  // 24.4.2.2.1 back_insert_iterator
+        -:  620:  /**
+        -:  621:   *  @brief  Turns assignment into insertion.
+        -:  622:   *
+        -:  623:   *  These are output iterators, constructed from a container-of-T.
+        -:  624:   *  Assigning a T to the iterator appends it to the container using
+        -:  625:   *  push_back.
+        -:  626:   *
+        -:  627:   *  Tip:  Using the back_inserter function to create these iterators can
+        -:  628:   *  save typing.
+        -:  629:  */
+        -:  630:  template<typename _Container>
+        -:  631:    class back_insert_iterator
+        -:  632:    : public iterator<output_iterator_tag, void, void, void, void>
+        -:  633:    {
+        -:  634:    protected:
+        -:  635:      _Container* container;
+        -:  636:
+        -:  637:    public:
+        -:  638:      /// A nested typedef for the type of whatever container you used.
+        -:  639:      typedef _Container          container_type;
+        -:  640:#if __cplusplus > 201703L
+        -:  641:      using difference_type = ptrdiff_t;
+        -:  642:
+        -:  643:      constexpr back_insert_iterator() noexcept : container(nullptr) { }
+        -:  644:#endif
+        -:  645:
+        -:  646:      /// The only way to create this %iterator is with a container.
+        -:  647:      explicit _GLIBCXX20_CONSTEXPR
+        -:  648:      back_insert_iterator(_Container& __x)
+        -:  649:      : container(std::__addressof(__x)) { }
+        -:  650:
+        -:  651:      /**
+        -:  652:       *  @param  __value  An instance of whatever type
+        -:  653:       *                 container_type::const_reference is; presumably a
+        -:  654:       *                 reference-to-const T for container<T>.
+        -:  655:       *  @return  This %iterator, for chained operations.
+        -:  656:       *
+        -:  657:       *  This kind of %iterator doesn't really have a @a position in the
+        -:  658:       *  container (you can think of the position as being permanently at
+        -:  659:       *  the end, if you like).  Assigning a value to the %iterator will
+        -:  660:       *  always append the value to the end of the container.
+        -:  661:      */
+        -:  662:#if __cplusplus < 201103L
+        -:  663:      back_insert_iterator&
+        -:  664:      operator=(typename _Container::const_reference __value)
+        -:  665:      {
+        -:  666:	container->push_back(__value);
+        -:  667:	return *this;
+        -:  668:      }
+        -:  669:#else
+        -:  670:      _GLIBCXX20_CONSTEXPR
+        -:  671:      back_insert_iterator&
+        -:  672:      operator=(const typename _Container::value_type& __value)
+        -:  673:      {
+        -:  674:	container->push_back(__value);
+        -:  675:	return *this;
+        -:  676:      }
+        -:  677:
+        -:  678:      _GLIBCXX20_CONSTEXPR
+        -:  679:      back_insert_iterator&
+        -:  680:      operator=(typename _Container::value_type&& __value)
+        -:  681:      {
+        -:  682:	container->push_back(std::move(__value));
+        -:  683:	return *this;
+        -:  684:      }
+        -:  685:#endif
+        -:  686:
+        -:  687:      /// Simply returns *this.
+        -:  688:      _GLIBCXX20_CONSTEXPR
+        -:  689:      back_insert_iterator&
+        -:  690:      operator*()
+        -:  691:      { return *this; }
+        -:  692:
+        -:  693:      /// Simply returns *this.  (This %iterator does not @a move.)
+        -:  694:      _GLIBCXX20_CONSTEXPR
+        -:  695:      back_insert_iterator&
+        -:  696:      operator++()
+        -:  697:      { return *this; }
+        -:  698:
+        -:  699:      /// Simply returns *this.  (This %iterator does not @a move.)
+        -:  700:      _GLIBCXX20_CONSTEXPR
+        -:  701:      back_insert_iterator
+        -:  702:      operator++(int)
+        -:  703:      { return *this; }
+        -:  704:    };
+        -:  705:
+        -:  706:  /**
+        -:  707:   *  @param  __x  A container of arbitrary type.
+        -:  708:   *  @return  An instance of back_insert_iterator working on @p __x.
+        -:  709:   *
+        -:  710:   *  This wrapper function helps in creating back_insert_iterator instances.
+        -:  711:   *  Typing the name of the %iterator requires knowing the precise full
+        -:  712:   *  type of the container, which can be tedious and impedes generic
+        -:  713:   *  programming.  Using this function lets you take advantage of automatic
+        -:  714:   *  template parameter deduction, making the compiler match the correct
+        -:  715:   *  types for you.
+        -:  716:  */
+        -:  717:  template<typename _Container>
+        -:  718:    _GLIBCXX20_CONSTEXPR
+        -:  719:    inline back_insert_iterator<_Container>
+        -:  720:    back_inserter(_Container& __x)
+        -:  721:    { return back_insert_iterator<_Container>(__x); }
+        -:  722:
+        -:  723:  /**
+        -:  724:   *  @brief  Turns assignment into insertion.
+        -:  725:   *
+        -:  726:   *  These are output iterators, constructed from a container-of-T.
+        -:  727:   *  Assigning a T to the iterator prepends it to the container using
+        -:  728:   *  push_front.
+        -:  729:   *
+        -:  730:   *  Tip:  Using the front_inserter function to create these iterators can
+        -:  731:   *  save typing.
+        -:  732:  */
+        -:  733:  template<typename _Container>
+        -:  734:    class front_insert_iterator
+        -:  735:    : public iterator<output_iterator_tag, void, void, void, void>
+        -:  736:    {
+        -:  737:    protected:
+        -:  738:      _Container* container;
+        -:  739:
+        -:  740:    public:
+        -:  741:      /// A nested typedef for the type of whatever container you used.
+        -:  742:      typedef _Container          container_type;
+        -:  743:#if __cplusplus > 201703L
+        -:  744:      using difference_type = ptrdiff_t;
+        -:  745:
+        -:  746:      constexpr front_insert_iterator() noexcept : container(nullptr) { }
+        -:  747:#endif
+        -:  748:
+        -:  749:      /// The only way to create this %iterator is with a container.
+        -:  750:      explicit _GLIBCXX20_CONSTEXPR
+        -:  751:      front_insert_iterator(_Container& __x)
+        -:  752:      : container(std::__addressof(__x)) { }
+        -:  753:
+        -:  754:      /**
+        -:  755:       *  @param  __value  An instance of whatever type
+        -:  756:       *                 container_type::const_reference is; presumably a
+        -:  757:       *                 reference-to-const T for container<T>.
+        -:  758:       *  @return  This %iterator, for chained operations.
+        -:  759:       *
+        -:  760:       *  This kind of %iterator doesn't really have a @a position in the
+        -:  761:       *  container (you can think of the position as being permanently at
+        -:  762:       *  the front, if you like).  Assigning a value to the %iterator will
+        -:  763:       *  always prepend the value to the front of the container.
+        -:  764:      */
+        -:  765:#if __cplusplus < 201103L
+        -:  766:      front_insert_iterator&
+        -:  767:      operator=(typename _Container::const_reference __value)
+        -:  768:      {
+        -:  769:	container->push_front(__value);
+        -:  770:	return *this;
+        -:  771:      }
+        -:  772:#else
+        -:  773:      _GLIBCXX20_CONSTEXPR
+        -:  774:      front_insert_iterator&
+        -:  775:      operator=(const typename _Container::value_type& __value)
+        -:  776:      {
+        -:  777:	container->push_front(__value);
+        -:  778:	return *this;
+        -:  779:      }
+        -:  780:
+        -:  781:      _GLIBCXX20_CONSTEXPR
+        -:  782:      front_insert_iterator&
+        -:  783:      operator=(typename _Container::value_type&& __value)
+        -:  784:      {
+        -:  785:	container->push_front(std::move(__value));
+        -:  786:	return *this;
+        -:  787:      }
+        -:  788:#endif
+        -:  789:
+        -:  790:      /// Simply returns *this.
+        -:  791:      _GLIBCXX20_CONSTEXPR
+        -:  792:      front_insert_iterator&
+        -:  793:      operator*()
+        -:  794:      { return *this; }
+        -:  795:
+        -:  796:      /// Simply returns *this.  (This %iterator does not @a move.)
+        -:  797:      _GLIBCXX20_CONSTEXPR
+        -:  798:      front_insert_iterator&
+        -:  799:      operator++()
+        -:  800:      { return *this; }
+        -:  801:
+        -:  802:      /// Simply returns *this.  (This %iterator does not @a move.)
+        -:  803:      _GLIBCXX20_CONSTEXPR
+        -:  804:      front_insert_iterator
+        -:  805:      operator++(int)
+        -:  806:      { return *this; }
+        -:  807:    };
+        -:  808:
+        -:  809:  /**
+        -:  810:   *  @param  __x  A container of arbitrary type.
+        -:  811:   *  @return  An instance of front_insert_iterator working on @p x.
+        -:  812:   *
+        -:  813:   *  This wrapper function helps in creating front_insert_iterator instances.
+        -:  814:   *  Typing the name of the %iterator requires knowing the precise full
+        -:  815:   *  type of the container, which can be tedious and impedes generic
+        -:  816:   *  programming.  Using this function lets you take advantage of automatic
+        -:  817:   *  template parameter deduction, making the compiler match the correct
+        -:  818:   *  types for you.
+        -:  819:  */
+        -:  820:  template<typename _Container>
+        -:  821:    _GLIBCXX20_CONSTEXPR
+        -:  822:    inline front_insert_iterator<_Container>
+        -:  823:    front_inserter(_Container& __x)
+        -:  824:    { return front_insert_iterator<_Container>(__x); }
+        -:  825:
+        -:  826:  /**
+        -:  827:   *  @brief  Turns assignment into insertion.
+        -:  828:   *
+        -:  829:   *  These are output iterators, constructed from a container-of-T.
+        -:  830:   *  Assigning a T to the iterator inserts it in the container at the
+        -:  831:   *  %iterator's position, rather than overwriting the value at that
+        -:  832:   *  position.
+        -:  833:   *
+        -:  834:   *  (Sequences will actually insert a @e copy of the value before the
+        -:  835:   *  %iterator's position.)
+        -:  836:   *
+        -:  837:   *  Tip:  Using the inserter function to create these iterators can
+        -:  838:   *  save typing.
+        -:  839:  */
+        -:  840:  template<typename _Container>
+        -:  841:    class insert_iterator
+        -:  842:    : public iterator<output_iterator_tag, void, void, void, void>
+        -:  843:    {
+        -:  844:#if __cplusplus > 201703L && defined __cpp_lib_concepts
+        -:  845:      using _Iter = std::__detail::__range_iter_t<_Container>;
+        -:  846:
+        -:  847:    protected:
+        -:  848:      _Container* container = nullptr;
+        -:  849:      _Iter iter = _Iter();
+        -:  850:#else
+        -:  851:      typedef typename _Container::iterator		_Iter;
+        -:  852:
+        -:  853:    protected:
+        -:  854:      _Container* container;
+        -:  855:      _Iter iter;
+        -:  856:#endif
+        -:  857:
+        -:  858:    public:
+        -:  859:      /// A nested typedef for the type of whatever container you used.
+        -:  860:      typedef _Container          container_type;
+        -:  861:
+        -:  862:#if __cplusplus > 201703L && defined __cpp_lib_concepts
+        -:  863:      using difference_type = ptrdiff_t;
+        -:  864:
+        -:  865:      insert_iterator() = default;
+        -:  866:#endif
+        -:  867:
+        -:  868:      /**
+        -:  869:       *  The only way to create this %iterator is with a container and an
+        -:  870:       *  initial position (a normal %iterator into the container).
+        -:  871:      */
+        -:  872:      _GLIBCXX20_CONSTEXPR
+        -:  873:      insert_iterator(_Container& __x, _Iter __i)
+        -:  874:      : container(std::__addressof(__x)), iter(__i) {}
+        -:  875:
+        -:  876:      /**
+        -:  877:       *  @param  __value  An instance of whatever type
+        -:  878:       *                 container_type::const_reference is; presumably a
+        -:  879:       *                 reference-to-const T for container<T>.
+        -:  880:       *  @return  This %iterator, for chained operations.
+        -:  881:       *
+        -:  882:       *  This kind of %iterator maintains its own position in the
+        -:  883:       *  container.  Assigning a value to the %iterator will insert the
+        -:  884:       *  value into the container at the place before the %iterator.
+        -:  885:       *
+        -:  886:       *  The position is maintained such that subsequent assignments will
+        -:  887:       *  insert values immediately after one another.  For example,
+        -:  888:       *  @code
+        -:  889:       *     // vector v contains A and Z
+        -:  890:       *
+        -:  891:       *     insert_iterator i (v, ++v.begin());
+        -:  892:       *     i = 1;
+        -:  893:       *     i = 2;
+        -:  894:       *     i = 3;
+        -:  895:       *
+        -:  896:       *     // vector v contains A, 1, 2, 3, and Z
+        -:  897:       *  @endcode
+        -:  898:      */
+        -:  899:#if __cplusplus < 201103L
+        -:  900:      insert_iterator&
+        -:  901:      operator=(typename _Container::const_reference __value)
+        -:  902:      {
+        -:  903:	iter = container->insert(iter, __value);
+        -:  904:	++iter;
+        -:  905:	return *this;
+        -:  906:      }
+        -:  907:#else
+        -:  908:      _GLIBCXX20_CONSTEXPR
+        -:  909:      insert_iterator&
+        -:  910:      operator=(const typename _Container::value_type& __value)
+        -:  911:      {
+        -:  912:	iter = container->insert(iter, __value);
+        -:  913:	++iter;
+        -:  914:	return *this;
+        -:  915:      }
+        -:  916:
+        -:  917:      _GLIBCXX20_CONSTEXPR
+        -:  918:      insert_iterator&
+        -:  919:      operator=(typename _Container::value_type&& __value)
+        -:  920:      {
+        -:  921:	iter = container->insert(iter, std::move(__value));
+        -:  922:	++iter;
+        -:  923:	return *this;
+        -:  924:      }
+        -:  925:#endif
+        -:  926:
+        -:  927:      /// Simply returns *this.
+        -:  928:      _GLIBCXX20_CONSTEXPR
+        -:  929:      insert_iterator&
+        -:  930:      operator*()
+        -:  931:      { return *this; }
+        -:  932:
+        -:  933:      /// Simply returns *this.  (This %iterator does not @a move.)
+        -:  934:      _GLIBCXX20_CONSTEXPR
+        -:  935:      insert_iterator&
+        -:  936:      operator++()
+        -:  937:      { return *this; }
+        -:  938:
+        -:  939:      /// Simply returns *this.  (This %iterator does not @a move.)
+        -:  940:      _GLIBCXX20_CONSTEXPR
+        -:  941:      insert_iterator&
+        -:  942:      operator++(int)
+        -:  943:      { return *this; }
+        -:  944:    };
+        -:  945:
+        -:  946:  /**
+        -:  947:   *  @param __x  A container of arbitrary type.
+        -:  948:   *  @param __i  An iterator into the container.
+        -:  949:   *  @return  An instance of insert_iterator working on @p __x.
+        -:  950:   *
+        -:  951:   *  This wrapper function helps in creating insert_iterator instances.
+        -:  952:   *  Typing the name of the %iterator requires knowing the precise full
+        -:  953:   *  type of the container, which can be tedious and impedes generic
+        -:  954:   *  programming.  Using this function lets you take advantage of automatic
+        -:  955:   *  template parameter deduction, making the compiler match the correct
+        -:  956:   *  types for you.
+        -:  957:  */
+        -:  958:#if __cplusplus > 201703L && defined __cpp_lib_concepts
+        -:  959:  template<typename _Container>
+        -:  960:    constexpr insert_iterator<_Container>
+        -:  961:    inserter(_Container& __x, std::__detail::__range_iter_t<_Container> __i)
+        -:  962:    { return insert_iterator<_Container>(__x, __i); }
+        -:  963:#else
+        -:  964:  template<typename _Container>
+        -:  965:    inline insert_iterator<_Container>
+        -:  966:    inserter(_Container& __x, typename _Container::iterator __i)
+        -:  967:    { return insert_iterator<_Container>(__x, __i); }
+        -:  968:#endif
+        -:  969:
+        -:  970:  /// @} group iterators
+        -:  971:
+        -:  972:_GLIBCXX_END_NAMESPACE_VERSION
+        -:  973:} // namespace
+        -:  974:
+        -:  975:namespace __gnu_cxx _GLIBCXX_VISIBILITY(default)
+        -:  976:{
+        -:  977:_GLIBCXX_BEGIN_NAMESPACE_VERSION
+        -:  978:
+        -:  979:  // This iterator adapter is @a normal in the sense that it does not
+        -:  980:  // change the semantics of any of the operators of its iterator
+        -:  981:  // parameter.  Its primary purpose is to convert an iterator that is
+        -:  982:  // not a class, e.g. a pointer, into an iterator that is a class.
+        -:  983:  // The _Container parameter exists solely so that different containers
+        -:  984:  // using this template can instantiate different types, even if the
+        -:  985:  // _Iterator parameter is the same.
+        -:  986:  template<typename _Iterator, typename _Container>
+        -:  987:    class __normal_iterator
+        -:  988:    {
+        -:  989:    protected:
+        -:  990:      _Iterator _M_current;
+        -:  991:
+        -:  992:      typedef std::iterator_traits<_Iterator>		__traits_type;
+        -:  993:
+        -:  994:    public:
+        -:  995:      typedef _Iterator					iterator_type;
+        -:  996:      typedef typename __traits_type::iterator_category iterator_category;
+        -:  997:      typedef typename __traits_type::value_type  	value_type;
+        -:  998:      typedef typename __traits_type::difference_type 	difference_type;
+        -:  999:      typedef typename __traits_type::reference 	reference;
+        -: 1000:      typedef typename __traits_type::pointer   	pointer;
+        -: 1001:
+        -: 1002:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -: 1003:      using iterator_concept = std::__detail::__iter_concept<_Iterator>;
+        -: 1004:#endif
+        -: 1005:
+        -: 1006:      _GLIBCXX_CONSTEXPR __normal_iterator() _GLIBCXX_NOEXCEPT
+        -: 1007:      : _M_current(_Iterator()) { }
+        -: 1008:
+        -: 1009:      explicit _GLIBCXX20_CONSTEXPR
+function _ZN9__gnu_cxx17__normal_iteratorIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorIS6_SaIS6_EEEC1ERKS7_ called 30 returned 100% blocks executed 100%
+       30: 1010:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+       30: 1011:      : _M_current(__i) { }
+        -: 1012:
+        -: 1013:      // Allow iterator to const_iterator conversion
+        -: 1014:      template<typename _Iter>
+        -: 1015:        _GLIBCXX20_CONSTEXPR
+        -: 1016:        __normal_iterator(const __normal_iterator<_Iter,
+        -: 1017:			  typename __enable_if<
+        -: 1018:      	       (std::__are_same<_Iter, typename _Container::pointer>::__value),
+        -: 1019:		      _Container>::__type>& __i) _GLIBCXX_NOEXCEPT
+        -: 1020:        : _M_current(__i.base()) { }
+        -: 1021:
+        -: 1022:      // Forward iterator requirements
+        -: 1023:      _GLIBCXX20_CONSTEXPR
+        -: 1024:      reference
+        -: 1025:      operator*() const _GLIBCXX_NOEXCEPT
+        -: 1026:      { return *_M_current; }
+        -: 1027:
+        -: 1028:      _GLIBCXX20_CONSTEXPR
+        -: 1029:      pointer
+        -: 1030:      operator->() const _GLIBCXX_NOEXCEPT
+        -: 1031:      { return _M_current; }
+        -: 1032:
+        -: 1033:      _GLIBCXX20_CONSTEXPR
+        -: 1034:      __normal_iterator&
+        -: 1035:      operator++() _GLIBCXX_NOEXCEPT
+        -: 1036:      {
+        -: 1037:	++_M_current;
+        -: 1038:	return *this;
+        -: 1039:      }
+        -: 1040:
+        -: 1041:      _GLIBCXX20_CONSTEXPR
+        -: 1042:      __normal_iterator
+        -: 1043:      operator++(int) _GLIBCXX_NOEXCEPT
+        -: 1044:      { return __normal_iterator(_M_current++); }
+        -: 1045:
+        -: 1046:      // Bidirectional iterator requirements
+        -: 1047:      _GLIBCXX20_CONSTEXPR
+        -: 1048:      __normal_iterator&
+        -: 1049:      operator--() _GLIBCXX_NOEXCEPT
+        -: 1050:      {
+        -: 1051:	--_M_current;
+        -: 1052:	return *this;
+        -: 1053:      }
+        -: 1054:
+        -: 1055:      _GLIBCXX20_CONSTEXPR
+        -: 1056:      __normal_iterator
+        -: 1057:      operator--(int) _GLIBCXX_NOEXCEPT
+        -: 1058:      { return __normal_iterator(_M_current--); }
+        -: 1059:
+        -: 1060:      // Random access iterator requirements
+        -: 1061:      _GLIBCXX20_CONSTEXPR
+        -: 1062:      reference
+        -: 1063:      operator[](difference_type __n) const _GLIBCXX_NOEXCEPT
+        -: 1064:      { return _M_current[__n]; }
+        -: 1065:
+        -: 1066:      _GLIBCXX20_CONSTEXPR
+        -: 1067:      __normal_iterator&
+        -: 1068:      operator+=(difference_type __n) _GLIBCXX_NOEXCEPT
+        -: 1069:      { _M_current += __n; return *this; }
+        -: 1070:
+        -: 1071:      _GLIBCXX20_CONSTEXPR
+        -: 1072:      __normal_iterator
+        -: 1073:      operator+(difference_type __n) const _GLIBCXX_NOEXCEPT
+        -: 1074:      { return __normal_iterator(_M_current + __n); }
+        -: 1075:
+        -: 1076:      _GLIBCXX20_CONSTEXPR
+        -: 1077:      __normal_iterator&
+        -: 1078:      operator-=(difference_type __n) _GLIBCXX_NOEXCEPT
+        -: 1079:      { _M_current -= __n; return *this; }
+        -: 1080:
+        -: 1081:      _GLIBCXX20_CONSTEXPR
+        -: 1082:      __normal_iterator
+        -: 1083:      operator-(difference_type __n) const _GLIBCXX_NOEXCEPT
+        -: 1084:      { return __normal_iterator(_M_current - __n); }
+        -: 1085:
+        -: 1086:      _GLIBCXX20_CONSTEXPR
+        -: 1087:      const _Iterator&
+function _ZNK9__gnu_cxx17__normal_iteratorIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorIS6_SaIS6_EEE4baseEv called 60 returned 100% blocks executed 100%
+       60: 1088:      base() const _GLIBCXX_NOEXCEPT
+       60: 1089:      { return _M_current; }
+       60: 1089-block  0
+        -: 1090:    };
+        -: 1091:
+        -: 1092:  // Note: In what follows, the left- and right-hand-side iterators are
+        -: 1093:  // allowed to vary in types (conceptually in cv-qualification) so that
+        -: 1094:  // comparison between cv-qualified and non-cv-qualified iterators be
+        -: 1095:  // valid.  However, the greedy and unfriendly operators in std::rel_ops
+        -: 1096:  // will make overload resolution ambiguous (when in scope) if we don't
+        -: 1097:  // provide overloads whose operands are of the same type.  Can someone
+        -: 1098:  // remind me what generic programming is about? -- Gaby
+        -: 1099:
+        -: 1100:#if __cpp_lib_three_way_comparison
+        -: 1101:  template<typename _IteratorL, typename _IteratorR, typename _Container>
+        -: 1102:    requires requires (_IteratorL __lhs, _IteratorR __rhs)
+        -: 1103:    { { __lhs == __rhs } -> std::convertible_to<bool>; }
+        -: 1104:    constexpr bool
+        -: 1105:    operator==(const __normal_iterator<_IteratorL, _Container>& __lhs,
+        -: 1106:	       const __normal_iterator<_IteratorR, _Container>& __rhs)
+        -: 1107:    noexcept(noexcept(__lhs.base() == __rhs.base()))
+        -: 1108:    { return __lhs.base() == __rhs.base(); }
+        -: 1109:
+        -: 1110:  template<typename _IteratorL, typename _IteratorR, typename _Container>
+        -: 1111:    constexpr std::__detail::__synth3way_t<_IteratorR, _IteratorL>
+        -: 1112:    operator<=>(const __normal_iterator<_IteratorL, _Container>& __lhs,
+        -: 1113:		const __normal_iterator<_IteratorR, _Container>& __rhs)
+        -: 1114:    noexcept(noexcept(std::__detail::__synth3way(__lhs.base(), __rhs.base())))
+        -: 1115:    { return std::__detail::__synth3way(__lhs.base(), __rhs.base()); }
+        -: 1116:#else
+        -: 1117:   // Forward iterator requirements
+        -: 1118:  template<typename _IteratorL, typename _IteratorR, typename _Container>
+        -: 1119:    _GLIBCXX20_CONSTEXPR
+        -: 1120:    inline bool
+        -: 1121:    operator==(const __normal_iterator<_IteratorL, _Container>& __lhs,
+        -: 1122:	       const __normal_iterator<_IteratorR, _Container>& __rhs)
+        -: 1123:    _GLIBCXX_NOEXCEPT
+        -: 1124:    { return __lhs.base() == __rhs.base(); }
+        -: 1125:
+        -: 1126:  template<typename _Iterator, typename _Container>
+        -: 1127:    _GLIBCXX20_CONSTEXPR
+        -: 1128:    inline bool
+        -: 1129:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+        -: 1130:	       const __normal_iterator<_Iterator, _Container>& __rhs)
+        -: 1131:    _GLIBCXX_NOEXCEPT
+        -: 1132:    { return __lhs.base() == __rhs.base(); }
+        -: 1133:
+        -: 1134:  template<typename _IteratorL, typename _IteratorR, typename _Container>
+        -: 1135:    _GLIBCXX20_CONSTEXPR
+        -: 1136:    inline bool
+        -: 1137:    operator!=(const __normal_iterator<_IteratorL, _Container>& __lhs,
+        -: 1138:	       const __normal_iterator<_IteratorR, _Container>& __rhs)
+        -: 1139:    _GLIBCXX_NOEXCEPT
+        -: 1140:    { return __lhs.base() != __rhs.base(); }
+        -: 1141:
+        -: 1142:  template<typename _Iterator, typename _Container>
+        -: 1143:    _GLIBCXX20_CONSTEXPR
+        -: 1144:    inline bool
+        -: 1145:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+        -: 1146:	       const __normal_iterator<_Iterator, _Container>& __rhs)
+        -: 1147:    _GLIBCXX_NOEXCEPT
+        -: 1148:    { return __lhs.base() != __rhs.base(); }
+        -: 1149:
+        -: 1150:  // Random access iterator requirements
+        -: 1151:  template<typename _IteratorL, typename _IteratorR, typename _Container>
+        -: 1152:    inline bool
+        -: 1153:    operator<(const __normal_iterator<_IteratorL, _Container>& __lhs,
+        -: 1154:	      const __normal_iterator<_IteratorR, _Container>& __rhs)
+        -: 1155:    _GLIBCXX_NOEXCEPT
+        -: 1156:    { return __lhs.base() < __rhs.base(); }
+        -: 1157:
+        -: 1158:  template<typename _Iterator, typename _Container>
+        -: 1159:    _GLIBCXX20_CONSTEXPR
+        -: 1160:    inline bool
+        -: 1161:    operator<(const __normal_iterator<_Iterator, _Container>& __lhs,
+        -: 1162:	      const __normal_iterator<_Iterator, _Container>& __rhs)
+        -: 1163:    _GLIBCXX_NOEXCEPT
+        -: 1164:    { return __lhs.base() < __rhs.base(); }
+        -: 1165:
+        -: 1166:  template<typename _IteratorL, typename _IteratorR, typename _Container>
+        -: 1167:    inline bool
+        -: 1168:    operator>(const __normal_iterator<_IteratorL, _Container>& __lhs,
+        -: 1169:	      const __normal_iterator<_IteratorR, _Container>& __rhs)
+        -: 1170:    _GLIBCXX_NOEXCEPT
+        -: 1171:    { return __lhs.base() > __rhs.base(); }
+        -: 1172:
+        -: 1173:  template<typename _Iterator, typename _Container>
+        -: 1174:    _GLIBCXX20_CONSTEXPR
+        -: 1175:    inline bool
+        -: 1176:    operator>(const __normal_iterator<_Iterator, _Container>& __lhs,
+        -: 1177:	      const __normal_iterator<_Iterator, _Container>& __rhs)
+        -: 1178:    _GLIBCXX_NOEXCEPT
+        -: 1179:    { return __lhs.base() > __rhs.base(); }
+        -: 1180:
+        -: 1181:  template<typename _IteratorL, typename _IteratorR, typename _Container>
+        -: 1182:    inline bool
+        -: 1183:    operator<=(const __normal_iterator<_IteratorL, _Container>& __lhs,
+        -: 1184:	       const __normal_iterator<_IteratorR, _Container>& __rhs)
+        -: 1185:    _GLIBCXX_NOEXCEPT
+        -: 1186:    { return __lhs.base() <= __rhs.base(); }
+        -: 1187:
+        -: 1188:  template<typename _Iterator, typename _Container>
+        -: 1189:    _GLIBCXX20_CONSTEXPR
+        -: 1190:    inline bool
+        -: 1191:    operator<=(const __normal_iterator<_Iterator, _Container>& __lhs,
+        -: 1192:	       const __normal_iterator<_Iterator, _Container>& __rhs)
+        -: 1193:    _GLIBCXX_NOEXCEPT
+        -: 1194:    { return __lhs.base() <= __rhs.base(); }
+        -: 1195:
+        -: 1196:  template<typename _IteratorL, typename _IteratorR, typename _Container>
+        -: 1197:    inline bool
+        -: 1198:    operator>=(const __normal_iterator<_IteratorL, _Container>& __lhs,
+        -: 1199:	       const __normal_iterator<_IteratorR, _Container>& __rhs)
+        -: 1200:    _GLIBCXX_NOEXCEPT
+        -: 1201:    { return __lhs.base() >= __rhs.base(); }
+        -: 1202:
+        -: 1203:  template<typename _Iterator, typename _Container>
+        -: 1204:    _GLIBCXX20_CONSTEXPR
+        -: 1205:    inline bool
+        -: 1206:    operator>=(const __normal_iterator<_Iterator, _Container>& __lhs,
+        -: 1207:	       const __normal_iterator<_Iterator, _Container>& __rhs)
+        -: 1208:    _GLIBCXX_NOEXCEPT
+        -: 1209:    { return __lhs.base() >= __rhs.base(); }
+        -: 1210:#endif // three-way comparison
+        -: 1211:
+        -: 1212:  // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -: 1213:  // According to the resolution of DR179 not only the various comparison
+        -: 1214:  // operators but also operator- must accept mixed iterator/const_iterator
+        -: 1215:  // parameters.
+        -: 1216:  template<typename _IteratorL, typename _IteratorR, typename _Container>
+        -: 1217:#if __cplusplus >= 201103L
+        -: 1218:    // DR 685.
+        -: 1219:    _GLIBCXX20_CONSTEXPR
+        -: 1220:    inline auto
+        -: 1221:    operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+        -: 1222:	      const __normal_iterator<_IteratorR, _Container>& __rhs) noexcept
+        -: 1223:    -> decltype(__lhs.base() - __rhs.base())
+        -: 1224:#else
+        -: 1225:    inline typename __normal_iterator<_IteratorL, _Container>::difference_type
+        -: 1226:    operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+        -: 1227:	      const __normal_iterator<_IteratorR, _Container>& __rhs)
+        -: 1228:#endif
+        -: 1229:    { return __lhs.base() - __rhs.base(); }
+        -: 1230:
+        -: 1231:  template<typename _Iterator, typename _Container>
+        -: 1232:    _GLIBCXX20_CONSTEXPR
+        -: 1233:    inline typename __normal_iterator<_Iterator, _Container>::difference_type
+function _ZN9__gnu_cxxmiIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorIS6_SaIS6_EEEENS_17__normal_iteratorIT_T0_E15difference_typeERKSE_SH_ called 15 returned 100% blocks executed 100%
+       15: 1234:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+        -: 1235:	      const __normal_iterator<_Iterator, _Container>& __rhs)
+        -: 1236:    _GLIBCXX_NOEXCEPT
+       15: 1237:    { return __lhs.base() - __rhs.base(); }
+       15: 1237-block  0
+call    0 returned 15
+call    1 returned 15
+        -: 1238:
+        -: 1239:  template<typename _Iterator, typename _Container>
+        -: 1240:    _GLIBCXX20_CONSTEXPR
+        -: 1241:    inline __normal_iterator<_Iterator, _Container>
+        -: 1242:    operator+(typename __normal_iterator<_Iterator, _Container>::difference_type
+        -: 1243:	      __n, const __normal_iterator<_Iterator, _Container>& __i)
+        -: 1244:    _GLIBCXX_NOEXCEPT
+        -: 1245:    { return __normal_iterator<_Iterator, _Container>(__i.base() + __n); }
+        -: 1246:
+        -: 1247:_GLIBCXX_END_NAMESPACE_VERSION
+        -: 1248:} // namespace
+        -: 1249:
+        -: 1250:namespace std _GLIBCXX_VISIBILITY(default)
+        -: 1251:{
+        -: 1252:_GLIBCXX_BEGIN_NAMESPACE_VERSION
+        -: 1253:
+        -: 1254:  template<typename _Iterator, typename _Container>
+        -: 1255:    _GLIBCXX20_CONSTEXPR
+        -: 1256:    _Iterator
+        -: 1257:    __niter_base(__gnu_cxx::__normal_iterator<_Iterator, _Container> __it)
+        -: 1258:    _GLIBCXX_NOEXCEPT_IF(std::is_nothrow_copy_constructible<_Iterator>::value)
+        -: 1259:    { return __it.base(); }
+        -: 1260:
+        -: 1261:#if __cplusplus >= 201103L
+        -: 1262:  /**
+        -: 1263:   * @addtogroup iterators
+        -: 1264:   * @{
+        -: 1265:   */
+        -: 1266:
+        -: 1267:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -: 1268:  template<semiregular _Sent>
+        -: 1269:    class move_sentinel
+        -: 1270:    {
+        -: 1271:    public:
+        -: 1272:      constexpr
+        -: 1273:      move_sentinel()
+        -: 1274:      noexcept(is_nothrow_default_constructible_v<_Sent>)
+        -: 1275:      : _M_last() { }
+        -: 1276:
+        -: 1277:      constexpr explicit
+        -: 1278:      move_sentinel(_Sent __s)
+        -: 1279:      noexcept(is_nothrow_move_constructible_v<_Sent>)
+        -: 1280:      : _M_last(std::move(__s)) { }
+        -: 1281:
+        -: 1282:      template<typename _S2> requires convertible_to<const _S2&, _Sent>
+        -: 1283:	constexpr
+        -: 1284:	move_sentinel(const move_sentinel<_S2>& __s)
+        -: 1285:	noexcept(is_nothrow_constructible_v<_Sent, const _S2&>)
+        -: 1286:	: _M_last(__s.base())
+        -: 1287:	{ }
+        -: 1288:
+        -: 1289:      template<typename _S2> requires assignable_from<_Sent&, const _S2&>
+        -: 1290:	constexpr move_sentinel&
+        -: 1291:	operator=(const move_sentinel<_S2>& __s)
+        -: 1292:	noexcept(is_nothrow_assignable_v<_Sent, const _S2&>)
+        -: 1293:	{
+        -: 1294:	  _M_last = __s.base();
+        -: 1295:	  return *this;
+        -: 1296:	}
+        -: 1297:
+        -: 1298:      constexpr _Sent
+        -: 1299:      base() const
+        -: 1300:      noexcept(is_nothrow_copy_constructible_v<_Sent>)
+        -: 1301:      { return _M_last; }
+        -: 1302:
+        -: 1303:    private:
+        -: 1304:      _Sent _M_last;
+        -: 1305:    };
+        -: 1306:#endif // C++20
+        -: 1307:
+        -: 1308:  namespace __detail
+        -: 1309:  {
+        -: 1310:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -: 1311:    template<typename _Iterator>
+        -: 1312:      struct __move_iter_cat
+        -: 1313:      { };
+        -: 1314:
+        -: 1315:    template<typename _Iterator>
+        -: 1316:      requires requires { typename iterator_traits<_Iterator>::iterator_category; }
+        -: 1317:      struct __move_iter_cat<_Iterator>
+        -: 1318:      {
+        -: 1319:	using iterator_category
+        -: 1320:	  = __clamp_iter_cat<typename iterator_traits<_Iterator>::iterator_category,
+        -: 1321:			     random_access_iterator_tag>;
+        -: 1322:      };
+        -: 1323:#endif
+        -: 1324:  }
+        -: 1325:
+        -: 1326:  // 24.4.3  Move iterators
+        -: 1327:  /**
+        -: 1328:   *  Class template move_iterator is an iterator adapter with the same
+        -: 1329:   *  behavior as the underlying iterator except that its dereference
+        -: 1330:   *  operator implicitly converts the value returned by the underlying
+        -: 1331:   *  iterator's dereference operator to an rvalue reference.  Some
+        -: 1332:   *  generic algorithms can be called with move iterators to replace
+        -: 1333:   *  copying with moving.
+        -: 1334:   */
+        -: 1335:  template<typename _Iterator>
+        -: 1336:    class move_iterator
+        -: 1337:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -: 1338:      : public __detail::__move_iter_cat<_Iterator>
+        -: 1339:#endif
+        -: 1340:    {
+        -: 1341:      _Iterator _M_current;
+        -: 1342:
+        -: 1343:      using __traits_type = iterator_traits<_Iterator>;
+        -: 1344:#if ! (__cplusplus > 201703L && __cpp_lib_concepts)
+        -: 1345:      using __base_ref = typename __traits_type::reference;
+        -: 1346:#endif
+        -: 1347:
+        -: 1348:      template<typename _Iter2>
+        -: 1349:	friend class move_iterator;
+        -: 1350:
+        -: 1351:#if __cpp_lib_concepts
+        -: 1352:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -: 1353:      // 3435. three_way_comparable_with<reverse_iterator<int*>, [...]>
+        -: 1354:      template<typename _Iter2>
+        -: 1355:	static constexpr bool __convertible = !is_same_v<_Iter2, _Iterator>
+        -: 1356:	    && convertible_to<const _Iter2&, _Iterator>;
+        -: 1357:#endif
+        -: 1358:
+        -: 1359:    public:
+        -: 1360:      using iterator_type = _Iterator;
+        -: 1361:
+        -: 1362:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -: 1363:      using iterator_concept = input_iterator_tag;
+        -: 1364:      // iterator_category defined in __move_iter_cat
+        -: 1365:      using value_type = iter_value_t<_Iterator>;
+        -: 1366:      using difference_type = iter_difference_t<_Iterator>;
+        -: 1367:      using pointer = _Iterator;
+        -: 1368:      using reference = iter_rvalue_reference_t<_Iterator>;
+        -: 1369:#else
+        -: 1370:      typedef typename __traits_type::iterator_category iterator_category;
+        -: 1371:      typedef typename __traits_type::value_type  	value_type;
+        -: 1372:      typedef typename __traits_type::difference_type	difference_type;
+        -: 1373:      // NB: DR 680.
+        -: 1374:      typedef _Iterator					pointer;
+        -: 1375:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -: 1376:      // 2106. move_iterator wrapping iterators returning prvalues
+        -: 1377:      typedef typename conditional<is_reference<__base_ref>::value,
+        -: 1378:			 typename remove_reference<__base_ref>::type&&,
+        -: 1379:			 __base_ref>::type		reference;
+        -: 1380:#endif
+        -: 1381:
+        -: 1382:      _GLIBCXX17_CONSTEXPR
+        -: 1383:      move_iterator()
+        -: 1384:      : _M_current() { }
+        -: 1385:
+        -: 1386:      explicit _GLIBCXX17_CONSTEXPR
+        -: 1387:      move_iterator(iterator_type __i)
+        -: 1388:      : _M_current(std::move(__i)) { }
+        -: 1389:
+        -: 1390:      template<typename _Iter>
+        -: 1391:#if __cpp_lib_concepts
+        -: 1392:	requires __convertible<_Iter>
+        -: 1393:#endif
+        -: 1394:	_GLIBCXX17_CONSTEXPR
+        -: 1395:	move_iterator(const move_iterator<_Iter>& __i)
+        -: 1396:	: _M_current(__i._M_current) { }
+        -: 1397:
+        -: 1398:      template<typename _Iter>
+        -: 1399:#if __cpp_lib_concepts
+        -: 1400:	requires __convertible<_Iter>
+        -: 1401:	  && assignable_from<_Iterator&, const _Iter&>
+        -: 1402:#endif
+        -: 1403:	_GLIBCXX17_CONSTEXPR
+        -: 1404:	move_iterator& operator=(const move_iterator<_Iter>& __i)
+        -: 1405:	{
+        -: 1406:	  _M_current = __i._M_current;
+        -: 1407:	  return *this;
+        -: 1408:	}
+        -: 1409:
+        -: 1410:#if __cplusplus <= 201703L
+        -: 1411:      _GLIBCXX17_CONSTEXPR iterator_type
+        -: 1412:      base() const
+        -: 1413:      { return _M_current; }
+        -: 1414:#else
+        -: 1415:      constexpr const iterator_type&
+        -: 1416:      base() const & noexcept
+        -: 1417:      { return _M_current; }
+        -: 1418:
+        -: 1419:      constexpr iterator_type
+        -: 1420:      base() &&
+        -: 1421:      { return std::move(_M_current); }
+        -: 1422:#endif
+        -: 1423:
+        -: 1424:      _GLIBCXX17_CONSTEXPR reference
+        -: 1425:      operator*() const
+        -: 1426:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -: 1427:      { return ranges::iter_move(_M_current); }
+        -: 1428:#else
+        -: 1429:      { return static_cast<reference>(*_M_current); }
+        -: 1430:#endif
+        -: 1431:
+        -: 1432:      _GLIBCXX17_CONSTEXPR pointer
+        -: 1433:      operator->() const
+        -: 1434:      { return _M_current; }
+        -: 1435:
+        -: 1436:      _GLIBCXX17_CONSTEXPR move_iterator&
+        -: 1437:      operator++()
+        -: 1438:      {
+        -: 1439:	++_M_current;
+        -: 1440:	return *this;
+        -: 1441:      }
+        -: 1442:
+        -: 1443:      _GLIBCXX17_CONSTEXPR move_iterator
+        -: 1444:      operator++(int)
+        -: 1445:      {
+        -: 1446:	move_iterator __tmp = *this;
+        -: 1447:	++_M_current;
+        -: 1448:	return __tmp;
+        -: 1449:      }
+        -: 1450:
+        -: 1451:#if __cpp_lib_concepts
+        -: 1452:      constexpr void
+        -: 1453:      operator++(int) requires (!forward_iterator<_Iterator>)
+        -: 1454:      { ++_M_current; }
+        -: 1455:#endif
+        -: 1456:
+        -: 1457:      _GLIBCXX17_CONSTEXPR move_iterator&
+        -: 1458:      operator--()
+        -: 1459:      {
+        -: 1460:	--_M_current;
+        -: 1461:	return *this;
+        -: 1462:      }
+        -: 1463:
+        -: 1464:      _GLIBCXX17_CONSTEXPR move_iterator
+        -: 1465:      operator--(int)
+        -: 1466:      {
+        -: 1467:	move_iterator __tmp = *this;
+        -: 1468:	--_M_current;
+        -: 1469:	return __tmp;
+        -: 1470:      }
+        -: 1471:
+        -: 1472:      _GLIBCXX17_CONSTEXPR move_iterator
+        -: 1473:      operator+(difference_type __n) const
+        -: 1474:      { return move_iterator(_M_current + __n); }
+        -: 1475:
+        -: 1476:      _GLIBCXX17_CONSTEXPR move_iterator&
+        -: 1477:      operator+=(difference_type __n)
+        -: 1478:      {
+        -: 1479:	_M_current += __n;
+        -: 1480:	return *this;
+        -: 1481:      }
+        -: 1482:
+        -: 1483:      _GLIBCXX17_CONSTEXPR move_iterator
+        -: 1484:      operator-(difference_type __n) const
+        -: 1485:      { return move_iterator(_M_current - __n); }
+        -: 1486:    
+        -: 1487:      _GLIBCXX17_CONSTEXPR move_iterator&
+        -: 1488:      operator-=(difference_type __n)
+        -: 1489:      { 
+        -: 1490:	_M_current -= __n;
+        -: 1491:	return *this;
+        -: 1492:      }
+        -: 1493:
+        -: 1494:      _GLIBCXX17_CONSTEXPR reference
+        -: 1495:      operator[](difference_type __n) const
+        -: 1496:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -: 1497:      { return ranges::iter_move(_M_current + __n); }
+        -: 1498:#else
+        -: 1499:      { return std::move(_M_current[__n]); }
+        -: 1500:#endif
+        -: 1501:
+        -: 1502:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -: 1503:      template<sentinel_for<_Iterator> _Sent>
+        -: 1504:	friend constexpr bool
+        -: 1505:	operator==(const move_iterator& __x, const move_sentinel<_Sent>& __y)
+        -: 1506:	{ return __x.base() == __y.base(); }
+        -: 1507:
+        -: 1508:      template<sized_sentinel_for<_Iterator> _Sent>
+        -: 1509:	friend constexpr iter_difference_t<_Iterator>
+        -: 1510:	operator-(const move_sentinel<_Sent>& __x, const move_iterator& __y)
+        -: 1511:	{ return __x.base() - __y.base(); }
+        -: 1512:
+        -: 1513:      template<sized_sentinel_for<_Iterator> _Sent>
+        -: 1514:	friend constexpr iter_difference_t<_Iterator>
+        -: 1515:	operator-(const move_iterator& __x, const move_sentinel<_Sent>& __y)
+        -: 1516:	{ return __x.base() - __y.base(); }
+        -: 1517:
+        -: 1518:      friend constexpr iter_rvalue_reference_t<_Iterator>
+        -: 1519:      iter_move(const move_iterator& __i)
+        -: 1520:      noexcept(noexcept(ranges::iter_move(__i._M_current)))
+        -: 1521:      { return ranges::iter_move(__i._M_current); }
+        -: 1522:
+        -: 1523:      template<indirectly_swappable<_Iterator> _Iter2>
+        -: 1524:	friend constexpr void
+        -: 1525:	iter_swap(const move_iterator& __x, const move_iterator<_Iter2>& __y)
+        -: 1526:	noexcept(noexcept(ranges::iter_swap(__x._M_current, __y._M_current)))
+        -: 1527:	{ return ranges::iter_swap(__x._M_current, __y._M_current); }
+        -: 1528:#endif // C++20
+        -: 1529:    };
+        -: 1530:
+        -: 1531:  template<typename _IteratorL, typename _IteratorR>
+        -: 1532:    inline _GLIBCXX17_CONSTEXPR bool
+        -: 1533:    operator==(const move_iterator<_IteratorL>& __x,
+        -: 1534:	       const move_iterator<_IteratorR>& __y)
+        -: 1535:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -: 1536:    requires requires { { __x.base() == __y.base() } -> convertible_to<bool>; }
+        -: 1537:#endif
+        -: 1538:    { return __x.base() == __y.base(); }
+        -: 1539:
+        -: 1540:#if __cpp_lib_three_way_comparison
+        -: 1541:  template<typename _IteratorL,
+        -: 1542:	   three_way_comparable_with<_IteratorL> _IteratorR>
+        -: 1543:    constexpr compare_three_way_result_t<_IteratorL, _IteratorR>
+        -: 1544:    operator<=>(const move_iterator<_IteratorL>& __x,
+        -: 1545:		const move_iterator<_IteratorR>& __y)
+        -: 1546:    { return __x.base() <=> __y.base(); }
+        -: 1547:#else
+        -: 1548:  template<typename _IteratorL, typename _IteratorR>
+        -: 1549:    inline _GLIBCXX17_CONSTEXPR bool
+        -: 1550:    operator!=(const move_iterator<_IteratorL>& __x,
+        -: 1551:	       const move_iterator<_IteratorR>& __y)
+        -: 1552:    { return !(__x == __y); }
+        -: 1553:#endif
+        -: 1554:
+        -: 1555:  template<typename _IteratorL, typename _IteratorR>
+        -: 1556:    inline _GLIBCXX17_CONSTEXPR bool
+        -: 1557:    operator<(const move_iterator<_IteratorL>& __x,
+        -: 1558:	      const move_iterator<_IteratorR>& __y)
+        -: 1559:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -: 1560:    requires requires { { __x.base() < __y.base() } -> convertible_to<bool>; }
+        -: 1561:#endif
+        -: 1562:    { return __x.base() < __y.base(); }
+        -: 1563:
+        -: 1564:  template<typename _IteratorL, typename _IteratorR>
+        -: 1565:    inline _GLIBCXX17_CONSTEXPR bool
+        -: 1566:    operator<=(const move_iterator<_IteratorL>& __x,
+        -: 1567:	       const move_iterator<_IteratorR>& __y)
+        -: 1568:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -: 1569:    requires requires { { __y.base() < __x.base() } -> convertible_to<bool>; }
+        -: 1570:#endif
+        -: 1571:    { return !(__y < __x); }
+        -: 1572:
+        -: 1573:  template<typename _IteratorL, typename _IteratorR>
+        -: 1574:    inline _GLIBCXX17_CONSTEXPR bool
+        -: 1575:    operator>(const move_iterator<_IteratorL>& __x,
+        -: 1576:	      const move_iterator<_IteratorR>& __y)
+        -: 1577:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -: 1578:    requires requires { { __y.base() < __x.base() } -> convertible_to<bool>; }
+        -: 1579:#endif
+        -: 1580:    { return __y < __x; }
+        -: 1581:
+        -: 1582:  template<typename _IteratorL, typename _IteratorR>
+        -: 1583:    inline _GLIBCXX17_CONSTEXPR bool
+        -: 1584:    operator>=(const move_iterator<_IteratorL>& __x,
+        -: 1585:	       const move_iterator<_IteratorR>& __y)
+        -: 1586:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -: 1587:    requires requires { { __x.base() < __y.base() } -> convertible_to<bool>; }
+        -: 1588:#endif
+        -: 1589:    { return !(__x < __y); }
+        -: 1590:
+        -: 1591:#if ! (__cplusplus > 201703L && __cpp_lib_concepts)
+        -: 1592:  // Note: See __normal_iterator operators note from Gaby to understand
+        -: 1593:  // why we have these extra overloads for some move_iterator operators.
+        -: 1594:
+        -: 1595:  // These extra overloads are not needed in C++20, because the ones above
+        -: 1596:  // are constrained with a requires-clause and so overload resolution will
+        -: 1597:  // prefer them to greedy unconstrained function templates.
+        -: 1598:
+        -: 1599:  template<typename _Iterator>
+        -: 1600:    inline _GLIBCXX17_CONSTEXPR bool
+        -: 1601:    operator==(const move_iterator<_Iterator>& __x,
+        -: 1602:	       const move_iterator<_Iterator>& __y)
+        -: 1603:    { return __x.base() == __y.base(); }
+        -: 1604:
+        -: 1605:  template<typename _Iterator>
+        -: 1606:    inline _GLIBCXX17_CONSTEXPR bool
+        -: 1607:    operator!=(const move_iterator<_Iterator>& __x,
+        -: 1608:	       const move_iterator<_Iterator>& __y)
+        -: 1609:    { return !(__x == __y); }
+        -: 1610:
+        -: 1611:  template<typename _Iterator>
+        -: 1612:    inline _GLIBCXX17_CONSTEXPR bool
+        -: 1613:    operator<(const move_iterator<_Iterator>& __x,
+        -: 1614:	      const move_iterator<_Iterator>& __y)
+        -: 1615:    { return __x.base() < __y.base(); }
+        -: 1616:
+        -: 1617:  template<typename _Iterator>
+        -: 1618:    inline _GLIBCXX17_CONSTEXPR bool
+        -: 1619:    operator<=(const move_iterator<_Iterator>& __x,
+        -: 1620:	       const move_iterator<_Iterator>& __y)
+        -: 1621:    { return !(__y < __x); }
+        -: 1622:
+        -: 1623:  template<typename _Iterator>
+        -: 1624:    inline _GLIBCXX17_CONSTEXPR bool
+        -: 1625:    operator>(const move_iterator<_Iterator>& __x,
+        -: 1626:	      const move_iterator<_Iterator>& __y)
+        -: 1627:    { return __y < __x; }
+        -: 1628:
+        -: 1629:  template<typename _Iterator>
+        -: 1630:    inline _GLIBCXX17_CONSTEXPR bool
+        -: 1631:    operator>=(const move_iterator<_Iterator>& __x,
+        -: 1632:	       const move_iterator<_Iterator>& __y)
+        -: 1633:    { return !(__x < __y); }
+        -: 1634:#endif // ! C++20
+        -: 1635:
+        -: 1636:  // DR 685.
+        -: 1637:  template<typename _IteratorL, typename _IteratorR>
+        -: 1638:    inline _GLIBCXX17_CONSTEXPR auto
+        -: 1639:    operator-(const move_iterator<_IteratorL>& __x,
+        -: 1640:	      const move_iterator<_IteratorR>& __y)
+        -: 1641:    -> decltype(__x.base() - __y.base())
+        -: 1642:    { return __x.base() - __y.base(); }
+        -: 1643:
+        -: 1644:  template<typename _Iterator>
+        -: 1645:    inline _GLIBCXX17_CONSTEXPR move_iterator<_Iterator>
+        -: 1646:    operator+(typename move_iterator<_Iterator>::difference_type __n,
+        -: 1647:	      const move_iterator<_Iterator>& __x)
+        -: 1648:    { return __x + __n; }
+        -: 1649:
+        -: 1650:  template<typename _Iterator>
+        -: 1651:    inline _GLIBCXX17_CONSTEXPR move_iterator<_Iterator>
+        -: 1652:    make_move_iterator(_Iterator __i)
+        -: 1653:    { return move_iterator<_Iterator>(std::move(__i)); }
+        -: 1654:
+        -: 1655:  template<typename _Iterator, typename _ReturnType
+        -: 1656:    = typename conditional<__move_if_noexcept_cond
+        -: 1657:      <typename iterator_traits<_Iterator>::value_type>::value,
+        -: 1658:                _Iterator, move_iterator<_Iterator>>::type>
+        -: 1659:    inline _GLIBCXX17_CONSTEXPR _ReturnType
+        -: 1660:    __make_move_if_noexcept_iterator(_Iterator __i)
+        -: 1661:    { return _ReturnType(__i); }
+        -: 1662:
+        -: 1663:  // Overload for pointers that matches std::move_if_noexcept more closely,
+        -: 1664:  // returning a constant iterator when we don't want to move.
+        -: 1665:  template<typename _Tp, typename _ReturnType
+        -: 1666:    = typename conditional<__move_if_noexcept_cond<_Tp>::value,
+        -: 1667:			   const _Tp*, move_iterator<_Tp*>>::type>
+        -: 1668:    inline _GLIBCXX17_CONSTEXPR _ReturnType
+        -: 1669:    __make_move_if_noexcept_iterator(_Tp* __i)
+        -: 1670:    { return _ReturnType(__i); }
+        -: 1671:
+        -: 1672:#if __cplusplus > 201703L && __cpp_lib_concepts
+        -: 1673:  // [iterators.common] Common iterators
+        -: 1674:
+        -: 1675:  namespace __detail
+        -: 1676:  {
+        -: 1677:    template<typename _It>
+        -: 1678:      concept __common_iter_has_arrow = indirectly_readable<const _It>
+        -: 1679:	&& (requires(const _It& __it) { __it.operator->(); }
+        -: 1680:	    || is_reference_v<iter_reference_t<_It>>
+        -: 1681:	    || constructible_from<iter_value_t<_It>, iter_reference_t<_It>>);
+        -: 1682:
+        -: 1683:    template<typename _It>
+        -: 1684:      concept __common_iter_use_postfix_proxy
+        -: 1685:	= (!requires (_It& __i) { { *__i++ } -> __can_reference; })
+        -: 1686:	  && constructible_from<iter_value_t<_It>, iter_reference_t<_It>>;
+        -: 1687:  } // namespace __detail
+        -: 1688:
+        -: 1689:  /// An iterator/sentinel adaptor for representing a non-common range.
+        -: 1690:  template<input_or_output_iterator _It, sentinel_for<_It> _Sent>
+        -: 1691:    requires (!same_as<_It, _Sent>) && copyable<_It>
+        -: 1692:  class common_iterator
+        -: 1693:  {
+        -: 1694:    template<typename _Tp, typename _Up>
+        -: 1695:      static constexpr bool
+        -: 1696:      _S_noexcept1()
+        -: 1697:      {
+        -: 1698:	if constexpr (is_trivially_default_constructible_v<_Tp>)
+        -: 1699:	  return is_nothrow_assignable_v<_Tp, _Up>;
+        -: 1700:	else
+        -: 1701:	  return is_nothrow_constructible_v<_Tp, _Up>;
+        -: 1702:      }
+        -: 1703:
+        -: 1704:    template<typename _It2, typename _Sent2>
+        -: 1705:      static constexpr bool
+        -: 1706:      _S_noexcept()
+        -: 1707:      { return _S_noexcept1<_It, _It2>() && _S_noexcept1<_Sent, _Sent2>(); }
+        -: 1708:
+        -: 1709:    class __arrow_proxy
+        -: 1710:    {
+        -: 1711:      iter_value_t<_It> _M_keep;
+        -: 1712:
+        -: 1713:      __arrow_proxy(iter_reference_t<_It>&& __x)
+        -: 1714:      : _M_keep(std::move(__x)) { }
+        -: 1715:
+        -: 1716:      friend class common_iterator;
+        -: 1717:
+        -: 1718:    public:
+        -: 1719:      const iter_value_t<_It>*
+        -: 1720:      operator->() const
+        -: 1721:      { return std::__addressof(_M_keep); }
+        -: 1722:    };
+        -: 1723:
+        -: 1724:    class __postfix_proxy
+        -: 1725:    {
+        -: 1726:      iter_value_t<_It> _M_keep;
+        -: 1727:
+        -: 1728:      __postfix_proxy(iter_reference_t<_It>&& __x)
+        -: 1729:      : _M_keep(std::move(__x)) { }
+        -: 1730:
+        -: 1731:      friend class common_iterator;
+        -: 1732:
+        -: 1733:    public:
+        -: 1734:      const iter_value_t<_It>&
+        -: 1735:      operator*() const
+        -: 1736:      { return _M_keep; }
+        -: 1737:    };
+        -: 1738:
+        -: 1739:  public:
+        -: 1740:    constexpr
+        -: 1741:    common_iterator()
+        -: 1742:    noexcept(is_nothrow_default_constructible_v<_It>)
+        -: 1743:    : _M_it(), _M_index(0)
+        -: 1744:    { }
+        -: 1745:
+        -: 1746:    constexpr
+        -: 1747:    common_iterator(_It __i)
+        -: 1748:    noexcept(is_nothrow_move_constructible_v<_It>)
+        -: 1749:    : _M_it(std::move(__i)), _M_index(0)
+        -: 1750:    { }
+        -: 1751:
+        -: 1752:    constexpr
+        -: 1753:    common_iterator(_Sent __s)
+        -: 1754:    noexcept(is_nothrow_move_constructible_v<_Sent>)
+        -: 1755:    : _M_sent(std::move(__s)), _M_index(1)
+        -: 1756:    { }
+        -: 1757:
+        -: 1758:    template<typename _It2, typename _Sent2>
+        -: 1759:      requires convertible_to<const _It2&, _It>
+        -: 1760:	&& convertible_to<const _Sent2&, _Sent>
+        -: 1761:      constexpr
+        -: 1762:      common_iterator(const common_iterator<_It2, _Sent2>& __x)
+        -: 1763:      noexcept(_S_noexcept<const _It2&, const _Sent2&>())
+        -: 1764:      : _M_valueless(), _M_index(__x._M_index)
+        -: 1765:      {
+        -: 1766:	if (_M_index == 0)
+        -: 1767:	  {
+        -: 1768:	    if constexpr (is_trivially_default_constructible_v<_It>)
+        -: 1769:	      _M_it = std::move(__x._M_it);
+        -: 1770:	    else
+        -: 1771:	      ::new((void*)std::__addressof(_M_it)) _It(__x._M_it);
+        -: 1772:	  }
+        -: 1773:	else if (_M_index == 1)
+        -: 1774:	  {
+        -: 1775:	    if constexpr (is_trivially_default_constructible_v<_Sent>)
+        -: 1776:	      _M_sent = std::move(__x._M_sent);
+        -: 1777:	    else
+        -: 1778:	      ::new((void*)std::__addressof(_M_sent)) _Sent(__x._M_sent);
+        -: 1779:	  }
+        -: 1780:      }
+        -: 1781:
+        -: 1782:    constexpr
+        -: 1783:    common_iterator(const common_iterator& __x)
+        -: 1784:    noexcept(_S_noexcept<const _It&, const _Sent&>())
+        -: 1785:    : _M_valueless(), _M_index(__x._M_index)
+        -: 1786:    {
+        -: 1787:      if (_M_index == 0)
+        -: 1788:	{
+        -: 1789:	  if constexpr (is_trivially_default_constructible_v<_It>)
+        -: 1790:	    _M_it = std::move(__x._M_it);
+        -: 1791:	  else
+        -: 1792:	    ::new((void*)std::__addressof(_M_it)) _It(__x._M_it);
+        -: 1793:	}
+        -: 1794:      else if (_M_index == 1)
+        -: 1795:	{
+        -: 1796:	  if constexpr (is_trivially_default_constructible_v<_Sent>)
+        -: 1797:	    _M_sent = std::move(__x._M_sent);
+        -: 1798:	  else
+        -: 1799:	    ::new((void*)std::__addressof(_M_sent)) _Sent(__x._M_sent);
+        -: 1800:	}
+        -: 1801:    }
+        -: 1802:
+        -: 1803:    common_iterator&
+        -: 1804:    operator=(const common_iterator& __x)
+        -: 1805:    noexcept(is_nothrow_copy_assignable_v<_It>
+        -: 1806:	     && is_nothrow_copy_assignable_v<_Sent>
+        -: 1807:	     && is_nothrow_copy_constructible_v<_It>
+        -: 1808:	     && is_nothrow_copy_constructible_v<_Sent>)
+        -: 1809:    {
+        -: 1810:      return this->operator=<_It, _Sent>(__x);
+        -: 1811:    }
+        -: 1812:
+        -: 1813:    template<typename _It2, typename _Sent2>
+        -: 1814:      requires convertible_to<const _It2&, _It>
+        -: 1815:	&& convertible_to<const _Sent2&, _Sent>
+        -: 1816:	&& assignable_from<_It&, const _It2&>
+        -: 1817:	&& assignable_from<_Sent&, const _Sent2&>
+        -: 1818:      common_iterator&
+        -: 1819:      operator=(const common_iterator<_It2, _Sent2>& __x)
+        -: 1820:      noexcept(is_nothrow_constructible_v<_It, const _It2&>
+        -: 1821:	       && is_nothrow_constructible_v<_Sent, const _Sent2&>
+        -: 1822:	       && is_nothrow_assignable_v<_It, const _It2&>
+        -: 1823:	       && is_nothrow_assignable_v<_Sent, const _Sent2&>)
+        -: 1824:      {
+        -: 1825:	switch(_M_index << 2 | __x._M_index)
+        -: 1826:	  {
+        -: 1827:	  case 0b0000:
+        -: 1828:	    _M_it = __x._M_it;
+        -: 1829:	    break;
+        -: 1830:	  case 0b0101:
+        -: 1831:	    _M_sent = __x._M_sent;
+        -: 1832:	    break;
+        -: 1833:	  case 0b0001:
+        -: 1834:	    _M_it.~_It();
+        -: 1835:	    _M_index = -1;
+        -: 1836:	    [[fallthrough]];
+        -: 1837:	  case 0b1001:
+        -: 1838:	    ::new((void*)std::__addressof(_M_sent)) _Sent(__x._M_sent);
+        -: 1839:	    _M_index = 1;
+        -: 1840:	    break;
+        -: 1841:	  case 0b0100:
+        -: 1842:	    _M_sent.~_Sent();
+        -: 1843:	    _M_index = -1;
+        -: 1844:	    [[fallthrough]];
+        -: 1845:	  case 0b1000:
+        -: 1846:	    ::new((void*)std::__addressof(_M_it)) _It(__x._M_it);
+        -: 1847:	    _M_index = 0;
+        -: 1848:	    break;
+        -: 1849:	  default:
+        -: 1850:	    __glibcxx_assert(__x._M_has_value());
+        -: 1851:	    __builtin_unreachable();
+        -: 1852:	  }
+        -: 1853:	return *this;
+        -: 1854:      }
+        -: 1855:
+        -: 1856:    ~common_iterator()
+        -: 1857:    {
+        -: 1858:      switch (_M_index)
+        -: 1859:	{
+        -: 1860:	case 0:
+        -: 1861:	  _M_it.~_It();
+        -: 1862:	  break;
+        -: 1863:	case 1:
+        -: 1864:	  _M_sent.~_Sent();
+        -: 1865:	  break;
+        -: 1866:	}
+        -: 1867:    }
+        -: 1868:
+        -: 1869:    decltype(auto)
+        -: 1870:    operator*()
+        -: 1871:    {
+        -: 1872:      __glibcxx_assert(_M_index == 0);
+        -: 1873:      return *_M_it;
+        -: 1874:    }
+        -: 1875:
+        -: 1876:    decltype(auto)
+        -: 1877:    operator*() const requires __detail::__dereferenceable<const _It>
+        -: 1878:    {
+        -: 1879:      __glibcxx_assert(_M_index == 0);
+        -: 1880:      return *_M_it;
+        -: 1881:    }
+        -: 1882:
+        -: 1883:    decltype(auto)
+        -: 1884:    operator->() const requires __detail::__common_iter_has_arrow<_It>
+        -: 1885:    {
+        -: 1886:      __glibcxx_assert(_M_index == 0);
+        -: 1887:      if constexpr (is_pointer_v<_It> || requires { _M_it.operator->(); })
+        -: 1888:	return _M_it;
+        -: 1889:      else if constexpr (is_reference_v<iter_reference_t<_It>>)
+        -: 1890:	{
+        -: 1891:	  auto&& __tmp = *_M_it;
+        -: 1892:	  return std::__addressof(__tmp);
+        -: 1893:	}
+        -: 1894:      else
+        -: 1895:	return __arrow_proxy{*_M_it};
+        -: 1896:    }
+        -: 1897:
+        -: 1898:    common_iterator&
+        -: 1899:    operator++()
+        -: 1900:    {
+        -: 1901:      __glibcxx_assert(_M_index == 0);
+        -: 1902:      ++_M_it;
+        -: 1903:      return *this;
+        -: 1904:    }
+        -: 1905:
+        -: 1906:    decltype(auto)
+        -: 1907:    operator++(int)
+        -: 1908:    {
+        -: 1909:      __glibcxx_assert(_M_index == 0);
+        -: 1910:      if constexpr (forward_iterator<_It>)
+        -: 1911:	{
+        -: 1912:	  common_iterator __tmp = *this;
+        -: 1913:	  ++*this;
+        -: 1914:	  return __tmp;
+        -: 1915:	}
+        -: 1916:      else if constexpr (!__detail::__common_iter_use_postfix_proxy<_It>)
+        -: 1917:	return _M_it++;
+        -: 1918:      else
+        -: 1919:	{
+        -: 1920:	  __postfix_proxy __p(**this);
+        -: 1921:	  ++*this;
+        -: 1922:	  return __p;
+        -: 1923:	}
+        -: 1924:    }
+        -: 1925:
+        -: 1926:    template<typename _It2, sentinel_for<_It> _Sent2>
+        -: 1927:      requires sentinel_for<_Sent, _It2>
+        -: 1928:      friend bool
+        -: 1929:      operator==(const common_iterator& __x,
+        -: 1930:		 const common_iterator<_It2, _Sent2>& __y)
+        -: 1931:      {
+        -: 1932:	switch(__x._M_index << 2 | __y._M_index)
+        -: 1933:	  {
+        -: 1934:	  case 0b0000:
+        -: 1935:	  case 0b0101:
+        -: 1936:	    return true;
+        -: 1937:	  case 0b0001:
+        -: 1938:	    return __x._M_it == __y._M_sent;
+        -: 1939:	  case 0b0100:
+        -: 1940:	    return __x._M_sent == __y._M_it;
+        -: 1941:	  default:
+        -: 1942:	    __glibcxx_assert(__x._M_has_value());
+        -: 1943:	    __glibcxx_assert(__y._M_has_value());
+        -: 1944:	    __builtin_unreachable();
+        -: 1945:	  }
+        -: 1946:      }
+        -: 1947:
+        -: 1948:    template<typename _It2, sentinel_for<_It> _Sent2>
+        -: 1949:      requires sentinel_for<_Sent, _It2> && equality_comparable_with<_It, _It2>
+        -: 1950:      friend bool
+        -: 1951:      operator==(const common_iterator& __x,
+        -: 1952:		 const common_iterator<_It2, _Sent2>& __y)
+        -: 1953:      {
+        -: 1954:	switch(__x._M_index << 2 | __y._M_index)
+        -: 1955:	  {
+        -: 1956:	  case 0b0101:
+        -: 1957:	    return true;
+        -: 1958:	  case 0b0000:
+        -: 1959:	    return __x._M_it == __y._M_it;
+        -: 1960:	  case 0b0001:
+        -: 1961:	    return __x._M_it == __y._M_sent;
+        -: 1962:	  case 0b0100:
+        -: 1963:	    return __x._M_sent == __y._M_it;
+        -: 1964:	  default:
+        -: 1965:	    __glibcxx_assert(__x._M_has_value());
+        -: 1966:	    __glibcxx_assert(__y._M_has_value());
+        -: 1967:	    __builtin_unreachable();
+        -: 1968:	  }
+        -: 1969:      }
+        -: 1970:
+        -: 1971:    template<sized_sentinel_for<_It> _It2, sized_sentinel_for<_It> _Sent2>
+        -: 1972:      requires sized_sentinel_for<_Sent, _It2>
+        -: 1973:      friend iter_difference_t<_It2>
+        -: 1974:      operator-(const common_iterator& __x,
+        -: 1975:		const common_iterator<_It2, _Sent2>& __y)
+        -: 1976:      {
+        -: 1977:	switch(__x._M_index << 2 | __y._M_index)
+        -: 1978:	  {
+        -: 1979:	  case 0b0101:
+        -: 1980:	    return 0;
+        -: 1981:	  case 0b0000:
+        -: 1982:	    return __x._M_it - __y._M_it;
+        -: 1983:	  case 0b0001:
+        -: 1984:	    return __x._M_it - __y._M_sent;
+        -: 1985:	  case 0b0100:
+        -: 1986:	    return __x._M_sent - __y._M_it;
+        -: 1987:	  default:
+        -: 1988:	    __glibcxx_assert(__x._M_has_value());
+        -: 1989:	    __glibcxx_assert(__y._M_has_value());
+        -: 1990:	    __builtin_unreachable();
+        -: 1991:	  }
+        -: 1992:      }
+        -: 1993:
+        -: 1994:    friend iter_rvalue_reference_t<_It>
+        -: 1995:    iter_move(const common_iterator& __i)
+        -: 1996:    noexcept(noexcept(ranges::iter_move(std::declval<const _It&>())))
+        -: 1997:    requires input_iterator<_It>
+        -: 1998:    {
+        -: 1999:      __glibcxx_assert(__i._M_index == 0);
+        -: 2000:      return ranges::iter_move(__i._M_it);
+        -: 2001:    }
+        -: 2002:
+        -: 2003:    template<indirectly_swappable<_It> _It2, typename _Sent2>
+        -: 2004:      friend void
+        -: 2005:      iter_swap(const common_iterator& __x,
+        -: 2006:		const common_iterator<_It2, _Sent2>& __y)
+        -: 2007:      noexcept(noexcept(ranges::iter_swap(std::declval<const _It&>(),
+        -: 2008:					  std::declval<const _It2&>())))
+        -: 2009:      {
+        -: 2010:	__glibcxx_assert(__x._M_index == 0);
+        -: 2011:	__glibcxx_assert(__y._M_index == 0);
+        -: 2012:	return ranges::iter_swap(__x._M_it, __y._M_it);
+        -: 2013:      }
+        -: 2014:
+        -: 2015:  private:
+        -: 2016:    template<input_or_output_iterator _It2, sentinel_for<_It2> _Sent2>
+        -: 2017:      friend class common_iterator;
+        -: 2018:
+        -: 2019:    bool _M_has_value() const noexcept { return _M_index < 2; }
+        -: 2020:
+        -: 2021:    union
+        -: 2022:    {
+        -: 2023:      _It _M_it;
+        -: 2024:      _Sent _M_sent;
+        -: 2025:      unsigned char _M_valueless;
+        -: 2026:    };
+        -: 2027:    unsigned char _M_index; // 0==_M_it, 1==_M_sent, 2==valueless
+        -: 2028:  };
+        -: 2029:
+        -: 2030:  template<typename _It, typename _Sent>
+        -: 2031:    struct incrementable_traits<common_iterator<_It, _Sent>>
+        -: 2032:    {
+        -: 2033:      using difference_type = iter_difference_t<_It>;
+        -: 2034:    };
+        -: 2035:
+        -: 2036:  template<input_iterator _It, typename _Sent>
+        -: 2037:    struct iterator_traits<common_iterator<_It, _Sent>>
+        -: 2038:    {
+        -: 2039:    private:
+        -: 2040:      template<typename _Iter>
+        -: 2041:	struct __ptr
+        -: 2042:	{
+        -: 2043:	  using type = void;
+        -: 2044:	};
+        -: 2045:
+        -: 2046:      template<typename _Iter>
+        -: 2047:	requires __detail::__common_iter_has_arrow<_Iter>
+        -: 2048:	struct __ptr<_Iter>
+        -: 2049:	{
+        -: 2050:	  using _CIter = common_iterator<_Iter, _Sent>;
+        -: 2051:	  using type = decltype(std::declval<const _CIter&>().operator->());
+        -: 2052:	};
+        -: 2053:
+        -: 2054:      static auto
+        -: 2055:      _S_iter_cat()
+        -: 2056:      {
+        -: 2057:	using _Traits = iterator_traits<_It>;
+        -: 2058:	if constexpr (requires { requires derived_from<typename _Traits::iterator_category,
+        -: 2059:						       forward_iterator_tag>; })
+        -: 2060:	  return forward_iterator_tag{};
+        -: 2061:	else
+        -: 2062:	  return input_iterator_tag{};
+        -: 2063:      }
+        -: 2064:
+        -: 2065:    public:
+        -: 2066:      using iterator_concept = conditional_t<forward_iterator<_It>,
+        -: 2067:	    forward_iterator_tag, input_iterator_tag>;
+        -: 2068:      using iterator_category = decltype(_S_iter_cat());
+        -: 2069:      using value_type = iter_value_t<_It>;
+        -: 2070:      using difference_type = iter_difference_t<_It>;
+        -: 2071:      using pointer = typename __ptr<_It>::type;
+        -: 2072:      using reference = iter_reference_t<_It>;
+        -: 2073:    };
+        -: 2074:
+        -: 2075:  // [iterators.counted] Counted iterators
+        -: 2076:
+        -: 2077:  namespace __detail
+        -: 2078:  {
+        -: 2079:    template<typename _It>
+        -: 2080:      struct __counted_iter_value_type
+        -: 2081:      { };
+        -: 2082:
+        -: 2083:    template<indirectly_readable _It>
+        -: 2084:      struct __counted_iter_value_type<_It>
+        -: 2085:      { using value_type = iter_value_t<_It>; };
+        -: 2086:
+        -: 2087:    template<typename _It>
+        -: 2088:      struct __counted_iter_concept
+        -: 2089:      { };
+        -: 2090:
+        -: 2091:    template<typename _It>
+        -: 2092:      requires requires { typename _It::iterator_concept; }
+        -: 2093:      struct __counted_iter_concept<_It>
+        -: 2094:      { using iterator_concept = typename _It::iterator_concept; };
+        -: 2095:
+        -: 2096:    template<typename _It>
+        -: 2097:      struct __counted_iter_cat
+        -: 2098:      { };
+        -: 2099:
+        -: 2100:    template<typename _It>
+        -: 2101:      requires requires { typename _It::iterator_category; }
+        -: 2102:      struct __counted_iter_cat<_It>
+        -: 2103:      { using iterator_category = typename _It::iterator_category; };
+        -: 2104:  }
+        -: 2105:
+        -: 2106:  /// An iterator adaptor that keeps track of the distance to the end.
+        -: 2107:  template<input_or_output_iterator _It>
+        -: 2108:    class counted_iterator
+        -: 2109:      : public __detail::__counted_iter_value_type<_It>,
+        -: 2110:	public __detail::__counted_iter_concept<_It>,
+        -: 2111:	public __detail::__counted_iter_cat<_It>
+        -: 2112:    {
+        -: 2113:    public:
+        -: 2114:      using iterator_type = _It;
+        -: 2115:      // value_type defined in __counted_iter_value_type
+        -: 2116:      using difference_type = iter_difference_t<_It>;
+        -: 2117:      // iterator_concept defined in __counted_iter_concept
+        -: 2118:      // iterator_category defined in __counted_iter_cat
+        -: 2119:
+        -: 2120:      constexpr counted_iterator() = default;
+        -: 2121:
+        -: 2122:      constexpr
+        -: 2123:      counted_iterator(_It __i, iter_difference_t<_It> __n)
+        -: 2124:      : _M_current(std::move(__i)), _M_length(__n)
+        -: 2125:      { __glibcxx_assert(__n >= 0); }
+        -: 2126:
+        -: 2127:      template<typename _It2>
+        -: 2128:	requires convertible_to<const _It2&, _It>
+        -: 2129:	constexpr
+        -: 2130:	counted_iterator(const counted_iterator<_It2>& __x)
+        -: 2131:	: _M_current(__x._M_current), _M_length(__x._M_length)
+        -: 2132:	{ }
+        -: 2133:
+        -: 2134:      template<typename _It2>
+        -: 2135:	requires assignable_from<_It&, const _It2&>
+        -: 2136:	constexpr counted_iterator&
+        -: 2137:	operator=(const counted_iterator<_It2>& __x)
+        -: 2138:	{
+        -: 2139:	  _M_current = __x._M_current;
+        -: 2140:	  _M_length = __x._M_length;
+        -: 2141:	  return *this;
+        -: 2142:	}
+        -: 2143:
+        -: 2144:      constexpr const _It&
+        -: 2145:      base() const & noexcept
+        -: 2146:      { return _M_current; }
+        -: 2147:
+        -: 2148:      constexpr _It
+        -: 2149:      base() &&
+        -: 2150:      noexcept(is_nothrow_move_constructible_v<_It>)
+        -: 2151:      { return std::move(_M_current); }
+        -: 2152:
+        -: 2153:      constexpr iter_difference_t<_It>
+        -: 2154:      count() const noexcept { return _M_length; }
+        -: 2155:
+        -: 2156:      constexpr decltype(auto)
+        -: 2157:      operator*()
+        -: 2158:      noexcept(noexcept(*_M_current))
+        -: 2159:      {
+        -: 2160:	__glibcxx_assert( _M_length > 0 );
+        -: 2161:	return *_M_current;
+        -: 2162:      }
+        -: 2163:
+        -: 2164:      constexpr decltype(auto)
+        -: 2165:      operator*() const
+        -: 2166:      noexcept(noexcept(*_M_current))
+        -: 2167:      requires __detail::__dereferenceable<const _It>
+        -: 2168:      {
+        -: 2169:	__glibcxx_assert( _M_length > 0 );
+        -: 2170:	return *_M_current;
+        -: 2171:      }
+        -: 2172:
+        -: 2173:      constexpr auto
+        -: 2174:      operator->() const noexcept
+        -: 2175:      requires contiguous_iterator<_It>
+        -: 2176:      { return std::to_address(_M_current); }
+        -: 2177:
+        -: 2178:      constexpr counted_iterator&
+        -: 2179:      operator++()
+        -: 2180:      {
+        -: 2181:	__glibcxx_assert(_M_length > 0);
+        -: 2182:	++_M_current;
+        -: 2183:	--_M_length;
+        -: 2184:	return *this;
+        -: 2185:      }
+        -: 2186:
+        -: 2187:      decltype(auto)
+        -: 2188:      operator++(int)
+        -: 2189:      {
+        -: 2190:	__glibcxx_assert(_M_length > 0);
+        -: 2191:	--_M_length;
+        -: 2192:	__try
+        -: 2193:	  {
+        -: 2194:	    return _M_current++;
+        -: 2195:	  } __catch(...) {
+        -: 2196:	    ++_M_length;
+        -: 2197:	    __throw_exception_again;
+        -: 2198:	  }
+        -: 2199:
+        -: 2200:      }
+        -: 2201:
+        -: 2202:      constexpr counted_iterator
+        -: 2203:      operator++(int) requires forward_iterator<_It>
+        -: 2204:      {
+        -: 2205:	auto __tmp = *this;
+        -: 2206:	++*this;
+        -: 2207:	return __tmp;
+        -: 2208:      }
+        -: 2209:
+        -: 2210:      constexpr counted_iterator&
+        -: 2211:      operator--() requires bidirectional_iterator<_It>
+        -: 2212:      {
+        -: 2213:	--_M_current;
+        -: 2214:	++_M_length;
+        -: 2215:	return *this;
+        -: 2216:      }
+        -: 2217:
+        -: 2218:      constexpr counted_iterator
+        -: 2219:      operator--(int) requires bidirectional_iterator<_It>
+        -: 2220:      {
+        -: 2221:	auto __tmp = *this;
+        -: 2222:	--*this;
+        -: 2223:	return __tmp;
+        -: 2224:      }
+        -: 2225:
+        -: 2226:      constexpr counted_iterator
+        -: 2227:      operator+(iter_difference_t<_It> __n) const
+        -: 2228:	requires random_access_iterator<_It>
+        -: 2229:      { return counted_iterator(_M_current + __n, _M_length - __n); }
+        -: 2230:
+        -: 2231:      friend constexpr counted_iterator
+        -: 2232:      operator+(iter_difference_t<_It> __n, const counted_iterator& __x)
+        -: 2233:      requires random_access_iterator<_It>
+        -: 2234:      { return __x + __n; }
+        -: 2235:
+        -: 2236:      constexpr counted_iterator&
+        -: 2237:      operator+=(iter_difference_t<_It> __n)
+        -: 2238:      requires random_access_iterator<_It>
+        -: 2239:      {
+        -: 2240:	__glibcxx_assert(__n <= _M_length);
+        -: 2241:	_M_current += __n;
+        -: 2242:	_M_length -= __n;
+        -: 2243:	return *this;
+        -: 2244:      }
+        -: 2245:
+        -: 2246:      constexpr counted_iterator
+        -: 2247:      operator-(iter_difference_t<_It> __n) const
+        -: 2248:      requires random_access_iterator<_It>
+        -: 2249:      { return counted_iterator(_M_current - __n, _M_length + __n); }
+        -: 2250:
+        -: 2251:      template<common_with<_It> _It2>
+        -: 2252:	friend constexpr iter_difference_t<_It2>
+        -: 2253:	operator-(const counted_iterator& __x,
+        -: 2254:		  const counted_iterator<_It2>& __y)
+        -: 2255:	{ return __y._M_length - __x._M_length; }
+        -: 2256:
+        -: 2257:      friend constexpr iter_difference_t<_It>
+        -: 2258:      operator-(const counted_iterator& __x, default_sentinel_t)
+        -: 2259:      { return -__x._M_length; }
+        -: 2260:
+        -: 2261:      friend constexpr iter_difference_t<_It>
+        -: 2262:      operator-(default_sentinel_t, const counted_iterator& __y)
+        -: 2263:      { return __y._M_length; }
+        -: 2264:
+        -: 2265:      constexpr counted_iterator&
+        -: 2266:      operator-=(iter_difference_t<_It> __n)
+        -: 2267:      requires random_access_iterator<_It>
+        -: 2268:      {
+        -: 2269:	__glibcxx_assert(-__n <= _M_length);
+        -: 2270:	_M_current -= __n;
+        -: 2271:	_M_length += __n;
+        -: 2272:	return *this;
+        -: 2273:      }
+        -: 2274:
+        -: 2275:      constexpr decltype(auto)
+        -: 2276:      operator[](iter_difference_t<_It> __n) const
+        -: 2277:      noexcept(noexcept(_M_current[__n]))
+        -: 2278:      requires random_access_iterator<_It>
+        -: 2279:      {
+        -: 2280:	__glibcxx_assert(__n < _M_length);
+        -: 2281:	return _M_current[__n];
+        -: 2282:      }
+        -: 2283:
+        -: 2284:      template<common_with<_It> _It2>
+        -: 2285:	friend constexpr bool
+        -: 2286:	operator==(const counted_iterator& __x,
+        -: 2287:		   const counted_iterator<_It2>& __y)
+        -: 2288:	{ return __x._M_length == __y._M_length; }
+        -: 2289:
+        -: 2290:      friend constexpr bool
+        -: 2291:      operator==(const counted_iterator& __x, default_sentinel_t)
+        -: 2292:      { return __x._M_length == 0; }
+        -: 2293:
+        -: 2294:      template<common_with<_It> _It2>
+        -: 2295:	friend constexpr strong_ordering
+        -: 2296:	operator<=>(const counted_iterator& __x,
+        -: 2297:		    const counted_iterator<_It2>& __y)
+        -: 2298:	{ return __y._M_length <=> __x._M_length; }
+        -: 2299:
+        -: 2300:      friend constexpr iter_rvalue_reference_t<_It>
+        -: 2301:      iter_move(const counted_iterator& __i)
+        -: 2302:      noexcept(noexcept(ranges::iter_move(__i._M_current)))
+        -: 2303:      requires input_iterator<_It>
+        -: 2304:      {
+        -: 2305:	__glibcxx_assert( __i._M_length > 0 );
+        -: 2306:	return ranges::iter_move(__i._M_current);
+        -: 2307:      }
+        -: 2308:
+        -: 2309:      template<indirectly_swappable<_It> _It2>
+        -: 2310:	friend constexpr void
+        -: 2311:	iter_swap(const counted_iterator& __x,
+        -: 2312:		  const counted_iterator<_It2>& __y)
+        -: 2313:	noexcept(noexcept(ranges::iter_swap(__x._M_current, __y._M_current)))
+        -: 2314:	{
+        -: 2315:	  __glibcxx_assert( __x._M_length > 0 && __y._M_length > 0 );
+        -: 2316:	  ranges::iter_swap(__x._M_current, __y._M_current);
+        -: 2317:	}
+        -: 2318:
+        -: 2319:    private:
+        -: 2320:      template<input_or_output_iterator _It2> friend class counted_iterator;
+        -: 2321:
+        -: 2322:      _It _M_current = _It();
+        -: 2323:      iter_difference_t<_It> _M_length = 0;
+        -: 2324:    };
+        -: 2325:
+        -: 2326:  template<input_iterator _It>
+        -: 2327:    requires same_as<__detail::__iter_traits<_It>, iterator_traits<_It>>
+        -: 2328:    struct iterator_traits<counted_iterator<_It>> : iterator_traits<_It>
+        -: 2329:    {
+        -: 2330:      using pointer = conditional_t<contiguous_iterator<_It>,
+        -: 2331:				    add_pointer_t<iter_reference_t<_It>>,
+        -: 2332:				    void>;
+        -: 2333:    };
+        -: 2334:#endif // C++20
+        -: 2335:
+        -: 2336:  /// @} group iterators
+        -: 2337:
+        -: 2338:  template<typename _Iterator>
+        -: 2339:    auto
+        -: 2340:    __niter_base(move_iterator<_Iterator> __it)
+        -: 2341:    -> decltype(make_move_iterator(__niter_base(__it.base())))
+        -: 2342:    { return make_move_iterator(__niter_base(__it.base())); }
+        -: 2343:
+        -: 2344:  template<typename _Iterator>
+        -: 2345:    struct __is_move_iterator<move_iterator<_Iterator> >
+        -: 2346:    {
+        -: 2347:      enum { __value = 1 };
+        -: 2348:      typedef __true_type __type;
+        -: 2349:    };
+        -: 2350:
+        -: 2351:  template<typename _Iterator>
+        -: 2352:    auto
+        -: 2353:    __miter_base(move_iterator<_Iterator> __it)
+        -: 2354:    -> decltype(__miter_base(__it.base()))
+        -: 2355:    { return __miter_base(__it.base()); }
+        -: 2356:
+        -: 2357:#define _GLIBCXX_MAKE_MOVE_ITERATOR(_Iter) std::make_move_iterator(_Iter)
+        -: 2358:#define _GLIBCXX_MAKE_MOVE_IF_NOEXCEPT_ITERATOR(_Iter) \
+        -: 2359:  std::__make_move_if_noexcept_iterator(_Iter)
+        -: 2360:#else
+        -: 2361:#define _GLIBCXX_MAKE_MOVE_ITERATOR(_Iter) (_Iter)
+        -: 2362:#define _GLIBCXX_MAKE_MOVE_IF_NOEXCEPT_ITERATOR(_Iter) (_Iter)
+        -: 2363:#endif // C++11
+        -: 2364:
+        -: 2365:#if __cpp_deduction_guides >= 201606
+        -: 2366:  // These helper traits are used for deduction guides
+        -: 2367:  // of associative containers.
+        -: 2368:  template<typename _InputIterator>
+        -: 2369:    using __iter_key_t = remove_const_t<
+        -: 2370:    typename iterator_traits<_InputIterator>::value_type::first_type>;
+        -: 2371:
+        -: 2372:  template<typename _InputIterator>
+        -: 2373:    using __iter_val_t =
+        -: 2374:    typename iterator_traits<_InputIterator>::value_type::second_type;
+        -: 2375:
+        -: 2376:  template<typename _T1, typename _T2>
+        -: 2377:    struct pair;
+        -: 2378:
+        -: 2379:  template<typename _InputIterator>
+        -: 2380:    using __iter_to_alloc_t =
+        -: 2381:    pair<add_const_t<__iter_key_t<_InputIterator>>,
+        -: 2382:	 __iter_val_t<_InputIterator>>;
+        -: 2383:#endif // __cpp_deduction_guides
+        -: 2384:
+        -: 2385:_GLIBCXX_END_NAMESPACE_VERSION
+        -: 2386:} // namespace
+        -: 2387:
+        -: 2388:#ifdef _GLIBCXX_DEBUG
+        -: 2389:# include <debug/stl_iterator.h>
+        -: 2390:#endif
+        -: 2391:
+        -: 2392:#endif

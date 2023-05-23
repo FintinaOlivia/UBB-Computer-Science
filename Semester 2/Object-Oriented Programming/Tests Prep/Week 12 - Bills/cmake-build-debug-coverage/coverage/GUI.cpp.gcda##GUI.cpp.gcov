@@ -1,0 +1,569 @@
+        -:    0:Source:C:/Users/Th/CLionProjects/W12-Test-Attempt-Bills/GUI/GUI.cpp
+        -:    0:Graph:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\GUI\GUI.cpp.gcno
+        -:    0:Data:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\GUI\GUI.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by Th on 20/05/2023.
+        -:    3://
+        -:    4:
+        -:    5:#include <QVBoxLayout>
+        -:    6:#include <iostream>
+        -:    7:#include "GUI.h"
+        -:    8:
+function _ZN3GUIC2ER7Service called 1 returned 100% blocks executed 78%
+        1:    9:GUI::GUI(Service &service) : service(service) {
+        1:    9-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:    9-block  1
+call    4 never executed
+        1:   10:    this->initGUI();
+        1:   10-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   11:    this->connectSignalsAndSlots();
+        1:   11-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   12:    this->displayAll();
+        1:   12-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   13:}
+        1:   13-block  0
+    $$$$$:   13-block  1
+call    0 never executed
+        -:   14:
+       1*:   15:GUI::~GUI() = default;
+------------------
+_ZN3GUID0Ev:
+function _ZN3GUID0Ev called 0 returned 0% blocks executed 0%
+    #####:   15:GUI::~GUI() = default;
+    %%%%%:   15-block  0
+call    0 never executed
+call    1 never executed
+------------------
+_ZN3GUID2Ev:
+function _ZN3GUID2Ev called 1 returned 100% blocks executed 100%
+        1:   15:GUI::~GUI() = default;
+        1:   15-block  0
+call    0 returned 1
+------------------
+        -:   16:
+function _ZN3GUI7initGUIEv called 1 returned 100% blocks executed 56%
+        1:   17:void GUI::initGUI() {
+        1:   18:    this->billsListWidget = new QListWidget{};
+        1:   18-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   18-block  1
+call    4 never executed
+        1:   19:    this->sortButton = new QPushButton{"Sort"};
+        1:   19-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   19-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   19-block  2
+call    7 returned 1
+    $$$$$:   19-block  3
+call    8 never executed
+    $$$$$:   19-block  4
+call    9 never executed
+    $$$$$:   19-block  5
+call   10 never executed
+        1:   20:    this->nameLineEdit = new QLineEdit{"Company name"};
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   20-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   20-block  1
+call    7 returned 1
+    $$$$$:   20-block  2
+call    8 never executed
+    $$$$$:   20-block  3
+call    9 never executed
+    $$$$$:   20-block  4
+call   10 never executed
+        1:   21:    this->nameLineEdit->setFocus();
+call    0 returned 1
+        1:   22:    this->calculateSumButton = new QPushButton{"Calculate sum"};
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   22-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   22-block  1
+call    7 returned 1
+    $$$$$:   22-block  2
+call    8 never executed
+    $$$$$:   22-block  3
+call    9 never executed
+    $$$$$:   22-block  4
+call   10 never executed
+        1:   23:    this->unpaidBillsListWidget = new QListWidget{};
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   23-block  0
+call    4 never executed
+        -:   24:
+        1:   25:    auto* mainLayout = new QVBoxLayout{};
+        1:   25-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   25-block  1
+call    4 never executed
+        1:   26:    mainLayout->addWidget(this->billsListWidget);
+        1:   26-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   26-block  1
+call    4 never executed
+        1:   27:    mainLayout->addWidget(this->sortButton);
+        1:   27-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   27-block  1
+call    4 never executed
+        1:   28:    mainLayout->addWidget(this->nameLineEdit);
+        1:   28-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   28-block  1
+call    4 never executed
+        1:   29:    mainLayout->addWidget(this->calculateSumButton);
+        1:   29-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   29-block  1
+call    4 never executed
+        1:   30:    mainLayout->addWidget(this->unpaidBillsListWidget);
+        1:   30-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        -:   31:
+        1:   32:    this->setLayout(mainLayout);
+        1:   32-block  0
+call    0 returned 1
+        1:   33:}
+        -:   34:
+function _ZN3GUI22connectSignalsAndSlotsEv called 1 returned 100% blocks executed 100%
+        1:   35:void GUI::connectSignalsAndSlots() {
+        1:   36:    QObject::connect(this->sortButton,
+        1:   36-block  0
+call    0 returned 1
+call    1 returned 1
+        -:   37:                     &QPushButton::clicked,
+        -:   38:                     this,
+        -:   39:                     &GUI::sortByCompanyName);
+        -:   40:
+        1:   41:    QObject::connect(this->calculateSumButton,
+call    0 returned 1
+call    1 returned 1
+        -:   42:                     &QPushButton::clicked,
+        -:   43:                     this,
+        -:   44:                     &GUI::displayUnpaidBills);
+        1:   45:}
+        -:   46:
+function _ZN3GUI10displayAllEv called 1 returned 100% blocks executed 56%
+        1:   47:void GUI::displayAll() {
+        1:   48:    this->billsListWidget->clear();
+        1:   48-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   49:    std::vector<Bill> bills = this->service.getAll();
+        1:   49-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        6:   50:    for (auto &bill : bills) {
+        1:   50-block  0
+call    0 returned 1
+call    1 returned 1
+        5:   50-block  1
+call    2 returned 5
+call    3 returned 5
+        6:   50-block  2
+call    4 returned 6
+branch  5 taken 5
+branch  6 taken 1 (fallthrough)
+       10:   51:        QString itemInList = QString::fromStdString(bill.getCompanyName() + " - " + std::to_string(bill.getSum()));
+call    0 returned 5
+branch  1 taken 5 (fallthrough)
+branch  2 taken 0 (throw)
+        5:   51-block  0
+call    3 returned 5
+branch  4 taken 5 (fallthrough)
+branch  5 taken 0 (throw)
+        5:   51-block  1
+call    6 returned 5
+branch  7 taken 5 (fallthrough)
+branch  8 taken 0 (throw)
+        5:   51-block  2
+call    9 returned 5
+branch 10 taken 5 (fallthrough)
+branch 11 taken 0 (throw)
+        5:   51-block  3
+call   12 returned 5
+branch 13 taken 5 (fallthrough)
+branch 14 taken 0 (throw)
+        5:   51-block  4
+call   15 returned 5
+branch 16 taken 5 (fallthrough)
+branch 17 taken 0 (throw)
+call   18 returned 5
+call   19 returned 5
+call   20 returned 5
+    $$$$$:   51-block  5
+    $$$$$:   51-block  6
+    $$$$$:   51-block  7
+    $$$$$:   51-block  8
+        5:   52:        this->billsListWidget->addItem(itemInList);
+call    0 returned 5
+branch  1 taken 5 (fallthrough)
+branch  2 taken 0 (throw)
+        5:   53:    }
+        5:   53-block  0
+call    0 returned 5
+    $$$$$:   53-block  1
+call    1 never executed
+        1:   54:}
+        1:   54-block  0
+call    0 returned 1
+    $$$$$:   54-block  1
+call    1 never executed
+        -:   55:
+function _ZN3GUI17sortByCompanyNameEv called 1 returned 100% blocks executed 56%
+        1:   56:void GUI::sortByCompanyName() {
+        1:   57:    this->billsListWidget->clear();
+        1:   57-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   58:    std::vector<Bill> bills = this->service.sortByName();
+        1:   58-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        6:   59:    for (auto &bill : bills) {
+        1:   59-block  0
+call    0 returned 1
+call    1 returned 1
+        5:   59-block  1
+call    2 returned 5
+call    3 returned 5
+        6:   59-block  2
+call    4 returned 6
+branch  5 taken 5
+branch  6 taken 1 (fallthrough)
+       10:   60:        QString itemInList = QString::fromStdString(bill.getCompanyName() + " - " + std::to_string(bill.getSum()));
+call    0 returned 5
+branch  1 taken 5 (fallthrough)
+branch  2 taken 0 (throw)
+        5:   60-block  0
+call    3 returned 5
+branch  4 taken 5 (fallthrough)
+branch  5 taken 0 (throw)
+        5:   60-block  1
+call    6 returned 5
+branch  7 taken 5 (fallthrough)
+branch  8 taken 0 (throw)
+        5:   60-block  2
+call    9 returned 5
+branch 10 taken 5 (fallthrough)
+branch 11 taken 0 (throw)
+        5:   60-block  3
+call   12 returned 5
+branch 13 taken 5 (fallthrough)
+branch 14 taken 0 (throw)
+        5:   60-block  4
+call   15 returned 5
+branch 16 taken 5 (fallthrough)
+branch 17 taken 0 (throw)
+call   18 returned 5
+call   19 returned 5
+call   20 returned 5
+    $$$$$:   60-block  5
+    $$$$$:   60-block  6
+    $$$$$:   60-block  7
+    $$$$$:   60-block  8
+        5:   61:        this->billsListWidget->addItem(itemInList);
+call    0 returned 5
+branch  1 taken 5 (fallthrough)
+branch  2 taken 0 (throw)
+        5:   62:    }
+        5:   62-block  0
+call    0 returned 5
+    $$$$$:   62-block  1
+call    1 never executed
+        1:   63:}
+        1:   63-block  0
+call    0 returned 1
+    $$$$$:   63-block  1
+call    1 never executed
+        -:   64:
+function _ZN3GUI18displayUnpaidBillsEv called 1 returned 100% blocks executed 35%
+        1:   65:void GUI::displayUnpaidBills() {
+        1:   66:    this->billsListWidget->clear();
+        1:   66-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   67:
+        1:   68:    auto *window = new QWidget;
+        1:   68-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   68-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+    $$$$$:   68-block  2
+call    7 never executed
+    $$$$$:   68-block  3
+        1:   69:    window->setWindowTitle("Unpaid bills");
+        1:   69-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   69-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   69-block  2
+call    6 returned 1
+    $$$$$:   69-block  3
+call    7 never executed
+    $$$$$:   69-block  4
+        1:   70:    window->setFixedSize(200, 100);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   71:    auto *layout = new QVBoxLayout;
+        1:   71-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   71-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+    $$$$$:   71-block  2
+call    6 never executed
+        1:   72:    window->setLayout(layout);
+        1:   72-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   73:
+        1:   74:    std::string companyName = this->nameLineEdit->text().toStdString();
+        1:   74-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   74-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+    $$$$$:   74-block  2
+        1:   75:    std::vector<Bill> bills = this->service.getByName(companyName);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   75-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+    $$$$$:   75-block  1
+        1:   76:    double sum = 0;
+       1*:   77:    for (auto &bill : bills) {
+call    0 returned 1
+call    1 returned 1
+    %%%%%:   77-block  0
+call    2 never executed
+    %%%%%:   77-block  1
+call    3 never executed
+        1:   77-block  2
+call    4 returned 1
+branch  5 taken 0
+branch  6 taken 1 (fallthrough)
+    #####:   78:        if(!bill.getIsPaid()) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   78-block  0
+branch  3 never executed
+branch  4 never executed
+    #####:   79:            QString itemInList = QString::fromStdString(bill.getCompanyName() + " - " + std::to_string(bill.getSum()));
+    %%%%%:   79-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   79-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   79-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:   79-block  3
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:   79-block  4
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+    %%%%%:   79-block  5
+call   15 never executed
+branch 16 never executed
+branch 17 never executed
+call   18 never executed
+call   19 never executed
+call   20 never executed
+    $$$$$:   79-block  6
+    $$$$$:   79-block  7
+    $$$$$:   79-block  8
+    $$$$$:   79-block  9
+    #####:   80:            sum += bill.getSum();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   81:            this->billsListWidget->addItem(itemInList);
+    %%%%%:   81-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   82:        }
+    %%%%%:   82-block  0
+call    0 never executed
+    $$$$$:   82-block  1
+call    1 never executed
+        -:   83:    }
+        2:   84:    QString itemInList = QString::fromStdString("Sum: " + std::to_string(sum));
+        1:   84-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   84-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   84-block  2
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+call    9 returned 1
+    $$$$$:   84-block  3
+    $$$$$:   84-block  4
+        1:   85:    this->unpaidBillsListWidget->addItem(itemInList);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   86:}
+        1:   86-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+    $$$$$:   86-block  1
+call    3 never executed
+    $$$$$:   86-block  2
+call    4 never executed
+    $$$$$:   86-block  3
+call    5 never executed
+        -:   87:
+function _ZN3GUI12populateListESt6vectorI4BillSaIS1_EE called 0 returned 0% blocks executed 0%
+    #####:   88:void GUI::populateList(std::vector<Bill> bills) {
+    #####:   89:    this->billsListWidget->clear();
+    %%%%%:   89-block  0
+call    0 never executed
+    #####:   90:    for (auto &bill : bills) {
+call    0 never executed
+call    1 never executed
+    %%%%%:   90-block  0
+call    2 never executed
+call    3 never executed
+    %%%%%:   90-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    #####:   91:        QString itemInList = QString::fromStdString(bill.getCompanyName() + " - " + std::to_string(bill.getSum()));
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   91-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   91-block  1
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:   91-block  2
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:   91-block  3
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+    %%%%%:   91-block  4
+call   15 never executed
+branch 16 never executed
+branch 17 never executed
+call   18 never executed
+call   19 never executed
+call   20 never executed
+    $$$$$:   91-block  5
+    $$$$$:   91-block  6
+    $$$$$:   91-block  7
+    $$$$$:   91-block  8
+    #####:   92:        this->billsListWidget->addItem(itemInList);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   93:    }
+    %%%%%:   93-block  0
+call    0 never executed
+    $$$$$:   93-block  1
+call    1 never executed
+        -:   94:
+    #####:   95:}
+    %%%%%:   95-block  0
+        -:   96:

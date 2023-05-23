@@ -1,0 +1,24 @@
+# ninja log v5
+6	89	7065769069555425	T3_Cars_autogen/timestamp	e4668f75f2ade366
+126	621	7065763373097589	CMakeFiles/T3_Cars.dir/Repository/Repository.cpp.obj	daaeedf7a2745503
+6	89	7065769069555425	T3_Cars_autogen/mocs_compilation.cpp	e4668f75f2ade366
+6	89	7065769069555425	C:/Users/Th/CLionProjects/T3-Cars/cmake-build-debug/T3_Cars_autogen/timestamp	e4668f75f2ade366
+6	89	7065769069555425	C:/Users/Th/CLionProjects/T3-Cars/cmake-build-debug/T3_Cars_autogen/mocs_compilation.cpp	e4668f75f2ade366
+147	201	7065739844837994	CMakeFiles/T3_Cars.dir/T3_Cars_autogen/mocs_compilation.cpp.obj	367e680786397adc
+93	798	7065769076637107	CMakeFiles/T3_Cars.dir/Controller/Controller.cpp.obj	24088438d80b2b4f
+82	483	7065755702336580	CMakeFiles/T3_Cars.dir/Domain/Car.cpp.obj	4f4c41e4ca555f07
+84	2010	7065765257448403	CMakeFiles/T3_Cars.dir/main.cpp.obj	95acab3bf9730bcf
+88	2093	7065765258298692	CMakeFiles/T3_Cars.dir/GUI/GUI.cpp.obj	262ea4b66df82959
+798	1128	7065769078460227	T3_Cars.exe	c09b17bd3ced44d
+6	81	7065770088555448	T3_Cars_autogen/timestamp	e4668f75f2ade366
+6	81	7065770088555448	T3_Cars_autogen/mocs_compilation.cpp	e4668f75f2ade366
+6	81	7065770088555448	C:/Users/Th/CLionProjects/T3-Cars/cmake-build-debug/T3_Cars_autogen/timestamp	e4668f75f2ade366
+6	81	7065770088555448	C:/Users/Th/CLionProjects/T3-Cars/cmake-build-debug/T3_Cars_autogen/mocs_compilation.cpp	e4668f75f2ade366
+85	723	7065770094964297	CMakeFiles/T3_Cars.dir/Controller/Controller.cpp.obj	24088438d80b2b4f
+723	1049	7065770096724680	T3_Cars.exe	c09b17bd3ced44d
+5	86	7065770841675550	T3_Cars_autogen/timestamp	e4668f75f2ade366
+5	86	7065770841675550	T3_Cars_autogen/mocs_compilation.cpp	e4668f75f2ade366
+5	86	7065770841675550	C:/Users/Th/CLionProjects/T3-Cars/cmake-build-debug/T3_Cars_autogen/timestamp	e4668f75f2ade366
+5	86	7065770841675550	C:/Users/Th/CLionProjects/T3-Cars/cmake-build-debug/T3_Cars_autogen/mocs_compilation.cpp	e4668f75f2ade366
+90	2000	7065770860805876	CMakeFiles/T3_Cars.dir/GUI/GUI.cpp.obj	262ea4b66df82959
+2000	2328	7065770862596278	T3_Cars.exe	c09b17bd3ced44d

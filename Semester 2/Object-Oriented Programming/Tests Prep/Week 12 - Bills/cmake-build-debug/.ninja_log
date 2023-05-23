@@ -1,0 +1,12 @@
+# ninja log v5
+4	76	7063185543722713	W12_Test_Attempt_Bills_autogen/timestamp	d86a1c65fcdabede
+4	76	7063185543722713	W12_Test_Attempt_Bills_autogen/mocs_compilation.cpp	d86a1c65fcdabede
+4	76	7063185543722713	C:/Users/Th/CLionProjects/W12-Test-Attempt-Bills/cmake-build-debug/W12_Test_Attempt_Bills_autogen/timestamp	d86a1c65fcdabede
+4	76	7063185543722713	C:/Users/Th/CLionProjects/W12-Test-Attempt-Bills/cmake-build-debug/W12_Test_Attempt_Bills_autogen/mocs_compilation.cpp	d86a1c65fcdabede
+158	219	7063173332573884	CMakeFiles/W12_Test_Attempt_Bills.dir/W12_Test_Attempt_Bills_autogen/mocs_compilation.cpp.obj	ab6e8bee4345912f
+80	2379	7063185566748542	CMakeFiles/W12_Test_Attempt_Bills.dir/GUI/GUI.cpp.obj	cfcb46b67e64fb9e
+83	2114	7063184549463934	CMakeFiles/W12_Test_Attempt_Bills.dir/main.cpp.obj	95d81220d8e6752f
+102	675	7063176532207767	CMakeFiles/W12_Test_Attempt_Bills.dir/Repository.cpp.obj	cfc22ac55b51d46e
+169	712	7063173337515036	CMakeFiles/W12_Test_Attempt_Bills.dir/Domain/Bill.cpp.obj	1b97499ee539d518
+95	727	7063176532727876	CMakeFiles/W12_Test_Attempt_Bills.dir/Service/Service.cpp.obj	c1a17afc0982f1b0
+2379	2704	7063185568398915	W12_Test_Attempt_Bills.exe	7ad990babf9d6345

@@ -1,0 +1,490 @@
+        -:    0:Source:C:/Qt/6.5.0/mingw_64/include/QtCore/qarraydatapointer.h
+        -:    0:Graph:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\GUI\GUI.cpp.gcno
+        -:    0:Data:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\GUI\GUI.cpp.gcda
+        -:    0:Runs:1
+        -:    1:// Copyright (C) 2020 The Qt Company Ltd.
+        -:    2:// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+        -:    3:
+        -:    4:#ifndef QARRAYDATAPOINTER_H
+        -:    5:#define QARRAYDATAPOINTER_H
+        -:    6:
+        -:    7:#include <QtCore/qarraydataops.h>
+        -:    8:#include <QtCore/qcontainertools_impl.h>
+        -:    9:
+        -:   10:QT_BEGIN_NAMESPACE
+        -:   11:
+        -:   12:template <class T>
+        -:   13:struct QArrayDataPointer
+        -:   14:{
+        -:   15:private:
+        -:   16:    typedef QTypedArrayData<T> Data;
+        -:   17:    typedef QArrayDataOps<T> DataOps;
+        -:   18:
+        -:   19:public:
+        -:   20:    enum {
+        -:   21:        pass_parameter_by_value =
+        -:   22:                std::is_arithmetic<T>::value || std::is_pointer<T>::value || std::is_enum<T>::value
+        -:   23:    };
+        -:   24:
+        -:   25:    typedef typename std::conditional<pass_parameter_by_value, T, const T &>::type parameter_type;
+        -:   26:
+        -:   27:    constexpr QArrayDataPointer() noexcept
+        -:   28:        : d(nullptr), ptr(nullptr), size(0)
+        -:   29:    {
+        -:   30:    }
+        -:   31:
+        -:   32:    QArrayDataPointer(const QArrayDataPointer &other) noexcept
+        -:   33:        : d(other.d), ptr(other.ptr), size(other.size)
+        -:   34:    {
+        -:   35:        ref();
+        -:   36:    }
+        -:   37:
+        -:   38:    constexpr QArrayDataPointer(Data *header, T *adata, qsizetype n = 0) noexcept
+        -:   39:        : d(header), ptr(adata), size(n)
+        -:   40:    {
+        -:   41:    }
+        -:   42:
+        -:   43:    explicit QArrayDataPointer(QPair<QTypedArrayData<T> *, T *> adata, qsizetype n = 0) noexcept
+        -:   44:        : d(adata.first), ptr(adata.second), size(n)
+        -:   45:    {
+        -:   46:    }
+        -:   47:
+        -:   48:    static QArrayDataPointer fromRawData(const T *rawData, qsizetype length) noexcept
+        -:   49:    {
+        -:   50:        Q_ASSERT(rawData || !length);
+        -:   51:        return { nullptr, const_cast<T *>(rawData), length };
+        -:   52:    }
+        -:   53:
+        -:   54:    QArrayDataPointer &operator=(const QArrayDataPointer &other) noexcept
+        -:   55:    {
+        -:   56:        QArrayDataPointer tmp(other);
+        -:   57:        this->swap(tmp);
+        -:   58:        return *this;
+        -:   59:    }
+        -:   60:
+        -:   61:    QArrayDataPointer(QArrayDataPointer &&other) noexcept
+        -:   62:        : d(other.d), ptr(other.ptr), size(other.size)
+        -:   63:    {
+        -:   64:        other.d = nullptr;
+        -:   65:        other.ptr = nullptr;
+        -:   66:        other.size = 0;
+        -:   67:    }
+        -:   68:
+        -:   69:    QT_MOVE_ASSIGNMENT_OPERATOR_IMPL_VIA_MOVE_AND_SWAP(QArrayDataPointer)
+        -:   70:
+        -:   71:    DataOps &operator*() noexcept
+        -:   72:    {
+        -:   73:        return *static_cast<DataOps *>(this);
+        -:   74:    }
+        -:   75:
+       1*:   76:    DataOps *operator->() noexcept
+        -:   77:    {
+       1*:   78:        return static_cast<DataOps *>(this);
+        -:   79:    }
+------------------
+_ZN17QArrayDataPointerIDsEptEv:
+function _ZN17QArrayDataPointerIDsEptEv called 0 returned 0% blocks executed 0%
+    #####:   76:    DataOps *operator->() noexcept
+        -:   77:    {
+    #####:   78:        return static_cast<DataOps *>(this);
+    %%%%%:   78-block  0
+        -:   79:    }
+------------------
+_ZN17QArrayDataPointerIcEptEv:
+function _ZN17QArrayDataPointerIcEptEv called 1 returned 100% blocks executed 100%
+        1:   76:    DataOps *operator->() noexcept
+        -:   77:    {
+        1:   78:        return static_cast<DataOps *>(this);
+        1:   78-block  0
+        -:   79:    }
+------------------
+        -:   80:
+        -:   81:    const DataOps &operator*() const noexcept
+        -:   82:    {
+        -:   83:        return *static_cast<const DataOps *>(this);
+        -:   84:    }
+        -:   85:
+        -:   86:    const DataOps *operator->() const noexcept
+        -:   87:    {
+        -:   88:        return static_cast<const DataOps *>(this);
+        -:   89:    }
+        -:   90:
+       17:   91:    ~QArrayDataPointer()
+        -:   92:    {
+       17:   93:        if (!deref()) {
+       1*:   94:            (*this)->destroyAll();
+       1*:   95:            Data::deallocate(d);
+        -:   96:        }
+       17:   97:    }
+------------------
+_ZN17QArrayDataPointerIDsED1Ev:
+function _ZN17QArrayDataPointerIDsED1Ev called 16 returned 100% blocks executed 50%
+       16:   91:    ~QArrayDataPointer()
+        -:   92:    {
+       16:   93:        if (!deref()) {
+       16:   93-block  0
+call    0 returned 16
+branch  1 taken 0 (fallthrough)
+branch  2 taken 16
+    #####:   94:            (*this)->destroyAll();
+    %%%%%:   94-block  0
+call    0 never executed
+call    1 never executed
+    #####:   95:            Data::deallocate(d);
+call    0 never executed
+        -:   96:        }
+       16:   97:    }
+------------------
+_ZN17QArrayDataPointerIcED1Ev:
+function _ZN17QArrayDataPointerIcED1Ev called 1 returned 100% blocks executed 100%
+        1:   91:    ~QArrayDataPointer()
+        -:   92:    {
+        1:   93:        if (!deref()) {
+        1:   93-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+        1:   94:            (*this)->destroyAll();
+        1:   94-block  0
+call    0 returned 1
+call    1 returned 1
+        1:   95:            Data::deallocate(d);
+call    0 returned 1
+        -:   96:        }
+        1:   97:    }
+------------------
+        -:   98:
+        -:   99:    bool isNull() const noexcept
+        -:  100:    {
+        -:  101:        return !ptr;
+        -:  102:    }
+        -:  103:
+        -:  104:    T *data() noexcept { return ptr; }
+        -:  105:    const T *data() const noexcept { return ptr; }
+        -:  106:
+        -:  107:    T *begin() noexcept { return data(); }
+        -:  108:    T *end() noexcept { return data() + size; }
+        -:  109:    const T *begin() const noexcept { return data(); }
+        -:  110:    const T *end() const noexcept { return data() + size; }
+        -:  111:    const T *constBegin() const noexcept { return data(); }
+        -:  112:    const T *constEnd() const noexcept { return data() + size; }
+        -:  113:
+        -:  114:    void swap(QArrayDataPointer &other) noexcept
+        -:  115:    {
+        -:  116:        qt_ptr_swap(d, other.d);
+        -:  117:        qt_ptr_swap(ptr, other.ptr);
+        -:  118:        std::swap(size, other.size);
+        -:  119:    }
+        -:  120:
+        -:  121:    void clear() noexcept(std::is_nothrow_destructible<T>::value)
+        -:  122:    {
+        -:  123:        QArrayDataPointer tmp;
+        -:  124:        swap(tmp);
+        -:  125:    }
+        -:  126:
+        -:  127:    void detach(QArrayDataPointer *old = nullptr)
+        -:  128:    {
+        -:  129:        if (needsDetach())
+        -:  130:            reallocateAndGrow(QArrayData::GrowsAtEnd, 0, old);
+        -:  131:    }
+        -:  132:
+        -:  133:    /*! \internal
+        -:  134:
+        -:  135:        Reinterprets the data of this QArrayDataPointer to type X. It's the
+        -:  136:        caller's responsibility to ensure that the data contents are valid and
+        -:  137:        properly aligned, particularly if T and X are not trivial types (i.e,
+        -:  138:        don't do that). The current size is kept and the allocated capacity is
+        -:  139:        updated to account for the difference in the element type's size.
+        -:  140:
+        -:  141:        This is used in QString::fromLatin1 to perform in-place conversion of
+        -:  142:        QString to QByteArray.
+        -:  143:    */
+        -:  144:    template <typename X> QArrayDataPointer<X> reinterpreted() &&
+        -:  145:    {
+        -:  146:        if (sizeof(T) != sizeof(X)) {
+        -:  147:            Q_ASSERT(!d->isShared());
+        -:  148:            d->alloc = d->alloc * sizeof(T) / sizeof(X);
+        -:  149:        }
+        -:  150:        auto od = reinterpret_cast<QTypedArrayData<X> *>(std::exchange(d, nullptr));
+        -:  151:        auto optr = reinterpret_cast<X *>(std::exchange(ptr, nullptr));
+        -:  152:        return { od, optr, std::exchange(size, 0) };
+        -:  153:    }
+        -:  154:
+        -:  155:    /*! \internal
+        -:  156:
+        -:  157:        Detaches this (optionally) and grows to accommodate the free space for
+        -:  158:        \a n elements at the required side. The side is determined from \a pos.
+        -:  159:
+        -:  160:        \a data pointer can be provided when the caller knows that \a data
+        -:  161:        points into range [this->begin(), this->end()). In case it is, *data
+        -:  162:        would be updated so that it continues to point to the element it was
+        -:  163:        pointing to before the data move. if \a data does not point into range,
+        -:  164:        one can/should pass \c nullptr.
+        -:  165:
+        -:  166:        Similarly to \a data, \a old, pointer to a default-constructed QADP, can
+        -:  167:        be provided when the caller expects to e.g. copy the data from this to
+        -:  168:        itself:
+        -:  169:        \code
+        -:  170:        QList<T> list(5);
+        -:  171:        qsizetype pos = getArbitraryPos();
+        -:  172:        list.insert(pos, list.begin(), list.end());
+        -:  173:        \endcode
+        -:  174:
+        -:  175:        The default rule would be: \a data and \a old must either both be valid
+        -:  176:        pointers, or both equal to \c nullptr.
+        -:  177:    */
+        -:  178:    void detachAndGrow(QArrayData::GrowthPosition where, qsizetype n, const T **data,
+        -:  179:                       QArrayDataPointer *old)
+        -:  180:    {
+        -:  181:        const bool detach = needsDetach();
+        -:  182:        bool readjusted = false;
+        -:  183:        if (!detach) {
+        -:  184:            if (!n || (where == QArrayData::GrowsAtBeginning && freeSpaceAtBegin() >= n)
+        -:  185:                || (where == QArrayData::GrowsAtEnd && freeSpaceAtEnd() >= n))
+        -:  186:                return;
+        -:  187:            readjusted = tryReadjustFreeSpace(where, n, data);
+        -:  188:            Q_ASSERT(!readjusted
+        -:  189:                     || (where == QArrayData::GrowsAtBeginning && freeSpaceAtBegin() >= n)
+        -:  190:                     || (where == QArrayData::GrowsAtEnd && freeSpaceAtEnd() >= n));
+        -:  191:        }
+        -:  192:
+        -:  193:        if (!readjusted)
+        -:  194:            reallocateAndGrow(where, n, old);
+        -:  195:    }
+        -:  196:
+        -:  197:    /*! \internal
+        -:  198:
+        -:  199:        Reallocates to accommodate the free space for \a n elements at the
+        -:  200:        required side. The side is determined from \a pos. Might also shrink
+        -:  201:        when n < 0.
+        -:  202:    */
+        -:  203:    Q_NEVER_INLINE void reallocateAndGrow(QArrayData::GrowthPosition where, qsizetype n,
+        -:  204:                                          QArrayDataPointer *old = nullptr)
+        -:  205:    {
+        -:  206:        if constexpr (QTypeInfo<T>::isRelocatable && alignof(T) <= alignof(std::max_align_t)) {
+        -:  207:            if (where == QArrayData::GrowsAtEnd && !old && !needsDetach() && n > 0) {
+        -:  208:                (*this)->reallocate(constAllocatedCapacity() - freeSpaceAtEnd() + n, QArrayData::Grow); // fast path
+        -:  209:                return;
+        -:  210:            }
+        -:  211:        }
+        -:  212:
+        -:  213:        QArrayDataPointer dp(allocateGrow(*this, n, where));
+        -:  214:        if (n > 0)
+        -:  215:            Q_CHECK_PTR(dp.data());
+        -:  216:        if (where == QArrayData::GrowsAtBeginning) {
+        -:  217:            Q_ASSERT(dp.freeSpaceAtBegin() >= n);
+        -:  218:        } else {
+        -:  219:            Q_ASSERT(dp.freeSpaceAtEnd() >= n);
+        -:  220:        }
+        -:  221:        if (size) {
+        -:  222:            qsizetype toCopy = size;
+        -:  223:            if (n < 0)
+        -:  224:                toCopy += n;
+        -:  225:            if (needsDetach() || old)
+        -:  226:                dp->copyAppend(begin(), begin() + toCopy);
+        -:  227:            else
+        -:  228:                dp->moveAppend(begin(), begin() + toCopy);
+        -:  229:            Q_ASSERT(dp.size == toCopy);
+        -:  230:        }
+        -:  231:
+        -:  232:        swap(dp);
+        -:  233:        if (old)
+        -:  234:            old->swap(dp);
+        -:  235:    }
+        -:  236:
+        -:  237:    /*! \internal
+        -:  238:
+        -:  239:        Attempts to relocate [begin(), end()) to accommodate the free space for
+        -:  240:        \a n elements at the required side. The side is determined from \a pos.
+        -:  241:
+        -:  242:        Returns \c true if the internal data is moved. Returns \c false when
+        -:  243:        there is no point in moving the data or the move is impossible. If \c
+        -:  244:        false is returned, it is the responsibility of the caller to figure out
+        -:  245:        how to accommodate the free space for \a n elements at \a pos.
+        -:  246:
+        -:  247:        This function expects that certain preconditions are met, e.g. the
+        -:  248:        detach is not needed, n > 0 and so on. This is intentional to reduce the
+        -:  249:        number of if-statements when the caller knows that preconditions would
+        -:  250:        be satisfied.
+        -:  251:
+        -:  252:        \sa reallocateAndGrow
+        -:  253:    */
+        -:  254:    bool tryReadjustFreeSpace(QArrayData::GrowthPosition pos, qsizetype n, const T **data = nullptr)
+        -:  255:    {
+        -:  256:        Q_ASSERT(!this->needsDetach());
+        -:  257:        Q_ASSERT(n > 0);
+        -:  258:        Q_ASSERT((pos == QArrayData::GrowsAtEnd && this->freeSpaceAtEnd() < n)
+        -:  259:                 || (pos == QArrayData::GrowsAtBeginning && this->freeSpaceAtBegin() < n));
+        -:  260:
+        -:  261:        const qsizetype capacity = this->constAllocatedCapacity();
+        -:  262:        const qsizetype freeAtBegin = this->freeSpaceAtBegin();
+        -:  263:        const qsizetype freeAtEnd = this->freeSpaceAtEnd();
+        -:  264:
+        -:  265:        qsizetype dataStartOffset = 0;
+        -:  266:        // algorithm:
+        -:  267:        //   a. GrowsAtEnd: relocate if space at begin AND size < (capacity * 2) / 3
+        -:  268:        //      [all goes to free space at end]:
+        -:  269:        //      new free space at begin = 0
+        -:  270:        //
+        -:  271:        //   b. GrowsAtBeginning: relocate if space at end AND size < capacity / 3
+        -:  272:        //      [balance the free space]:
+        -:  273:        //      new free space at begin = n + (total free space - n) / 2
+        -:  274:        if (pos == QArrayData::GrowsAtEnd && freeAtBegin >= n
+        -:  275:            && ((3 * this->size) < (2 * capacity))) {
+        -:  276:            // dataStartOffset = 0; - done in declaration
+        -:  277:        } else if (pos == QArrayData::GrowsAtBeginning && freeAtEnd >= n
+        -:  278:                   && ((3 * this->size) < capacity)) {
+        -:  279:            // total free space == capacity - size
+        -:  280:            dataStartOffset = n + qMax(0, (capacity - this->size - n) / 2);
+        -:  281:        } else {
+        -:  282:            // nothing to do otherwise
+        -:  283:            return false;
+        -:  284:        }
+        -:  285:
+        -:  286:        relocate(dataStartOffset - freeAtBegin, data);
+        -:  287:
+        -:  288:        Q_ASSERT((pos == QArrayData::GrowsAtEnd && this->freeSpaceAtEnd() >= n)
+        -:  289:                 || (pos == QArrayData::GrowsAtBeginning && this->freeSpaceAtBegin() >= n));
+        -:  290:        return true;
+        -:  291:    }
+        -:  292:
+        -:  293:    /*! \internal
+        -:  294:
+        -:  295:        Relocates [begin(), end()) by \a offset and updates \a data if it is not
+        -:  296:        \c nullptr and points into [begin(), end()).
+        -:  297:    */
+        -:  298:    void relocate(qsizetype offset, const T **data = nullptr)
+        -:  299:    {
+        -:  300:        T *res = this->ptr + offset;
+        -:  301:        QtPrivate::q_relocate_overlap_n(this->ptr, this->size, res);
+        -:  302:        // first update data pointer, then this->ptr
+        -:  303:        if (data && QtPrivate::q_points_into_range(*data, *this))
+        -:  304:            *data += offset;
+        -:  305:        this->ptr = res;
+        -:  306:    }
+        -:  307:
+        -:  308:    // forwards from QArrayData
+        -:  309:    qsizetype allocatedCapacity() noexcept { return d ? d->allocatedCapacity() : 0; }
+        -:  310:    qsizetype constAllocatedCapacity() const noexcept { return d ? d->constAllocatedCapacity() : 0; }
+        -:  311:    void ref() noexcept { if (d) d->ref(); }
+      17*:  312:    bool deref() noexcept { return !d || d->deref(); }
+------------------
+_ZN17QArrayDataPointerIDsE5derefEv:
+function _ZN17QArrayDataPointerIDsE5derefEv called 16 returned 100% blocks executed 86%
+      16*:  312:    bool deref() noexcept { return !d || d->deref(); }
+       16:  312-block  0
+branch  0 taken 16 (fallthrough)
+branch  1 taken 0
+       16:  312-block  1
+call    2 returned 16
+branch  3 taken 16 (fallthrough)
+branch  4 taken 0
+       16:  312-block  2
+    %%%%%:  312-block  3
+       16:  312-block  4
+------------------
+_ZN17QArrayDataPointerIcE5derefEv:
+function _ZN17QArrayDataPointerIcE5derefEv called 1 returned 100% blocks executed 86%
+       1*:  312:    bool deref() noexcept { return !d || d->deref(); }
+        1:  312-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:  312-block  1
+call    2 returned 1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:  312-block  2
+        1:  312-block  3
+        1:  312-block  4
+------------------
+        -:  313:    bool isMutable() const noexcept { return d; }
+        -:  314:    bool isShared() const noexcept { return !d || d->isShared(); }
+        -:  315:    bool isSharedWith(const QArrayDataPointer &other) const noexcept { return d && d == other.d; }
+        -:  316:    bool needsDetach() const noexcept { return !d || d->needsDetach(); }
+        -:  317:    qsizetype detachCapacity(qsizetype newSize) const noexcept { return d ? d->detachCapacity(newSize) : newSize; }
+        -:  318:    const typename Data::ArrayOptions flags() const noexcept { return d ? d->flags : Data::ArrayOptionDefault; }
+        -:  319:    void setFlag(typename Data::ArrayOptions f) noexcept { Q_ASSERT(d); d->flags |= f; }
+        -:  320:    void clearFlag(typename Data::ArrayOptions f) noexcept { if (d) d->flags &= ~f; }
+        -:  321:
+        -:  322:    Data *d_ptr() noexcept { return d; }
+        -:  323:    void setBegin(T *begin) noexcept { ptr = begin; }
+        -:  324:
+        -:  325:    qsizetype freeSpaceAtBegin() const noexcept
+        -:  326:    {
+        -:  327:        if (d == nullptr)
+        -:  328:            return 0;
+        -:  329:        return this->ptr - Data::dataStart(d, alignof(typename Data::AlignmentDummy));
+        -:  330:    }
+        -:  331:
+        -:  332:    qsizetype freeSpaceAtEnd() const noexcept
+        -:  333:    {
+        -:  334:        if (d == nullptr)
+        -:  335:            return 0;
+        -:  336:        return d->constAllocatedCapacity() - freeSpaceAtBegin() - this->size;
+        -:  337:    }
+        -:  338:
+        -:  339:    // allocate and grow. Ensure that at the minimum requiredSpace is available at the requested end
+        -:  340:    static QArrayDataPointer allocateGrow(const QArrayDataPointer &from, qsizetype n, QArrayData::GrowthPosition position)
+        -:  341:    {
+        -:  342:        // calculate new capacity. We keep the free capacity at the side that does not have to grow
+        -:  343:        // to avoid quadratic behavior with mixed append/prepend cases
+        -:  344:
+        -:  345:        // use qMax below, because constAllocatedCapacity() can be 0 when using fromRawData()
+        -:  346:        qsizetype minimalCapacity = qMax(from.size, from.constAllocatedCapacity()) + n;
+        -:  347:        // subtract the free space at the side we want to allocate. This ensures that the total size requested is
+        -:  348:        // the existing allocation at the other side + size + n.
+        -:  349:        minimalCapacity -= (position == QArrayData::GrowsAtEnd) ? from.freeSpaceAtEnd() : from.freeSpaceAtBegin();
+        -:  350:        qsizetype capacity = from.detachCapacity(minimalCapacity);
+        -:  351:        const bool grows = capacity > from.constAllocatedCapacity();
+        -:  352:        auto [header, dataPtr] = Data::allocate(capacity, grows ? QArrayData::Grow : QArrayData::KeepSize);
+        -:  353:        const bool valid = header != nullptr && dataPtr != nullptr;
+        -:  354:        if (!valid)
+        -:  355:            return QArrayDataPointer(header, dataPtr);
+        -:  356:
+        -:  357:        // Idea: * when growing backwards, adjust pointer to prepare free space at the beginning
+        -:  358:        //       * when growing forward, adjust by the previous data pointer offset
+        -:  359:        dataPtr += (position == QArrayData::GrowsAtBeginning)
+        -:  360:                ? n + qMax(0, (header->alloc - from.size - n) / 2)
+        -:  361:                : from.freeSpaceAtBegin();
+        -:  362:        header->flags = from.flags();
+        -:  363:        return QArrayDataPointer(header, dataPtr);
+        -:  364:    }
+        -:  365:
+        -:  366:    friend bool operator==(const QArrayDataPointer &lhs, const QArrayDataPointer &rhs) noexcept
+        -:  367:    {
+        -:  368:        return lhs.data() == rhs.data() && lhs.size == rhs.size;
+        -:  369:    }
+        -:  370:
+        -:  371:    friend bool operator!=(const QArrayDataPointer &lhs, const QArrayDataPointer &rhs) noexcept
+        -:  372:    {
+        -:  373:        return lhs.data() != rhs.data() || lhs.size != rhs.size;
+        -:  374:    }
+        -:  375:
+        -:  376:    Data *d;
+        -:  377:    T *ptr;
+        -:  378:    qsizetype size;
+        -:  379:};
+        -:  380:
+        -:  381:template <class T>
+        -:  382:inline void swap(QArrayDataPointer<T> &p1, QArrayDataPointer<T> &p2) noexcept
+        -:  383:{
+        -:  384:    p1.swap(p2);
+        -:  385:}
+        -:  386:
+        -:  387:////////////////////////////////////////////////////////////////////////////////
+        -:  388://  Q_ARRAY_LITERAL
+        -:  389:
+        -:  390:// The idea here is to place a (read-only) copy of header and array data in an
+        -:  391:// mmappable portion of the executable (typically, .rodata section).
+        -:  392:
+        -:  393:// Hide array inside a lambda
+        -:  394:#define Q_ARRAY_LITERAL(Type, ...) \
+        -:  395:    ([]() -> QArrayDataPointer<Type> { \
+        -:  396:        static Type const data[] = { __VA_ARGS__ }; \
+        -:  397:        return QArrayDataPointer<Type>::fromRawData(const_cast<Type *>(data), std::size(data)); \
+        -:  398:    }())
+        -:  399:/**/
+        -:  400:
+        -:  401:QT_END_NAMESPACE
+        -:  402:
+        -:  403:#endif // include guard

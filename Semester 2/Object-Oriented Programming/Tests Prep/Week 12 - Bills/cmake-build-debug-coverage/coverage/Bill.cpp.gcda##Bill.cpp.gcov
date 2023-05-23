@@ -1,0 +1,183 @@
+        -:    0:Source:C:/Users/Th/CLionProjects/W12-Test-Attempt-Bills/Domain/Bill.cpp
+        -:    0:Graph:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\Domain\Bill.cpp.gcno
+        -:    0:Data:C:\Users\Th\CLionProjects\W12-Test-Attempt-Bills\cmake-build-debug-coverage\CMakeFiles\W12_Test_Attempt_Bills.dir\Domain\Bill.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by Th on 20/05/2023.
+        -:    3://
+        -:    4:
+        -:    5:#include <vector>
+        -:    6:#include <sstream>
+        -:    7:#include "Bill.h"
+        -:    8:
+function _ZN4BillC2Ev called 1 returned 100% blocks executed 100%
+        1:    9:Bill::Bill() = default;
+        1:    9-block  0
+call    0 returned 1
+call    1 returned 1
+        -:   10:
+function _ZN4BillC2ENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_db called 0 returned 0% blocks executed 0%
+    #####:   11:Bill::Bill(std::string companyName, std::string code, double sum, bool isPaid) {
+    %%%%%:   11-block  0
+call    0 never executed
+call    1 never executed
+    #####:   12:    this->companyName = companyName;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   13:    this->code = code;
+    %%%%%:   13-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   14:    this->sum = sum;
+    #####:   15:    this->isPaid = isPaid;
+    #####:   16:}
+    %%%%%:   16-block  0
+    $$$$$:   16-block  1
+call    0 never executed
+    $$$$$:   16-block  2
+call    1 never executed
+        -:   17:
+function _ZN4BillD2Ev called 55 returned 100% blocks executed 100%
+       55:   18:Bill::~Bill() = default;
+       55:   18-block  0
+call    0 returned 55
+call    1 returned 55
+        -:   19:
+function _ZN4Bill14getCompanyNameB5cxx11Ev called 33 returned 100% blocks executed 100%
+       33:   20:std::string Bill::getCompanyName() {
+       33:   21:    return this->companyName;
+       33:   21-block  0
+call    0 returned 33
+        -:   22:}
+        -:   23:
+function _ZN4Bill7getCodeB5cxx11Ev called 0 returned 0% blocks executed 0%
+    #####:   24:std::string Bill::getCode() {
+    #####:   25:    return this->code;
+    %%%%%:   25-block  0
+call    0 never executed
+        -:   26:}
+        -:   27:
+function _ZN4Bill6getSumEv called 10 returned 100% blocks executed 100%
+       10:   28:double Bill::getSum() {
+       10:   29:    return this->sum;
+       10:   29-block  0
+        -:   30:}
+        -:   31:
+function _ZN4Bill9getIsPaidEv called 0 returned 0% blocks executed 0%
+    #####:   32:bool Bill::getIsPaid() {
+    #####:   33:    return this->isPaid;
+    %%%%%:   33-block  0
+        -:   34:}
+        -:   35:
+function _ZN4BilleqERKS_ called 0 returned 0% blocks executed 0%
+    #####:   36:bool Bill::operator==(const Bill &bill) {
+    #####:   37:    return this->companyName == bill.companyName && this->code == bill.code && this->sum == bill.sum &&
+    %%%%%:   37-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   37-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   37-block  2
+branch  6 never executed
+branch  7 never executed
+    %%%%%:   37-block  3
+    %%%%%:   37-block  4
+    #####:   38:           this->isPaid == bill.isPaid;
+    %%%%%:   38-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:   38-block  1
+        -:   39:}
+        -:   40:
+function _ZrsRSiR4Bill called 6 returned 100% blocks executed 79%
+        6:   41:std::istream &operator>>(std::istream &is, Bill &bill) {
+        6:   42:    std::string line;
+        6:   42-block  0
+call    0 returned 6
+        6:   43:    getline(is, line);
+call    0 returned 6
+branch  1 taken 6 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   44:
+        6:   45:    std::vector<std::string> tokens;
+        6:   45-block  0
+call    0 returned 6
+        6:   46:    std::stringstream ss(line);
+call    0 returned 6
+call    1 returned 6
+branch  2 taken 6 (fallthrough)
+branch  3 taken 0 (throw)
+        6:   47:    std::string token;
+        6:   47-block  0
+call    0 returned 6
+       26:   48:    while (getline(ss, token, ';')) {
+       26:   48-block  0
+call    0 returned 26
+branch  1 taken 26 (fallthrough)
+branch  2 taken 0 (throw)
+       26:   48-block  1
+call    3 returned 26
+branch  4 taken 26 (fallthrough)
+branch  5 taken 0 (throw)
+       26:   48-block  2
+branch  6 taken 20
+branch  7 taken 6 (fallthrough)
+       20:   49:        tokens.push_back(token);
+       20:   49-block  0
+call    0 returned 20
+branch  1 taken 20 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   50:    }
+        -:   51:
+        6:   52:    if (tokens.size() != 4) {
+        6:   52-block  0
+call    0 returned 6
+branch  1 taken 1 (fallthrough)
+branch  2 taken 5
+        1:   53:        return is;
+        1:   53-block  0
+        -:   54:    }
+        -:   55:
+        5:   56:    bill.companyName = tokens[0];
+        5:   56-block  0
+call    0 returned 5
+call    1 returned 5
+branch  2 taken 5 (fallthrough)
+branch  3 taken 0 (throw)
+        5:   57:    bill.code = tokens[1];
+        5:   57-block  0
+call    0 returned 5
+call    1 returned 5
+branch  2 taken 5 (fallthrough)
+branch  3 taken 0 (throw)
+        5:   58:    bill.sum = stod(tokens[2]);
+        5:   58-block  0
+call    0 returned 5
+call    1 returned 5
+branch  2 taken 5 (fallthrough)
+branch  3 taken 0 (throw)
+        5:   59:    bill.isPaid = tokens[3] == "true";
+        5:   59-block  0
+call    0 returned 5
+call    1 returned 5
+        -:   60:
+        5:   61:    return is;
+        6:   62:}
+        6:   62-block  0
+call    0 returned 6
+call    1 returned 6
+call    2 returned 6
+call    3 returned 6
+    $$$$$:   62-block  1
+call    4 never executed
+    $$$$$:   62-block  2
+call    5 never executed
+    $$$$$:   62-block  3
+call    6 never executed
+    $$$$$:   62-block  4
+call    7 never executed
