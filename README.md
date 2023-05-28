@@ -56,8 +56,8 @@ YEAR 1
                     </a>
                 </li>
                  <li>
-                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%202/Operational%20Systems">
-                       🌟 Operational Systems
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%202/Operating%20Systems">
+                       🌟 Operating Systems
                     </a>
                 </li>
                 <li>
