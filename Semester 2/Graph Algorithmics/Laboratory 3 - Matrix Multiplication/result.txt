@@ -1,0 +1,22 @@
+The cost is 13!
+The path is [0, 4]!
+
+The graph is:
+Vertices: [0, 1, 2, 3, 4]
+Edges:
+(0, 4, 13) 
+(3, 2, 9) 
+(0, 2, 4) 
+(4, 1, 5) 
+(0, 0, 9) 
+(3, 0, 0) 
+(3, 1, 2) 
+(1, 1, 14) 
+(2, 0, 12) 
+(3, 4, 9) 
+
+
+The intermediate matrices are:
+Intermediate matrix: 1[[0, inf, 4, inf, 13], [inf, 0, inf, inf, inf], [12, inf, 0, inf, inf], [0, 2, 9, 0, 9], [inf, 5, inf, inf, 0]]
+Intermediate matrix: 2[[0, 18, 4, inf, 13], [inf, 0, inf, inf, inf], [12, inf, 0, inf, 25], [0, 2, 4, 0, 9], [inf, 5, inf, inf, 0]]
+Intermediate matrix: 4[[0, 18, 4, inf, 13], [inf, 0, inf, inf, inf], [12, 30, 0, inf, 25], [0, 2, 4, 0, 9], [inf, 5, inf, inf, 0]]
