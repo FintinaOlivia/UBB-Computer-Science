@@ -1,0 +1,6 @@
+Ana;aremere@hr.com;reading,swimming,cooking,;HR
+Bogdan;bogdan@tech.com;reading,swimming,cooking,reading,swimming,cooking,;Tech
+Xenia;xenia@hr.com;reading,swimming,cooking,reading,swimming,cooking,reading,swimming,cooking,;HR
+Bob;Bob;Bob,;Tech
+Banana;nana;lana;HR
+Razvan;razvan;razvan;Education

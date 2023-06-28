@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StudentsWidget</class>
+ <widget class="QWidget" name="StudentsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>588</width>
+    <height>517</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>StudentsWidget</string>
+  </property>
+  <widget class="QTableView" name="studentsTable">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>50</y>
+     <width>491</width>
+     <height>291</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>360</y>
+     <width>47</width>
+     <height>14</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Name</string>
+   </property>
+   <property name="buddy">
+    <cstring>nameInput</cstring>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>390</y>
+     <width>47</width>
+     <height>14</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Group</string>
+   </property>
+   <property name="buddy">
+    <cstring>groupInput</cstring>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>420</y>
+     <width>47</width>
+     <height>14</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Grade 1</string>
+   </property>
+   <property name="buddy">
+    <cstring>grade1Input</cstring>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>450</y>
+     <width>47</width>
+     <height>14</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Grade 2</string>
+   </property>
+   <property name="buddy">
+    <cstring>grade2Input</cstring>
+   </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>360</y>
+     <width>121</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="addNewStudentButton">
+      <property name="text">
+       <string>Add Student</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>Delete Student</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>360</y>
+     <width>121</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QLineEdit" name="nameInput"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="groupInput"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="grade1Input"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="grade2Input"/>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>addNewStudentButton</sender>
+   <signal>clicked()</signal>
+   <receiver>StudentsWidget</receiver>
+   <slot>addNewStudent()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>416</x>
+     <y>392</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>460</x>
+     <y>476</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>StudentsWidget</receiver>
+   <slot>deleteStudent()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>451</x>
+     <y>436</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>519</x>
+     <y>412</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>addNewStudent()</slot>
+  <slot>deleteStudent()</slot>
+ </slots>
+</ui>

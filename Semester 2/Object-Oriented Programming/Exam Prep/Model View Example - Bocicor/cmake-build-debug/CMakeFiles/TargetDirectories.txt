@@ -1,0 +1,5 @@
+C:/Users/Th/CLionProjects/MV/cmake-build-debug/CMakeFiles/MV.dir
+C:/Users/Th/CLionProjects/MV/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Th/CLionProjects/MV/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Th/CLionProjects/MV/cmake-build-debug/CMakeFiles/MV_autogen_timestamp_deps.dir
+C:/Users/Th/CLionProjects/MV/cmake-build-debug/CMakeFiles/MV_autogen.dir

@@ -1,0 +1,9 @@
+Jane Smith,915,10,8
+John Doe,915,9,6
+Sarah Faroh,912,9,7
+Nigel Troul,913,10,5
+Mary Penny,911,5,8
+David Star,911,7,10
+Roger Stan,912,10,10
+Razvan,913,5.495,9.495
+Razvan Florea,913,5.495,9.495
