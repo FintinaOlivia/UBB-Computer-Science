@@ -34,9 +34,9 @@ public class View {
     public void run(){
 
         //Populating list with some items
-        this.controller.addItem(new Cube(10));
-        this.controller.addItem(new Sphere(5));
-        this.controller.addItem(new Cylinder(10));
+        this.controller.addItem(new Cube(1));
+        this.controller.addItem(new Sphere(1));
+        this.controller.addItem(new Cylinder(2.5F));
         this.controller.addItem(new Cube(2));
 
         while(true){
@@ -69,7 +69,13 @@ public class View {
                     }
 
                     System.out.println("Please specify the edge of the item: ");
-                    float edge = Float.parseFloat(scanner.nextLine());
+                    float edge = 0;
+                    try {
+                        edge = Float.parseFloat(scanner.nextLine());
+                    } catch (Exception e) {
+                        System.out.println("Invalid edge!");
+                        break;
+                    }
 
                     try {
                         if(type.equals("cube"))
@@ -102,16 +108,24 @@ public class View {
 
                 case "4":
                     System.out.println("Please specify the index of the item to be removed: ");
-                    int index = Integer.parseInt(scanner.nextLine());
+                    int index = 0;
+
+                    try {
+                        index = Integer.parseInt(scanner.nextLine());
+                    } catch (Exception e) {
+                        System.out.println("Invalid index!");
+                        break;
+                    }
 
                     Object itemToRemove = null;
                     try {
                         itemToRemove = this.controller.getAll().get(index - 1);
                         this.controller.removeItem(itemToRemove);
+                        System.out.println("Item removed!");
                     } catch (Exception e) {
-                        System.out.println("Invalid index!");
+                        System.out.println("Not found!");
                     }
-                    System.out.println("Item removed!");
+
                     break;
             }
         }
