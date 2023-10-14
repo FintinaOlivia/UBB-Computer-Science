@@ -78,6 +78,7 @@ YEAR 1
         </ul>
     </li>
     <li> 📂 Semester 3
+        <ul>
                 <li>
                     <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%203/Advanced%20Programming%20Methods%20(MAP)">
                        Advanced Programming Methods (MAP)
