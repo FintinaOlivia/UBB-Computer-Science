@@ -1,0 +1,32 @@
+Parser Combinators -> very useful to use a logical programming language
+
+Prolog  -> trivial to interpret the code
+        -> give the opporunity to wrtei DSL (domain-specific language)
+        -> e.g. privacy settings for social media :
+                - regardless of how nested and complex an expression might be,
+                it just needs to be interpreted, therefore parsing to get the
+                functions
+        -> atomic functions
+
+LUA -> a more popular language
+
+Haskell, rlang, Scala (the most popular functional pl)
+
+Facebook - took a few of C programmers, wrote an interpreter from Php to C, and then 
+            hired php programmers (much cheaper)
+
+Prolog does not care about left- or right-hand side
+"=" : equals, like in mathematics 
+"," : equivalent to ; in cpp
+
+occ([], _, 0).
+occ([H|T], X, No) :-
+    H = X, !,
+    occ(T, X, NewNo),
+    No is NewNo + 1.
+
+occ([H|T], X, No) :-
+    % H \= X, //this line is not necessary because we added a cut after
+                //the other condition, which means it stops the recursion if the condition
+                //is not met
+    occ(T, X, No).
