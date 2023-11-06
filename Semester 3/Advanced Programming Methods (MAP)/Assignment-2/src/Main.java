@@ -1,10 +1,43 @@
+import Controller.IController;
+import Controller.Controller;
+import Exceptions.AppException;
+import Repository.IRepository;
+import Repository.Repository;
+import View.View;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.concurrent.Executors;
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
+    public static void main(String[] args) throws IOException, AppException {
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//        System.out.print("Select logfilePath:");
+//        String line = reader.readLine().trim();
+//        if (line.isEmpty()) {
+//            line = null;
+//        }
+        IRepository repository = new Repository("log.txt");
+        IController controller = new Controller(repository, Executors.newFixedThreadPool(2), true);
+
+        View view = new View(controller);
+        view.run(args);
     }
 }
 
 /*
+Checklist:
+- [x] ADTs
+- [x] States
+- [x] Statements
+- [x] Expressions
+- [x] Types
+- [x] Values
+- [x] Program State
+- [x] Repository
+- [x] Controller
+- [ ] View (50%)
+
 * MVC : model view controller
 * Model:
 *  - states
@@ -41,8 +74,9 @@ public class Main {
 *
 * On the stack: first s2, then s1
 *
-* Harcode the type of expressions
-* class ArithmeticExpression, with methods:
+* Hardcode the type of expressions
+* class ArithmeticExpression, with methods: (Binary Expressions?
+* Along with logical expressions)
 * - evaluate
 * - add
 * - subtract, etc.

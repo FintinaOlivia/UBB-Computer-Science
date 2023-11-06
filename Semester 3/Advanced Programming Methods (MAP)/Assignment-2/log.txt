@@ -1,0 +1,1096 @@
+ID: 0
+Execution stack:
+Boolean a; a = false; Integer v; if(a)then {v = 2} else {v = 3}
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+Boolean a
+a = false; Integer v; if(a)then {v = 2} else {v = 3}
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+a = false; Integer v; if(a)then {v = 2} else {v = 3}
+Sym Table:
+a(Boolean):-> false
+Output:
+File Table:
+ID: 0
+Execution stack:
+a = false
+Integer v; if(a)then {v = 2} else {v = 3}
+Sym Table:
+a(Boolean):-> false
+Output:
+File Table:
+ID: 0
+Execution stack:
+Integer v; if(a)then {v = 2} else {v = 3}
+Sym Table:
+a(Boolean):-> false
+Output:
+File Table:
+ID: 0
+Execution stack:
+Integer v
+if(a)then {v = 2} else {v = 3}
+Sym Table:
+a(Boolean):-> false
+Output:
+File Table:
+ID: 0
+Execution stack:
+if(a)then {v = 2} else {v = 3}
+Sym Table:
+a(Boolean):-> false
+v(Integer):-> 0
+Output:
+File Table:
+ID: 0
+Execution stack:
+v = 3
+Sym Table:
+a(Boolean):-> false
+v(Integer):-> 0
+Output:
+File Table:
+ID: 0
+Execution stack:
+Sym Table:
+a(Boolean):-> false
+v(Integer):-> 3
+Output:
+File Table:
+ID: 0
+Execution stack:
+Integer a; a = (2 + (3 * 5)); Integer b; b = ((a - (4 / 2)) + 7); print(b)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+Integer a
+a = (2 + (3 * 5)); Integer b; b = ((a - (4 / 2)) + 7); print(b)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+a = (2 + (3 * 5)); Integer b; b = ((a - (4 / 2)) + 7); print(b)
+Sym Table:
+a(Integer):-> 0
+Output:
+File Table:
+ID: 0
+Execution stack:
+a = (2 + (3 * 5))
+Integer b; b = ((a - (4 / 2)) + 7); print(b)
+Sym Table:
+a(Integer):-> 0
+Output:
+File Table:
+ID: 0
+Execution stack:
+Integer b; b = ((a - (4 / 2)) + 7); print(b)
+Sym Table:
+a(Integer):-> 17
+Output:
+File Table:
+ID: 0
+Execution stack:
+Integer b
+b = ((a - (4 / 2)) + 7); print(b)
+Sym Table:
+a(Integer):-> 17
+Output:
+File Table:
+ID: 0
+Execution stack:
+b = ((a - (4 / 2)) + 7); print(b)
+Sym Table:
+a(Integer):-> 17
+b(Integer):-> 0
+Output:
+File Table:
+ID: 0
+Execution stack:
+b = ((a - (4 / 2)) + 7)
+print(b)
+Sym Table:
+a(Integer):-> 17
+b(Integer):-> 0
+Output:
+File Table:
+ID: 0
+Execution stack:
+print(b)
+Sym Table:
+a(Integer):-> 17
+b(Integer):-> 22
+Output:
+File Table:
+ID: 0
+Execution stack:
+Sym Table:
+a(Integer):-> 17
+b(Integer):-> 22
+Output: 22
+File Table:
+ID: 0
+Execution stack:
+String varf; varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf); print(varc); readFile(varf); print(varc); closeReadFile(varf)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+String varf
+varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf); print(varc); readFile(varf); print(varc); closeReadFile(varf)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf); print(varc); readFile(varf); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value=''}
+Output:
+File Table:
+ID: 0
+Execution stack:
+varf = StringValue{value='test.txt'}
+openReadFile(varf); Integer varc; readFile(varf); print(varc); readFile(varf); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value=''}
+Output:
+File Table:
+ID: 0
+Execution stack:
+openReadFile(varf); Integer varc; readFile(varf); print(varc); readFile(varf); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+ID: 0
+Execution stack:
+openReadFile(varf)
+Integer varc; readFile(varf); print(varc); readFile(varf); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+ID: 1
+Execution stack:
+NOP
+Sym Table:
+Output:
+File Table:
+ID: 1
+Execution stack:
+NOP
+Sym Table:
+Output:
+File Table:
+ID: 1
+Execution stack:
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+String varf; varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+String varf
+varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value=''}
+Output:
+File Table:
+ID: 0
+Execution stack:
+varf = StringValue{value='test.txt'}
+openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value=''}
+Output:
+File Table:
+ID: 0
+Execution stack:
+openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+ID: 0
+Execution stack:
+openReadFile(varf)
+Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+ID: 1
+Execution stack:
+NOP
+Sym Table:
+Output:
+File Table:
+ID: 1
+Execution stack:
+NOP
+Sym Table:
+Output:
+File Table:
+ID: 1
+Execution stack:
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+String varf; varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+String varf
+varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value=''}
+Output:
+File Table:
+ID: 0
+Execution stack:
+varf = StringValue{value='test.txt'}
+openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value=''}
+Output:
+File Table:
+ID: 0
+Execution stack:
+openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+ID: 0
+Execution stack:
+openReadFile(varf)
+Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+ID: 0
+Execution stack:
+Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+Integer varc
+readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc)
+print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc)
+readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 0
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc)
+print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 0
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 0
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc)
+closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 0
+File Table:
+test.txt
+ID: 0
+Execution stack:
+closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 00
+File Table:
+test.txt
+ID: 0
+Execution stack:
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 00
+File Table:
+ID: 0
+Execution stack:
+String varf; varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+String varf
+varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value=''}
+Output:
+File Table:
+ID: 0
+Execution stack:
+varf = StringValue{value='test.txt'}
+openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value=''}
+Output:
+File Table:
+ID: 0
+Execution stack:
+openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+ID: 0
+Execution stack:
+openReadFile(varf)
+Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+ID: 0
+Execution stack:
+Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+Integer varc
+readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc)
+print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc)
+readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 0
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc)
+print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 0
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 0
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc)
+closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 0
+File Table:
+test.txt
+ID: 0
+Execution stack:
+closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 00
+File Table:
+test.txt
+ID: 0
+Execution stack:
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 00
+File Table:
+ID: 0
+Execution stack:
+Integer a; a = (2 + (3 * 5)); Integer b; b = ((a - (4 / 2)) + 7); print(b)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+Integer a
+a = (2 + (3 * 5)); Integer b; b = ((a - (4 / 2)) + 7); print(b)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+a = (2 + (3 * 5)); Integer b; b = ((a - (4 / 2)) + 7); print(b)
+Sym Table:
+a(Integer):-> 0
+Output:
+File Table:
+ID: 0
+Execution stack:
+a = (2 + (3 * 5))
+Integer b; b = ((a - (4 / 2)) + 7); print(b)
+Sym Table:
+a(Integer):-> 0
+Output:
+File Table:
+ID: 0
+Execution stack:
+Integer b; b = ((a - (4 / 2)) + 7); print(b)
+Sym Table:
+a(Integer):-> 17
+Output:
+File Table:
+ID: 0
+Execution stack:
+Integer b
+b = ((a - (4 / 2)) + 7); print(b)
+Sym Table:
+a(Integer):-> 17
+Output:
+File Table:
+ID: 0
+Execution stack:
+b = ((a - (4 / 2)) + 7); print(b)
+Sym Table:
+a(Integer):-> 17
+b(Integer):-> 0
+Output:
+File Table:
+ID: 0
+Execution stack:
+b = ((a - (4 / 2)) + 7)
+print(b)
+Sym Table:
+a(Integer):-> 17
+b(Integer):-> 0
+Output:
+File Table:
+ID: 0
+Execution stack:
+print(b)
+Sym Table:
+a(Integer):-> 17
+b(Integer):-> 22
+Output:
+File Table:
+ID: 0
+Execution stack:
+Sym Table:
+a(Integer):-> 17
+b(Integer):-> 22
+Output: 22
+File Table:
+ID: 0
+Execution stack:
+String varf; varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+String varf
+varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value=''}
+Output:
+File Table:
+ID: 0
+Execution stack:
+varf = StringValue{value='test.txt'}
+openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value=''}
+Output:
+File Table:
+ID: 0
+Execution stack:
+openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+ID: 0
+Execution stack:
+openReadFile(varf)
+Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+ID: 0
+Execution stack:
+Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+Integer varc
+readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc)
+print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc)
+readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 0
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc)
+print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 0
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 0
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc)
+closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 0
+File Table:
+test.txt
+ID: 0
+Execution stack:
+closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 00
+File Table:
+test.txt
+ID: 0
+Execution stack:
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output: 00
+File Table:
+ID: 0
+Execution stack:
+String varf; varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+String varf
+varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value=''}
+Output:
+File Table:
+ID: 0
+Execution stack:
+varf = StringValue{value='test.txt'}
+openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value=''}
+Output:
+File Table:
+ID: 0
+Execution stack:
+openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+ID: 0
+Execution stack:
+openReadFile(varf)
+Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+ID: 0
+Execution stack:
+Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+Integer varc
+readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc)
+print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 15
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc)
+readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 15
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 15
+Output: 15
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc)
+print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 15
+Output: 15
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 50
+Output: 15
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc)
+closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 50
+Output: 15
+File Table:
+test.txt
+ID: 0
+Execution stack:
+closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 50
+Output: 1550
+File Table:
+test.txt
+ID: 0
+Execution stack:
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 50
+Output: 1550
+File Table:
+ID: 0
+Execution stack:
+String varf; varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+String varf
+varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+Output:
+File Table:
+ID: 0
+Execution stack:
+varf = StringValue{value='test.txt'}; openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value=''}
+Output:
+File Table:
+ID: 0
+Execution stack:
+varf = StringValue{value='test.txt'}
+openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value=''}
+Output:
+File Table:
+ID: 0
+Execution stack:
+openReadFile(varf); Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+ID: 0
+Execution stack:
+openReadFile(varf)
+Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+ID: 0
+Execution stack:
+Integer varc; readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+Integer varc
+readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc); print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc)
+print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 0
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc); readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 50
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc)
+readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 50
+Output:
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc); print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 50
+Output: 50
+File Table:
+test.txt
+ID: 0
+Execution stack:
+readFile(varf,varc)
+print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 50
+Output: 50
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc); closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 15
+Output: 50
+File Table:
+test.txt
+ID: 0
+Execution stack:
+print(varc)
+closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 15
+Output: 50
+File Table:
+test.txt
+ID: 0
+Execution stack:
+closeReadFile(varf)
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 15
+Output: 5015
+File Table:
+test.txt
+ID: 0
+Execution stack:
+Sym Table:
+varf(String):-> StringValue{value='test.txt'}
+varc(Integer):-> 15
+Output: 5015
+File Table:
