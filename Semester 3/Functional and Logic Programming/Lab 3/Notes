@@ -1,0 +1,19 @@
+For the test:
+
+2p modele matematice
+	
+3p cele 4 cazuri de test din barem (0.75p fiecare)  // edge-cases that are specified
+	
+5p implementare solutie cu explicatii
+
+---------------------------------------------------------------------------------------
+
+'AS' for pattern matching, keeping the pointer to the original list as well
+
+Padding a list with 0s -> to make two lists of equal length
+! Pushing lists on the stack to reverse them instead of defining a new predicate 
+
+---------------------------------------------------------------------------------------
+
+IO - assembly -- the process interupts, and interrupts are asynchronous by definition
+That's why sometimes concurrent is better than parallel
