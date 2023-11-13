@@ -81,7 +81,17 @@ YEAR 1
         <ul>
                 <li>
                     <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%203/Advanced%20Programming%20Methods%20(MAP)">
-                       Advanced Programming Methods (MAP)
+                       💡 Advanced Programming Methods (MAP)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%203/Databases">
+                       🎇 Databases
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%203/Functional%20and%20Logic%20Programming">
+                       🔥 Functional and Logic Programming in Lisp and Prolog
                     </a>
                 </li>
         </ul>
