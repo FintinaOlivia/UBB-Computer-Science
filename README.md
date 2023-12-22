@@ -7,7 +7,7 @@
     
     PSA:
     * preferred IDE: VSC / CLion
-    * main OS: (K)Ubuntu
+    * dual-boot Manjaro/W10
     
 YEAR 1
 
