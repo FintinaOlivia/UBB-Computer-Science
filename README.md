@@ -8,9 +8,7 @@
     PSA:
     * preferred IDE: VSC / CLion
     * main OS: (K)Ubuntu
-    * lots of the materials are not my intellectual property, and credits should be given where 
-    credits are due
-
+    
 YEAR 1
 
 <ul>
