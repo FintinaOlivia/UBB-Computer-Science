@@ -1,0 +1,107 @@
+SAVE THE CONFIGURATION:
+(router>) copy running-config startup-config
+
+------------------------------
+DHCP on a router
+
+ip dhcp pool <name_of_pool>
+
+Ex: ip dhcp pool lan
+
+#define the network range
+network 192.168.0.0 255.255.255.0
+ 
+#define the default gateway (if any) that should be passed to the clients
+default-router 192.168.0.1 
+
+#define the DNS server (if any) that should be passed to the clients
+dns-server 192.168.0.3 
+
+#exit dhcp pool configuration
+exit 
+
+# If there any IPs in that range that you do not want to be served to PCs - add them to the excluded range:
+ip dhcp excluded-address 192.168.0.1         #(for a single IP)
+
+#or
+
+ip dhcp excluded–address 192.168.0.1 192.168.0.10    #(for a range of IPs)
+
+------------------------------------------------------------
+
+NAT Configuration on a router
+
+enable
+conf t
+interface FastEthernet 0/0
+
+#specify that this is an inside interface. The interface needs to have an IP Address
+ip nat inside
+
+
+exit
+
+
+#define Serial 0/0/0 as WAN (outside) interface
+interface Serial 0/0/0
+ip nat outside
+
+exit
+
+#Define an Access list with the addresses from the inside that can be nat-ted. 
+#The 0.0.0.31 specify the masks of bits from the IP Address that can vary. 
+#In our example bellow all addresses between 192.168.0.1 – 192.168.0.31 would pass !
+# these are simple one liner lists
+access-list 1 permit 192.168.0.1 0.0.0.31
+
+
+# Define the NAT policy. The NAT policy applies NAT by selecting a source and
+# a NAT pool or single IP (which replace the private range)
+#Overload allows to use a single outside IP from the defined pool for multiple 
+#clients – by altering the port. One port is allocated on that IP for each outgoing client. Overload allows this behavior.
+
+ip nat inside source list 1 pool ISP overload
+
+
+
+-----------------------------------------------------------
+
+
+RIP – configuration
+In order to configure RIPv2 on a router we need to:
+
+#go in admin mode, configuration
+enable
+config t
+
+#enable RIP protocol on the router
+route rip
+
+#enable RIPv2
+version 2
+
+#specifiy the networks that we advertise to remote routers one by one
+network 192.168.0.0
+network 10.0.1.0
+network 10.0.2.0
+
+---------------------------------------------------------
+
+NAT – configuration
+#Access lists are a mechanism that helps selecting IP traffic according to
+#some rules (IP addresses – source or destination and protocol) either for 
+#implementing a basic packet filtering (firewall) or to be selected for some action.  
+#You will need to use them to select which communicating parties are candidate to NAT 
+#from each local network.  Extended access-lists contain multiple rules read in order 
+#and having the first matching rule apply the fate of the packet.
+
+#to select traffic that won’t be affected where the access list is applied put use deny.
+# To allow traffic to be selected use permit. Both versions use a source and destion specifiers. 
+#Select to not apply to = deny traffic from 192.168.0.0-192.168.0.127  to 192.168.0.0-192.168.0.255. 
+#The list bellow selects traffic between 192.168.0.0/25 to all other IPs except the range 192.168.0.0/24.
+
+conf t
+ip access-list extended nat
+10 deny ip 192.168.0.0 0.0.0.127 192.168.0.0 0.0.0.255
+
+

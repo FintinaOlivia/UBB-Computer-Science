@@ -1,0 +1,19 @@
+Binomial distribution -> 
+Binomial model - class of problems in statistics, where the solution resembles the binomials
+		- used when there is an expected succes/failure
+		- what is the probability of K successes in N repetitions (N tries)
+		
+!! Practical exam - full solution does not grant full marks, unless there are also comments to explain 
+what's going on !!
+
+P(X = k) = (N choose K) * (p ^ K) * ((1-p)  ^ (n-k))
+
+To type the probability density
+Discrete probability laws = GRAPH OF POINTS
+Continuous probability laws = not necessarily points
+
+cdf - always a continuous function
+	- cdf is depedent on the values of X
+	- we create the impression of continuity, by lowering the step to a very small one
+
+The probability law 
