@@ -7,10 +7,8 @@
     
     PSA:
     * preferred IDE: VSC / CLion
-    * main OS: (K)Ubuntu
-    * lots of the materials are not my intellectual property, and credits should be given where 
-    credits are due
-
+    * dual-boot Manjaro/W10
+    
 YEAR 1
 
 <ul>
