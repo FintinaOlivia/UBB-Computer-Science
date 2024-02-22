@@ -1,0 +1,391 @@
+ID: 0
+Execution stack:
+Ref(String) x; String y; y = "Hello"; new(x, y); print(ReadHeap(x))
+Sym Table:
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+Ref(String) x
+String y; y = "Hello"; new(x, y); print(ReadHeap(x))
+Sym Table:
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+String y; y = "Hello"; new(x, y); print(ReadHeap(x))
+Sym Table:
+x(Ref(String)):-> Reference(0, String)
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+String y
+y = "Hello"; new(x, y); print(ReadHeap(x))
+Sym Table:
+x(Ref(String)):-> Reference(0, String)
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+y = "Hello"; new(x, y); print(ReadHeap(x))
+Sym Table:
+x(Ref(String)):-> Reference(0, String)
+y(String):-> ""
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+y = "Hello"
+new(x, y); print(ReadHeap(x))
+Sym Table:
+x(Ref(String)):-> Reference(0, String)
+y(String):-> ""
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+new(x, y); print(ReadHeap(x))
+Sym Table:
+x(Ref(String)):-> Reference(0, String)
+y(String):-> "Hello"
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+new(x, y)
+print(ReadHeap(x))
+Sym Table:
+x(Ref(String)):-> Reference(0, String)
+y(String):-> "Hello"
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+print(ReadHeap(x))
+Sym Table:
+x(Ref(String)):-> Reference(1, String)
+y(String):-> "Hello"
+Output:
+File Table:
+Heap:
+1(String):-> "Hello"
+ID: 0
+Execution stack:
+Sym Table:
+x(Ref(String)):-> Reference(1, String)
+y(String):-> "Hello"
+Output: "Hello"
+File Table:
+Heap:
+1(String):-> "Hello"
+ID: 0
+Execution stack:
+Integer v; Ref(Integer) a; v = 10; new(a, 22); fork(writeHeap(a, 30); v = 32; print(v); print(ReadHeap(a))); print(v); print(ReadHeap(a))
+Sym Table:
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+Integer v
+Ref(Integer) a; v = 10; new(a, 22); fork(writeHeap(a, 30); v = 32; print(v); print(ReadHeap(a))); print(v); print(ReadHeap(a))
+Sym Table:
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+Ref(Integer) a; v = 10; new(a, 22); fork(writeHeap(a, 30); v = 32; print(v); print(ReadHeap(a))); print(v); print(ReadHeap(a))
+Sym Table:
+v(Integer):-> 0
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+Ref(Integer) a
+v = 10; new(a, 22); fork(writeHeap(a, 30); v = 32; print(v); print(ReadHeap(a))); print(v); print(ReadHeap(a))
+Sym Table:
+v(Integer):-> 0
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+v = 10; new(a, 22); fork(writeHeap(a, 30); v = 32; print(v); print(ReadHeap(a))); print(v); print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(0, Integer)
+v(Integer):-> 0
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+v = 10
+new(a, 22); fork(writeHeap(a, 30); v = 32; print(v); print(ReadHeap(a))); print(v); print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(0, Integer)
+v(Integer):-> 0
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+new(a, 22); fork(writeHeap(a, 30); v = 32; print(v); print(ReadHeap(a))); print(v); print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(0, Integer)
+v(Integer):-> 10
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+new(a, 22)
+fork(writeHeap(a, 30); v = 32; print(v); print(ReadHeap(a))); print(v); print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(0, Integer)
+v(Integer):-> 10
+Output:
+File Table:
+Heap:
+ID: 0
+Execution stack:
+fork(writeHeap(a, 30); v = 32; print(v); print(ReadHeap(a))); print(v); print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(1, Integer)
+v(Integer):-> 10
+Output:
+File Table:
+Heap:
+1(Integer):-> 22
+ID: 0
+Execution stack:
+fork(writeHeap(a, 30); v = 32; print(v); print(ReadHeap(a)))
+print(v); print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(1, Integer)
+v(Integer):-> 10
+Output:
+File Table:
+Heap:
+1(Integer):-> 22
+ID: 0
+Execution stack:
+print(v); print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(1, Integer)
+v(Integer):-> 10
+Output:
+File Table:
+Heap:
+1(Integer):-> 22
+ID: 1
+Execution stack:
+writeHeap(a, 30); v = 32; print(v); print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(1, Integer)
+v(Integer):-> 10
+Output:
+File Table:
+Heap:
+1(Integer):-> 22
+ID: 0
+Execution stack:
+print(v)
+print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(1, Integer)
+v(Integer):-> 10
+Output:
+File Table:
+Heap:
+1(Integer):-> 22
+ID: 1
+Execution stack:
+writeHeap(a, 30)
+v = 32; print(v); print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(1, Integer)
+v(Integer):-> 10
+Output:
+File Table:
+Heap:
+1(Integer):-> 22
+ID: 0
+Execution stack:
+print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(1, Integer)
+v(Integer):-> 10
+Output: 10
+File Table:
+Heap:
+1(Integer):-> 30
+ID: 1
+Execution stack:
+v = 32; print(v); print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(1, Integer)
+v(Integer):-> 10
+Output: 10
+File Table:
+Heap:
+1(Integer):-> 30
+ID: 0
+Execution stack:
+Sym Table:
+a(Ref(Integer)):-> Reference(1, Integer)
+v(Integer):-> 10
+Output: 1030
+File Table:
+Heap:
+1(Integer):-> 30
+ID: 1
+Execution stack:
+v = 32
+print(v); print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(1, Integer)
+v(Integer):-> 10
+Output: 1030
+File Table:
+Heap:
+1(Integer):-> 30
+ID: 1
+Execution stack:
+print(v); print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(1, Integer)
+v(Integer):-> 32
+Output: 1030
+File Table:
+Heap:
+1(Integer):-> 30
+ID: 1
+Execution stack:
+print(v)
+print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(1, Integer)
+v(Integer):-> 32
+Output: 1030
+File Table:
+Heap:
+1(Integer):-> 30
+ID: 1
+Execution stack:
+print(ReadHeap(a))
+Sym Table:
+a(Ref(Integer)):-> Reference(1, Integer)
+v(Integer):-> 32
+Output: 103032
+File Table:
+Heap:
+1(Integer):-> 30
+ID: 1
+Execution stack:
+Sym Table:
+a(Ref(Integer)):-> Reference(1, Integer)
+v(Integer):-> 32
+Output: 10303230
+File Table:
+Heap:
+1(Integer):-> 30
+ID: 2
+Execution stack:
+Ref(String) x; String y; y = "Hello"; new(x, y); print(ReadHeap(x))
+Sym Table:
+Output:
+File Table:
+Heap:
+ID: 2
+Execution stack:
+Ref(String) x
+String y; y = "Hello"; new(x, y); print(ReadHeap(x))
+Sym Table:
+Output:
+File Table:
+Heap:
+ID: 2
+Execution stack:
+String y; y = "Hello"; new(x, y); print(ReadHeap(x))
+Sym Table:
+x(Ref(String)):-> Reference(0, String)
+Output:
+File Table:
+Heap:
+ID: 2
+Execution stack:
+String y
+y = "Hello"; new(x, y); print(ReadHeap(x))
+Sym Table:
+x(Ref(String)):-> Reference(0, String)
+Output:
+File Table:
+Heap:
+ID: 2
+Execution stack:
+y = "Hello"; new(x, y); print(ReadHeap(x))
+Sym Table:
+x(Ref(String)):-> Reference(0, String)
+y(String):-> ""
+Output:
+File Table:
+Heap:
+ID: 2
+Execution stack:
+y = "Hello"
+new(x, y); print(ReadHeap(x))
+Sym Table:
+x(Ref(String)):-> Reference(0, String)
+y(String):-> ""
+Output:
+File Table:
+Heap:
+ID: 2
+Execution stack:
+new(x, y); print(ReadHeap(x))
+Sym Table:
+x(Ref(String)):-> Reference(0, String)
+y(String):-> "Hello"
+Output:
+File Table:
+Heap:
+ID: 2
+Execution stack:
+new(x, y)
+print(ReadHeap(x))
+Sym Table:
+x(Ref(String)):-> Reference(0, String)
+y(String):-> "Hello"
+Output:
+File Table:
+Heap:
+ID: 2
+Execution stack:
+print(ReadHeap(x))
+Sym Table:
+x(Ref(String)):-> Reference(1, String)
+y(String):-> "Hello"
+Output:
+File Table:
+Heap:
+1(String):-> "Hello"
+ID: 2
+Execution stack:
+Sym Table:
+x(Ref(String)):-> Reference(1, String)
+y(String):-> "Hello"
+Output: "Hello"
+File Table:
+Heap:
+1(String):-> "Hello"
