@@ -1,0 +1,79 @@
+
+body{
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+header{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 7px;
+    color:#4a4a4a;
+    font-size: 13.5px;
+}
+
+#udemy{
+    height: 35px;
+    width: auto;
+}
+
+#search-bar{
+    width: 32%;
+    height: 28px;
+    border-radius: 30px;
+    border: 1px solid black;
+    
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#search-icon{
+    height: 20px;
+    width: auto;
+    margin: 15px;
+}
+
+#shopping-cart{
+    height: 20px;
+    width: auto;
+}
+
+.ux{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    white-space: nowrap;
+    font-weight:bold;
+}
+
+.ux > *{
+    border: 1px solid black;
+    padding: 12px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 5px;
+}
+
+#sign-up{
+    background-color: #2D2F31;
+    color: white;
+}
+
+#language{
+    height: 17px;
+    width: auto;
+}
+
+#grey-section {
+  background-color: #2D2F31;
+  padding: 85px;
+  display:flex;
+  color: white;
+}

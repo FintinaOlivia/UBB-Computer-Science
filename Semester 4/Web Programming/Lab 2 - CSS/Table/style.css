@@ -1,0 +1,39 @@
+body{
+    font-family: sans-serif;
+    background-color: #000000;
+}
+
+div{
+    display: flex;
+    align-content: center;
+}
+
+
+/* Table */
+.character-table{
+    width: 100%;
+    border: 1px solid #ffffff;
+    margin: 10%;
+    text-align: center;
+}
+
+.character-table td{
+    vertical-align: middle; 
+    padding-top: 5%;
+    padding-bottom: 5%; 
+    border: 1px solid #ffffff;
+}
+
+/* Images */
+
+.character-table img{
+    height: 400px;
+    width: auto;
+    opacity: 0.6;
+    transition: transform 0.3s ease-in-out;
+}
+
+.character-table img:hover{
+    transform: scale(1.5);
+    opacity: 1;
+}

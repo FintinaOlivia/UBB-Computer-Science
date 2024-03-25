@@ -1,0 +1,278 @@
+
+body{
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1{
+    padding-top:10px;
+    font-size: 32px;
+}
+
+h2{
+    padding-top:10px;
+    font-size: 25px;
+    color:#242526;
+}
+
+h3{
+    font-family: 'Times', Courier, monospace;
+    font-size: 22px;
+    color:#242526;
+}
+
+
+/* -------------------------------------------------------- */
+header{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 7px;
+    color:#4a4a4a;
+    font-size: 13.5px;
+}
+
+#udemy{
+    height: 35px;
+    width: auto;
+}
+
+#search-bar{
+    width: 32%;
+    height: 28px;
+    border-radius: 30px;
+    border: 1px solid black;
+    
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#search-icon{
+    height: 20px;
+    width: auto;
+    margin: 15px;
+}
+
+#shopping-cart{
+    height: 20px;
+    width: auto;
+}
+
+.ux{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    white-space: nowrap;
+    font-weight:bold;
+}
+
+.ux > *{
+    border: 1px solid black;
+    padding: 12px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 5px;
+}
+
+#sign-up{
+    background-color: #2D2F31;
+    color: white;
+}
+
+#language{
+    height: 17px;
+    width: auto;
+}
+
+/* ------------------------ BODY ------------------------------- */
+
+#grey-section {
+  background-color: #2D2F31;
+  height: 340px;
+  padding-left: 70px;
+  padding-right: 90px;
+  padding-top: 15px;
+  margin-bottom: 10px;
+  display:flex;
+  justify-content: space-between;
+  color: white; 
+  z-index: 1;
+}
+
+#preview{
+    width: 348px;
+    height: auto;
+    margin-right: 5px;
+    padding: 1px;
+}
+
+#left-section{
+    padding-top:5px;
+    padding-left:15px;
+}
+
+#rating{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size:13px;
+}
+
+#rating > *{
+    margin: 5px;
+}
+
+#stars{
+    height: 20px;
+    width: auto;
+}
+
+.purple{
+    color: #ABAEDA;
+    font-size: 15px;
+}
+
+#description{
+    font-size: 19px;
+}
+
+#score{
+    color:#DD9939;
+    font-weight: bold;
+}
+
+#author{
+    font-size: small;
+}
+
+.details{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: small;
+}
+
+.details > *{
+    margin: 5px;
+}
+
+/* ---------------------- */
+#right-section{
+    background-color: white;
+    color: black;
+
+    width: 350px;
+    height: 700px;
+    margin-top: 20px;
+    margin-left:20px;
+
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    z-index: 2;
+}
+
+#type{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#type > *{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 62px;
+    padding-right: 62px;
+    font-weight: bolder;
+    border-bottom: 1px solid #bcbcbc;
+    overflow:hidden;
+}
+
+#personal{
+    border-bottom: 2px solid black ;
+}
+
+#team{
+    color:#898888;
+}
+
+#bottom-right{  
+    display: flex;
+    flex-direction: column;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+#p1{
+    font-size: 14px;
+    color: #242526;
+}
+
+#p3{
+    font-size: 12px;
+    color: #7a7a7a;
+
+    padding-left:35px;
+}
+
+#p4{
+    display: flex;
+    flex-direction: row;
+    color:#9b9b9b;
+}
+
+
+button{
+    background-color: #983DE7;
+    color: white;
+    font-size:15px;
+    font-weight:bolder;
+
+    margin-left:5px;
+    padding: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 10px;
+    border: none;
+
+}
+
+
+/* --------------------------------------------------- */
+
+#white-section{
+    background-color: white;
+    width: 535px;
+    margin-top:35px;
+    margin-left: 87px;
+    padding-left: 27px;
+
+    border: 1px solid #cecece;
+
+    display:flex;
+    justify-content: flex-start;
+    z-index: 0;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: small;
+}
+
+.fourth-element{
+    padding-left: 90px;
+}   
+
+#checkmark{
+    height: 15px;
+    width: auto;
+    margin-right: 15px;
+}

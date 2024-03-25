@@ -1,0 +1,10 @@
+D:\College\DBMS\Lab_1_WF\bin\Debug\Lab_1_WF.exe.config
+D:\College\DBMS\Lab_1_WF\bin\Debug\Lab_1_WF.exe
+D:\College\DBMS\Lab_1_WF\bin\Debug\Lab_1_WF.pdb
+D:\College\DBMS\Lab_1_WF\obj\Debug\Lab_1_WF.csproj.AssemblyReference.cache
+D:\College\DBMS\Lab_1_WF\obj\Debug\Lab_1_WF.Form1.resources
+D:\College\DBMS\Lab_1_WF\obj\Debug\Lab_1_WF.Properties.Resources.resources
+D:\College\DBMS\Lab_1_WF\obj\Debug\Lab_1_WF.csproj.GenerateResource.cache
+D:\College\DBMS\Lab_1_WF\obj\Debug\Lab_1_WF.csproj.CoreCompileInputs.cache
+D:\College\DBMS\Lab_1_WF\obj\Debug\Lab_1_WF.exe
+D:\College\DBMS\Lab_1_WF\obj\Debug\Lab_1_WF.pdb
