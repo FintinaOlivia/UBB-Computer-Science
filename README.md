@@ -104,4 +104,33 @@ YEAR 1
                 </li>
         </ul>
     </li>
+     <li> 📂 Semester 4
+        <ul>
+                <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%204/Artificial%20Intelligence">
+                        Artificial Intelligence
+                    </a>
+                </li>
+                 <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%204/DBMS">
+                       DBMS
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%204/Software%20Engineering">
+                       Software Engineering
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/913-Fintina-Olivia/UBB-Computer-Science/tree/main/Semester%204/Web%20Programming">
+                       Web Programming
+                    </a>
+                </li>
+                <li>
+                    <a https://github.com/FintinaOlivia/React-Master-Detail>
+                       Systems for Design and Implementation
+                    </a>
+                </li>
+        </ul>
+    </li>
 </ul>
