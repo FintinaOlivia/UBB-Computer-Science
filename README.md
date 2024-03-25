@@ -127,7 +127,7 @@ YEAR 1
                     </a>
                 </li>
                 <li>
-                    <a https://github.com/FintinaOlivia/React-Master-Detail>
+                    <a  href="https://github.com/FintinaOlivia/React-Master-Detail">
                        Systems for Design and Implementation
                     </a>
                 </li>
