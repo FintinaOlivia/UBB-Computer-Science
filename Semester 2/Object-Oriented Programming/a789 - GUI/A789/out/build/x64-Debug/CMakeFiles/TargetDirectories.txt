@@ -1,0 +1,5 @@
+C:/Users/Th/CLionProjects/A789/out/build/x64-Debug/CMakeFiles/A789.dir
+C:/Users/Th/CLionProjects/A789/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/Th/CLionProjects/A789/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Th/CLionProjects/A789/out/build/x64-Debug/CMakeFiles/A789_autogen_timestamp_deps.dir
+C:/Users/Th/CLionProjects/A789/out/build/x64-Debug/CMakeFiles/A789_autogen.dir

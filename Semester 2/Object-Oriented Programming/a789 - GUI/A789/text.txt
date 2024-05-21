@@ -1,0 +1,13 @@
+M,Blue,100,15,https://www.morganclare.co.uk/images/luxe-blue-coat-p36372-114149_image.jpg
+XS,Pink,200,18,https://cdn.shopify.com/s/files/1/1848/7325/products/01-OW-TB-01002_4_960x.jpg?v=1576489803
+S,LightPink,200,17,https://images-na.ssl-images-amazon.com/images/I/71IismvKi3L._AC_UL1447_.jpg
+XL,Grey,100,24,https://cdn.shopify.com/s/files/1/0024/0697/3485/products/407A7456.jpg?v=1604310704
+XS,Magenta,400,7,https://i.pinimg.com/originals/6e/b1/a9/6eb1a9282acc0aeef06dd693ae0301d9.jpg
+M,LightGreen,100,50,https://i.pinimg.com/564x/8a/47/12/8a47128a8040ccd709ad8d64933906ec.jpg
+S,BabyBlue,300,10,https://i.pinimg.com/474x/32/1c/bd/321cbda1d4b16bb3d1759e5403e950c5.jpg
+S,PastelPurple,200,30,https://cdna.lystit.com/photos/intermixonline/cffda2e8/ganni-PURPLE-Fenn-Pastel-Lilac-Wrap-Coat.jpeg
+XS,PastelPurple,220,31,https://cdna.lystit.com/photos/intermixonline/cffda2e8/ganni-PURPLE-Fenn-Pastel-Lilac-Wrap-Coat.jpeg
+S,LightGreen,121,50,https://i.pinimg.com/564x/8a/47/12/8a47128a8040ccd709ad8d64933906ec.jpg
+S,Pink,100,50,https://i.pinimg.com/564x/8a/47/12/8a47128a8040ccd709ad8d64933906ec.jpg
+XXS,Abracadabra,178,30,https://img01.ztat.net/article/spp-media-p1/41269dbd2b98473b86f8a643b6911b23/231fe14ea3a241beabb878d7a4b69464.jpg?imwidth=762&filter=packshot
+XS,Abracadabra,180,30,https://photo.com

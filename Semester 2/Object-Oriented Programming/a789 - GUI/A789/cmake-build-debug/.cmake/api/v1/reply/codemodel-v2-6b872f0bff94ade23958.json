@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "A789",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "A789::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-A789-Debug-ef90acdab68d64df2e28.json",
+					"name" : "A789",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "A789_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-A789_autogen-Debug-8d0c64f90c4b7d32859e.json",
+					"name" : "A789_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "A789_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-A789_autogen_timestamp_deps-Debug-0da864eda9f9dd643b9f.json",
+					"name" : "A789_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Th/CLionProjects/A789/cmake-build-debug",
+		"source" : "C:/Users/Th/CLionProjects/A789"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
