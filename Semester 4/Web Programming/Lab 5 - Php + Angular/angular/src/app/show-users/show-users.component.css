@@ -1,0 +1,99 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(146, 180, 254, 0.516);
+}
+
+h1 {
+    align-self: center;
+    margin-top:50px;
+    color: white;
+}
+
+.container {
+    min-height: 90%;
+    width: 90%;
+    background: rgba(0, 61, 193, 0.8);
+    border-radius: 10px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+}
+
+.details {
+    margin-top: 20px;
+    width: 80%;
+    align-self: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.details h1, .details p {
+    margin: 0;
+}
+
+.details h1 {
+    text-align: center;
+    margin-right: 20px;
+}
+
+.details p {
+    font-size: 20px;
+    margin-left: 30px;
+    border-radius: 5px;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+.details input {
+    /* height: 70%; */
+    height: 45px;
+    margin: 0 10px;
+    color: black;
+    border-radius: 10px;
+    font-size: 20px;
+    padding-left: 30px;
+    flex: 1;
+}
+
+.details .add {
+    width: 135px;
+    padding: 8px;
+    border-radius: 7px;
+    margin-left: 20px;
+}
+
+#info {
+    margin-top: 5px;
+}
+
+table {
+    margin-top: 30px;
+    align-self: center;
+    width: 80%;
+    background-color:  rgba(193, 212, 255, 0.516); ;
+}
+
+th {
+    background: black;
+    color: white;
+}
+
+table, th, td {
+    border-bottom: 1px solid white;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 15px;
+}
+
+button {
+    border-radius: 7px;
+}

@@ -1,0 +1,41 @@
+<div class="container">
+    <h1>Random Enterprise</h1>
+
+    <div class="details">
+    
+
+      <input type="text" placeholder="Name" #name (input)="refresh(role.value, name.value)"/>
+  
+      <input type="text" placeholder="Role" #role (input)="refresh(role.value, name.value)"/>
+  
+      <button class="add" (click)="navigateToAdd()">
+       <b>ADD</b>
+      </button>
+      
+    </div>
+    <table>
+      <tr>
+        <th> NAME</th>
+        <th> USERNAME</th>
+        <th> AGE</th>
+        <th> ROLE</th>
+        <th> EMAIL</th>
+        <th> WEBPAGE</th>
+        <th> ACTION</th>
+      </tr>
+      <tr *ngFor="let user of users">
+        <td>{{user.name}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.age}}</td>
+        <td>{{user.role}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.webpage}}</td>
+        <td>
+          <button id="updateButton" (click)="navigateToUpdate(user.id)">Update</button>
+          <br>
+          <button (click)="navigateToDelete(user.id)" id="deleteButton">Delete</button>
+          <br>
+        </td>
+      </tr>
+    </table>
+  </div>
