@@ -1,0 +1,41 @@
+----------------------------ALPHABET---------------------------------
+
+a. upper and lowercase letters : A-Z, a-Z;
+b. underline character : '_'
+c. decimal digits: 0-9
+
+
+------------------------------LEXIC----------------------------------
+a. Special Symbols, representing:
+    - operators: 
+    '+', '-', '*', '/', '%', '=', '==', '<>', '!=', '<', '<=', '>', '>=', '!'. "||", "&&"
+
+    - separators:
+    space, newline, '['']' , '{''}' , ',', ';', ":", " (quotes), " ' " (single quotes)
+
+    - reserved words:
+    true, false, const, int, string, bool, char, array, and, return, for, while, if, else, throw, catch, switch, case, struct
+
+b. Identifiers:
+    identifier = letter{letter | digit}
+    letter = "A" | "B" | "C" | ... | "Z" | "a" | "b" | ... | "z"
+    digit = "0" | "1" | ... | "9"
+
+c. Constants
+    1. integer - rule
+        int_const = ["+" | "-"] non_zero_digit {digit} | "0"
+        non_zero_digit = "1" | "2" |... | "9"
+
+    2. character
+        character_const = 'letter' | 'digit'
+
+    3. bool
+        bool_const = "true" | "false";
+
+    4. string 
+        string_const = """{letter | digit | "_" | | "-" | " "}
+
+ 
+
+Lab 2 ->
+1a/2d

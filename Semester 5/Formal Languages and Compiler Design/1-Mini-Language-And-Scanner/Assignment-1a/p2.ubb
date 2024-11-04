@@ -1,0 +1,10 @@
+int gcd(int firstNumber, int secondNumber) {
+    while(firstNumber <> secondNumber){
+        if(firstNumber < secondNumber) {
+            secondNumber = secondNumber - firstNumber;
+        } else {
+            firstNumber = firstNumber - secondNumber;
+        }
+    }
+    return firstNumber;
+}

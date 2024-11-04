@@ -1,0 +1,9 @@
+// A comment
+
+int sum (array < int > numbers ) {
+    int sum = 0;
+    for ( int i < numbers.size(); i ++ ) {
+        sum += numbers[i];
+    }
+    return sum;
+}

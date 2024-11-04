@@ -1,0 +1,6 @@
+Constants Table
+{ elements = [[], ["The maximum number is the first one."]], size = 2 }
+
+Identifiers Table
+{ elements = [[thirdNumber], [], [], [secondNumber], [max], [], [], [firstNumber]], size = 8 }
+

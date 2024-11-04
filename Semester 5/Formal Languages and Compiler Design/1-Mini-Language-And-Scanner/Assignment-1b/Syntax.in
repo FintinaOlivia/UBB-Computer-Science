@@ -1,0 +1,42 @@
+----------------------------------------------Syntactical Rules------------------------------------------------
+
+Program         ::= Statement{ Statement } ;
+
+Statement       ::= DeclarationStatement
+                | Assignment
+                | Input
+                | Output
+                | Conditional
+                | Loop
+                | Comment ;
+
+Type            ::= "int"
+                |   "bool"
+                |   "char"
+                |   "string"
+                |   "array<"Type">[" NonZeroDigit{Digit}"]" ;
+
+DeclarationStatement   ::= Type Identifier ["=" Expression] ";"; 
+Assignment      ::=  Identifier"=" Expression ";" ;
+Input           ::= "read("Identifier{,Identifier}")";
+Output          ::= "print" ( Expression{, Expression} ) ";" ;
+Conditional     ::= "if" "(" Expression ")" "{" Program "}" [ "else" "{" Program "}" ] ;
+Loop            ::= "while" "(" Expression ")" "{" Program "}" ;
+Comment         ::= "//" {string} | "##" {string};
+
+
+Expression      ::= Term { Operator Term } ;
+Term            ::= Identifier
+                | IntConstant
+                | StringLiteral
+                | BoolConstant
+                | "("Expression")";
+
+IntConstant     ::= [ "+" | "-" ] ( NonZeroDigit { Digit } ) | "0" ;
+StringLiteral   ::= """{character literal}"""
+BoolConstant    ::= "true" | "false" ;
+
+Operator        ::= "+" | "-" | "*" | "/" | "%" | "==" | "!=" | "<" | "<=" | ">" | ">=" | "=" | "&&" | "||";
+Letter          ::= "A" | "B" | "C" | ... | "Z" | "a" | ... "z" ;
+NonZeroDigit    ::= "1" | "2" | ... | "9" ;
+Digit           ::= "0" | "1" | "2" | ... | "9" ;

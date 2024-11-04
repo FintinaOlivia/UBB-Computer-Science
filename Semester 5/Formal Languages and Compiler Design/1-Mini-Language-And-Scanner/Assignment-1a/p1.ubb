@@ -1,0 +1,9 @@
+int max(int firstNumber, int secondNumber, int thirdNumber){
+    if(firstNumber <= thirdNumber && secondNumber <= thirdNumber){
+        return thirdNumber;
+    } else if (firstNumber <= secondNumber && thirdNumber <= secondNumber) {
+        return secondNumber;
+    } else {
+        return firstNumber;
+    }
+}
