@@ -133,4 +133,13 @@ YEAR 1
                 </li>
         </ul>
     </li>
+     <li> 📂 Semester 4
+        <ul>
+                <li>
+                    <a href="https://github.com/FintinaOlivia/FLCD/tree/master">
+                        Formal Languages and Compiler Design
+                    </a>
+                </li>
+        </ul>
+     </li>
 </ul>
