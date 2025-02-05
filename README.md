@@ -133,7 +133,7 @@ YEAR 1
                 </li>
         </ul>
     </li>
-     <li> 📂 Semester 4
+     <li> 📂 Semester 5
         <ul>
                 <li>
                     <a href="https://github.com/FintinaOlivia/FLCD/tree/master">
