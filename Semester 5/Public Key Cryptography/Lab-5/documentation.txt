@@ -1,0 +1,52 @@
+validate_plaintext(plaintext):
+    Validation of the input plaintext, such that it should only contain
+    alphabetic characters or space
+
+validate_ciphertext(ciphertext):
+    Validation of the ciphertext, such that it should only contain
+    tuples of the shape u1, u2, e, v).
+
+modular_exponentiation(base, exp, mod):
+    Modular exponentiation: (base^exp) % mod.
+
+hash_function(u1, u2, e):
+    Compute the result of H() - the universal one way hash,
+    combining u1, u2, and e, that should be collision resistant.
+    Using sha256 in hexadecimal base, it gets converted to an integer
+    value.
+
+generate_keys():
+    Generates public and private keys for the Cramer-Shoup cryptosystem.
+    Generation of a cyclic group G of order q, and the random generators g1 and g2 is
+    succeeded by choosing five random values from the interval [0, q-1].
+    We compute:
+        c = g1^x1 % p * g2^x2 % p
+        d = g1^y1 % p * g2^y2 % p
+        h = g1^z
+    The private key is described as:
+        (x1,x2,y1,y2,z)
+    The public key is described as:
+        (G, g1, g2, c, d, h), where G is the cyclic group G
+
+encrypt(public_key, plaintext):
+    After validating the plaintext and converting it to numeric values,
+    a random k value is chosen in the same interval [0, q-1] as g1 and g2.
+    We compute:
+        u1 = g1^k % G
+        u2 = g2^k % G
+        e = [c in numeric_message] c^k % G as list
+        alpha = H(u1, u2, e), H = universal one way hash function
+        v = c^k % G * d^(k * alpha) % G
+    The data sent is:
+        (u1,u2,e,v)
+        In this  particular implementation, we sent the plaintext as well
+    in order to check it against the result
+
+decrypt(private_key, ciphertext, public_key):
+     In order to verify the validity of the ciphertext received, we compute:
+        1. alpha = H(u1,u2,e), H = universal one way hash function
+        2. v' = u1^x1 % u2^x2 * (u1^y1 % u2^y2)^alpha % G
+    And we check that v = v'; if they are not equal, the message is rejected
+    Otherwise, the message is computed like so:
+        m = e / u1^z % G, which is equivalent to :
+        m = e * (u1^z)^(-1), equivalent to u1^(G-1-z) % G (Fermat's little theorem)

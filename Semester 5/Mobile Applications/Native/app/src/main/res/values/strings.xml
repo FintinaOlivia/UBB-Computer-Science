@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">app</string>
+    <string name="start_image_description">image</string>
+    <string name="editButton">EditButton</string>
+    <string name="name">Name</string>
+    <string name="date">Story</string>
+    <string name="description">CharacterDescription</string>
+    <string name="character_image">CharacterPicture</string>
+    <string name="add_character">Add</string>
+    <string name="cancelOption">Cancel</string>
+    <string name="saveOption">Save</string>
+    <string name="image_input">Character Image Placeholder</string>
+
+    <!--    Delete modal-->
+    <string name="deleteMessage">Delete this character?</string>
+    <string name="no">No, take me back</string>
+    <string name="yes">Yes, to creative Hell with it</string>
+
+    <!--    Labels-->
+    <string name="character_strengths_label">Strengths</string>
+    <string name="character_skills_label">Skills</string>
+    <string name="character_background_label">Background</string>
+    <string name="character_age_label">Age</string>
+    <string name="character_description_label">Description</string>
+    <string name="story_label">Story</string>
+    <string name="character_name_label">Name</string>
+    <string name="character_weaknesses_label">Weaknesses</string>
+    <string name="character_notable_features_label">Notable features</string>
+
+    <string name="is_favourite">Is this a beloved character?</string>
+
+    <!--    Hints-->
+    <string name="character_weaknesses_hint">Achilles\' heel?</string>
+    <string name="character_strengths_hint">What is the ace up their sleeve?</string>
+    <string name="character_skills_hint">To die, to sleep; perchance to dream?</string>
+    <string name="character_name_hint">\?</string>
+    <string name="story_hint">Title of the story?</string>
+    <string name="character_description_hint">What did you have in mind?</string>
+    <string name="character_background_hint">Scoundrel? Noble?</string>
+    <string name="character_age_hint">\'Unknown\' they say</string>
+    <string name="description_hint">What are they like?</string>
+    <string name="character_notable_features_hint">What do bards sing about?</string>
+
+
+    <!--    Buttons-->
+    <string name="save_character">Save Character</string>
+    <string name="add_button">Add Button</string>
+    <string name="entry_button">Begin</string>
+    <string name="deleteButton">DeleteButton</string>
+
+    <string name="createID">Id</string>
+    <string name="list_view_detail">List of characters</string>
+    <string name="description_label">Description</string>
+    <string name="cover_image">cover image</string>
+    <string name="welcome_text">Welcome to Genesis!</string>
+</resources>

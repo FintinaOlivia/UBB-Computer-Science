@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lighter_purple"
+    android:fitsSystemWindows="true"
+    tools:context=".service.CharacterDetailActivity"
+    tools:ignore="MergeRootFrame">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_purple"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/detail_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:backgroundTint="@color/teal_200"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="Character Details" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/item_detail_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="17dp"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:id="@+id/linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/imageInputCreate"
+                    android:layout_width="104dp"
+                    android:layout_height="96dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/rounded_text_box"
+                    android:contentDescription="@string/image_input"
+                    android:textColor="@color/dark_purple"
+                    tools:srcCompat="@drawable/ic_image_placeholder"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/nameInputLayout"
+                    android:layout_width="241dp"
+                    android:layout_height="60dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageInputCreate"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/labelTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/character_name_label"
+                        android:textColor="@color/dark_purple" />
+
+                    <EditText
+                        android:id="@+id/nameInputCreate"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/rounded_text_box"
+                        android:hint="@string/character_name_hint"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/dark_purple"
+                        android:textColorHint="@color/grey"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/storyInputLayout"
+                    android:layout_width="242dp"
+                    android:layout_height="60dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/imageInputCreate"
+                    app:layout_constraintTop_toBottomOf="@id/nameInputLayout">
+
+                    <TextView
+                        android:id="@+id/labelStory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/story_label"
+                        android:textColor="@color/dark_purple" />
+
+                    <EditText
+                        android:id="@+id/storyInputCreate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_text_box"
+                        android:hint="@string/story_hint"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/dark_purple"
+                        android:textColorHint="@color/grey"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <LinearLayout
+            android:id="@+id/descriptionInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/labelDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/description_label"
+                android:textColor="@color/dark_purple" />
+
+            <EditText
+                android:id="@+id/descriptionInputCreate"
+                android:layout_width="match_parent"
+                android:layout_height="136dp"
+                android:autofillHints=""
+                android:background="@drawable/rounded_text_box"
+                android:gravity="top"
+                android:hint="@string/character_description_hint"
+                android:inputType="textMultiLine"
+                android:textColor="@color/dark_purple"
+                android:textColorHint="@color/grey"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ageInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ageInputLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/character_age_label"
+                android:textColor="@color/dark_purple" />
+
+            <EditText
+                android:id="@+id/ageInputCreate"
+                android:layout_width="360dp"
+                android:layout_height="40dp"
+
+                android:layout_marginTop="4dp"
+                android:autofillHints=""
+                android:background="@drawable/rounded_text_box"
+                android:hint="@string/character_age_hint"
+                android:inputType="text"
+                android:textColor="@color/dark_purple"
+                android:textColorHint="@color/grey"
+                android:textSize="20sp"  />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/backgroundInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/backgroundInputLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/character_background_label"
+                android:textColor="@color/dark_purple" />
+            <EditText
+                android:id="@+id/backgroundInputCreate"
+                android:layout_width="360dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="4dp"
+                android:gravity="top"
+                android:background="@drawable/rounded_text_box"
+                android:hint="@string/character_background_hint"
+                android:inputType="textMultiLine"
+                android:textColor="@color/dark_purple"
+                android:textColorHint="@color/grey"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/skillsInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/skillsInputLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/character_skills_label"
+                android:textColor="@color/dark_purple" />
+            <EditText
+                android:id="@+id/skillsInputCreate"
+                android:layout_width="360dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints=""
+                android:background="@drawable/rounded_text_box"
+                android:hint="@string/character_skills_hint"
+                android:inputType="textPersonName"
+                android:textColor="@color/dark_purple"
+                android:textColorHint="@color/grey"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/strengthsInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/strengthsInputLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/character_strengths_label"
+                android:textColor="@color/dark_purple" />
+            <EditText
+                android:id="@+id/strengthsInputCreate"
+                android:layout_width="360dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints=""
+                android:background="@drawable/rounded_text_box"
+                android:hint="@string/character_strengths_hint"
+                android:inputType="textMultiLine"
+                android:textColor="@color/dark_purple"
+                android:textColorHint="@color/grey"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/weaknessesInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/weaknessesInputLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/character_weaknesses_label"
+                android:textColor="@color/dark_purple" />
+            <EditText
+                android:id="@+id/weaknessesInputCreate"
+                android:layout_width="360dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints=""
+                android:background="@drawable/rounded_text_box"
+                android:hint="@string/character_weaknesses_hint"
+                android:inputType="textMultiLine"
+                android:textColor="@color/dark_purple"
+                android:textColorHint="@color/grey"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/notableFeaturesInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/notableFeaturesInputLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/character_notable_features_label"
+                android:textColor="@color/dark_purple" />
+            <EditText
+                android:id="@+id/notableFeaturesInputCreate"
+                android:layout_width="360dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="8dp"
+                android:gravity="top"
+                android:background="@drawable/rounded_text_box"
+                android:hint="@string/character_notable_features_hint"
+                android:inputType="textMultiLine"
+                android:textColor="@color/dark_purple"
+                android:textColorHint="@color/grey"
+                android:textSize="20sp" />
+        </LinearLayout>
+            <CheckBox
+                android:id="@+id/favoriteCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="84dp"
+                android:minHeight="48dp"
+                android:text="@string/is_favourite"
+                android:textColor="@color/dark_purple" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|start"
+        android:contentDescription="@string/save_character"
+        android:backgroundTint="@color/teal_700"
+        app:layout_anchor="@+id/item_detail_container"
+        app:layout_anchorGravity="top|end"
+        app:srcCompat="@android:drawable/ic_menu_save" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
