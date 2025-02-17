@@ -141,17 +141,17 @@ YEAR 1
                     </a>
                 </li>
                 <li>
-                    <a href="https://github.com/FintinaOlivia/UBB-Computer-Science/tree/main/Semester%205/Parallel%20and%20Distributed%20Programming">
-                        Parallel and Distributed Programming
+                    <a href="https://github.com/FintinaOlivia/UBB-Computer-Science/tree/main/Semester%205/Parallel%20And%20Distributed%20Programming">
+Parallel and Distributed Programming
                     </a>
                 </li>
                 <li>
-                    <a href="https://github.com/FintinaOlivia/UBB-Computer-Science/tree/main/Semester%205/Mobile%Applications">
+                    <a href="https://github.com/FintinaOlivia/UBB-Computer-Science/tree/main/Semester%205/Mobile%20Applications">
                         Mobile Applications
                     </a>
                 </li>
                 <li>
-                    <a href="https://github.com/FintinaOlivia/UBB-Computer-Science/tree/main/Semester%205/Public%20Key%20Crpyography">
+                    <a href="https://github.com/FintinaOlivia/UBB-Computer-Science/tree/main/Semester%205/Public%20Key%20Cryptography">
                         Public Key Cryptography
                     </a>
                 </li>
