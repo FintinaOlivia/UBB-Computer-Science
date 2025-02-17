@@ -1,6 +1,0 @@
-Constants Table
-{ elements = [[], []], size = 2 }
-
-Identifiers Table
-{ elements = [[gcd], [], [], [firstNumber, secondNumber]], size = 4 }
-

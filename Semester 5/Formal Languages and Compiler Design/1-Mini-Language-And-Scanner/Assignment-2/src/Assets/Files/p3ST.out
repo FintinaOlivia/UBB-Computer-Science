@@ -1,6 +1,0 @@
-Constants Table
-{ elements = [[0], []], size = 2 }
-
-Identifiers Table
-{ elements = [[], [A, i, size], [], [sum], [], [], [numbers], [comment]], size = 8 }
-
