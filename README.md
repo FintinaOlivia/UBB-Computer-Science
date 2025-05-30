@@ -8,8 +8,6 @@
     PSA:
     * preferred IDE: VSC / CLion
     * dual-boot Manjaro/W10
-    
-YEAR 1
 
 <ul>
     <li> 📂 Semester 1
